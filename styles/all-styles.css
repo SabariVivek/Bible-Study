@@ -159,7 +159,7 @@ nav {
 }
 
 .nav-item.active {
-    background: #3b82f6;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border-radius: 10px;
     margin: 0 15px;
@@ -600,20 +600,81 @@ nav {
     justify-content: center;
     font-size: 14px;
     font-weight: bold;
-    background: rgb(59, 130, 246);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-width: initial;
     border-style: none;
     border-color: initial;
     border-image: initial;
-    border-radius: 50%;
+    border-radius: 4px;
     transition: 0.2s;
     margin: 0px auto;
 }
 
 .info-btn:hover {
-    background: #4267d4;
-    transform: none;
-    box-shadow: none;
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Animated Audio Icon Styles */
+.audio-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.audio-btn:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+    transform: scale(1.05);
+}
+
+.audio-icon-animated {
+    display: flex;
+    align-items: end;
+    gap: 2px;
+    height: 14px;
+    justify-content: center;
+}
+
+.sound-bar {
+    width: 2px;
+    background: white;
+    border-radius: 1px;
+    animation: audioWave 1.2s ease-in-out infinite;
+}
+
+.bar1 {
+    height: 6px;
+    animation-delay: 0s;
+}
+
+.bar2 {
+    height: 10px;
+    animation-delay: 0.1s;
+}
+
+.bar3 {
+    height: 14px;
+    animation-delay: 0.2s;
+}
+
+.bar4 {
+    height: 8px;
+    animation-delay: 0.3s;
+}
+
+@keyframes audioWave {
+    0%, 100% {
+        transform: scaleY(0.5);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+/* Pause animation on hover */
+.audio-btn:hover .sound-bar {
+    animation-play-state: paused;
 }
 
 /* Contemporary Kings cell styling */
@@ -1647,7 +1708,15 @@ nav {
     }
     
     .timeline-container .timeline ul li:hover::before {
-        background-color: #007bff;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transform: translate(50%, -50%) scale(1.2);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    
+    .timeline-container .timeline ul li:nth-child(even):hover::before {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
 }
 

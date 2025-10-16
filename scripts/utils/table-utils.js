@@ -215,7 +215,14 @@ function createStatusBadge(status, type = 'default') {
 // Utility function to create info button
 function createInfoButton(onClickHandler, index) {
     return `<td class="info-cell">
-        <button class="info-btn" onclick="event.stopPropagation(); ${onClickHandler}(${index})">🔊</button>
+        <button class="info-btn audio-btn" onclick="event.stopPropagation(); ${onClickHandler}(${index})">
+            <div class="audio-icon-animated">
+                <div class="sound-bar bar1"></div>
+                <div class="sound-bar bar2"></div>
+                <div class="sound-bar bar3"></div>
+                <div class="sound-bar bar4"></div>
+            </div>
+        </button>
     </td>`;
 }
 

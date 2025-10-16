@@ -761,33 +761,37 @@ function playBookAudio(bookName) {
     playerContainer.className = 'audio-player-container';
     playerContainer.innerHTML = `
         <div class="audio-player-card">
-            <div class="audio-player-header">
-                <div class="audio-info">
-                    <div class="audio-icon">🎧</div>
-                    <div class="audio-details">
-                        <h3 class="audio-title">${bookName} Overview</h3>
-                        <p class="audio-subtitle">Bible Book Audio</p>
+            <div class="audio-player-content">
+                <div class="audio-info-section">
+                    <div class="audio-book-info">
+                        <h2 class="audio-book-title">${bookName}</h2>
                     </div>
+                    <button class="audio-close-btn" onclick="closeAudioPlayer()">✕</button>
                 </div>
-                <button class="audio-close-btn" onclick="closeAudioPlayer()">✕</button>
-            </div>
-            <div class="audio-player-body">
-                <div class="audio-controls">
-                    <button class="audio-control-btn play-pause-btn" onclick="toggleAudioPlayback()">
-                        <span class="play-icon">▶️</span>
-                        <span class="pause-icon" style="display: none;">⏸️</span>
-                    </button>
-                    <div class="audio-progress-container">
-                        <div class="audio-progress-bar">
-                            <div class="audio-progress-fill"></div>
+                
+                <div class="audio-player-section">
+                    <div class="audio-waveform-container">
+                        <div class="audio-waveform">
+                            <button class="audio-play-button" onclick="toggleAudioPlayback()">
+                                <div class="play-pause-icon">
+                                    <span class="play-icon">▶</span>
+                                    <span class="pause-icon" style="display: none;">⏸</span>
+                                </div>
+                            </button>
+                            <div class="waveform-section">
+                                <div class="waveform-bars">
+                                    ${generateWaveformBars()}
+                                </div>
+                                <div class="waveform-progress"></div>
+                            </div>
                         </div>
-                        <div class="audio-time">
+                        <div class="audio-time-info">
                             <span class="current-time">0:00</span>
                             <span class="total-time">0:00</span>
                         </div>
                     </div>
-                    <button class="audio-control-btn cancel-btn" onclick="closeAudioPlayer()">Cancel</button>
                 </div>
+                
                 <audio preload="metadata">
                     <source src="${audioFile}" type="audio/mpeg">
                     Your browser does not support the audio element.
@@ -796,7 +800,18 @@ function playBookAudio(bookName) {
         </div>
     `;
 
-    // Add styles for the audio player
+    // Function to generate waveform bars
+    function generateWaveformBars() {
+        let bars = '';
+        const barCount = 80;
+        for (let i = 0; i < barCount; i++) {
+            const height = Math.random() * 80 + 20; // Random height between 20-100%
+            bars += `<div class="waveform-bar" style="height: ${height}%"></div>`;
+        }
+        return bars;
+    }
+
+    // Add enhanced styles for the waveform audio player
     const style = document.createElement('style');
     style.textContent = `
         .audio-player-container {
@@ -810,60 +825,53 @@ function playBookAudio(bookName) {
 
         .audio-player-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            color: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
-            min-width: 400px;
-            max-width: 500px;
+            width: 550px;
+            max-width: 90vw;
+            color: white;
         }
 
-        .audio-player-header {
+        .audio-player-content {
+            padding: 30px;
+        }
+
+        .audio-info-section {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
+            align-items: flex-start;
+            margin-bottom: 30px;
         }
 
-        .audio-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .audio-book-info {
+            flex: 1;
         }
 
-        .audio-icon {
-            font-size: 32px;
-            animation: pulse 2s infinite;
+        .audio-book-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .audio-details h3 {
+        .audio-book-title {
+            font-size: 24px;
+            color: white;
             margin: 0;
-            font-size: 18px;
             font-weight: 600;
         }
 
-        .audio-details p {
-            margin: 4px 0 0 0;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
         .audio-close-btn {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
             border: none;
             color: white;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -871,101 +879,164 @@ function playBookAudio(bookName) {
         }
 
         .audio-close-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.2);
             transform: scale(1.1);
         }
 
-        .audio-player-body {
-            padding: 25px;
-        }
-
-        .audio-controls {
+        .audio-player-section {
             display: flex;
             align-items: center;
-            gap: 15px;
         }
 
-        .audio-control-btn {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            padding: 12px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .audio-control-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-
-        .play-pause-btn {
-            min-width: 80px;
-            justify-content: center;
-        }
-
-        .cancel-btn {
-            background: rgba(239, 68, 68, 0.8);
-            margin-left: auto;
-        }
-
-        .cancel-btn:hover {
-            background: rgba(239, 68, 68, 1);
-        }
-
-        .audio-progress-container {
+        .audio-waveform-container {
             flex: 1;
+            min-width: 0;
         }
 
-        .audio-progress-bar {
-            background: rgba(255,255,255,0.3);
-            height: 6px;
-            border-radius: 3px;
+        .audio-waveform {
+            position: relative;
+            height: 70px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 35px;
             overflow: hidden;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 10px;
         }
 
-        .audio-progress-fill {
+        .audio-play-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             background: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            margin-right: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .audio-play-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+
+        .play-pause-icon {
+            color: #667eea;
+            font-size: 16px;
+            margin-left: 2px;
+        }
+
+        .waveform-section {
+            position: relative;
+            flex: 1;
+            height: 50px;
+        }
+
+        .waveform-bars {
+            display: flex;
+            align-items: center;
             height: 100%;
+            gap: 2px;
+            padding: 0 10px;
+        }
+
+        .waveform-bar {
+            background: rgba(255,255,255,0.3);
+            width: 3px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .waveform-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: rgba(255,255,255,0.6);
             width: 0%;
             transition: width 0.1s;
-            border-radius: 3px;
+            border-radius: 25px;
+            overflow: hidden;
         }
 
-        .audio-time {
+        .waveform-progress::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .audio-time-info {
             display: flex;
             justify-content: space-between;
             font-size: 12px;
-            opacity: 0.9;
+            color: rgba(255,255,255,0.8);
+            padding: 0 5px;
         }
+
+        /* Waveform animation when playing */
+        .waveform-playing .waveform-bar {
+            animation: waveform-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes waveform-pulse {
+            0%, 100% { 
+                background: rgba(255,255,255,0.3);
+                transform: scaleY(1);
+            }
+            50% { 
+                background: rgba(255,255,255,0.8);
+                transform: scaleY(1.3);
+            }
+        }
+
+        /* Different animation delays for bars */
+        .waveform-bar:nth-child(2n) { animation-delay: 0.1s; }
+        .waveform-bar:nth-child(3n) { animation-delay: 0.2s; }
+        .waveform-bar:nth-child(4n) { animation-delay: 0.3s; }
+        .waveform-bar:nth-child(5n) { animation-delay: 0.4s; }
 
         @media (max-width: 480px) {
             .audio-player-card {
-                min-width: 320px;
+                width: 95vw;
                 margin: 20px;
             }
             
-            .audio-controls {
-                flex-wrap: wrap;
-                gap: 10px;
+            .audio-player-content {
+                padding: 20px;
             }
             
-            .cancel-btn {
-                margin-left: 0;
-                order: 3;
-                flex: 1;
+            .audio-waveform {
+                height: 60px;
+                padding: 8px;
+            }
+            
+            .audio-play-button {
+                width: 44px;
+                height: 44px;
+                margin-right: 12px;
+            }
+            
+            .waveform-section {
+                height: 44px;
             }
         }
     `;
 
-    // Add overlay background
+    // Add overlay background with click-outside-to-close functionality
     const overlay = document.createElement('div');
     overlay.style.cssText = `
         position: fixed;
@@ -977,6 +1048,18 @@ function playBookAudio(bookName) {
         z-index: 9999;
         backdrop-filter: blur(5px);
     `;
+    
+    // Close when clicking outside the player
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            closeAudioPlayer();
+        }
+    });
+
+    // Prevent closing when clicking inside the player
+    playerContainer.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
 
     // Add to document
     document.head.appendChild(style);
@@ -985,11 +1068,12 @@ function playBookAudio(bookName) {
 
     // Get audio element and set up functionality
     const audio = playerContainer.querySelector('audio');
-    const playPauseBtn = playerContainer.querySelector('.play-pause-btn');
+    const playPauseBtn = playerContainer.querySelector('.audio-play-button');
     const playIcon = playerContainer.querySelector('.play-icon');
     const pauseIcon = playerContainer.querySelector('.pause-icon');
-    const progressBar = playerContainer.querySelector('.audio-progress-bar');
-    const progressFill = playerContainer.querySelector('.audio-progress-fill');
+    const waveformContainer = playerContainer.querySelector('.audio-waveform');
+    const waveformProgress = playerContainer.querySelector('.waveform-progress');
+    const waveformBars = playerContainer.querySelector('.waveform-bars');
     const currentTimeSpan = playerContainer.querySelector('.current-time');
     const totalTimeSpan = playerContainer.querySelector('.total-time');
 
@@ -999,9 +1083,18 @@ function playBookAudio(bookName) {
         playerContainer.remove();
         overlay.remove();
         style.remove();
+        document.removeEventListener('keydown', handleEscapeKey);
         delete window.closeAudioPlayer;
         delete window.toggleAudioPlayback;
     };
+
+    // Handle ESC key to close player
+    function handleEscapeKey(e) {
+        if (e.key === 'Escape') {
+            closeAudioPlayer();
+        }
+    }
+    document.addEventListener('keydown', handleEscapeKey);
 
     // Toggle play/pause function
     window.toggleAudioPlayback = function() {
@@ -1030,27 +1123,29 @@ function playBookAudio(bookName) {
 
     audio.addEventListener('timeupdate', () => {
         const progress = (audio.currentTime / audio.duration) * 100;
-        progressFill.style.width = `${progress}%`;
+        waveformProgress.style.width = `${progress}%`;
         currentTimeSpan.textContent = formatTime(audio.currentTime);
     });
 
     audio.addEventListener('play', () => {
         playIcon.style.display = 'none';
         pauseIcon.style.display = 'inline';
+        waveformBars.classList.add('waveform-playing');
     });
 
     audio.addEventListener('pause', () => {
         playIcon.style.display = 'inline';
         pauseIcon.style.display = 'none';
+        waveformBars.classList.remove('waveform-playing');
     });
 
     audio.addEventListener('ended', () => {
         closeAudioPlayer();
     });
 
-    // Progress bar click to seek
-    progressBar.addEventListener('click', (e) => {
-        const rect = progressBar.getBoundingClientRect();
+    // Waveform click to seek
+    waveformContainer.addEventListener('click', (e) => {
+        const rect = waveformContainer.getBoundingClientRect();
         const clickX = e.clientX - rect.left;
         const width = rect.width;
         const seekTime = (clickX / width) * audio.duration;
@@ -1312,7 +1407,14 @@ function initializeBooksTable() {
             {
                 header: 'Audio',
                 className: 'info-cell',
-                render: (item, index) => `<td class="info-cell"><button class="info-btn" onclick="event.stopPropagation(); openBookByIndex(${index})" title="Audio Information">🔊</button></td>`
+                render: (item, index) => `<td class="info-cell"><button class="info-btn audio-btn" onclick="event.stopPropagation(); openBookByIndex(${index})" title="Audio Information">
+                    <div class="audio-icon-animated">
+                        <div class="sound-bar bar1"></div>
+                        <div class="sound-bar bar2"></div>
+                        <div class="sound-bar bar3"></div>
+                        <div class="sound-bar bar4"></div>
+                    </div>
+                </button></td>`
             }
         ]
     };
