@@ -2,6 +2,8 @@
 
 This project has been reorganized into separate, well-structured files for better maintainability and navigation.
 
+**Live Demo:** [https://sabarivivek.github.io/Bible-Study/](https://sabarivivek.github.io/Bible-Study/)
+
 ## 📁 Project Structure
 
 ```
