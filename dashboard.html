@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Study - Dashboard</title>
+    <link rel="stylesheet" href="styles/all-styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <button class="drawer-toggle" id="drawerToggle" onclick="toggleDrawer()">
+                <span id="toggleIcon">⫷</span>
+            </button>
+            <div class="logo">Bible Study</div>
+            <nav>
+                <div class="nav-item dashboard active" onclick="showDashboard()">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </div>
+                <div class="nav-item kings" onclick="showKings()">
+                    <span class="nav-icon">👑</span>
+                    <span class="nav-text">Kings</span>
+                </div>
+                <div class="nav-item prophets">
+                    <span class="nav-icon">🎤</span>
+                    <span class="nav-text">Prophets</span>
+                </div>
+                <div class="nav-item books">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-text">Books</span>
+                </div>
+                <div class="nav-item genealogy">
+                    <span class="nav-icon">🌳</span>
+                    <span class="nav-text">Genealogy</span>
+                </div>
+                <div class="nav-item timeline">
+                    <span class="nav-icon">⏰</span>
+                    <span class="nav-text">Timeline</span>
+                </div>
+                <div class="nav-item maps">
+                    <span class="nav-icon">🗺️</span>
+                    <span class="nav-text">Maps</span>
+                </div>
+                <div class="nav-item setting">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Setting</span>
+                </div>
+                <div class="nav-item help">
+                    <span class="nav-icon">❓</span>
+                    <span class="nav-text">Help</span>
+                </div>
+                
+                <!-- Logout Button at Bottom -->
+                <div class="nav-item logout-nav-item" onclick="logout()">
+                    <span class="nav-icon">⏻</span>
+                    <span class="nav-text">Logout</span>
+                </div>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <div class="search-container">
+                    <div class="search-icon">🔍</div>
+                    <input type="text" class="search-input" placeholder="Search">
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">BS</div>
+                        <div class="user-info">
+                            <div class="user-name">Bible Study</div>
+                            <div class="user-email">admin@biblestudy.com</div>
+                        </div>
+                        <span>▼</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div id="dashboard-content">
+                <div class="content-header">
+                    <h1 class="page-title">Dashboard</h1>
+                </div>
+                <div style="text-align: center; padding: 50px;">
+                    <h2>Welcome to Bible Study Dashboard</h2>
+                    <p style="color: #6b7280; margin-top: 20px;">Select a topic from the left navigation to begin your study.</p>
+                </div>
+            </div>
+
+            <!-- Kings Content -->
+            <div id="kings-content" class="hidden">
+                <div class="content-header">
+                    <h1 class="page-title">Kings</h1>
+                    <div class="content-actions">
+                        <span class="showing-text" id="showing-count">Showing 10</span>
+                        <div class="fancy-dropdown">
+                            <button class="dropdown-button" onclick="openFilterCard()">
+                                <img src="resources/filter-icon.svg" alt="Filter" style="width: 18px; height: 18px; filter: brightness(0) invert(1);">
+                            </button>
+                        </div>
+                        <div class="fancy-dropdown kingdom-dropdown">
+                            <button class="dropdown-button kingdom-dropdown-button" id="dropdownButton" onclick="toggleDropdown()">
+                                <span id="selectedText">🏰 All Kingdoms</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </button>
+                            <div class="dropdown-menu" id="dropdownMenu">
+                                <div class="dropdown-item selected" onclick="selectKingdom('all', 'All Kingdoms', '🏰', 42)">
+                                    <span class="dropdown-icon">🏰</span>
+                                    <span class="dropdown-text">All Kingdoms</span>
+                                    <span class="dropdown-count">42</span>
+                                </div>
+                                <div class="dropdown-item" onclick="selectKingdom('united', 'United Kingdom', '👑', 3)">
+                                    <span class="dropdown-icon">👑</span>
+                                    <span class="dropdown-text">United Kingdom</span>
+                                    <span class="dropdown-count">3</span>
+                                </div>
+                                <div class="dropdown-item" onclick="selectKingdom('israel', 'Northern Kingdom', '⚔️', 19)">
+                                    <span class="dropdown-icon">⚔️</span>
+                                    <span class="dropdown-text">Northern Kingdom</span>
+                                    <span class="dropdown-count">19</span>
+                                </div>
+                                <div class="dropdown-item" onclick="selectKingdom('judah', 'Southern Kingdom', '🛡️', 20)">
+                                    <span class="dropdown-icon">🛡️</span>
+                                    <span class="dropdown-text">Southern Kingdom</span>
+                                    <span class="dropdown-count">20</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>King Name</th>
+                                <th>Kingdom</th>
+                                <th>Character</th>
+                                <th>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody id="kings-table-body">
+                            <!-- Table content will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+
+                    <div class="pagination">
+                        <div class="pagination-info">
+                            <button class="pagination-btn" id="prevBtn" onclick="changePage(-1)">Previous</button>
+                        </div>
+                        <div class="pagination-controls" id="paginationControls">
+                            <!-- Pagination controls will be populated by JavaScript -->
+                        </div>
+                        <div>
+                            <button class="pagination-btn" id="nextBtn" onclick="changePage(1)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- King Details Popup -->
+    <div class="king-popup-overlay" id="kingPopup">
+        <div class="popup-container">
+            <div class="king-card">
+                <div class="king-card-header">
+                    <h2 class="king-card-title" id="popupKingName">King Details</h2>
+                    <button class="close-btn" onclick="closeKingPopup()">×</button>
+                </div>
+                <div class="king-card-content" id="popupKingContent">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Side Info Cards -->
+            <div class="side-cards-container" id="sideCardsContainer">
+                <div class="side-card order-card" id="orderCard">
+                    <div class="side-card-label">Order</div>
+                    <div class="side-card-value" id="orderValue">1st ruler</div>
+                </div>
+                
+                <div class="side-card kingdom-card" id="kingdomCard">
+                    <div class="side-card-label">Kingdom</div>
+                    <div class="side-card-value" id="kingdomValue">United Kingdom</div>
+                </div>
+                
+                <div class="side-card description-card" id="descriptionCard">
+                    <div class="side-card-label">Reign</div>
+                    <div class="side-card-value" id="descriptionValue">40 years</div>
+                </div>
+                
+                <div class="side-card character-card" id="characterCard">
+                    <div class="side-card-label">Character</div>
+                    <div class="side-card-value" id="characterValue">Disobedient</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Card -->
+    <div class="filter-card-overlay" id="filterCardOverlay">
+        <div class="filter-card">
+            <div class="filter-card-header">
+                <h2 class="filter-card-title">Filter by Character</h2>
+                <button class="close-btn" onclick="closeFilterCard()">×</button>
+            </div>
+            <div class="filter-options">
+                <div class="filter-options-grid">
+                    <div class="filter-option selected" data-value="all">
+                        <div class="filter-option-icon">☰</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">All Characters</div>
+                            <div class="filter-option-description">Everyone</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Righteous">
+                        <div class="filter-option-icon">😇</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Righteous</div>
+                            <div class="filter-option-description">Follows God</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Good">
+                        <div class="filter-option-icon">👍</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Good</div>
+                            <div class="filter-option-description">Does good things</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Wise">
+                        <div class="filter-option-icon">🧠</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Wise</div>
+                            <div class="filter-option-description">Thinks smartly</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Zealous">
+                        <div class="filter-option-icon">🔥</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Zealous</div>
+                            <div class="filter-option-description">Very passionate</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Evil">
+                        <div class="filter-option-icon">😈</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Evil</div>
+                            <div class="filter-option-description">Does bad things</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Wicked">
+                        <div class="filter-option-icon">💀</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Wicked</div>
+                            <div class="filter-option-description">Very bad and cruel</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Disobedient">
+                        <div class="filter-option-icon">🚫</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Disobedient</div>
+                            <div class="filter-option-description">Doesn't listen to God</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Rebellious">
+                        <div class="filter-option-icon">⚡</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Rebellious</div>
+                            <div class="filter-option-description">Fights against rules</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Foolish">
+                        <div class="filter-option-icon">🤡</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Foolish</div>
+                            <div class="filter-option-description">Not wise, makes silly choices</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Good/Bad">
+                        <div class="filter-option-icon">⚖️</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Good/Bad</div>
+                            <div class="filter-option-description">Has both good and bad actions</div>
+                        </div>
+                    </div>
+                    <div class="filter-option" data-value="Evil/Repentant">
+                        <div class="filter-option-icon">🔄</div>
+                        <div class="filter-option-content">
+                            <div class="filter-option-name">Evil/Repentant</div>
+                            <div class="filter-option-description">Was bad, but changed to good</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button class="filter-btn-cancel" onclick="closeFilterCard()">Cancel</button>
+                <button class="filter-btn-apply" onclick="applyFilter()">Apply Filter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load JavaScript files in the correct order -->
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/data/kings-data.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/ui/modal.js"></script>
+    <script src="scripts/ui/events.js"></script>
+</body>
+</html>
