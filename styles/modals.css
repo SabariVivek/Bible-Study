@@ -445,3 +445,199 @@
 .filter-btn-cancel:hover {
     background: #e5e7eb;
 }
+
+/* ===== GENESIS CONTENT STYLES ===== */
+
+/* Genesis Section Styling */
+.genesis-section {
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+}
+
+.section-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 15px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.external-link {
+    color: #3b82f6;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.external-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+.section-content {
+    padding: 20px;
+}
+
+/* Introduction Text */
+.introduction-text {
+    line-height: 1.7;
+    color: #374151;
+    font-size: 15px;
+}
+
+.introduction-text p {
+    margin-bottom: 16px;
+}
+
+/* Chapter Content */
+.chapter-content {
+    background: #fafbfb;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.verse-section {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.verse-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.verse-reference {
+    font-weight: 600;
+    color: #3b82f6;
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: inline-block;
+    background: #eff6ff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #dbeafe;
+}
+
+.verse-content {
+    color: #374151;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+/* Chapter Index */
+.chapter-index-description {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.chapter-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.chapter-link-item {
+    background: #f8fafc;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.chapter-link-item:hover {
+    background: #e2e8f0;
+    transform: translateY(-1px);
+}
+
+.chapter-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #374151;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.chapter-link:hover {
+    color: #1e293b;
+    text-decoration: none;
+}
+
+.chapter-number {
+    background: #3b82f6;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.chapter-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Responsive adjustments for Genesis content */
+@media (max-width: 768px) {
+    .section-header {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .section-title {
+        font-size: 15px;
+    }
+    
+    .external-link {
+        font-size: 13px;
+    }
+    
+    .section-content {
+        padding: 16px;
+    }
+    
+    .chapter-links-grid {
+        grid-template-columns: 1fr;
+        max-height: 250px;
+    }
+    
+    .chapter-link {
+        padding: 10px 12px;
+    }
+    
+    .verse-reference {
+        font-size: 13px;
+    }
+    
+    .verse-content {
+        font-size: 14px;
+    }
+}

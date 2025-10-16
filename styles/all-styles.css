@@ -461,6 +461,52 @@ nav {
     color: #be185d;
 }
 
+/* Category Badge Styles - Unique colors for each book category */
+.category-law {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.category-history {
+    background: #ddd6fe;
+    color: #5b21b6;
+}
+
+.category-poetry {
+    background: #ecfccb;
+    color: #365314;
+}
+
+.category-major-prophet {
+    background: #fecaca;
+    color: #991b1b;
+}
+
+.category-minor-prophet {
+    background: #fed7aa;
+    color: #c2410c;
+}
+
+.category-gospel {
+    background: #bfdbfe;
+    color: #1e40af;
+}
+
+.category-acts {
+    background: #c7d2fe;
+    color: #3730a3;
+}
+
+.category-letters {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.category-revelation {
+    background: #fde68a;
+    color: #a16207;
+}
+
 .action-btn {
     background: none;
     border: none;
@@ -568,6 +614,16 @@ nav {
     background: #4267d4;
     transform: none;
     box-shadow: none;
+}
+
+/* Contemporary Kings cell styling */
+.contemporary-cell {
+    font-size: 13px;
+    color: #4b5563;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* Fancy Dropdown Styles */

@@ -123,25 +123,317 @@ const allKingsData = {
         }
     ],
     israel: [
-        { name: "Jeroboam I", order: 1, description: "First King of Northern Kingdom", character: "Rebellious", reign: "22 years", biblicalRef: "1 Kings 11 : 26 - 14 : 20" },
-        { name: "Nadab", order: 2, description: "Son of Jeroboam I", character: "Evil", reign: "2 years", biblicalRef: "1 Kings 15:25-28" },
-        { name: "Baasha", order: 3, description: "Killed Nadab", character: "Evil", reign: "24 years", biblicalRef: "1 Kings 15:27-16:7" },
-        { name: "Elah", order: 4, description: "Son of Baasha", character: "Evil", reign: "2 years", biblicalRef: "1 Kings 16:6-14" },
-        { name: "Zimri", order: 5, description: "Ruled 7 days", character: "Evil", reign: "7 days", biblicalRef: "1 Kings 16:9-20" },
-        { name: "Omri", order: 6, description: "Built Samaria", character: "Evil", reign: "12 years", biblicalRef: "1 Kings 16:16-28" },
-        { name: "Ahab", order: 7, description: "Married to Jezebel", character: "Wicked", reign: "22 years", biblicalRef: "1 Kings 16:29-22:40" },
-        { name: "Ahaziah", order: 8, description: "Son of Ahab", character: "Evil", reign: "2 years", biblicalRef: "1 Kings 22:51-2 Kings 1:18" },
-        { name: "Joram (Jehoram)", order: 9, description: "Brother of Ahaziah", character: "Evil", reign: "12 years", biblicalRef: "2 Kings 3:1-9:26" },
-        { name: "Jehu", order: 10, description: "Anointed by Elisha", character: "Zealous", reign: "28 years", biblicalRef: "2 Kings 9:1-10:36" },
-        { name: "Jehoahaz", order: 11, description: "Son of Jehu", character: "Evil", reign: "17 years", biblicalRef: "2 Kings 13:1-9" },
-        { name: "Jehoash (Joash)", order: 12, description: "Son of Jehoahaz", character: "Evil", reign: "16 years", biblicalRef: "2 Kings 13:10-14:16" },
-        { name: "Jeroboam II", order: 13, description: "Long reign", character: "Evil", reign: "41 years", biblicalRef: "2 Kings 14:23-29" },
-        { name: "Zechariah", order: 14, description: "Ruled 6 months", character: "Evil", reign: "6 months", biblicalRef: "2 Kings 15:8-12" },
-        { name: "Shallum", order: 15, description: "Ruled 1 month", character: "Evil", reign: "1 month", biblicalRef: "2 Kings 15:10-15" },
-        { name: "Menahem", order: 16, description: "Paid tribute to Assyria", character: "Evil", reign: "10 years", biblicalRef: "2 Kings 15:14-22" },
-        { name: "Pekahiah", order: 17, description: "Son of Menahem", character: "Evil", reign: "2 years", biblicalRef: "2 Kings 15:23-26" },
-        { name: "Pekah", order: 18, description: "Killed Pekahiah", character: "Evil", reign: "20 years", biblicalRef: "2 Kings 15:25-31" },
-        { name: "Hoshea", order: 19, description: "Last King of Israel", character: "Evil", reign: "9 years", biblicalRef: "2 Kings 17:1-6" }
+        { 
+            name: "Jeroboam I", 
+            order: 1, 
+            description: "First King of Northern Kingdom", 
+            character: "Rebellious", 
+            reign: "22 years", 
+            biblicalRef: "1 Kings 12:20, 25–33; 13–20",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Though God had promised the kingdom to Jeroboam, he turned from God and started a chain of evil influence during his 22-year reign.</p>
+                <p><strong>Notable Actions:</strong></p>
+                <ul>
+                    <li>To prevent the Israelites from going to the Jerusalem temple (in Judah) to worship, he set up golden calves in both the northern and southern regions of his kingdom.</li>
+                    <li>This blend of pagan worship and the worship of God caused a lot of confusion among the people.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Nadab", 
+            order: 2, 
+            description: "Son of Jeroboam I", 
+            character: "Evil", 
+            reign: "2 years", 
+            biblicalRef: "1 Kings 15:25-28",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Nadab followed in the footsteps of his father Jeroboam.</p>
+                <p><strong>Reign:</strong></p>
+                <ul>
+                    <li>Only reigned for two years.</li>
+                    <li>He and Jeroboam's other relatives were assassinated by a man named Baasha (1 Kings 15:29).</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Baasha", 
+            order: 3, 
+            description: "Killed Nadab", 
+            character: "Evil", 
+            reign: "24 years", 
+            biblicalRef: "1 Kings 15:33-16:7",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Baasha took the throne by force and reigned for 24 years.</p>
+                <p><strong>Notable Events:</strong></p>
+                <ul>
+                    <li>The prophet Jehu prophesied his downfall because Baasha had assassinated Jeroboam's family.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Elah", 
+            order: 4, 
+            description: "Son of Baasha", 
+            character: "Evil", 
+            reign: "2 years", 
+            biblicalRef: "1 Kings 16:8-10",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Elah, Baasha's son, only reigned for two years.</p>
+                <p><strong>Notable Events:</strong></p>
+                <ul>
+                    <li>His captain of chariots, Zimri, assassinated him and took the throne.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Zimri", 
+            order: 5, 
+            description: "Ruled 7 days", 
+            character: "Evil", 
+            reign: "7 days", 
+            biblicalRef: "1 Kings 16:11-20",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Zimri destroyed all of Elah and Baasha's household to seize the throne.</p>
+                <p><strong>Reign:</strong></p>
+                <ul>
+                    <li>His reign lasted only seven days.</li>
+                </ul>
+                <p><strong>Notable Events:</strong></p>
+                <ul>
+                    <li>The people discovered his actions and made Omri king instead.</li>
+                    <li>Omri took an army and besieged the city of Tirzah where Zimri was.</li>
+                    <li>In desperation, Zimri set his palace on fire and died there.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Omri", 
+            order: 6, 
+            description: "Built Samaria", 
+            character: "Evil", 
+            reign: "12 years", 
+            biblicalRef: "1 Kings 16:21-28",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Omri wasn't much better than Zimri in morality, though he reigned for 12 years.</p>
+                <p><strong>Notable Events:</strong></p>
+                <ul>
+                    <li>Omri had to deal with civil war when some of the people made a man named Tibni king.</li>
+                    <li>Once Tibni died in battle, Omri united the people under himself.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Ahab", 
+            order: 7, 
+            description: "Married to Jezebel", 
+            character: "Wicked", 
+            reign: "22 years", 
+            biblicalRef: "1 Kings 16:29-22:40",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Ahab was an evil king, known for his marriage to an idolatrous and cruel woman, Jezebel. During Ahab's 22-year reign, Jezebel championed the worship of Baal.</p>
+                <p><strong>About Baal:</strong></p>
+                <ul>
+                    <li>A Canaanite god of fertility.</li>
+                    <li>Worship involved idols, altars, animal sacrifices, sexual rites, and even sacrificing children.</li>
+                </ul>
+                <p><strong>Notable Events:</strong></p>
+                <ul>
+                    <li>God sent the prophet Elijah to warn Ahab of coming judgment: a drought lasting three years.</li>
+                    <li>A dramatic showdown occurred between Elijah and the prophets of Baal on Mt. Carmel.</li>
+                    <li>God sent fire from heaven to consume Elijah's sacrificial offering (1 Kings 18:38–39), showing His support and indicating that Ahab's kingdom would eventually be taken from him.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Ahaziah", 
+            order: 8, 
+            description: "Son of Ahab", 
+            character: "Evil", 
+            reign: "2 years", 
+            biblicalRef: "1 Kings 22:51-2 Kings 1:18",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Ahaziah, Ahab's son, wasn't much better than his parents.</p>
+                <p><strong>Reign:</strong></p>
+                <ul>
+                    <li>Two-year reign.</li>
+                    <li>Continued to encourage national worship of Baal.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Jehoram (Joram)", 
+            order: 9, 
+            description: "Brother of Ahaziah", 
+            character: "Evil", 
+            reign: "12 years", 
+            biblicalRef: "2 Kings 3-9",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Jehoram, Ahaziah's son, was also an evil king.</p>
+                <p><strong>Reign:</strong></p>
+                <ul>
+                    <li>Reigned 12 years.</li>
+                    <li>Faced attacks from enemy nations including Moabites and Syrians.</li>
+                    <li>Assassinated by Jehu.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Jehu", 
+            order: 10, 
+            description: "Anointed by Elisha", 
+            character: "Zealous", 
+            reign: "28 years", 
+            biblicalRef: "2 Kings 9-10",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> The prophet Elisha anointed Jehu king while Jehoram was still on the throne.</p>
+                <p><strong>Notable Events:</strong></p>
+                <ul>
+                    <li>God commissioned Jehu to bring judgment on Ahab's family line (2 Kings 9:7–9, 24–27).</li>
+                    <li>Tried to reform Israel but used deception: pretended to follow Baal, called a gathering, and killed all who attended (2 Kings 10:18–28).</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Jehoahaz", 
+            order: 11, 
+            description: "Son of Jehu", 
+            character: "Evil", 
+            reign: "17 years", 
+            biblicalRef: "2 Kings 13:1-9",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Jehoahaz started his 17-year reign at odds with God.</p>
+                <p><strong>Notable Events:</strong></p>
+                <ul>
+                    <li>God allowed the Syrians to conquer Israel because of his wayward actions.</li>
+                    <li>Jehoahaz cried out to God, and God delivered Israel in His mercy.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Jehoash (Joash)", 
+            order: 12, 
+            description: "Son of Jehoahaz", 
+            character: "Evil", 
+            reign: "16 years", 
+            biblicalRef: "2 Kings 13:10-25",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Jehoash, also called Joash, was evil like his father Jehoahaz.</p>
+                <p><strong>Reign:</strong></p>
+                <ul>
+                    <li>Fought against the Syrians.</li>
+                    <li>Prophet Elisha prophesied Israel would gain some victories during his reign (2 Kings 13:14–19).</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Jeroboam II", 
+            order: 13, 
+            description: "Long reign", 
+            character: "Evil", 
+            reign: "41 years", 
+            biblicalRef: "2 Kings 14:23-29",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Jeroboam II, Jehoash's son, reigned for 41 years.</p>
+                <h4>Notable Events:</h4>
+                <ul>
+                    <li>Though he didn't follow God, he restored some of the coastal lands of Israel.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Zechariah", 
+            order: 14, 
+            description: "Ruled 6 months", 
+            character: "Evil", 
+            reign: "6 months", 
+            biblicalRef: "2 Kings 15:8-12",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Zechariah, Jeroboam's son, reigned for six months.</p>
+                <h4>Notable Events:</h4>
+                <ul>
+                    <li>Killed by Shallum.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Shallum", 
+            order: 15, 
+            description: "Ruled 1 month", 
+            character: "Evil", 
+            reign: "1 month", 
+            biblicalRef: "2 Kings 15:13-15",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Shallum, son of Jabesh, assassinated King Zechariah.</p>
+                <h4>Reign:</h4>
+                <ul>
+                    <li>Reigned only one month.</li>
+                    <li>Killed by Menahem.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Menahem", 
+            order: 16, 
+            description: "Paid tribute to Assyria", 
+            character: "Evil", 
+            reign: "10 years", 
+            biblicalRef: "2 Kings 15:16-22",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Menahem, son of Gadi, reigned for ten years.</p>
+                <h4>Notable Events:</h4>
+                <ul>
+                    <li>Attacked by Assyrian King Pul.</li>
+                    <li>Paid tribute to Pul to maintain peace.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Pekahiah", 
+            order: 17, 
+            description: "Son of Menahem", 
+            character: "Evil", 
+            reign: "2 years", 
+            biblicalRef: "2 Kings 15:23-26",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Pekahiah, son of Menahem, reigned for two years.</p>
+                <h4>Notable Events:</h4>
+                <ul>
+                    <li>Murdered by Pekah, a captain in his army.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Pekah", 
+            order: 18, 
+            description: "Killed Pekahiah", 
+            character: "Evil", 
+            reign: "20 years", 
+            biblicalRef: "2 Kings 15:27-31",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Pekah reigned for 20 years.</p>
+                <h4>Notable Events:</h4>
+                <ul>
+                    <li>Faced attacks from Assyrian King Tiglath-Pileser.</li>
+                    <li>Murdered by Hoshea.</li>
+                </ul>
+            </div>`
+        },
+        { 
+            name: "Hoshea", 
+            order: 19, 
+            description: "Last King of Israel", 
+            character: "Evil", 
+            reign: "9 years", 
+            biblicalRef: "2 Kings 17",
+            biography: `<div class="biography-content">
+                <p><strong>Summary:</strong> Hoshea was the last king of Israel.</p>
+                <h4>Notable Events:</h4>
+                <ul>
+                    <li>His reign ended with the fall of Samaria.</li>
+                    <li>This event led to the Assyrian captivity in 722 BC.</li>
+                </ul>
+            </div>`
+        }
     ],
     judah: [
         { name: "Rehoboam", order: 1, description: "Son of Solomon", character: "Foolish", reign: "17 years", biblicalRef: "1 Kings 11:43-14:31" },

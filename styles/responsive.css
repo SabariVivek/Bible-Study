@@ -52,6 +52,12 @@
         padding: 12px 15px;
     }
 
+    /* Hide contemporary kings column on tablets */
+    .contemporary-cell,
+    .table th:nth-child(4) {
+        display: none;
+    }
+
     .pagination {
         padding: 15px 20px;
         flex-direction: column;
@@ -181,6 +187,12 @@
     .table th,
     .table td {
         padding: 10px 12px;
+    }
+
+    /* Hide contemporary kings column on mobile */
+    .contemporary-cell,
+    .table th:nth-child(4) {
+        display: none;
     }
 
     .fancy-dropdown.kingdom-dropdown {

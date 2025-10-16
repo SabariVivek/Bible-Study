@@ -11,6 +11,7 @@ const allProphetsData = {
             ministry: "Southern Kingdom (Judah)",
             testament: "Old",
             audience: "Judah",
+            contemporaryKings: "Uzziah, Jotham, Ahaz, Hezekiah (Judah)",
             keyEvents: [
                 "Prophesied during reigns of four kings of Judah",
                 "Vision of God in the temple",
@@ -38,6 +39,7 @@ const allProphetsData = {
             ministry: "Southern Kingdom (Judah)",
             testament: "Old",
             audience: "Judah",
+            contemporaryKings: "Josiah, Jehoahaz, Jehoiakim, Jehoiachin, Zedekiah (Judah); Babylonian Empire",
             keyEvents: [
                 "Called as young man to prophesy",
                 "Witnessed fall of Jerusalem",
@@ -65,6 +67,7 @@ const allProphetsData = {
             ministry: "Babylon (among exiles)",
             testament: "Old",
             audience: "Israel in Babylon (exiles)",
+            contemporaryKings: "Jehoiachin (Judah); Babylonian Empire",
             keyEvents: [
                 "Vision of God's glory",
                 "Prophetic actions and symbols",
@@ -92,6 +95,7 @@ const allProphetsData = {
             ministry: "Babylon (royal court)",
             testament: "Old",
             audience: "Israel in Babylon (exiles)",
+            contemporaryKings: "Nebuchadnezzar, Belshazzar, Darius, Cyrus (Babylon / Medo-Persian Empire)",
             keyEvents: [
                 "Refused to eat royal food",
                 "Interpreted dreams for kings",
@@ -122,6 +126,7 @@ const allProphetsData = {
             ministry: "Northern Kingdom",
             testament: "Old",
             audience: "Northern Kingdom (Israel)",
+            contemporaryKings: "Jeroboam II, Zechariah, Shallum, Menahem, Pekahiah, Pekah, Hoshea (Israel)",
             keyEvents: [
                 "Married unfaithful wife as symbol",
                 "Prophesied Israel's unfaithfulness",
@@ -142,6 +147,7 @@ const allProphetsData = {
             ministry: "Southern Kingdom",
             testament: "Old",
             audience: "Judah",
+            contemporaryKings: "Likely Joash, Uzziah, or early post-exilic period (uncertain)",
             keyEvents: [
                 "Locust plague judgment",
                 "Call to repentance",
@@ -163,6 +169,7 @@ const allProphetsData = {
             ministry: "Northern Kingdom",
             testament: "Old",
             audience: "Northern Kingdom (Israel)",
+            contemporaryKings: "Jeroboam II (Israel)",
             keyEvents: [
                 "Shepherd called to prophesy",
                 "Denounced social injustice",
@@ -184,6 +191,7 @@ const allProphetsData = {
             ministry: "Against Edom",
             testament: "Old",
             audience: "Edom",
+            contemporaryKings: "Unknown (likely during Judah/Israel conflicts, post-Assyrian invasions)",
             keyEvents: [
                 "Prophesied against Edom",
                 "Condemned Edom's treatment of Judah"
@@ -203,6 +211,7 @@ const allProphetsData = {
             ministry: "To Nineveh",
             testament: "Old",
             audience: "Nineveh (Assyria)",
+            contemporaryKings: "Jeroboam II (Israel)",
             keyEvents: [
                 "Fled from God's call",
                 "Swallowed by great fish",
@@ -226,6 +235,7 @@ const allProphetsData = {
             ministry: "Southern Kingdom",
             testament: "Old",
             audience: "Judah",
+            contemporaryKings: "Jotham, Ahaz, Hezekiah (Judah)",
             keyEvents: [
                 "Prophesied Messiah's birthplace",
                 "Condemned social injustice",
@@ -247,6 +257,7 @@ const allProphetsData = {
             ministry: "Against Nineveh",
             testament: "Old",
             audience: "Nineveh (Assyria)",
+            contemporaryKings: "Assyria in decline (after Tiglath-Pileser III, before Babylonian conquest)",
             keyEvents: [
                 "Prophesied fall of Nineveh",
                 "Described God's judgment on Assyria"
@@ -266,6 +277,7 @@ const allProphetsData = {
             ministry: "Southern Kingdom",
             testament: "Old",
             audience: "Judah",
+            contemporaryKings: "Josiah (Judah); rising Babylonian Empire",
             keyEvents: [
                 "Questioned God about injustice",
                 "Received vision of coming judgment",
@@ -287,6 +299,7 @@ const allProphetsData = {
             ministry: "Southern Kingdom",
             testament: "Old",
             audience: "Judah",
+            contemporaryKings: "Josiah (Judah)",
             keyEvents: [
                 "Prophesied Day of the Lord",
                 "Called for repentance",
@@ -308,6 +321,7 @@ const allProphetsData = {
             ministry: "Post-exile Judah",
             testament: "Old",
             audience: "Judah (post-exile)",
+            contemporaryKings: "Darius I (Persian Empire)",
             keyEvents: [
                 "Urged rebuilding of temple",
                 "Encouraged discouraged remnant",
@@ -329,6 +343,7 @@ const allProphetsData = {
             ministry: "Post-exile Judah",
             testament: "Old",
             audience: "Judah (post-exile)",
+            contemporaryKings: "Darius I (Persian Empire)",
             keyEvents: [
                 "Eight night visions",
                 "Encouraged temple rebuilding",
@@ -350,6 +365,7 @@ const allProphetsData = {
             ministry: "Post-exile Judah",
             testament: "Old",
             audience: "Judah (post-exile)",
+            contemporaryKings: "Likely Artaxerxes I (Persian Empire)",
             keyEvents: [
                 "Confronted spiritual apathy",
                 "Addressed corrupt worship",
@@ -374,6 +390,7 @@ const allProphetsData = {
             ministry: "Northern Kingdom (Israel)",
             testament: "Old",
             audience: "Northern Kingdom (Israel)",
+            contemporaryKings: "Ahab (Israel); King of Israel during Baal worship conflicts",
             keyEvents: [
                 "Confronted King Ahab and Queen Jezebel",
                 "Contest on Mount Carmel against prophets of Baal",
@@ -405,6 +422,7 @@ const allProphetsData = {
             ministry: "Northern Kingdom (Israel)",
             testament: "Old",
             audience: "Northern Kingdom (Israel)",
+            contemporaryKings: "Jehoram, Jehu (Israel)",
             keyEvents: [
                 "Received double portion of Elijah's spirit",
                 "Healed Naaman of leprosy",

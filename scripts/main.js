@@ -228,6 +228,7 @@ function showDashboard() {
     document.getElementById('dashboard-content').classList.remove('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.add('hidden');
 }
 
 function showKings() {
@@ -239,6 +240,7 @@ function showKings() {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.remove('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.add('hidden');
     
     // Initialize with all kingdoms if not already loaded
     if (currentKingdoms.length === 0) {
@@ -255,8 +257,9 @@ function showProphets() {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.remove('hidden');
+    document.getElementById('books-content').classList.add('hidden');
     
-    // Initialize table manager if not already done
+    // Initialize prophets table if not already done
     if (!prophetsTableManager) {
         initializeProphetsTable();
     }
@@ -317,6 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(event) {
         const kingdomDropdownContainer = document.getElementById('dropdownButton')?.closest('.fancy-dropdown');
         const prophetsDropdownContainer = document.getElementById('prophetsDropdownButton')?.closest('.fancy-dropdown');
+        const booksDropdownContainer = document.getElementById('booksDropdownButton')?.closest('.fancy-dropdown');
         
         // Close kingdom dropdown if click is outside
         if (kingdomDropdownContainer && !kingdomDropdownContainer.contains(event.target)) {
@@ -328,6 +332,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (prophetsDropdownContainer && !prophetsDropdownContainer.contains(event.target)) {
             document.getElementById('prophetsDropdownButton')?.classList.remove('active');
             document.getElementById('prophetsDropdownMenu')?.classList.remove('show');
+        }
+        
+        // Close books dropdown if click is outside
+        if (booksDropdownContainer && !booksDropdownContainer.contains(event.target)) {
+            document.getElementById('booksDropdownButton')?.classList.remove('active');
+            document.getElementById('booksDropdownMenu')?.classList.remove('show');
         }
     });
 
@@ -343,6 +353,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(event) {
         const filterOverlay = document.getElementById('filterCardOverlay');
         const prophetsFilterOverlay = document.getElementById('prophetsFilterCardOverlay');
+        const booksFilterOverlay = document.getElementById('booksFilterCardOverlay');
         
         if (event.target === filterOverlay) {
             closeFilterCard();
@@ -350,6 +361,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (event.target === prophetsFilterOverlay) {
             closeProphetsFilterCard();
+        }
+        
+        if (event.target === booksFilterOverlay) {
+            closeBooksFilterCard();
         }
     });
     
@@ -383,12 +398,6 @@ function initializeProphetsTable() {
         itemsPerPage: 10,
         columns: [
             {
-                header: 'Prophet Name',
-                key: 'name',
-                className: 'name-cell',
-                render: (item) => `<td class="name-cell"><div class="name-container"><span class="name">${item.name}</span></div></td>`
-            },
-            {
                 header: 'Testament',
                 key: 'testament',
                 className: 'testament-cell',
@@ -398,10 +407,22 @@ function initializeProphetsTable() {
                 }
             },
             {
+                header: 'Prophet Name',
+                key: 'name',
+                className: 'name-cell',
+                render: (item) => `<td class="name-cell"><div class="name-container"><span class="name">${item.name}</span></div></td>`
+            },
+            {
                 header: 'Audience',
                 key: 'audience',
                 className: 'audience-cell',
                 render: (item) => `<td class="audience-cell">${item.audience}</td>`
+            },
+            {
+                header: 'Contemporary Kings',
+                key: 'contemporaryKings',
+                className: 'contemporary-cell',
+                render: (item) => `<td class="contemporary-cell">${item.contemporaryKings || 'Not specified'}</td>`
             },
             {
                 header: 'Info',
@@ -460,6 +481,31 @@ function getTestamentBadge(testament) {
         return { class: 'status-righteous', text: 'New' };
     } else {
         return { class: 'status-neutral', text: testament };
+    }
+}
+
+function getCategoryBadge(category) {
+    switch (category) {
+        case 'Law':
+            return { class: 'category-law', text: 'Law' };
+        case 'History':
+            return { class: 'category-history', text: 'History' };
+        case 'Poetry':
+            return { class: 'category-poetry', text: 'Poetry' };
+        case 'Major Prophet':
+            return { class: 'category-major-prophet', text: 'Major Prophet' };
+        case 'Minor Prophet':
+            return { class: 'category-minor-prophet', text: 'Minor Prophet' };
+        case 'Gospel':
+            return { class: 'category-gospel', text: 'Gospel' };
+        case 'Acts':
+            return { class: 'category-acts', text: 'Acts' };
+        case 'Letters':
+            return { class: 'category-letters', text: 'Letters' };
+        case 'Revelation':
+            return { class: 'category-revelation', text: 'Revelation' };
+        default:
+            return { class: 'status-neutral', text: category };
     }
 }
 
@@ -538,6 +584,15 @@ document.addEventListener('DOMContentLoaded', function() {
             updateProphetsFilterSelection();
         });
     });
+
+    // Books filter event listeners
+    const booksFilterOptions = document.querySelectorAll('#booksFilterCardOverlay .filter-option');
+    booksFilterOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            selectedBooksCategoryFilterValue = this.dataset.value;
+            updateBooksFilterSelection();
+        });
+    });
 });
 
 function openProphetModal(prophet) {
@@ -548,49 +603,88 @@ function openProphetModal(prophet) {
     if (nameElement) nameElement.textContent = prophet.name;
     
     if (contentElement) {
-        contentElement.innerHTML = `
-            <div class="king-details">
-                <div class="detail-section">
-                    <h3>Major Events</h3>
-                    <ul>
+        let content = '';
+        
+        // Add key events section
+        if (prophet.keyEvents && prophet.keyEvents.length > 0) {
+            content += `
+                <div class="king-info-row">
+                    <span class="king-info-label">Key Events:</span>
+                    <ul class="king-info-list">
+                        ${prophet.keyEvents.map(event => `<li>${event}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+        
+        // Add major events section
+        if (prophet.majorEvents && prophet.majorEvents.length > 0) {
+            content += `
+                <div class="king-info-row">
+                    <span class="king-info-label">Major Events:</span>
+                    <ul class="king-info-list">
                         ${prophet.majorEvents.map(event => `<li>${event}</li>`).join('')}
                     </ul>
                 </div>
-                <div class="detail-section">
-                    <h3>Miracles Performed</h3>
-                    <ul>
+            `;
+        }
+        
+        // Add miracles section
+        if (prophet.miracles && prophet.miracles.length > 0) {
+            content += `
+                <div class="king-info-row">
+                    <span class="king-info-label">Miracles Performed:</span>
+                    <ul class="king-info-list">
                         ${prophet.miracles.map(miracle => `<li>${miracle}</li>`).join('')}
                     </ul>
                 </div>
-                <div class="detail-section">
-                    <h3>Testament</h3>
-                    <p>${prophet.testament} Testament</p>
+            `;
+        }
+        
+        // Add significance section
+        if (prophet.significance) {
+            content += `
+                <div class="king-info-row biography-section">
+                    <span class="king-info-label">Significance:</span>
+                    <span class="king-info-value biography-text">${prophet.significance}</span>
                 </div>
-                <div class="detail-section">
-                    <h3>Ministry Direction</h3>
-                    <p>${prophet.fromTo}</p>
-                </div>
-                <div class="detail-section">
-                    <h3>Audience</h3>
-                    <p>${prophet.audience}</p>
-                </div>
-                <div class="detail-section">
-                    <h3>Significance</h3>
-                    <p>${prophet.significance}</p>
-                </div>
-            </div>
-        `;
+            `;
+        }
+        
+        contentElement.innerHTML = content;
     }
     
     // Update side cards
-    document.getElementById('prophetPeriodValue').textContent = prophet.period;
-    document.getElementById('prophetMinistryValue').textContent = prophet.ministry;
-    document.getElementById('prophetBooksValue').textContent = prophet.books;
-    document.getElementById('prophetCharacterValue').textContent = prophet.characteristics;
+    document.getElementById('prophetPeriodValue').textContent = prophet.period || 'Unknown';
+    document.getElementById('prophetMinistryValue').textContent = prophet.ministry || 'Unknown';
+    document.getElementById('prophetBooksValue').textContent = prophet.books || 'Unknown';
+    document.getElementById('prophetCharacterValue').textContent = prophet.characteristics || 'Unknown';
+    document.getElementById('prophetContemporaryValue').textContent = prophet.contemporaryKings || 'Not specified';
     
     if (popup) {
         popup.classList.add('show');
         document.body.classList.add('modal-open');
+        
+        // Add click outside listener when modal opens
+        setTimeout(() => {
+            document.addEventListener('click', handleProphetOutsideClick);
+        }, 100);
+    }
+}
+
+/**
+ * Handle clicks outside the prophet modal to close it
+ */
+function handleProphetOutsideClick(event) {
+    const prophetPopup = document.getElementById('prophetPopup');
+    if (!prophetPopup?.classList.contains('show')) return;
+    
+    const prophetCard = prophetPopup.querySelector('.king-card');
+    const sideCards = prophetPopup.querySelector('.side-cards-container');
+    
+    // Close if clicking outside both the main card and side cards
+    if (!prophetCard?.contains(event.target) && !sideCards?.contains(event.target)) {
+        closeProphetPopup();
     }
 }
 
@@ -599,7 +693,377 @@ function closeProphetPopup() {
     if (popup) {
         popup.classList.remove('show');
         document.body.classList.remove('modal-open');
+        
+        // Remove the outside click listener when modal closes
+        document.removeEventListener('click', handleProphetOutsideClick);
     }
+}
+
+// Book popup functions
+function openBookByIndex(index) {
+    const currentData = booksTableManager.getCurrentData();
+    const book = currentData[index];
+    if (book) {
+        openBookModal(book);
+    }
+}
+
+function openBookModal(book) {
+    const popup = document.getElementById('bookPopup');
+    const nameElement = document.getElementById('popupBookName');
+    const contentElement = document.getElementById('popupBookContent');
+    
+    if (nameElement) nameElement.textContent = book.name;
+    
+    if (contentElement) {
+        // Check if this is Genesis and we have Genesis data
+        if (book.name === 'Genesis' && typeof genesisData !== 'undefined') {
+            displayGenesisContent(contentElement);
+        } else {
+            // For other books, show basic book information
+            contentElement.innerHTML = `
+                <div class="king-info-row">
+                    <span class="king-info-label">Testament:</span>
+                    <span class="king-info-value">${book.testament} Testament</span>
+                </div>
+                <div class="king-info-row">
+                    <span class="king-info-label">Category:</span>
+                    <span class="king-info-value">${book.category}</span>
+                </div>
+                <div class="king-info-row">
+                    <span class="king-info-label">Author:</span>
+                    <span class="king-info-value">${book.author}</span>
+                </div>
+                <div class="king-info-row">
+                    <span class="king-info-label">Chapters:</span>
+                    <span class="king-info-value">${book.chapters}</span>
+                </div>
+            `;
+        }
+    }
+    
+    if (popup) {
+        popup.classList.add('show');
+        document.body.classList.add('modal-open');
+        
+        // Add outside click listener to close modal
+        setTimeout(() => {
+            document.addEventListener('click', handleBookOutsideClick);
+        }, 100);
+    }
+}
+
+/**
+ * Display Genesis content in the book modal
+ * @param {HTMLElement} contentElement - The element to populate with Genesis content
+ */
+function displayGenesisContent(contentElement) {
+    let content = `
+        <!-- Introduction Section -->
+        <div class="genesis-section">
+            <div class="section-header">
+                <h3 class="section-title">📖 ${genesisData.introduction.title}</h3>
+            </div>
+            <div class="section-content">
+                <div class="introduction-text">${genesisData.introduction.content.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</div>
+            </div>
+        </div>
+
+        <!-- Basic Information -->
+        <div class="genesis-section">
+            <div class="section-header">
+                <h3 class="section-title">📋 Book Information</h3>
+            </div>
+            <div class="section-content">
+                <div class="king-info-row">
+                    <span class="king-info-label">Testament:</span>
+                    <span class="king-info-value">${genesisData.testament} Testament</span>
+                </div>
+                <div class="king-info-row">
+                    <span class="king-info-label">Category:</span>
+                    <span class="king-info-value">${genesisData.category}</span>
+                </div>
+                <div class="king-info-row">
+                    <span class="king-info-label">Author:</span>
+                    <span class="king-info-value">${genesisData.author}</span>
+                </div>
+                <div class="king-info-row">
+                    <span class="king-info-label">Chapters:</span>
+                    <span class="king-info-value">${genesisData.chapters}</span>
+                </div>
+                <div class="king-info-row">
+                    <span class="king-info-label">Theme:</span>
+                    <span class="king-info-value">${genesisData.theme}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Chapter (Chapter 1) -->
+        <div class="genesis-section">
+            <div class="section-header">
+                <h3 class="section-title">📜 Chapter 1: ${genesisData.chapters_list[0].title}</h3>
+                <a href="${genesisData.chapters_list[0].url}" target="_blank" class="external-link">View on EasyEnglish Bible ↗</a>
+            </div>
+            <div class="section-content">
+                <div class="chapter-content">
+    `;
+    
+    // Add the verses from Chapter 1
+    genesisData.chapters_list[0].sections.forEach((section, index) => {
+        content += `
+            <div class="verse-section">
+                <div class="verse-reference">${section.verses}</div>
+                <div class="verse-content">${section.content}</div>
+            </div>
+        `;
+    });
+    
+    content += `
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter Index -->
+        <div class="genesis-section">
+            <div class="section-header">
+                <h3 class="section-title">📑 Chapter Index</h3>
+            </div>
+            <div class="section-content">
+                <div class="chapter-index">
+                    <p class="chapter-index-description">Click on any chapter title to read it on EasyEnglish Bible:</p>
+                    <div class="chapter-links-grid">
+    `;
+    
+    // Add chapter links in a grid format
+    genesisData.chapterLinks.forEach((link, index) => {
+        const chapterNumber = index + 1;
+        content += `
+            <div class="chapter-link-item">
+                <a href="${link.url}" target="_blank" class="chapter-link" title="Read Chapter ${chapterNumber}">
+                    <span class="chapter-number">${chapterNumber}</span>
+                    <span class="chapter-title">${link.title}</span>
+                </a>
+            </div>
+        `;
+    });
+    
+    content += `
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    contentElement.innerHTML = content;
+}
+
+function handleBookOutsideClick(event) {
+    const popup = document.getElementById('bookPopup');
+    const popupContainer = popup.querySelector('.popup-container');
+    
+    if (popup && popupContainer && !popupContainer.contains(event.target)) {
+        closeBookPopup();
+    }
+}
+
+function closeBookPopup() {
+    const popup = document.getElementById('bookPopup');
+    if (popup) {
+        popup.classList.remove('show');
+        document.body.classList.remove('modal-open');
+        
+        // Remove the outside click listener when modal closes
+        document.removeEventListener('click', handleBookOutsideClick);
+    }
+}
+
+// Books functionality
+let booksTableManager;
+let currentBooksFilter = 'all';
+let currentBooksCategoryFilter = 'all';
+let selectedBooksCategoryFilterValue = 'all';
+
+function showBooks() {
+    // Update navigation
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelector('.nav-item.books').classList.add('active');
+    
+    // Show/hide content
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.remove('hidden');
+    
+    // Initialize table manager if not already done
+    if (!booksTableManager) {
+        initializeBooksTable();
+    }
+    
+    // Load books data
+    loadBooksData();
+}
+
+function initializeBooksTable() {
+    const booksTableConfig = {
+        containerId: 'books-table-container',
+        tableId: 'books-table',
+        tableBodyId: 'books-table-body',
+        paginationId: 'books-pagination',
+        showingCountId: 'books-showing-count',
+        prevBtnId: 'booksPrevBtn',
+        nextBtnId: 'booksNextBtn',
+        paginationControlsId: 'booksPaginationControls',
+        itemsPerPage: 10,
+        columns: [
+            {
+                header: 'Testament',
+                key: 'testament',
+                className: 'testament-cell',
+                render: (item) => {
+                    const testamentBadge = getTestamentBadge(item.testament);
+                    return `<td class="testament-cell"><span class="status-badge ${testamentBadge.class}">${testamentBadge.text}</span></td>`;
+                }
+            },
+            {
+                header: 'Book Name',
+                key: 'name',
+                className: 'name-cell',
+                render: (item) => `<td class="name-cell"><div class="name-container"><span class="name">${item.name}</span></div></td>`
+            },
+            {
+                header: 'Category',
+                key: 'category',
+                className: 'category-cell',
+                render: (item) => {
+                    const categoryBadge = getCategoryBadge(item.category);
+                    return `<td class="category-cell"><span class="status-badge ${categoryBadge.class}">${categoryBadge.text}</span></td>`;
+                }
+            },
+            {
+                header: 'Author',
+                key: 'author',
+                className: 'author-cell',
+                render: (item) => `<td class="author-cell">${item.author}</td>`
+            },
+            {
+                header: 'Info',
+                className: 'info-cell',
+                render: (item, index) => `<td class="info-cell"><button class="info-btn" onclick="event.stopPropagation(); openBookByIndex(${index})" title="Book Information">ℹ</button></td>`
+            }
+        ]
+    };
+
+    booksTableManager = new TableManager(booksTableConfig);
+}
+
+function loadBooksData() {
+    // Only load books data if books section is active
+    const booksContent = document.getElementById('books-content');
+    if (!booksContent || booksContent.classList.contains('hidden')) {
+        return;
+    }
+    
+    let booksData = [];
+    
+    // Check if allBooksData is available
+    if (typeof allBooksData === 'undefined') {
+        console.error('allBooksData is not defined. Make sure books-data.js is loaded.');
+        return;
+    }
+    
+    if (currentBooksFilter === 'all') {
+        // Combine all books
+        booksData = [
+            ...allBooksData.oldTestament,
+            ...allBooksData.newTestament
+        ];
+    } else if (currentBooksFilter === 'old') {
+        booksData = allBooksData.oldTestament;
+    } else if (currentBooksFilter === 'new') {
+        booksData = allBooksData.newTestament;
+    }
+    
+    // Apply category filter
+    if (currentBooksCategoryFilter !== 'all') {
+        booksData = booksData.filter(book => book.category === currentBooksCategoryFilter);
+    }
+    
+    if (booksTableManager) {
+        booksTableManager.setData(booksData);
+    }
+}
+
+function selectBooksCategory(category, text, icon, count) {
+    currentBooksFilter = category;
+    
+    const selectedText = document.getElementById('booksSelectedText');
+    if (selectedText) {
+        selectedText.textContent = `${icon} ${text}`;
+    }
+    
+    // Update dropdown selection
+    document.querySelectorAll('#booksDropdownMenu .dropdown-item').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    const clickedItem = document.querySelector(`#booksDropdownMenu .dropdown-item[onclick*="${category}"]`);
+    if (clickedItem) {
+        clickedItem.classList.add('selected');
+    }
+    
+    loadBooksData();
+    toggleBooksDropdown();
+}
+
+function toggleBooksDropdown() {
+    const dropdownMenu = document.getElementById('booksDropdownMenu');
+    if (dropdownMenu) {
+        dropdownMenu.classList.toggle('show');
+    }
+}
+
+function openBooksFilterCard() {
+    // Only open filter if books content is currently visible
+    const booksContent = document.getElementById('books-content');
+    if (!booksContent || booksContent.classList.contains('hidden')) {
+        console.warn('Cannot open books filter - books section is not active');
+        return;
+    }
+    
+    document.getElementById('booksFilterCardOverlay').classList.add('show');
+    document.body.classList.add('modal-open');
+    // Set current selection
+    selectedBooksCategoryFilterValue = currentBooksCategoryFilter;
+    updateBooksFilterSelection();
+}
+
+function closeBooksFilterCard() {
+    document.getElementById('booksFilterCardOverlay').classList.remove('show');
+    document.body.classList.remove('modal-open');
+}
+
+function updateBooksFilterSelection() {
+    const filterOptions = document.querySelectorAll('#booksFilterCardOverlay .filter-option');
+    filterOptions.forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.value === selectedBooksCategoryFilterValue) {
+            option.classList.add('selected');
+        }
+    });
+}
+
+function applyBooksFilter() {
+    // Only apply filter if books content is currently visible
+    const booksContent = document.getElementById('books-content');
+    if (!booksContent || booksContent.classList.contains('hidden')) {
+        console.warn('Books filter applied but books section is not active');
+        closeBooksFilterCard();
+        return;
+    }
+    
+    currentBooksCategoryFilter = selectedBooksCategoryFilterValue;
+    loadBooksData();
+    closeBooksFilterCard();
 }
 
 // Make functions globally available
@@ -610,3 +1074,12 @@ window.changeProphetsPage = changeProphetsPage;
 window.selectProphetsCategory = selectProphetsCategory;
 window.toggleProphetsDropdown = toggleProphetsDropdown;
 window.openProphetsFilterCard = openProphetsFilterCard;
+window.openBookByIndex = openBookByIndex;
+window.openBookModal = openBookModal;
+window.closeBookPopup = closeBookPopup;
+window.showBooks = showBooks;
+window.selectBooksCategory = selectBooksCategory;
+window.toggleBooksDropdown = toggleBooksDropdown;
+window.openBooksFilterCard = openBooksFilterCard;
+window.closeBooksFilterCard = closeBooksFilterCard;
+window.applyBooksFilter = applyBooksFilter;
