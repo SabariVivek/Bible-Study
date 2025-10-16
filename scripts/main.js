@@ -229,6 +229,11 @@ function showDashboard() {
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
 }
 
 function showKings() {
@@ -241,6 +246,11 @@ function showKings() {
     document.getElementById('kings-content').classList.remove('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
     
     // Initialize with all kingdoms if not already loaded
     if (currentKingdoms.length === 0) {
@@ -258,6 +268,11 @@ function showProphets() {
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.remove('hidden');
     document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
     
     // Initialize prophets table if not already done
     if (!prophetsTableManager) {
@@ -893,6 +908,11 @@ function showBooks() {
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.remove('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
     
     // Initialize table manager if not already done
     if (!booksTableManager) {
@@ -1066,6 +1086,92 @@ function applyBooksFilter() {
     closeBooksFilterCard();
 }
 
+// Additional Navigation Functions
+function showTimeline() {
+    // Update navigation
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelector('.nav-item.timeline').classList.add('active');
+    
+    // Show/hide content
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.remove('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
+}
+
+function showGenealogy() {
+    // Update navigation
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelector('.nav-item.genealogy').classList.add('active');
+    
+    // Show/hide content
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.remove('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
+}
+
+function showMaps() {
+    // Update navigation
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelector('.nav-item.maps').classList.add('active');
+    
+    // Show/hide content
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.remove('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
+}
+
+function showSetting() {
+    // Update navigation
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelector('.nav-item.setting').classList.add('active');
+    
+    // Show/hide content
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.remove('hidden');
+    document.getElementById('help-content').classList.add('hidden');
+}
+
+function showHelp() {
+    // Update navigation
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelector('.nav-item.help').classList.add('active');
+    
+    // Show/hide content
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.remove('hidden');
+}
+
 // Make functions globally available
 window.openProphetModal = openProphetModal;
 window.openProphetByIndex = openProphetByIndex;
@@ -1083,3 +1189,8 @@ window.toggleBooksDropdown = toggleBooksDropdown;
 window.openBooksFilterCard = openBooksFilterCard;
 window.closeBooksFilterCard = closeBooksFilterCard;
 window.applyBooksFilter = applyBooksFilter;
+window.showTimeline = showTimeline;
+window.showGenealogy = showGenealogy;
+window.showMaps = showMaps;
+window.showSetting = showSetting;
+window.showHelp = showHelp;
