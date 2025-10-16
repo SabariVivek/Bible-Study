@@ -106,50 +106,15 @@ async function handleLogin(event) {
     }
 }
 
-// Security helper function (obfuscated credential decoder)
-function getAuthConfig() {
-    // Multi-layered obfuscation system
-    const obfuscatedData = {
-        // Split and encoded credential segments
-        segments: ['bmltZGE=', 'MzIxQEA=', 'bWRh'],
-        // Reconstruction pattern
-        pattern: [2, 0, 1],
-        // Character shift value
-        shift: 3
-    };
-    
-    try {
-        // Decode base64 segments
-        const decodedSegments = obfuscatedData.segments.map(segment => atob(segment));
-        
-        // Reconstruct using pattern
-        let reconstructed = '';
-        for (let i = 0; i < obfuscatedData.pattern.length; i++) {
-            reconstructed += decodedSegments[obfuscatedData.pattern[i]];
-        }
-        
-        // Reverse the string and split into credentials
-        const reversed = reconstructed.split('').reverse().join('');
-        const midPoint = Math.floor(reversed.length / 2);
-        
-        return {
-            username: reversed.substring(0, 5),
-            password: reversed.substring(5)
-        };
-    } catch (e) {
-        // Fallback to prevent errors
-        return { username: '', password: '' };
-    }
-}
-
-// Simulate login process (replace with actual authentication logic)
+// Simulate login process with hardcoded credentials
 function simulateLogin(username, password) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            // Get obfuscated credentials
-            const authConfig = getAuthConfig();
+            // Hardcoded credentials
+            const validUsername = 'Admin';
+            const validPassword = 'Admin@123';
             
-            if (username === authConfig.username && password === authConfig.password) {
+            if (username === validUsername && password === validPassword) {
                 resolve();
             } else {
                 reject(new Error('Invalid username or password'));
