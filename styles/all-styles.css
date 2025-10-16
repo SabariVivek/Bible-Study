@@ -304,40 +304,46 @@ nav {
 
 .filter-btn, .export-btn {
     padding: 10px 16px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid transparent;
     border-radius: 8px;
-    background: white;
-    color: #374151;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: center;
     gap: 8px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
 }
 
 .filter-btn:hover, .export-btn:hover {
-    border-color: #d1d5db;
-    background: #f9fafb;
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .add-btn {
     padding: 12px 20px;
-    background: #3b82f6;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
     display: flex;
     align-items: center;
     gap: 8px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
 }
 
 .add-btn:hover {
-    background: #2563eb;
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .table-container {
@@ -552,12 +558,15 @@ nav {
 
 .pagination-btn:hover {
     background: #f9fafb;
+    border-color: #d1d5db;
 }
 
 .pagination-btn.active {
-    background: #3b82f6;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    border-color: #3b82f6;
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .pagination-btn:disabled {
@@ -862,18 +871,21 @@ nav {
 .filter-btn-apply {
     flex: 1;
     padding: 12px 20px;
-    background: #3b82f6;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
 }
 
 .filter-btn-apply:hover {
-    background: #2563eb;
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .filter-btn-cancel {
@@ -1527,7 +1539,7 @@ nav {
 .login-btn {
     width: 100%;
     padding: 12px 20px;
-    background: #3b82f6;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 8px;
@@ -1540,12 +1552,13 @@ nav {
     justify-content: center;
     gap: 8px;
     margin-top: 30px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
 }
 
 .login-btn:hover:not(:disabled) {
-    background: #2563eb;
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
 .login-btn:disabled {
@@ -1737,4 +1750,111 @@ nav {
 
 .timeline-container::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
+}
+
+/* Custom Scrollbar for Main Content */
+.main-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+/* Dashboard Era Cards */
+.dashboard-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.era-card {
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 6px solid;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.era-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.era-card-content {
+    padding: 24px;
+}
+
+.era-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.era-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Era-specific colors */
+.creation-era {
+    border-left-color: #3b82f6;
+}
+
+.patriarchs-era {
+    border-left-color: #10b981;
+}
+
+.exodus-era {
+    border-left-color: #f59e0b;
+}
+
+.kingdom-era {
+    border-left-color: #ef4444;
+}
+
+.exile-era {
+    border-left-color: #8b5cf6;
+}
+
+.new-testament-era {
+    border-left-color: #06b6d4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard-cards-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .era-card-content {
+        padding: 20px;
+    }
+    
+    .era-title {
+        font-size: 16px;
+    }
+    
+    .era-subtitle {
+        font-size: 13px;
+    }
 }
