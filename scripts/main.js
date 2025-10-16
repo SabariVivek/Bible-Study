@@ -227,6 +227,7 @@ function showDashboard() {
     // Show/hide content
     document.getElementById('dashboard-content').classList.remove('hidden');
     document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
 }
 
 function showKings() {
@@ -237,11 +238,31 @@ function showKings() {
     // Show/hide content
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.remove('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
     
     // Initialize with all kingdoms if not already loaded
     if (currentKingdoms.length === 0) {
         applyFilters();
     }
+}
+
+function showProphets() {
+    // Update navigation
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelector('.nav-item.prophets').classList.add('active');
+    
+    // Show/hide content
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.remove('hidden');
+    
+    // Initialize table manager if not already done
+    if (!prophetsTableManager) {
+        initializeProphetsTable();
+    }
+    
+    // Load prophets data
+    loadProphetsData();
 }
 
 // Drawer toggle functionality
@@ -295,11 +316,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close dropdown when clicking outside
     document.addEventListener('click', function(event) {
         const kingdomDropdownContainer = document.getElementById('dropdownButton')?.closest('.fancy-dropdown');
+        const prophetsDropdownContainer = document.getElementById('prophetsDropdownButton')?.closest('.fancy-dropdown');
         
         // Close kingdom dropdown if click is outside
         if (kingdomDropdownContainer && !kingdomDropdownContainer.contains(event.target)) {
             document.getElementById('dropdownButton')?.classList.remove('active');
             document.getElementById('dropdownMenu')?.classList.remove('show');
+        }
+        
+        // Close prophets dropdown if click is outside
+        if (prophetsDropdownContainer && !prophetsDropdownContainer.contains(event.target)) {
+            document.getElementById('prophetsDropdownButton')?.classList.remove('active');
+            document.getElementById('prophetsDropdownMenu')?.classList.remove('show');
         }
     });
 
@@ -314,8 +342,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close filter card when clicking outside
     document.addEventListener('click', function(event) {
         const filterOverlay = document.getElementById('filterCardOverlay');
+        const prophetsFilterOverlay = document.getElementById('prophetsFilterCardOverlay');
+        
         if (event.target === filterOverlay) {
             closeFilterCard();
+        }
+        
+        if (event.target === prophetsFilterOverlay) {
+            closeProphetsFilterCard();
         }
     });
     
@@ -327,3 +361,252 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Make functions globally accessible
 window.openKingModal = openKingModal;
+
+// Prophets Filter Variables
+let selectedProphetsFilterValue = 'all';
+let currentProphetsAudienceFilter = 'all';
+
+// Prophets functionality using TableManager
+let prophetsTableManager;
+let currentProphetsFilter = 'all';
+
+function initializeProphetsTable() {
+    const prophetsTableConfig = {
+        containerId: 'prophets-table-container',
+        tableId: 'prophets-table',
+        tableBodyId: 'prophets-table-body',
+        paginationId: 'prophets-pagination',
+        showingCountId: 'prophets-showing-count',
+        prevBtnId: 'prophetsPrevBtn',
+        nextBtnId: 'prophetsNextBtn',
+        paginationControlsId: 'prophetsPaginationControls',
+        itemsPerPage: 10,
+        columns: [
+            {
+                header: 'Prophet Name',
+                key: 'name',
+                className: 'name-cell',
+                render: (item) => `<td class="name-cell"><div class="name-container"><span class="name">${item.name}</span></div></td>`
+            },
+            {
+                header: 'Testament',
+                key: 'testament',
+                className: 'testament-cell',
+                render: (item) => {
+                    const testamentBadge = getTestamentBadge(item.testament);
+                    return `<td class="testament-cell"><span class="status-badge ${testamentBadge.class}">${testamentBadge.text}</span></td>`;
+                }
+            },
+            {
+                header: 'Audience',
+                key: 'audience',
+                className: 'audience-cell',
+                render: (item) => `<td class="audience-cell">${item.audience}</td>`
+            },
+            {
+                header: 'Info',
+                className: 'info-cell',
+                render: (item, index) => `<td class="info-cell"><button class="info-btn" onclick="event.stopPropagation(); openProphetByIndex(${index})" title="Major Events / Miracles">ℹ</button></td>`
+            }
+        ]
+    };
+
+    prophetsTableManager = new TableManager(prophetsTableConfig);
+}
+
+function loadProphetsData() {
+    let prophetsData = [];
+    
+    if (currentProphetsFilter === 'all') {
+        // Combine all prophet categories
+        prophetsData = [
+            ...allProphetsData.majorProphets.map(prophet => ({...prophet, category: 'Major Prophet'})),
+            ...allProphetsData.minorProphets.map(prophet => ({...prophet, category: 'Minor Prophet'})),
+            ...allProphetsData.otherProphets.map(prophet => ({...prophet, category: 'Other Prophet'}))
+        ];
+    } else if (currentProphetsFilter === 'major') {
+        prophetsData = allProphetsData.majorProphets.map(prophet => ({
+            ...prophet,
+            category: 'Major Prophet'
+        }));
+    } else if (currentProphetsFilter === 'minor') {
+        prophetsData = allProphetsData.minorProphets.map(prophet => ({
+            ...prophet,
+            category: 'Minor Prophet'
+        }));
+    } else if (currentProphetsFilter === 'other') {
+        prophetsData = allProphetsData.otherProphets.map(prophet => ({
+            ...prophet,
+            category: 'Other Prophet'
+        }));
+    }
+    
+    // Apply audience filter
+    if (currentProphetsAudienceFilter !== 'all') {
+        prophetsData = prophetsData.filter(prophet => 
+            prophet.audience === currentProphetsAudienceFilter
+        );
+    }
+    
+    if (prophetsTableManager) {
+        prophetsTableManager.setData(prophetsData);
+    }
+}
+
+function getTestamentBadge(testament) {
+    if (testament === 'Old') {
+        return { class: 'status-ancient', text: 'Old' };
+    } else if (testament === 'New') {
+        return { class: 'status-righteous', text: 'New' };
+    } else {
+        return { class: 'status-neutral', text: testament };
+    }
+}
+
+function openProphetByIndex(index) {
+    const currentData = prophetsTableManager.getCurrentData();
+    const prophet = currentData[index];
+    if (prophet) {
+        openProphetModal(prophet);
+    }
+}
+
+function selectProphetsCategory(category, text, icon, count) {
+    currentProphetsFilter = category;
+    
+    const selectedText = document.getElementById('prophetsSelectedText');
+    if (selectedText) {
+        selectedText.textContent = `${icon} ${text}`;
+    }
+    
+    // Update dropdown selection
+    document.querySelectorAll('#prophetsDropdownMenu .dropdown-item').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    const clickedItem = document.querySelector(`#prophetsDropdownMenu .dropdown-item[onclick*="${category}"]`);
+    if (clickedItem) {
+        clickedItem.classList.add('selected');
+    }
+    
+    loadProphetsData();
+    toggleProphetsDropdown();
+}
+
+function toggleProphetsDropdown() {
+    const dropdownMenu = document.getElementById('prophetsDropdownMenu');
+    if (dropdownMenu) {
+        dropdownMenu.classList.toggle('show');
+    }
+}
+
+function openProphetsFilterCard() {
+    document.getElementById('prophetsFilterCardOverlay').classList.add('show');
+    document.body.classList.add('modal-open');
+    // Set current selection
+    selectedProphetsFilterValue = currentProphetsAudienceFilter;
+    updateProphetsFilterSelection();
+}
+
+function closeProphetsFilterCard() {
+    document.getElementById('prophetsFilterCardOverlay').classList.remove('show');
+    document.body.classList.remove('modal-open');
+}
+
+function updateProphetsFilterSelection() {
+    const filterOptions = document.querySelectorAll('#prophetsFilterCardOverlay .filter-option');
+    filterOptions.forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.value === selectedProphetsFilterValue) {
+            option.classList.add('selected');
+        }
+    });
+}
+
+function applyProphetsFilter() {
+    currentProphetsAudienceFilter = selectedProphetsFilterValue;
+    loadProphetsData();
+    closeProphetsFilterCard();
+}
+
+// Add click event listeners for prophets filter options
+document.addEventListener('DOMContentLoaded', function() {
+    const prophetsFilterOptions = document.querySelectorAll('#prophetsFilterCardOverlay .filter-option');
+    prophetsFilterOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            selectedProphetsFilterValue = this.dataset.value;
+            updateProphetsFilterSelection();
+        });
+    });
+});
+
+function openProphetModal(prophet) {
+    const popup = document.getElementById('prophetPopup');
+    const nameElement = document.getElementById('popupProphetName');
+    const contentElement = document.getElementById('popupProphetContent');
+    
+    if (nameElement) nameElement.textContent = prophet.name;
+    
+    if (contentElement) {
+        contentElement.innerHTML = `
+            <div class="king-details">
+                <div class="detail-section">
+                    <h3>Major Events</h3>
+                    <ul>
+                        ${prophet.majorEvents.map(event => `<li>${event}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="detail-section">
+                    <h3>Miracles Performed</h3>
+                    <ul>
+                        ${prophet.miracles.map(miracle => `<li>${miracle}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="detail-section">
+                    <h3>Testament</h3>
+                    <p>${prophet.testament} Testament</p>
+                </div>
+                <div class="detail-section">
+                    <h3>Ministry Direction</h3>
+                    <p>${prophet.fromTo}</p>
+                </div>
+                <div class="detail-section">
+                    <h3>Audience</h3>
+                    <p>${prophet.audience}</p>
+                </div>
+                <div class="detail-section">
+                    <h3>Significance</h3>
+                    <p>${prophet.significance}</p>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Update side cards
+    document.getElementById('prophetPeriodValue').textContent = prophet.period;
+    document.getElementById('prophetMinistryValue').textContent = prophet.ministry;
+    document.getElementById('prophetBooksValue').textContent = prophet.books;
+    document.getElementById('prophetCharacterValue').textContent = prophet.characteristics;
+    
+    if (popup) {
+        popup.classList.add('show');
+        document.body.classList.add('modal-open');
+    }
+}
+
+function closeProphetPopup() {
+    const popup = document.getElementById('prophetPopup');
+    if (popup) {
+        popup.classList.remove('show');
+        document.body.classList.remove('modal-open');
+    }
+}
+
+// Make functions globally available
+window.openProphetModal = openProphetModal;
+window.openProphetByIndex = openProphetByIndex;
+window.closeProphetPopup = closeProphetPopup;
+window.changeProphetsPage = changeProphetsPage;
+window.selectProphetsCategory = selectProphetsCategory;
+window.toggleProphetsDropdown = toggleProphetsDropdown;
+window.openProphetsFilterCard = openProphetsFilterCard;
