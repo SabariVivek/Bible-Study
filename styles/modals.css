@@ -1,0 +1,447 @@
+/* ===== MODAL STYLES - Popups, Overlays, Filter Cards ===== */
+
+/* King Card Popup Styles */
+.king-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.king-popup-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    max-width: 90%;
+    width: auto;
+}
+
+.king-card {
+    background: white;
+    border-radius: 16px;
+    padding: 35px;
+    max-width: 600px;
+    width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: scale(0.8) translateX(-50px);
+    transition: transform 0.5s ease;
+}
+
+.king-popup-overlay.show .king-card {
+    transform: scale(1) translateX(0);
+}
+
+.side-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 200px;
+}
+
+.side-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateX(50px);
+    opacity: 0;
+    transition: all 0.6s ease;
+    border-left: 4px solid #3b82f6;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.king-popup-overlay.show .side-card:nth-child(1) {
+    transform: translateX(0);
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+
+.king-popup-overlay.show .side-card:nth-child(2) {
+    transform: translateX(0);
+    opacity: 1;
+    transition-delay: 0.4s;
+}
+
+.king-popup-overlay.show .side-card:nth-child(3) {
+    transform: translateX(0);
+    opacity: 1;
+    transition-delay: 0.6s;
+}
+
+.king-popup-overlay.show .side-card:nth-child(4) {
+    transform: translateX(0);
+    opacity: 1;
+    transition-delay: 0.8s;
+}
+
+.side-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.order-card {
+    border-left-color: #10b981;
+}
+
+.kingdom-card {
+    border-left-color: #8b5cf6;
+}
+
+.description-card {
+    border-left-color: #f59e0b;
+}
+
+.character-card {
+    border-left-color: #ef4444;
+}
+
+.side-card-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+}
+
+.side-card-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1f2937;
+    line-height: 1.2;
+}
+
+.king-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.king-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f2937;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.close-btn {
+    background: #f3f4f6;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #6b7280;
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.king-card-content {
+    display: grid;
+    gap: 16px;
+}
+
+.king-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.king-info-row:last-child {
+    border-bottom: none;
+}
+
+.king-info-label {
+    font-weight: 600;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.king-info-value {
+    font-weight: 500;
+    color: #1f2937;
+    text-align: right;
+}
+
+.biography-section {
+    flex-direction: column;
+    align-items: flex-start !important;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.biography-section .king-info-label {
+    margin-bottom: 8px;
+    color: #7c3aed;
+    font-weight: 700;
+}
+
+.biography-text {
+    text-align: left !important;
+    line-height: 1.6;
+    color: #374151;
+    font-size: 14px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.biography-text::-webkit-scrollbar {
+    width: 6px;
+}
+
+.biography-text::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.biography-text::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.biography-text::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.biography-content {
+    text-align: left;
+}
+
+.biography-content h4 {
+    margin: 0 0 15px 0;
+    color: #7c3aed;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.biography-content ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.biography-content ul ul {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-left: 18px;
+    list-style-type: circle;
+}
+
+.biography-content li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+    color: #374151;
+}
+
+.biography-content li:last-child {
+    margin-bottom: 0;
+}
+
+.verse-highlight {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #1f2937;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 11px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.biblical-ref {
+    background: linear-gradient(135deg, #9ca3af, #6b7280);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 11px;
+    margin-left: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+}
+
+/* Filter Card Styles */
+.filter-card-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.filter-card-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.filter-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.filter-card-overlay.show .filter-card {
+    transform: scale(1);
+}
+
+.filter-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.filter-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f2937;
+    margin: 0;
+}
+
+.filter-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.filter-option:hover {
+    border-color: #3b82f6;
+    background: #f8fafc;
+}
+
+.filter-option.selected {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.filter-option-icon {
+    font-size: 18px;
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+}
+
+.filter-option-content {
+    flex: 1;
+}
+
+.filter-option-name {
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1px;
+    font-size: 14px;
+}
+
+.filter-option-description {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.filter-btn-apply {
+    flex: 1;
+    padding: 12px 20px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.filter-btn-apply:hover {
+    background: #2563eb;
+}
+
+.filter-btn-cancel {
+    flex: 1;
+    padding: 12px 20px;
+    background: #f3f4f6;
+    color: #374151;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.filter-btn-cancel:hover {
+    background: #e5e7eb;
+}
