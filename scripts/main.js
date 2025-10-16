@@ -719,8 +719,352 @@ function openBookByIndex(index) {
     const currentData = booksTableManager.getCurrentData();
     const book = currentData[index];
     if (book) {
-        openBookModal(book);
+        // Check if this is Genesis and play audio
+        if (book.name === "Genesis") {
+            playBookAudio(book.name);
+        } else {
+            openBookModal(book);
+        }
     }
+}
+
+// Function to play audio for specific books
+function playBookAudio(bookName) {
+    // Stop any currently playing audio
+    const existingAudio = document.querySelector('.audio-player-container');
+    if (existingAudio) {
+        const audio = existingAudio.querySelector('audio');
+        if (audio) audio.pause();
+        existingAudio.remove();
+    }
+
+    // Create audio element based on book name
+    let audioFile = '';
+    switch(bookName) {
+        case 'Genesis':
+            audioFile = 'resources/audio/genesis-overview.mp3';
+            break;
+        // Add more cases for other books as needed
+        default:
+            console.log(`No audio file available for ${bookName}`);
+            // Fall back to opening book modal
+            const currentData = booksTableManager.getCurrentData();
+            const book = currentData.find(b => b.name === bookName);
+            if (book) {
+                openBookModal(book);
+            }
+            return;
+    }
+
+    // Create attractive audio player container
+    const playerContainer = document.createElement('div');
+    playerContainer.className = 'audio-player-container';
+    playerContainer.innerHTML = `
+        <div class="audio-player-card">
+            <div class="audio-player-header">
+                <div class="audio-info">
+                    <div class="audio-icon">🎧</div>
+                    <div class="audio-details">
+                        <h3 class="audio-title">${bookName} Overview</h3>
+                        <p class="audio-subtitle">Bible Book Audio</p>
+                    </div>
+                </div>
+                <button class="audio-close-btn" onclick="closeAudioPlayer()">✕</button>
+            </div>
+            <div class="audio-player-body">
+                <div class="audio-controls">
+                    <button class="audio-control-btn play-pause-btn" onclick="toggleAudioPlayback()">
+                        <span class="play-icon">▶️</span>
+                        <span class="pause-icon" style="display: none;">⏸️</span>
+                    </button>
+                    <div class="audio-progress-container">
+                        <div class="audio-progress-bar">
+                            <div class="audio-progress-fill"></div>
+                        </div>
+                        <div class="audio-time">
+                            <span class="current-time">0:00</span>
+                            <span class="total-time">0:00</span>
+                        </div>
+                    </div>
+                    <button class="audio-control-btn cancel-btn" onclick="closeAudioPlayer()">Cancel</button>
+                </div>
+                <audio preload="metadata">
+                    <source src="${audioFile}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    `;
+
+    // Add styles for the audio player
+    const style = document.createElement('style');
+    style.textContent = `
+        .audio-player-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .audio-player-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            color: white;
+            overflow: hidden;
+            min-width: 400px;
+            max-width: 500px;
+        }
+
+        .audio-player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .audio-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .audio-icon {
+            font-size: 32px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .audio-details h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .audio-details p {
+            margin: 4px 0 0 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .audio-close-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .audio-close-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .audio-player-body {
+            padding: 25px;
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .audio-control-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .audio-control-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .play-pause-btn {
+            min-width: 80px;
+            justify-content: center;
+        }
+
+        .cancel-btn {
+            background: rgba(239, 68, 68, 0.8);
+            margin-left: auto;
+        }
+
+        .cancel-btn:hover {
+            background: rgba(239, 68, 68, 1);
+        }
+
+        .audio-progress-container {
+            flex: 1;
+        }
+
+        .audio-progress-bar {
+            background: rgba(255,255,255,0.3);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .audio-progress-fill {
+            background: white;
+            height: 100%;
+            width: 0%;
+            transition: width 0.1s;
+            border-radius: 3px;
+        }
+
+        .audio-time {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 480px) {
+            .audio-player-card {
+                min-width: 320px;
+                margin: 20px;
+            }
+            
+            .audio-controls {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .cancel-btn {
+                margin-left: 0;
+                order: 3;
+                flex: 1;
+            }
+        }
+    `;
+
+    // Add overlay background
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 9999;
+        backdrop-filter: blur(5px);
+    `;
+
+    // Add to document
+    document.head.appendChild(style);
+    document.body.appendChild(overlay);
+    document.body.appendChild(playerContainer);
+
+    // Get audio element and set up functionality
+    const audio = playerContainer.querySelector('audio');
+    const playPauseBtn = playerContainer.querySelector('.play-pause-btn');
+    const playIcon = playerContainer.querySelector('.play-icon');
+    const pauseIcon = playerContainer.querySelector('.pause-icon');
+    const progressBar = playerContainer.querySelector('.audio-progress-bar');
+    const progressFill = playerContainer.querySelector('.audio-progress-fill');
+    const currentTimeSpan = playerContainer.querySelector('.current-time');
+    const totalTimeSpan = playerContainer.querySelector('.total-time');
+
+    // Close function
+    window.closeAudioPlayer = function() {
+        if (audio) audio.pause();
+        playerContainer.remove();
+        overlay.remove();
+        style.remove();
+        delete window.closeAudioPlayer;
+        delete window.toggleAudioPlayback;
+    };
+
+    // Toggle play/pause function
+    window.toggleAudioPlayback = function() {
+        if (audio.paused) {
+            audio.play().catch(error => {
+                console.error('Error playing audio:', error);
+                alert('Unable to play audio file. Please check if the file exists.');
+                closeAudioPlayer();
+            });
+        } else {
+            audio.pause();
+        }
+    };
+
+    // Format time helper
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Audio event listeners
+    audio.addEventListener('loadedmetadata', () => {
+        totalTimeSpan.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = `${progress}%`;
+        currentTimeSpan.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('play', () => {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'inline';
+    });
+
+    audio.addEventListener('pause', () => {
+        playIcon.style.display = 'inline';
+        pauseIcon.style.display = 'none';
+    });
+
+    audio.addEventListener('ended', () => {
+        closeAudioPlayer();
+    });
+
+    // Progress bar click to seek
+    progressBar.addEventListener('click', (e) => {
+        const rect = progressBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        const seekTime = (clickX / width) * audio.duration;
+        audio.currentTime = seekTime;
+    });
+
+    // Auto-play the audio
+    audio.play().catch(error => {
+        console.error('Error playing audio:', error);
+        alert('Unable to play audio file. Please check if the file exists.');
+        closeAudioPlayer();
+    });
+
+    console.log(`Playing audio for ${bookName}: ${audioFile}`);
 }
 
 function openBookModal(book) {
@@ -966,9 +1310,9 @@ function initializeBooksTable() {
                 render: (item) => `<td class="author-cell">${item.author}</td>`
             },
             {
-                header: 'Info',
+                header: 'Audio',
                 className: 'info-cell',
-                render: (item, index) => `<td class="info-cell"><button class="info-btn" onclick="event.stopPropagation(); openBookByIndex(${index})" title="Book Information">ℹ</button></td>`
+                render: (item, index) => `<td class="info-cell"><button class="info-btn" onclick="event.stopPropagation(); openBookByIndex(${index})" title="Audio Information">🔊</button></td>`
             }
         ]
     };
@@ -1181,6 +1525,7 @@ window.selectProphetsCategory = selectProphetsCategory;
 window.toggleProphetsDropdown = toggleProphetsDropdown;
 window.openProphetsFilterCard = openProphetsFilterCard;
 window.openBookByIndex = openBookByIndex;
+window.playBookAudio = playBookAudio;
 window.openBookModal = openBookModal;
 window.closeBookPopup = closeBookPopup;
 window.showBooks = showBooks;
