@@ -727,8 +727,13 @@ function openBookByIndex(index) {
     const currentData = booksTableManager.getCurrentData();
     const book = currentData[index];
     if (book) {
-        // Check if this is Genesis and play audio
-        if (book.name === "Genesis") {
+        // Play audio for supported books using the custom player
+        const audioBooks = [
+            "Genesis", "Exodus", "Leviticus", "Levi", "Numbers", "Deuteronomy",
+            "Joshua", "Judges", "Ruth", "1 Samuel", "1st Samuel", "First Samuel",
+            "2 Samuel", "2nd Samuel", "Second Samuel"
+        ];
+        if (audioBooks.includes(book.name)) {
             playBookAudio(book.name);
         } else {
             openBookModal(book);
@@ -752,19 +757,45 @@ function playBookAudio(bookName) {
         case 'Genesis':
             audioFile = 'resources/audio/genesis-overview.mp3';
             break;
-        // Add more cases for other books as needed
+        case 'Exodus':
+            audioFile = 'resources/audio/exodus-overview.mp3';
+            break;
+        case 'Leviticus':
+        case 'Levi':
+            audioFile = 'resources/audio/levi-overview.mp3';
+            break;
+        case 'Numbers':
+            audioFile = 'resources/audio/numbers-overview.mp3';
+            break;
+        case 'Deuteronomy':
+            audioFile = 'resources/audio/deuteronomy-overview.mp3';
+            break;
+        case 'Joshua':
+            audioFile = 'resources/audio/joshua-overview.mp3';
+            break;
+        case 'Judges':
+            audioFile = 'resources/audio/judges-overview.mp3';
+            break;
+        case 'Ruth':
+            audioFile = 'resources/audio/ruth-overview.mp3';
+            break;
+        case '1 Samuel':
+        case '1st Samuel':
+        case 'First Samuel':
+            audioFile = 'resources/audio/1-samuel-overview.mp3';
+            break;
+        case '2 Samuel':
+        case '2nd Samuel':
+        case 'Second Samuel':
+            audioFile = 'resources/audio/2-samuel-overview.mp3';
+            break;
         default:
             console.log(`No audio file available for ${bookName}`);
-            // Fall back to opening book modal
-            const currentData = booksTableManager.getCurrentData();
-            const book = currentData.find(b => b.name === bookName);
-            if (book) {
-                openBookModal(book);
-            }
+            // Do not show any card/modal, just return
             return;
     }
 
-    // Create attractive audio player container
+    // Create only the audio player overlay (no card/modal content)
     const playerContainer = document.createElement('div');
     playerContainer.className = 'audio-player-container';
     playerContainer.innerHTML = `
@@ -776,7 +807,6 @@ function playBookAudio(bookName) {
                     </div>
                     <button class="audio-close-btn" onclick="closeAudioPlayer()">✕</button>
                 </div>
-                
                 <div class="audio-player-section">
                     <div class="audio-waveform-container">
                         <div class="audio-waveform">
@@ -799,7 +829,6 @@ function playBookAudio(bookName) {
                         </div>
                     </div>
                 </div>
-                
                 <audio preload="metadata">
                     <source src="${audioFile}" type="audio/mpeg">
                     Your browser does not support the audio element.
