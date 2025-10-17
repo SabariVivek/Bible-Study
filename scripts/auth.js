@@ -111,8 +111,8 @@ function simulateLogin(username, password) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             // Hardcoded credentials
-            const validUsername = 'Admin';
-            const validPassword = 'Admin@123';
+            const validUsername = 'Test';
+            const validPassword = '1234';
             
             if (username === validUsername && password === validPassword) {
                 resolve();
@@ -147,13 +147,19 @@ function isLoggedIn() {
 
 // Logout function
 function logout() {
-    // Clear session storage
-    sessionStorage.removeItem('isLoggedIn');
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem('loginTime');
-    
-    // Redirect to login page
-    window.location.href = 'index.html';
+    // Show fancy loader
+    const loader = document.getElementById('logout-fancy-loader');
+    if (loader) loader.style.display = 'flex';
+    // Simulate network delay for logout
+    setTimeout(() => {
+        // Clear session storage
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('loginTime');
+        // Hide loader and redirect
+        if (loader) loader.style.display = 'none';
+        window.location.href = 'index.html';
+    }, 1500); // 1.5 seconds delay
 }
 
 // Show error message
