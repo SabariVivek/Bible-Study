@@ -8,10 +8,10 @@ let currentPage = 1;
 let currentFilter = 'all';
 let currentCharacterFilter = 'all';
 let selectedFilterValue = 'all'; // For the filter card
-const itemsPerPage = 10;
+const itemsPerPage = 7;
 
 function getOrdinalSuffix(number) {
-    const j = number % 10;
+    const j = number % 7;
     const k = number % 100;
     if (j == 1 && k != 11) return "st";
     if (j == 2 && k != 12) return "nd";
@@ -410,7 +410,7 @@ function initializeProphetsTable() {
         prevBtnId: 'prophetsPrevBtn',
         nextBtnId: 'prophetsNextBtn',
         paginationControlsId: 'prophetsPaginationControls',
-        itemsPerPage: 10,
+    itemsPerPage: 7,
         columns: [
             {
                 header: 'Testament',
@@ -1372,7 +1372,7 @@ function initializeBooksTable() {
         prevBtnId: 'booksPrevBtn',
         nextBtnId: 'booksNextBtn',
         paginationControlsId: 'booksPaginationControls',
-        itemsPerPage: 10,
+    itemsPerPage: 7,
         columns: [
             {
                 header: 'Testament',
