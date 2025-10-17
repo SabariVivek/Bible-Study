@@ -220,10 +220,18 @@ function changePage(direction) {
 }
 
 function showDashboard() {
+    // Always reset dashboard to show cards and hide Parables section
+    var cardsWrapper = document.getElementById('dashboard-cards-wrapper');
+    if (cardsWrapper) cardsWrapper.classList.remove('hidden');
+    var dashTitle = document.getElementById('dashboard-title-header');
+    if (dashTitle) dashTitle.style.display = '';
+    var parablesSection = document.getElementById('parables-pdf-section');
+    if (parablesSection) parablesSection.remove();
+
     // Update navigation
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
     document.querySelector('.nav-item.dashboard').classList.add('active');
-    
+
     // Show/hide content
     document.getElementById('dashboard-content').classList.remove('hidden');
     document.getElementById('kings-content').classList.add('hidden');

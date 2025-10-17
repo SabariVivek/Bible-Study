@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bible Study - Dashboard</title>
     <link rel="stylesheet" href="styles/all-styles.css">
+    <script src="scripts/parables.js"></script>
 </head>
 <body>
     <div class="container">
@@ -75,9 +76,10 @@
 
             <!-- Dashboard Content -->
             <div id="dashboard-content">
-                <div class="content-header">
-                    <h1 class="page-title">Dashboard</h1>
+                <div class="content-header" id="dashboard-title-header">
+                    <h1 class="page-title" id="dashboard-title">Dashboard</h1>
                 </div>
+                <div id="dashboard-cards-wrapper">
                 <div class="dashboard-cards-container">
                     <div class="era-card creation-era">
                         <div class="era-card-content">
@@ -120,6 +122,13 @@
                             <p class="era-subtitle">Jesus & Apostles</p>
                         </div>
                     </div>
+                     <div class="era-card parables-jesus">
+                        <div class="era-card-content">
+                            <h3 class="era-title">Parables of Jesus</h3>
+                            <p class="era-subtitle">Stories & Teachings</p>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
 
