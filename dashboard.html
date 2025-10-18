@@ -2021,8 +2021,10 @@
                     <p class="page-subtitle">Complete Timeline from Birth to Ascension</p>
                 </div>
                 
-                <div class="life-of-jesus-cards-grid" id="lifeOfJesusCardsGrid">
-                    <!-- Cards will be dynamically generated here -->
+                <div class="life-of-jesus-container">
+                    <div class="life-of-jesus-cards-grid" id="lifeOfJesusCardsGrid">
+                        <!-- Cards will be dynamically generated here -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -2229,11 +2231,12 @@
     <!-- Passage Details Popup -->
     <div class="passage-popup-overlay" id="passagePopup">
         <div class="passage-modal-card">
+            <img src="resources/icon/translate-icon.png" alt="Tamil" class="tamil-icon" title="Tamil Translation">
+            <button class="close-btn" onclick="closePassagePopup()">×</button>
             <div class="passage-modal-header">
                 <h2 class="passage-modal-title">
                     <span class="passage-modal-badge" id="passageBadge">Loading...</span>
                 </h2>
-                <button class="passage-close-btn" onclick="closePassagePopup()">×</button>
             </div>
             <div class="passage-modal-content" id="passageContent">
                 <p>Content is loading...</p>

@@ -6,6 +6,10 @@
     0% { transform: rotate(360deg); }
     100% { transform: rotate(0deg); }
 }
+
+/* Import Kurale font for Tamil content */
+@import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
+
 /* CONSOLIDATED STYLES - All CSS in one file to match original exactly */
 
 * {
@@ -1772,6 +1776,25 @@ nav {
     background: #a8a8a8;
 }
 
+/* Custom Scrollbar for Life of Jesus Container */
+.life-of-jesus-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.life-of-jesus-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.life-of-jesus-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.life-of-jesus-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
 /* Custom Scrollbar for Main Content */
 .main-content::-webkit-scrollbar {
     width: 8px;
@@ -1903,12 +1926,25 @@ nav {
    LIFE OF CHRIST CARDS STYLES
    ============================================ */
 
+.life-of-jesus-container {
+    height: 70vh; /* Fixed height like timeline */
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    background-color: #ffffff;
+    overflow-y: auto; /* Add vertical scroll */
+    overflow-x: hidden; /* Hide horizontal scroll */
+}
+
 .life-of-jesus-cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     padding: 20px 0;
     max-width: 100%;
+    width: 100%;
 }
 
 .life-of-jesus-card {
@@ -2091,54 +2127,87 @@ nav {
     position: relative;
 }
 
+/* Position close button on top-right of modal card */
+.passage-modal-card .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+/* Tamil/Translate Icon in passage modal */
+.passage-modal-card .tamil-icon {
+    position: absolute;
+    top: 20px;
+    right: 60px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+    object-fit: contain;
+}
+
+.passage-modal-card .tamil-icon:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
 .passage-popup-overlay.show .passage-modal-card {
     transform: scale(1);
 }
 
 .passage-modal-header {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 1.5rem;
     position: relative;
+    padding-top: 0px;
 }
 
 .passage-modal-title {
     font-size: 1.5rem;
     color: #2563eb;
     margin: 0;
-    text-align: center;
-}
-
-.passage-close-btn {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #555;
-    cursor: pointer;
-    background: none;
-    border: none;
-    transition: color 0.2s ease;
-    user-select: none;
-    padding: 0;
-    line-height: 1;
-}
-
-.passage-close-btn:hover {
-    color: #000;
+    text-align: left;
 }
 
 .passage-modal-badge {
     display: inline-block;
     padding: 0.35rem 0.9rem;
     font-size: 0.9rem;
-    color: #fff;
-    background-color: #2563eb;
+    color: #1d4ed8;
+    background-color: #dbeafe;
     border-radius: 999px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
+}
+
+/* Gospel-specific colors for passage modal badge */
+.passage-modal-badge.matthew {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.passage-modal-badge.mark {
+    background: #fecaca;
+    color: #991b1b;
+}
+
+.passage-modal-badge.luke {
+    background: #ddd6fe;
+    color: #5b21b6;
+}
+
+.passage-modal-badge.john {
+    background: #fed7aa;
+    color: #c2410c;
+}
+
+.passage-modal-badge.acts {
+    background: #bfdbfe;
+    color: #1e40af;
 }
 
 .passage-modal-content {
@@ -2148,15 +2217,26 @@ nav {
     max-height: 400px;
     overflow-y: auto;
     padding-right: 1rem;
+    font-family: 'Kurale', serif; /* Tamil font */
+    text-align: left;
 }
 
 .passage-modal-content::-webkit-scrollbar {
     width: 6px;
 }
 
-.passage-modal-content::-webkit-scrollbar-thumb {
-    background: #2563eb;
+.passage-modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
     border-radius: 10px;
+}
+
+.passage-modal-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+.passage-modal-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }
 
 .passage-no-data {
@@ -2169,9 +2249,15 @@ nav {
 
 /* Responsive for Life of Christ */
 @media (max-width: 768px) {
+    .life-of-jesus-container {
+        height: 75vh; /* Slightly taller on mobile */
+        padding: 10px;
+    }
+
     .life-of-jesus-cards-grid {
         grid-template-columns: 1fr;
         gap: 16px;
+        padding: 10px 0;
     }
 
     .life-of-jesus-card {
@@ -2200,10 +2286,6 @@ nav {
     .passage-modal-content {
         font-size: 1rem;
         max-height: 350px;
-    }
-
-    .passage-close-btn {
-        font-size: 24px;
     }
 }
 

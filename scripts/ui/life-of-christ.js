@@ -160,6 +160,9 @@ function loadPassageData(passageKey, verseReference) {
         // Show "Data yet to be seeded" for missing passages
         badge.textContent = verseReference;
         content.innerHTML = '<p class="passage-no-data">Data yet to be seeded</p>';
+        
+        // Add gospel-specific class to badge
+        addGospelClassToBadge(badge, verseReference);
         return;
     }
 
@@ -169,12 +172,35 @@ function loadPassageData(passageKey, verseReference) {
         badge.setAttribute('title', data.reference);
     }
 
+    // Add gospel-specific class to badge
+    addGospelClassToBadge(badge, verseReference);
+
     if (Array.isArray(data.verses)) {
         content.innerHTML = data.verses.join('<br><br>');
     } else if (data.text) {
         content.textContent = data.text;
     } else {
         content.innerHTML = '<p class="passage-no-data">No content available</p>';
+    }
+}
+
+// Helper function to add gospel-specific class to badge
+function addGospelClassToBadge(badge, verseReference) {
+    // Remove any existing gospel classes
+    badge.classList.remove('matthew', 'mark', 'luke', 'john', 'acts');
+    
+    // Add gospel-specific class
+    const verseLower = verseReference.toLowerCase();
+    if (verseLower.includes('matthew')) {
+        badge.classList.add('matthew');
+    } else if (verseLower.includes('mark')) {
+        badge.classList.add('mark');
+    } else if (verseLower.includes('luke')) {
+        badge.classList.add('luke');
+    } else if (verseLower.includes('john')) {
+        badge.classList.add('john');
+    } else if (verseLower.includes('acts')) {
+        badge.classList.add('acts');
     }
 }
 
