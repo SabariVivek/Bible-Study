@@ -1829,27 +1829,47 @@ nav {
 
 /* Era-specific colors */
 .creation-era {
-    border-left-color: #3b82f6;
+    border-left-color: #bfdbfe;
 }
 
 .patriarchs-era {
-    border-left-color: #10b981;
+    border-left-color: #bbf7d0;
 }
 
 .exodus-era {
-    border-left-color: #f59e0b;
+    border-left-color: #fde68a;
 }
 
 .kingdom-era {
-    border-left-color: #ef4444;
+    border-left-color: #fecaca;
 }
 
 .exile-era {
-    border-left-color: #8b5cf6;
+    border-left-color: #ddd6fe;
 }
 
 .new-testament-era {
-    border-left-color: #06b6d4;
+    border-left-color: #a5f3fc;
+}
+
+.parables-jesus {
+    border-left-color: #fed7aa;
+}
+
+.genealogy-card {
+    border-left-color: #fbcfe8;
+}
+
+.parables-english {
+    border-left-color: #fed7aa;
+}
+
+.parables-tamil {
+    border-left-color: #fecaca;
+}
+
+.genealogy-pdf {
+    border-left-color: #e9d5ff;
 }
 
 /* Responsive adjustments */

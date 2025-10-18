@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/all-styles.css">
     <script src="scripts/parables.js"></script>
     <script src="scripts/genealogy.js"></script>
+    <script src="scripts/data/life-of-jesus.js"></script>
 </head>
 <body>
         <div id="logout-fancy-loader" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.85);z-index:9999;justify-content:center;align-items:center;">
@@ -55,7 +56,7 @@
                 </div>
                 <div class="nav-item help" onclick="showHelp()">
                     <span class="nav-icon">❓</span>
-                    <span class="nav-text">Help</span>
+                    <span class="nav-text">Life of Christ</span>
                 </div>
                 
                 <!-- Logout Button at Bottom -->
@@ -2015,13 +2016,9 @@
 
             <!-- Help Content -->
             <div id="help-content" class="hidden">
-                <div class="content-header">
-                    <h1 class="page-title">Help & Support</h1>
-                </div>
-                <div style="text-align: center; padding: 50px;">
-                    <h2>Help & Support</h2>
-                    <p style="color: #6b7280; margin-top: 20px;">Help documentation and support information are coming soon.</p>
-                </div>
+                <iframe src="life-of-jesus-cards.html" 
+                        style="width: 100%; height: calc(100vh - 80px); border: none; overflow-y: auto;">
+                </iframe>
             </div>
         </div>
     </div>
