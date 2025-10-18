@@ -1653,6 +1653,11 @@ function showHelp() {
     document.getElementById('maps-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.remove('hidden');
+    
+    // Initialize Life of Christ cards
+    if (typeof initializeLifeOfChrist === 'function') {
+        initializeLifeOfChrist();
+    }
 }
 
 // Make functions globally available
