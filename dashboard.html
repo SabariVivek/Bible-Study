@@ -280,31 +280,24 @@
                     <h1 class="page-title">Bible Books</h1>
                     <div class="content-actions">
                         <span class="showing-text" id="books-showing-count">Showing 7</span>
-                        <div class="fancy-dropdown">
-                            <button class="dropdown-button" onclick="openBooksFilterCard()">
-                                <img src="resources/icon/filter-icon.svg" alt="Filter" style="width: 18px; height: 18px; filter: brightness(0) invert(1);">
-                            </button>
-                        </div>
-                        <div class="fancy-dropdown kingdom-dropdown">
-                            <button class="dropdown-button kingdom-dropdown-button" id="booksDropdownButton" onclick="toggleBooksDropdown()">
-                                <span id="booksSelectedText">📚 All Books</span>
-                                <span class="dropdown-arrow">▼</span>
-                            </button>
-                            <div class="dropdown-menu" id="booksDropdownMenu">
-                                <div class="dropdown-item selected" onclick="selectBooksCategory('all', 'All Books', '📚', 66)">
-                                    <span class="dropdown-icon">📚</span>
-                                    <span class="dropdown-text">All Books</span>
-                                    <span class="dropdown-count">66</span>
-                                </div>
-                                <div class="dropdown-item" onclick="selectBooksCategory('old', 'Old Testament', '📜', 39)">
-                                    <span class="dropdown-icon">📜</span>
-                                    <span class="dropdown-text">Old Testament</span>
-                                    <span class="dropdown-count">39</span>
-                                </div>
-                                <div class="dropdown-item" onclick="selectBooksCategory('new', 'New Testament', '✝️', 27)">
-                                    <span class="dropdown-icon">✝️</span>
-                                    <span class="dropdown-text">New Testament</span>
-                                    <span class="dropdown-count">27</span>
+                        <div class="card" style="background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; max-width: fit-content; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <div class="setting-item" style="margin-bottom: 0;">
+                                <div class="theme-buttons" style="display: flex; gap: 12px; margin-top: 0;">
+                                    <button class="theme-btn" onclick="openBooksFilterCard()">
+                                        <svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" style="width: 16px; height: 16px;">
+                                            <path d="M2 3h12M4 7h8M6 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                        <span>Filter</span>
+                                    </button>
+                                    <button class="theme-btn active" data-filter="all">
+                                        <span>All</span>
+                                    </button>
+                                    <button class="theme-btn" data-filter="old">
+                                        <span>Old</span>
+                                    </button>
+                                    <button class="theme-btn" data-filter="new">
+                                        <span>New</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -1397,6 +1397,9 @@ function showBooks() {
     
     // Load books data
     loadBooksData();
+    
+    // Initialize filter buttons
+    initializeBooksFilterButtons();
 }
 
 function initializeBooksTable() {
@@ -1493,6 +1496,74 @@ function loadBooksData() {
     
     if (booksTableManager) {
         booksTableManager.setData(booksData);
+    }
+}
+
+function initializeBooksFilterButtons() {
+    // Find all theme buttons in the books section
+    const booksContent = document.getElementById('books-content');
+    if (!booksContent) return;
+    
+    const themeButtons = booksContent.querySelectorAll('.theme-btn');
+    if (themeButtons.length === 0) return;
+    
+    const filterBtn = themeButtons[0]; // First button is the filter button
+    
+    themeButtons.forEach((button, index) => {
+        // Skip the first button (Filter button)
+        if (index === 0) return;
+        
+        // Remove any existing listeners by cloning
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+        
+        newButton.addEventListener('click', function() {
+            // Add a quick scale down animation to currently active button
+            const currentActive = booksContent.querySelector('.theme-btn.active');
+            if (currentActive && currentActive !== this) {
+                currentActive.style.transition = 'all 0.2s ease-out';
+                currentActive.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    currentActive.classList.remove('active');
+                    currentActive.style.transform = '';
+                }, 200);
+            }
+            
+            // Add a scale animation to the clicked button
+            this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            this.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                this.classList.add('active');
+                this.style.transform = '';
+            }, 100);
+            
+            // Get the filter text
+            const filter = this.textContent.trim().toLowerCase();
+            
+            // Update the current filter and reload data
+            if (filter === 'all') {
+                currentBooksFilter = 'all';
+            } else if (filter === 'old') {
+                currentBooksFilter = 'old';
+            } else if (filter === 'new') {
+                currentBooksFilter = 'new';
+            }
+            
+            loadBooksData();
+        });
+    });
+    
+    // Filter button click handler (optional - can trigger additional functionality)
+    if (filterBtn) {
+        const newFilterBtn = filterBtn.cloneNode(true);
+        filterBtn.parentNode.replaceChild(newFilterBtn, filterBtn);
+        
+        newFilterBtn.addEventListener('click', function() {
+            console.log('Filter button clicked');
+            // You can add filter menu/dropdown functionality here if needed
+        });
     }
 }
 
