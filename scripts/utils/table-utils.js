@@ -108,6 +108,7 @@ class TableManager {
         itemsToShow.forEach((item, index) => {
             const row = document.createElement('tr');
             row.className = 'table-row';
+            row.style.cursor = 'pointer';
             
             if (this.config.onRowClick) {
                 row.onclick = () => this.config.onRowClick(item, startIndex + index);
