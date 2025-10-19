@@ -264,6 +264,9 @@ function showKings() {
     if (currentKingdoms.length === 0) {
         applyFilters();
     }
+    
+    // Initialize filter buttons
+    initializeKingsFilterButtons();
 }
 
 function showProphets() {
@@ -289,6 +292,9 @@ function showProphets() {
     
     // Load prophets data
     loadProphetsData();
+    
+    // Initialize filter buttons
+    initializeProphetsFilterButtons();
 }
 
 // Drawer toggle functionality
@@ -1496,6 +1502,148 @@ function loadBooksData() {
     
     if (booksTableManager) {
         booksTableManager.setData(booksData);
+    }
+}
+
+function initializeKingsFilterButtons() {
+    // Find all theme buttons in the kings section
+    const kingsContent = document.getElementById('kings-content');
+    if (!kingsContent) return;
+    
+    const themeButtons = kingsContent.querySelectorAll('.theme-btn');
+    if (themeButtons.length === 0) return;
+    
+    const filterBtn = themeButtons[0]; // First button is the filter button
+    
+    themeButtons.forEach((button, index) => {
+        // Skip the first button (Filter button)
+        if (index === 0) return;
+        
+        // Remove any existing listeners by cloning
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+        
+        newButton.addEventListener('click', function() {
+            // Add a quick scale down animation to currently active button
+            const currentActive = kingsContent.querySelector('.theme-btn.active');
+            if (currentActive && currentActive !== this) {
+                currentActive.style.transition = 'all 0.2s ease-out';
+                currentActive.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    currentActive.classList.remove('active');
+                    currentActive.style.transform = '';
+                }, 200);
+            }
+            
+            // Add a scale animation to the clicked button
+            this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            this.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                this.classList.add('active');
+                this.style.transform = '';
+            }, 100);
+            
+            // Get the filter text
+            const filter = this.textContent.trim().toLowerCase();
+            
+            // Update the current filter and reload data
+            if (filter === 'all') {
+                currentFilter = 'all';
+            } else if (filter === 'united') {
+                currentFilter = 'united';
+            } else if (filter === 'northern') {
+                currentFilter = 'israel'; // Maps to 'israel' in the data
+            } else if (filter === 'southern') {
+                currentFilter = 'judah'; // Maps to 'judah' in the data
+            }
+            
+            applyFilters();
+        });
+    });
+    
+    // Filter button click handler
+    if (filterBtn) {
+        const newFilterBtn = filterBtn.cloneNode(true);
+        filterBtn.parentNode.replaceChild(newFilterBtn, filterBtn);
+        
+        newFilterBtn.addEventListener('click', function() {
+            console.log('Kings filter button clicked');
+            // Trigger the kings filter card
+            openFilterCard();
+        });
+    }
+}
+
+function initializeProphetsFilterButtons() {
+    // Find all theme buttons in the prophets section
+    const prophetsContent = document.getElementById('prophets-content');
+    if (!prophetsContent) return;
+    
+    const themeButtons = prophetsContent.querySelectorAll('.theme-btn');
+    if (themeButtons.length === 0) return;
+    
+    const filterBtn = themeButtons[0]; // First button is the filter button
+    
+    themeButtons.forEach((button, index) => {
+        // Skip the first button (Filter button)
+        if (index === 0) return;
+        
+        // Remove any existing listeners by cloning
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+        
+        newButton.addEventListener('click', function() {
+            // Add a quick scale down animation to currently active button
+            const currentActive = prophetsContent.querySelector('.theme-btn.active');
+            if (currentActive && currentActive !== this) {
+                currentActive.style.transition = 'all 0.2s ease-out';
+                currentActive.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    currentActive.classList.remove('active');
+                    currentActive.style.transform = '';
+                }, 200);
+            }
+            
+            // Add a scale animation to the clicked button
+            this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            this.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                this.classList.add('active');
+                this.style.transform = '';
+            }, 100);
+            
+            // Get the filter text
+            const filter = this.textContent.trim().toLowerCase();
+            
+            // Update the current filter and reload data
+            if (filter === 'all') {
+                currentProphetsFilter = 'all';
+            } else if (filter === 'major') {
+                currentProphetsFilter = 'major';
+            } else if (filter === 'minor') {
+                currentProphetsFilter = 'minor';
+            } else if (filter === 'other') {
+                currentProphetsFilter = 'other';
+            }
+            
+            loadProphetsData();
+        });
+    });
+    
+    // Filter button click handler (optional - can trigger additional functionality)
+    if (filterBtn) {
+        const newFilterBtn = filterBtn.cloneNode(true);
+        filterBtn.parentNode.replaceChild(newFilterBtn, filterBtn);
+        
+        newFilterBtn.addEventListener('click', function() {
+            console.log('Prophets filter button clicked');
+            // Trigger the prophets filter card
+            openProphetsFilterCard();
+        });
     }
 }
 

@@ -161,36 +161,26 @@
                     <h1 class="page-title">Kings</h1>
                     <div class="content-actions">
                         <span class="showing-text" id="showing-count">Showing 7</span>
-                        <div class="fancy-dropdown">
-                            <button class="dropdown-button" onclick="openFilterCard()">
-                                <img src="resources/icon/filter-icon.svg" alt="Filter" style="width: 18px; height: 18px; filter: brightness(0) invert(1);">
-                            </button>
-                        </div>
-                        <div class="fancy-dropdown kingdom-dropdown">
-                            <button class="dropdown-button kingdom-dropdown-button" id="dropdownButton" onclick="toggleDropdown()">
-                                <span id="selectedText">🏰 All Kingdoms</span>
-                                <span class="dropdown-arrow">▼</span>
-                            </button>
-                            <div class="dropdown-menu" id="dropdownMenu">
-                                <div class="dropdown-item selected" onclick="selectKingdom('all', 'All Kingdoms', '🏰', 42)">
-                                    <span class="dropdown-icon">🏰</span>
-                                    <span class="dropdown-text">All Kingdoms</span>
-                                    <span class="dropdown-count">42</span>
-                                </div>
-                                <div class="dropdown-item" onclick="selectKingdom('united', 'United Kingdom', '👑', 3)">
-                                    <span class="dropdown-icon">👑</span>
-                                    <span class="dropdown-text">United Kingdom</span>
-                                    <span class="dropdown-count">3</span>
-                                </div>
-                                <div class="dropdown-item" onclick="selectKingdom('israel', 'Northern Kingdom', '⚔️', 19)">
-                                    <span class="dropdown-icon">⚔️</span>
-                                    <span class="dropdown-text">Northern Kingdom</span>
-                                    <span class="dropdown-count">19</span>
-                                </div>
-                                <div class="dropdown-item" onclick="selectKingdom('judah', 'Southern Kingdom', '🛡️', 20)">
-                                    <span class="dropdown-icon">🛡️</span>
-                                    <span class="dropdown-text">Southern Kingdom</span>
-                                    <span class="dropdown-count">20</span>
+                        <div class="card" style="background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; max-width: fit-content; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <div class="setting-item" style="margin-bottom: 0;">
+                                <div class="theme-buttons" style="display: flex; gap: 12px; margin-top: 0;">
+                                    <button class="theme-btn" onclick="openFilterCard()">
+                                        <svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" style="width: 16px; height: 16px;">
+                                            <path d="M2 3h12M4 7h8M6 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="theme-btn active" data-filter="all">
+                                        <span>All</span>
+                                    </button>
+                                    <button class="theme-btn" data-filter="united">
+                                        <span>United</span>
+                                    </button>
+                                    <button class="theme-btn" data-filter="northern">
+                                        <span>Northern</span>
+                                    </button>
+                                    <button class="theme-btn" data-filter="southern">
+                                        <span>Southern</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -233,36 +223,26 @@
                     <h1 class="page-title">Prophets</h1>
                     <div class="content-actions">
                         <span class="showing-text" id="prophets-showing-count">Showing 7</span>
-                        <div class="fancy-dropdown">
-                            <button class="dropdown-button" onclick="openProphetsFilterCard()">
-                                <img src="resources/icon/filter-icon.svg" alt="Filter" style="width: 18px; height: 18px; filter: brightness(0) invert(1);">
-                            </button>
-                        </div>
-                        <div class="fancy-dropdown kingdom-dropdown">
-                            <button class="dropdown-button kingdom-dropdown-button" id="prophetsDropdownButton" onclick="toggleProphetsDropdown()">
-                                <span id="prophetsSelectedText">🎤 All Prophets</span>
-                                <span class="dropdown-arrow">▼</span>
-                            </button>
-                            <div class="dropdown-menu" id="prophetsDropdownMenu">
-                                <div class="dropdown-item selected" onclick="selectProphetsCategory('all', 'All Prophets', '🎤', 16)">
-                                    <span class="dropdown-icon">🎤</span>
-                                    <span class="dropdown-text">All Prophets</span>
-                                    <span class="dropdown-count">16</span>
-                                </div>
-                                <div class="dropdown-item" onclick="selectProphetsCategory('major', 'Major Prophets', '⭐', 4)">
-                                    <span class="dropdown-icon">⭐</span>
-                                    <span class="dropdown-text">Major Prophets</span>
-                                    <span class="dropdown-count">4</span>
-                                </div>
-                                <div class="dropdown-item" onclick="selectProphetsCategory('minor', 'Minor Prophets', '📜', 12)">
-                                    <span class="dropdown-icon">📜</span>
-                                    <span class="dropdown-text">Minor Prophets</span>
-                                    <span class="dropdown-count">12</span>
-                                </div>
-                                <div class="dropdown-item" onclick="selectProphetsCategory('other', 'Other Prophets', '🔥', 2)">
-                                    <span class="dropdown-icon">🔥</span>
-                                    <span class="dropdown-text">Other Prophets</span>
-                                    <span class="dropdown-count">2</span>
+                        <div class="card" style="background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; max-width: fit-content; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                            <div class="setting-item" style="margin-bottom: 0;">
+                                <div class="theme-buttons" style="display: flex; gap: 12px; margin-top: 0;">
+                                    <button class="theme-btn" onclick="openProphetsFilterCard()">
+                                        <svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" style="width: 16px; height: 16px;">
+                                            <path d="M2 3h12M4 7h8M6 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="theme-btn active" data-filter="all">
+                                        <span>All</span>
+                                    </button>
+                                    <button class="theme-btn" data-filter="major">
+                                        <span>Major</span>
+                                    </button>
+                                    <button class="theme-btn" data-filter="minor">
+                                        <span>Minor</span>
+                                    </button>
+                                    <button class="theme-btn" data-filter="other">
+                                        <span>Other</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -287,7 +267,6 @@
                                         <svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" style="width: 16px; height: 16px;">
                                             <path d="M2 3h12M4 7h8M6 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                                         </svg>
-                                        <span>Filter</span>
                                     </button>
                                     <button class="theme-btn active" data-filter="all">
                                         <span>All</span>
