@@ -863,7 +863,6 @@ function loadEnhancedAudioPlayer(audioFile, bookName) {
                 height: 100%;
                 z-index: 10000;
                 pointer-events: none;
-                zoom: 1.2;
             }
             
             .enhanced-audio-player-overlay::before {
@@ -896,8 +895,9 @@ function loadEnhancedAudioPlayer(audioFile, bookName) {
                 justify-content: center;
                 padding: 20px;
                 position: fixed;
-                top: 0;
-                left: 0;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 pointer-events: none;
             }
 

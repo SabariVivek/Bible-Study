@@ -2276,7 +2276,7 @@ nav {
     white-space: nowrap;
     letter-spacing: 0px;
     transition: all 0.2s ease;
-    cursor: default;
+    cursor: pointer;
 }
 
 /* Prevent nested badges */
