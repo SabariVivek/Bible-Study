@@ -750,14 +750,17 @@ function openBookByIndex(index) {
     }
 }
 
-// Function to play audio for specific books
+// Function to play audio for specific books using enhanced audio player
 function playBookAudio(bookName) {
     // Stop any currently playing audio
-    const existingAudio = document.querySelector('.audio-player-container');
-    if (existingAudio) {
-        const audio = existingAudio.querySelector('audio');
-        if (audio) audio.pause();
-        existingAudio.remove();
+    const existingPlayer = document.querySelector('.enhanced-audio-player-overlay');
+    if (existingPlayer) {
+        const audio = existingPlayer.querySelector('audio');
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+        existingPlayer.remove();
     }
 
     // Create audio element based on book name
@@ -804,408 +807,873 @@ function playBookAudio(bookName) {
             return;
     }
 
-    // Create only the audio player overlay (no card/modal content)
-    const playerContainer = document.createElement('div');
-    playerContainer.className = 'audio-player-container';
-    playerContainer.innerHTML = `
-        <div class="audio-player-card">
-            <div class="audio-player-content">
-                <div class="audio-info-section">
-                    <div class="audio-book-info">
-                        <h2 class="audio-book-title">${bookName}</h2>
+    // Load the enhanced audio player
+    loadEnhancedAudioPlayer(audioFile, bookName);
+}
+
+// Enhanced Audio Player Function - creates the player directly in the page
+function loadEnhancedAudioPlayer(audioFile, bookName) {
+    // Remove any existing player
+    const existingPlayer = document.querySelector('.enhanced-audio-player-overlay');
+    if (existingPlayer) {
+        const audio = existingPlayer.querySelector('audio');
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+        existingPlayer.remove();
+    }
+
+    // Create overlay container with embedded player
+    const overlay = document.createElement('div');
+    overlay.className = 'enhanced-audio-player-overlay';
+    overlay.innerHTML = `
+        <style>
+            .enhanced-audio-player-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 10000;
+                pointer-events: none;
+            }
+            
+            .enhanced-audio-player-overlay::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(8px);
+                transition: all 0.3s ease;
+                z-index: 0;
+                pointer-events: auto;
+            }
+
+            .enhanced-audio-player-overlay.minimized::before {
+                background: rgba(0, 0, 0, 0);
+                backdrop-filter: blur(0px);
+                pointer-events: none;
+            }
+
+            .enhanced-player-body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                background: transparent;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                position: relative;
+                pointer-events: none;
+            }
+
+            .player-container {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                backdrop-filter: blur(10px);
+                border-radius: 16px;
+                padding: 16px;
+                width: 100%;
+                position: relative;
+                z-index: 1;
+                max-width: 320px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                pointer-events: auto;
+            }
+
+            .player-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+
+            .player-title {
+                color: white;
+                font-size: 18px;
+                font-weight: 700;
+                letter-spacing: -0.3px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .playing-indicator {
+                display: none;
+                width: 20px;
+                height: 16px;
+                position: relative;
+                gap: 2px;
+                align-items: flex-end;
+            }
+
+            .player-container.minimized .playing-indicator.active {
+                display: flex;
+            }
+
+            .playing-bar {
+                width: 3px;
+                background: white;
+                border-radius: 2px;
+                animation: playingAnimation 0.8s ease-in-out infinite;
+            }
+
+            .playing-bar:nth-child(1) {
+                height: 8px;
+                animation-delay: 0s;
+            }
+
+            .playing-bar:nth-child(2) {
+                height: 16px;
+                animation-delay: 0.2s;
+            }
+
+            .playing-bar:nth-child(3) {
+                height: 8px;
+                animation-delay: 0.4s;
+            }
+
+            @keyframes playingAnimation {
+                0%, 100% {
+                    transform: scaleY(0.5);
+                }
+                50% {
+                    transform: scaleY(1);
+                }
+            }
+
+            .player-container.minimized {
+                max-width: 250px;
+            }
+
+            .player-container.minimized .waveform-container,
+            .player-container.minimized .progress-bar,
+            .player-container.minimized .time-display,
+            .player-container.minimized .controls,
+            .player-container.minimized .bottom-controls {
+                display: none;
+            }
+
+            .player-container.minimized .player-header {
+                margin-bottom: 0;
+            }
+
+            .minimize-btn .minimize-icon {
+                display: block;
+            }
+
+            .minimize-btn .maximize-icon {
+                display: none;
+            }
+
+            .player-container.minimized .minimize-btn .minimize-icon {
+                display: none;
+            }
+
+            .player-container.minimized .minimize-btn .maximize-icon {
+                display: block;
+            }
+
+            .header-buttons {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+            }
+
+            .minimize-btn,
+            .close-btn {
+                background: rgba(255, 255, 255, 0.2);
+                border: none;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 20px;
+            }
+
+            .minimize-btn:hover,
+            .close-btn:hover {
+                background: rgba(255, 255, 255, 0.3);
+            }
+
+            .minimize-btn:hover {
+                transform: scale(1.1);
+            }
+
+            .minimize-btn {
+                font-size: 24px;
+                font-weight: normal;
+                line-height: 1;
+            }
+
+            .minimize-btn svg {
+                width: 16px;
+                height: 16px;
+                fill: none;
+                stroke: white;
+            }
+
+            .waveform-container {
+                background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(147, 51, 234, 0.15));
+                border-radius: 12px;
+                padding: 8px 6px;
+                margin-bottom: 10px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .waveform {
+                display: flex;  
+                align-items: center;
+                justify-content: center;
+                height: 24px;
+                gap: 2px;
+                cursor: pointer;
+                position: relative;
+                z-index: 1;
+                padding: 0 1px;
+            }
+
+            .wave-bar {
+                flex: 1;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+                border-radius: 6px;
+                transition: all 0.2s ease;
+                min-width: 2px;
+                max-width: 4px;
+                position: relative;
+                cursor: ew-resize;
+            }
+
+            .wave-bar:hover {
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
+            }
+
+            .wave-bar.active {
+                background: linear-gradient(180deg, #ff6b6b, #ff8787);
+            }
+
+            .progress-bar {
+                width: 100%;
+                height: 5px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 3px;
+                margin-bottom: 8px;
+                cursor: pointer;
+                position: relative;
+                overflow: visible;
+                transition: height 0.2s ease;
+            }
+
+            .progress-bar:hover {
+                height: 6px;
+            }
+
+            .progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #ff6b6b, #ff8787);
+                border-radius: 3px;
+                width: 0%;
+                transition: width 0.1s linear;
+                position: relative;
+            }
+
+            .progress-fill::after {
+                content: '';
+                position: absolute;
+                right: -5px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 10px;
+                height: 10px;
+                background: white;
+                border-radius: 50%;
+                opacity: 0;
+                transition: opacity 0.2s ease;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+
+            .progress-bar:hover .progress-fill::after {
+                opacity: 1;
+            }
+
+            .time-display {
+                display: flex;
+                justify-content: space-between;
+                color: rgba(255, 255, 255, 0.9);
+                font-size: 11px;
+                font-weight: 500;
+                margin-bottom: 12px;
+            }
+
+            .controls {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+
+            .control-btn {
+                background: rgba(255, 255, 255, 0.9);
+                border: none;
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 11px;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .control-btn:hover {
+                background: rgba(255, 255, 255, 1);
+                transform: scale(1.05);
+            }
+
+            .control-btn.play {
+                width: 48px;
+                height: 48px;
+                background: linear-gradient(135deg, #ff6b6b, #ff8787);
+                box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+            }
+
+            .control-btn.play:hover {
+                box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+            }
+
+            .control-btn svg {
+                width: 18px;
+                height: 18px;
+                fill: #333;
+            }
+
+            .control-btn.play svg {
+                fill: white;
+                width: 20px;
+                height: 20px;
+            }
+
+            .bottom-controls {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+            }
+
+            .volume-control {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex: 1;
+            }
+
+            .volume-icon {
+                color: white;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .volume-icon:hover {
+                transform: scale(1.1);
+            }
+
+            .volume-icon.muted {
+                opacity: 0.4;
+            }
+
+            .volume-slider {
+                flex: 1;
+                height: 3px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 2px;
+                position: relative;
+                cursor: pointer;
+            }
+
+            .volume-slider:hover {
+                height: 4px;
+            }
+
+            .volume-fill {
+                height: 100%;
+                background: white;
+                border-radius: 2px;
+                width: 70%;
+                position: relative;
+                transition: width 0.1s linear;
+            }
+
+            .volume-fill::after {
+                content: '';
+                position: absolute;
+                right: -5px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 10px;
+                height: 10px;
+                background: white;
+                border-radius: 50%;
+                opacity: 0;
+                transition: opacity 0.2s ease;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+
+            .volume-slider:hover .volume-fill::after {
+                opacity: 1;
+            }
+
+            .speed-control {
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 12px;
+                padding: 6px 12px;
+                color: white;
+                font-size: 11px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .speed-control:hover {
+                background: rgba(255, 255, 255, 0.3);
+            }
+        </style>
+        
+        <div class="enhanced-player-body">
+            <audio id="audioPlayer" src="${audioFile}" preload="metadata" autoplay></audio>
+            
+            <div class="player-container">
+                <div class="player-header">
+                    <h2 class="player-title">
+                        <span class="playing-indicator" id="playingIndicator">
+                            <div class="playing-bar"></div>
+                            <div class="playing-bar"></div>
+                            <div class="playing-bar"></div>
+                        </span>
+                        ${bookName}
+                    </h2>
+                    <div class="header-buttons">
+                        <button class="minimize-btn" id="minimizeBtn">
+                            <span class="minimize-icon">−</span>
+                            <svg class="maximize-icon" viewBox="0 0 24 24">
+                                <path d="M4 8V4h4M4 4l5 5M20 8V4h-4M20 4l-5 5M4 16v4h4M4 20l5-5M20 16v4h-4M20 20l-5-5" 
+                                      stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="close-btn" id="closeBtn">×</button>
                     </div>
-                    <button class="audio-close-btn" onclick="closeAudioPlayer()">✕</button>
                 </div>
-                <div class="audio-player-section">
-                    <div class="audio-waveform-container">
-                        <div class="audio-waveform">
-                            <button class="audio-play-button" onclick="toggleAudioPlayback()">
-                                <div class="play-pause-icon">
-                                    <span class="play-icon">▶</span>
-                                    <span class="pause-icon" style="display: none;">⏸</span>
-                                </div>
-                            </button>
-                            <div class="waveform-section">
-                                <div class="waveform-bars">
-                                    ${generateWaveformBars()}
-                                </div>
-                                <div class="waveform-progress"></div>
-                            </div>
+
+                <div class="waveform-container">
+                    <div class="waveform" id="waveform"></div>
+                </div>
+
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <div class="time-display">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+
+                <div class="controls">
+                    <button class="control-btn skip" id="rewind" title="Rewind 3 seconds">-3s</button>
+                    <button class="control-btn play" id="playBtn">
+                        <svg viewBox="0 0 24 24" id="playIcon">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                        <svg viewBox="0 0 24 24" id="pauseIcon" style="display: none;">
+                            <path d="M6 4h4v16H6zM14 4h4v16h-4z" />
+                        </svg>
+                    </button>
+                    <button class="control-btn skip" id="forward" title="Forward 3 seconds">+3s</button>
+                </div>
+
+                <div class="bottom-controls">
+                    <div class="volume-control">
+                        <div class="volume-icon" id="volumeIcon">
+                            <svg width="22" height="18" viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/>
+                                <path d="M14 10.5a1.5 1.5 0 0 1 0 3" class="volume-bar-1" style="opacity: 1;" stroke-linecap="round"/>
+                                <path d="M16.5 8.5a4.5 4.5 0 0 1 0 7" class="volume-bar-2" style="opacity: 1;" stroke-linecap="round"/>
+                                <path d="M19 6.5a7.5 7.5 0 0 1 0 11" class="volume-bar-3" style="opacity: 1;" stroke-linecap="round"/>
+                            </svg>
+                            <svg width="22" height="18" viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="2" id="volumeOffIcon" style="display: none;">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/>
+                                <line x1="21" y1="9" x2="15" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="15" y1="9" x2="21" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
                         </div>
-                        <div class="audio-time-info">
-                            <span class="current-time">0:00</span>
-                            <span class="total-time">0:00</span>
+                        <div class="volume-slider" id="volumeSlider">
+                            <div class="volume-fill" id="volumeFill"></div>
                         </div>
                     </div>
+                    <button class="speed-control" id="speedBtn">1.0x</button>
                 </div>
-                <audio preload="metadata">
-                    <source src="${audioFile}" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
             </div>
         </div>
     `;
-
-    // Function to generate waveform bars
-    function generateWaveformBars() {
-        let bars = '';
-        const barCount = 80;
-        for (let i = 0; i < barCount; i++) {
-            const height = Math.random() * 80 + 20; // Random height between 20-100%
-            bars += `<div class="waveform-bar" style="height: ${height}%"></div>`;
-        }
-        return bars;
-    }
-
-    // Add enhanced styles for the waveform audio player
-    const style = document.createElement('style');
-    style.textContent = `
-        .audio-player-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10000;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        .audio-player-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-            width: 550px;
-            max-width: 90vw;
-            color: white;
-        }
-
-        .audio-player-content {
-            padding: 30px;
-        }
-
-        .audio-info-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 30px;
-        }
-
-        .audio-book-info {
-            flex: 1;
-        }
-
-        .audio-book-label {
-            font-size: 12px;
-            color: rgba(255,255,255,0.7);
-            margin: 0 0 5px 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .audio-book-title {
-            font-size: 24px;
-            color: white;
-            margin: 0;
-            font-weight: 600;
-        }
-
-        .audio-close-btn {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .audio-close-btn:hover {
-            background: rgba(255,255,255,0.2);
-            transform: scale(1.1);
-        }
-
-        .audio-player-section {
-            display: flex;
-            align-items: center;
-        }
-
-        .audio-waveform-container {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .audio-waveform {
-            position: relative;
-            height: 70px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 35px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            padding: 10px;
-        }
-
-        .audio-play-button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            flex-shrink: 0;
-            margin-right: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .audio-play-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-        }
-
-        .play-pause-icon {
-            color: #667eea;
-            font-size: 16px;
-            margin-left: 2px;
-        }
-
-        .waveform-section {
-            position: relative;
-            flex: 1;
-            height: 50px;
-        }
-
-        .waveform-bars {
-            display: flex;
-            align-items: center;
-            height: 100%;
-            gap: 2px;
-            padding: 0 10px;
-        }
-
-        .waveform-bar {
-            background: rgba(255,255,255,0.3);
-            width: 3px;
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-
-        .waveform-progress {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: rgba(255,255,255,0.6);
-            width: 0%;
-            transition: width 0.1s;
-            border-radius: 25px;
-            overflow: hidden;
-        }
-
-        .waveform-progress::after {
-            content: '';
-            position: absolute;
-            right: -6px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        .audio-time-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: rgba(255,255,255,0.8);
-            padding: 0 5px;
-        }
-
-        /* Waveform animation when playing */
-        .waveform-playing .waveform-bar {
-            animation: waveform-pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes waveform-pulse {
-            0%, 100% { 
-                background: rgba(255,255,255,0.3);
-                transform: scaleY(1);
-            }
-            50% { 
-                background: rgba(255,255,255,0.8);
-                transform: scaleY(1.3);
-            }
-        }
-
-        /* Different animation delays for bars */
-        .waveform-bar:nth-child(2n) { animation-delay: 0.1s; }
-        .waveform-bar:nth-child(3n) { animation-delay: 0.2s; }
-        .waveform-bar:nth-child(4n) { animation-delay: 0.3s; }
-        .waveform-bar:nth-child(5n) { animation-delay: 0.4s; }
-
-        @media (max-width: 480px) {
-            .audio-player-card {
-                width: 95vw;
-                margin: 20px;
-            }
-            
-            .audio-player-content {
-                padding: 20px;
-            }
-            
-            .audio-waveform {
-                height: 60px;
-                padding: 8px;
-            }
-            
-            .audio-play-button {
-                width: 44px;
-                height: 44px;
-                margin-right: 12px;
-            }
-            
-            .waveform-section {
-                height: 44px;
-            }
-        }
-    `;
-
-    // Add overlay background with click-outside-to-close functionality
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        z-index: 9999;
-        backdrop-filter: blur(5px);
-    `;
     
-    // Close when clicking outside the player
-    overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) {
-            closeAudioPlayer();
-        }
-    });
-
-    // Prevent closing when clicking inside the player
-    playerContainer.addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
-
-    // Add to document
-    document.head.appendChild(style);
     document.body.appendChild(overlay);
-    document.body.appendChild(playerContainer);
+    
+    // Initialize the player with JavaScript
+    initializeEnhancedPlayer(overlay);
+}
 
-    // Get audio element and set up functionality
-    const audio = playerContainer.querySelector('audio');
-    const playPauseBtn = playerContainer.querySelector('.audio-play-button');
-    const playIcon = playerContainer.querySelector('.play-icon');
-    const pauseIcon = playerContainer.querySelector('.pause-icon');
-    const waveformContainer = playerContainer.querySelector('.audio-waveform');
-    const waveformProgress = playerContainer.querySelector('.waveform-progress');
-    const waveformBars = playerContainer.querySelector('.waveform-bars');
-    const currentTimeSpan = playerContainer.querySelector('.current-time');
-    const totalTimeSpan = playerContainer.querySelector('.total-time');
+// Initialize the enhanced audio player functionality
+function initializeEnhancedPlayer(overlay) {
+    const playerContainer = overlay.querySelector('.player-container');
+    const waveform = overlay.querySelector('#waveform');
+    const audio = overlay.querySelector('#audioPlayer');
+    const playBtn = overlay.querySelector('#playBtn');
+    const playIcon = overlay.querySelector('#playIcon');
+    const pauseIcon = overlay.querySelector('#pauseIcon');
+    const playingIndicator = overlay.querySelector('#playingIndicator');
+    const progressBar = overlay.querySelector('#progressBar');
+    const progressFill = overlay.querySelector('#progressFill');
+    const currentTimeSpan = overlay.querySelector('#currentTime');
+    const durationSpan = overlay.querySelector('#duration');
+    const volumeIcon = overlay.querySelector('#volumeIcon');
+    const volumeOffIcon = overlay.querySelector('#volumeOffIcon');
+    const volumeSlider = overlay.querySelector('#volumeSlider');
+    const volumeFill = overlay.querySelector('#volumeFill');
+    const volumeBar1 = overlay.querySelector('.volume-bar-1');
+    const volumeBar2 = overlay.querySelector('.volume-bar-2');
+    const volumeBar3 = overlay.querySelector('.volume-bar-3');
+    const speedBtn = overlay.querySelector('#speedBtn');
+    const minimizeBtn = overlay.querySelector('#minimizeBtn');
+    const closeBtn = overlay.querySelector('#closeBtn');
+    const rewindBtn = overlay.querySelector('#rewind');
+    const forwardBtn = overlay.querySelector('#forward');
 
-    // Close function
-    window.closeAudioPlayer = function() {
-        if (audio) audio.pause();
-        playerContainer.remove();
-        overlay.remove();
-        style.remove();
-        document.removeEventListener('keydown', handleEscapeKey);
-        delete window.closeAudioPlayer;
-        delete window.toggleAudioPlayback;
-    };
-
-    // Handle ESC key to close player
-    function handleEscapeKey(e) {
-        if (e.key === 'Escape') {
-            closeAudioPlayer();
-        }
+    // Generate waveform bars
+    const bars = 60;
+    for (let i = 0; i < bars; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'wave-bar';
+        const height = Math.random() * 70 + 30;
+        bar.style.height = height + '%';
+        waveform.appendChild(bar);
     }
-    document.addEventListener('keydown', handleEscapeKey);
 
-    // Toggle play/pause function
-    window.toggleAudioPlayback = function() {
-        if (audio.paused) {
-            audio.play().catch(error => {
-                console.error('Error playing audio:', error);
-                alert('Unable to play audio file. Please check if the file exists.');
-                closeAudioPlayer();
-            });
-        } else {
+    // Player state
+    let isPlaying = false;
+    let currentProgress = 0;
+    let speed = 1.0;
+    let volume = 70;
+    let isMuted = false;
+    let previousVolume = 70;
+    let isMinimized = false;
+
+    // Set initial volume
+    audio.volume = volume / 100;
+
+    // Play/Pause
+    playBtn.addEventListener('click', () => {
+        if (isPlaying) {
             audio.pause();
+        } else {
+            audio.play();
         }
-    };
-
-    // Format time helper
-    function formatTime(seconds) {
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${mins}:${secs.toString().padStart(2, '0')}`;
-    }
+    });
 
     // Audio event listeners
-    audio.addEventListener('loadedmetadata', () => {
-        totalTimeSpan.textContent = formatTime(audio.duration);
-    });
-
-    audio.addEventListener('timeupdate', () => {
-        const progress = (audio.currentTime / audio.duration) * 100;
-        waveformProgress.style.width = `${progress}%`;
-        currentTimeSpan.textContent = formatTime(audio.currentTime);
-    });
-
     audio.addEventListener('play', () => {
+        isPlaying = true;
         playIcon.style.display = 'none';
-        pauseIcon.style.display = 'inline';
-        waveformBars.classList.add('waveform-playing');
+        pauseIcon.style.display = 'block';
+        playingIndicator.classList.add('active');
     });
 
     audio.addEventListener('pause', () => {
-        playIcon.style.display = 'inline';
+        isPlaying = false;
+        playIcon.style.display = 'block';
         pauseIcon.style.display = 'none';
-        waveformBars.classList.remove('waveform-playing');
+        playingIndicator.classList.remove('active');
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+        const minutes = Math.floor(audio.duration / 60);
+        const seconds = Math.floor(audio.duration % 60);
+        durationSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        
+        // Autoplay on load
+        audio.play().catch(error => {
+            console.log('Autoplay prevented:', error);
+        });
+    });
+
+    audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const percent = (audio.currentTime / audio.duration) * 100;
+        currentProgress = percent;
+        progressFill.style.width = currentProgress + '%';
+        updateWaveform(currentProgress);
+        
+        const minutes = Math.floor(audio.currentTime / 60);
+        const seconds = Math.floor(audio.currentTime % 60);
+        currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
     });
 
     audio.addEventListener('ended', () => {
-        closeAudioPlayer();
+        isPlaying = false;
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+        playingIndicator.classList.remove('active');
     });
 
-    // Waveform click to seek
-    waveformContainer.addEventListener('click', (e) => {
-        const rect = waveformContainer.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const width = rect.width;
-        const seekTime = (clickX / width) * audio.duration;
-        audio.currentTime = seekTime;
+    // Waveform interaction
+    let isDraggingWaveform = false;
+
+    waveform.addEventListener('mousedown', (e) => {
+        isDraggingWaveform = true;
+        seekWaveform(e);
     });
 
-    // Auto-play the audio
-    audio.play().catch(error => {
-        console.error('Error playing audio:', error);
-        alert('Unable to play audio file. Please check if the file exists.');
-        closeAudioPlayer();
+    document.addEventListener('mousemove', (e) => {
+        if (isDraggingWaveform) {
+            seekWaveform(e);
+        }
     });
 
-    console.log(`Playing audio for ${bookName}: ${audioFile}`);
+    document.addEventListener('mouseup', () => {
+        isDraggingWaveform = false;
+    });
+
+    function seekWaveform(e) {
+        const rect = waveform.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        if (audio.duration) {
+            audio.currentTime = (percent / 100) * audio.duration;
+        }
+    }
+
+    // Progress bar interaction
+    let isDraggingProgress = false;
+
+    function updateProgress(e) {
+        const rect = progressBar.getBoundingClientRect();
+        const percent = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+        if (audio.duration) {
+            audio.currentTime = (percent / 100) * audio.duration;
+        }
+    }
+
+    progressBar.addEventListener('mousedown', (e) => {
+        isDraggingProgress = true;
+        updateProgress(e);
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDraggingProgress) {
+            updateProgress(e);
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDraggingProgress = false;
+    });
+
+    progressBar.addEventListener('click', (e) => {
+        updateProgress(e);
+    });
+
+    // Update waveform active state
+    function updateWaveform(percent) {
+        const waveBars = waveform.querySelectorAll('.wave-bar');
+        const activeIndex = Math.floor((percent / 100) * waveBars.length);
+        waveBars.forEach((bar, i) => {
+            if (i < activeIndex) {
+                bar.classList.add('active');
+            } else {
+                bar.classList.remove('active');
+            }
+        });
+    }
+
+    // Volume icon functionality
+    function updateVolumeIcon(volumeLevel) {
+        const normalizedVolume = volumeLevel / 100;
+        
+        if (volumeLevel === 0 || audio.muted) {
+            volumeIcon.querySelector('svg:not(#volumeOffIcon)').style.display = 'none';
+            volumeOffIcon.style.display = 'block';
+            volumeIcon.classList.add('muted');
+        } else {
+            volumeIcon.querySelector('svg:not(#volumeOffIcon)').style.display = 'block';
+            volumeOffIcon.style.display = 'none';
+            volumeIcon.classList.remove('muted');
+            
+            if (normalizedVolume > 0 && normalizedVolume <= 0.33) {
+                volumeBar1.style.opacity = '1';
+                volumeBar2.style.opacity = '0';
+                volumeBar3.style.opacity = '0';
+            } else if (normalizedVolume > 0.33 && normalizedVolume <= 0.66) {
+                volumeBar1.style.opacity = '1';
+                volumeBar2.style.opacity = '1';
+                volumeBar3.style.opacity = '0';
+            } else {
+                volumeBar1.style.opacity = '1';
+                volumeBar2.style.opacity = '1';
+                volumeBar3.style.opacity = '1';
+            }
+        }
+    }
+
+    volumeIcon.addEventListener('click', () => {
+        isMuted = !isMuted;
+        audio.muted = isMuted;
+
+        if (isMuted) {
+            previousVolume = volume;
+            updateVolumeIcon(0);
+        } else {
+            volume = previousVolume;
+            audio.volume = volume / 100;
+            volumeFill.style.width = volume + '%';
+            updateVolumeIcon(volume);
+        }
+    });
+
+    // Speed control
+    const speeds = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
+    let speedIndex = 2;
+
+    speedBtn.addEventListener('click', () => {
+        speedIndex = (speedIndex + 1) % speeds.length;
+        speed = speeds[speedIndex];
+        audio.playbackRate = speed;
+        speedBtn.textContent = speed + 'x';
+    });
+
+    // Volume control
+    let isDraggingVolume = false;
+
+    function updateVolume(e) {
+        const rect = volumeSlider.getBoundingClientRect();
+        const percent = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+        volume = percent;
+        audio.volume = volume / 100;
+        volumeFill.style.width = volume + '%';
+
+        if (volume === 0) {
+            isMuted = true;
+            audio.muted = true;
+        } else {
+            isMuted = false;
+            audio.muted = false;
+            previousVolume = volume;
+        }
+        
+        updateVolumeIcon(volume);
+    }
+
+    volumeSlider.addEventListener('mousedown', (e) => {
+        isDraggingVolume = true;
+        updateVolume(e);
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDraggingVolume) {
+            updateVolume(e);
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDraggingVolume = false;
+    });
+
+    volumeSlider.addEventListener('click', (e) => {
+        updateVolume(e);
+    });
+
+    // Skip buttons
+    rewindBtn.addEventListener('click', () => {
+        if (audio.duration) {
+            audio.currentTime = Math.max(0, audio.currentTime - 3);
+        }
+    });
+
+    forwardBtn.addEventListener('click', () => {
+        if (audio.duration) {
+            audio.currentTime = Math.min(audio.duration, audio.currentTime + 3);
+        }
+    });
+
+    // Minimize button
+    minimizeBtn.addEventListener('click', () => {
+        if (!isMinimized) {
+            playerContainer.classList.add('minimized');
+            overlay.classList.add('minimized');
+            playerContainer.style.position = 'fixed';
+            playerContainer.style.bottom = '20px';
+            playerContainer.style.right = '20px';
+            playerContainer.style.top = 'auto';
+            playerContainer.style.left = 'auto';
+            isMinimized = true;
+        } else {
+            playerContainer.classList.remove('minimized');
+            overlay.classList.remove('minimized');
+            playerContainer.style.position = 'relative';
+            playerContainer.style.bottom = 'auto';
+            playerContainer.style.right = 'auto';
+            isMinimized = false;
+        }
+    });
+
+    // Click outside to minimize
+    overlay.addEventListener('click', (e) => {
+        if (!playerContainer.contains(e.target) && !isMinimized) {
+            playerContainer.classList.add('minimized');
+            overlay.classList.add('minimized');
+            playerContainer.style.position = 'fixed';
+            playerContainer.style.bottom = '20px';
+            playerContainer.style.right = '20px';
+            playerContainer.style.top = 'auto';
+            playerContainer.style.left = 'auto';
+            isMinimized = true;
+        }
+    });
+
+    // Close button
+    closeBtn.addEventListener('click', () => {
+        audio.pause();
+        audio.currentTime = 0;
+        overlay.style.opacity = '0';
+        overlay.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => {
+            overlay.remove();
+        }, 300);
+    });
+
+    // ESC key to close
+    function handleEscKey(e) {
+        if (e.key === 'Escape') {
+            audio.pause();
+            overlay.remove();
+            document.removeEventListener('keydown', handleEscKey);
+        }
+    }
+    document.addEventListener('keydown', handleEscKey);
+
+    // Initialize volume
+    updateVolumeIcon(volume);
 }
 
 function openBookModal(book) {
