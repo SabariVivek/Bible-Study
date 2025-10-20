@@ -1216,30 +1216,25 @@ function openBookModal(book) {
     if (nameElement) nameElement.textContent = book.name;
     
     if (contentElement) {
-        // Check if this is Genesis and we have Genesis data
-        if (book.name === 'Genesis' && typeof genesisData !== 'undefined') {
-            displayGenesisContent(contentElement);
-        } else {
-            // For other books, show basic book information
-            contentElement.innerHTML = `
-                <div class="king-info-row">
-                    <span class="king-info-label">Testament:</span>
-                    <span class="king-info-value">${book.testament} Testament</span>
-                </div>
-                <div class="king-info-row">
-                    <span class="king-info-label">Category:</span>
-                    <span class="king-info-value">${book.category}</span>
-                </div>
-                <div class="king-info-row">
-                    <span class="king-info-label">Author:</span>
-                    <span class="king-info-value">${book.author}</span>
-                </div>
-                <div class="king-info-row">
-                    <span class="king-info-label">Chapters:</span>
-                    <span class="king-info-value">${book.chapters}</span>
-                </div>
-            `;
-        }
+        // Show basic book information
+        contentElement.innerHTML = `
+            <div class="king-info-row">
+                <span class="king-info-label">Testament:</span>
+                <span class="king-info-value">${book.testament} Testament</span>
+            </div>
+            <div class="king-info-row">
+                <span class="king-info-label">Category:</span>
+                <span class="king-info-value">${book.category}</span>
+            </div>
+            <div class="king-info-row">
+                <span class="king-info-label">Author:</span>
+                <span class="king-info-value">${book.author}</span>
+            </div>
+            <div class="king-info-row">
+                <span class="king-info-label">Chapters:</span>
+                <span class="king-info-value">${book.chapters}</span>
+            </div>
+        `;
     }
     
     if (popup) {
@@ -1251,110 +1246,6 @@ function openBookModal(book) {
             document.addEventListener('click', handleBookOutsideClick);
         }, 100);
     }
-}
-
-/**
- * Display Genesis content in the book modal
- * @param {HTMLElement} contentElement - The element to populate with Genesis content
- */
-function displayGenesisContent(contentElement) {
-    let content = `
-        <!-- Introduction Section -->
-        <div class="genesis-section">
-            <div class="section-header">
-                <h3 class="section-title">📖 ${genesisData.introduction.title}</h3>
-            </div>
-            <div class="section-content">
-                <div class="introduction-text">${genesisData.introduction.content.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</div>
-            </div>
-        </div>
-
-        <!-- Basic Information -->
-        <div class="genesis-section">
-            <div class="section-header">
-                <h3 class="section-title">📋 Book Information</h3>
-            </div>
-            <div class="section-content">
-                <div class="king-info-row">
-                    <span class="king-info-label">Testament:</span>
-                    <span class="king-info-value">${genesisData.testament} Testament</span>
-                </div>
-                <div class="king-info-row">
-                    <span class="king-info-label">Category:</span>
-                    <span class="king-info-value">${genesisData.category}</span>
-                </div>
-                <div class="king-info-row">
-                    <span class="king-info-label">Author:</span>
-                    <span class="king-info-value">${genesisData.author}</span>
-                </div>
-                <div class="king-info-row">
-                    <span class="king-info-label">Chapters:</span>
-                    <span class="king-info-value">${genesisData.chapters}</span>
-                </div>
-                <div class="king-info-row">
-                    <span class="king-info-label">Theme:</span>
-                    <span class="king-info-value">${genesisData.theme}</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sample Chapter (Chapter 1) -->
-        <div class="genesis-section">
-            <div class="section-header">
-                <h3 class="section-title">📜 Chapter 1: ${genesisData.chapters_list[0].title}</h3>
-                <a href="${genesisData.chapters_list[0].url}" target="_blank" class="external-link">View on EasyEnglish Bible ↗</a>
-            </div>
-            <div class="section-content">
-                <div class="chapter-content">
-    `;
-    
-    // Add the verses from Chapter 1
-    genesisData.chapters_list[0].sections.forEach((section, index) => {
-        content += `
-            <div class="verse-section">
-                <div class="verse-reference">${section.verses}</div>
-                <div class="verse-content">${section.content}</div>
-            </div>
-        `;
-    });
-    
-    content += `
-                </div>
-            </div>
-        </div>
-
-        <!-- Chapter Index -->
-        <div class="genesis-section">
-            <div class="section-header">
-                <h3 class="section-title">📑 Chapter Index</h3>
-            </div>
-            <div class="section-content">
-                <div class="chapter-index">
-                    <p class="chapter-index-description">Click on any chapter title to read it on EasyEnglish Bible:</p>
-                    <div class="chapter-links-grid">
-    `;
-    
-    // Add chapter links in a grid format
-    genesisData.chapterLinks.forEach((link, index) => {
-        const chapterNumber = index + 1;
-        content += `
-            <div class="chapter-link-item">
-                <a href="${link.url}" target="_blank" class="chapter-link" title="Read Chapter ${chapterNumber}">
-                    <span class="chapter-number">${chapterNumber}</span>
-                    <span class="chapter-title">${link.title}</span>
-                </a>
-            </div>
-        `;
-    });
-    
-    content += `
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    contentElement.innerHTML = content;
 }
 
 function handleBookOutsideClick(event) {
