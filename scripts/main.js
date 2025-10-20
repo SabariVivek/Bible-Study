@@ -1705,13 +1705,140 @@ function showBookChapter(book, chapterNum) {
     
     // Update the title with the book name and chapter number
     const bookChapterTitle = document.getElementById('bookChapterTitle');
+    const bookName = typeof book === 'string' ? book : book.name;
+    
     if (bookChapterTitle && book) {
-        const bookName = typeof book === 'string' ? book : book.name;
         if (chapterNum) {
-            bookChapterTitle.textContent = `${bookName} - ${chapterNum}`;
+            bookChapterTitle.textContent = `${bookName} - Chapter ${chapterNum}`;
         } else {
             bookChapterTitle.textContent = bookName;
         }
+    }
+    
+    // Display chapter data
+    const bookChapterContainer = document.querySelector('.book-chapter-container');
+    if (bookChapterContainer && chapterNum) {
+        displayChapterContent(bookName, chapterNum, bookChapterContainer);
+    }
+}
+
+// Function to convert verse references to badges
+function formatVerseReferences(text) {
+    // First, remove any existing verse badge spans to avoid double-wrapping
+    let cleanText = text.replace(/<span class="verse-badge">([^<]*)<\/span>/g, '$1');
+    
+    // Use a placeholder to prevent double-processing
+    const PLACEHOLDER_START = '###BADGE_START###';
+    const PLACEHOLDER_END = '###BADGE_END###';
+    
+    // First, handle complex patterns like "Matthew 9:27, 12:23, 15:22, 20:30, 21:9, 21:15"
+    // This pattern looks for a book name followed by multiple chapter:verse references in parentheses
+    let formattedText = cleanText.replace(
+        /\(([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)\s+(\d+:\d+(?:-\d+)?(?:,\s*\d+:\d+(?:-\d+)?)*)\)/g,
+        (match, book, verses) => {
+            // Split the verses by comma
+            const verseList = verses.split(',').map(v => v.trim());
+            const badges = verseList.map(verse => 
+                `${PLACEHOLDER_START}${book} ${verse}${PLACEHOLDER_END}`
+            ).join(' ');
+            return `(${badges})`;
+        }
+    );
+    
+    // Second, handle "book chapter X" format (e.g., "Genesis chapter 38")
+    formattedText = formattedText.replace(/\b(\d\s)?([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)\s+chapter\s+(\d+)\b/g, 
+        (match, num, book, chapter) => {
+            const prefix = num ? num : '';
+            return `${PLACEHOLDER_START}${prefix}${book} ${chapter}${PLACEHOLDER_END}`;
+        });
+    
+    // Third, handle standard single verse references with colons
+    // Examples: "Matthew 22:41-46", "Genesis 22:18", "1 Chronicles 3:11-12"
+    formattedText = formattedText.replace(/\b(\d\s)?([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)\s(\d+):(\d+)(?:-(\d+))?/g, 
+        (match, num, book, chapter, verse1, verse2) => {
+            const prefix = num ? num : '';
+            const range = verse2 ? `-${verse2}` : '';
+            return `${PLACEHOLDER_START}${prefix}${book} ${chapter}:${verse1}${range}${PLACEHOLDER_END}`;
+        });
+    
+    // Finally, replace all placeholders with actual span tags
+    formattedText = formattedText.replace(new RegExp(PLACEHOLDER_START, 'g'), '<span class="verse-badge">');
+    formattedText = formattedText.replace(new RegExp(PLACEHOLDER_END, 'g'), '</span>');
+    
+    return formattedText;
+}
+
+// Function to display chapter content
+function displayChapterContent(bookName, chapterNum, container) {
+    // Clear previous content
+    container.innerHTML = '';
+    
+    // Get chapter data based on book name
+    let chapterData = null;
+    
+    if (bookName.toLowerCase() === 'matthew') {
+        const chapterKey = `chapter_${chapterNum}`;
+        if (typeof MatthewData !== 'undefined' && MatthewData[chapterKey]) {
+            chapterData = MatthewData[chapterKey];
+        }
+    }
+    // Add more books here as needed
+    // else if (bookName.toLowerCase() === 'mark') {
+    //     const chapterKey = `chapter_${chapterNum}`;
+    //     if (typeof MarkData !== 'undefined' && MarkData[chapterKey]) {
+    //         chapterData = MarkData[chapterKey];
+    //     }
+    // }
+    
+    // Display the chapter data
+    if (chapterData && chapterData.length > 0) {
+        chapterData.forEach((section, index) => {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'chapter-section';
+            sectionDiv.style.marginBottom = index < chapterData.length - 1 ? '2.5rem' : '0';
+            
+            // Add section heading
+            if (section.section) {
+                const sectionHeading = document.createElement('h3');
+                sectionHeading.textContent = section.section;
+                sectionHeading.style.color = '#4a7c59';
+                sectionHeading.style.marginBottom = '1rem';
+                sectionHeading.style.fontSize = '1.4rem';
+                sectionHeading.style.fontWeight = '700';
+                sectionHeading.style.borderBottom = '2px solid #4a7c59';
+                sectionHeading.style.paddingBottom = '0.5rem';
+                sectionDiv.appendChild(sectionHeading);
+            }
+            
+            // Add section text with formatted verse references
+            if (section.text) {
+                const sectionText = document.createElement('div');
+                // Format verse references as badges
+                const formattedText = formatVerseReferences(section.text);
+                sectionText.innerHTML = formattedText;
+                sectionText.style.lineHeight = '2.2';
+                sectionText.style.color = '#2c3e50';
+                sectionText.style.fontSize = '1.05rem';
+                sectionText.style.whiteSpace = 'pre-wrap';
+                sectionText.style.marginTop = '1rem';
+                sectionDiv.appendChild(sectionText);
+            }
+            
+            container.appendChild(sectionDiv);
+        });
+    } else {
+        // No data available message
+        const noDataDiv = document.createElement('div');
+        noDataDiv.className = 'no-chapter-data';
+        noDataDiv.style.padding = '3rem';
+        noDataDiv.style.textAlign = 'center';
+        noDataDiv.style.color = '#666';
+        noDataDiv.style.fontSize = '1.1rem';
+        noDataDiv.innerHTML = `
+            <p style="font-size: 3rem; margin-bottom: 1rem;">📖</p>
+            <p>Chapter content for ${bookName} ${chapterNum} is not available yet.</p>
+        `;
+        container.appendChild(noDataDiv);
     }
 }
 

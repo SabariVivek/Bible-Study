@@ -498,3 +498,103 @@
     transform: scale(1.02) !important;
     box-shadow: 0 4px 16px rgba(107, 95, 191, 0.4) !important;
 }
+
+/* ===== BOOK CHAPTER CONTENT STYLES ===== */
+.book-chapter-container {
+    scrollbar-width: thin;
+    scrollbar-color: #4a7c59 #f0f0f0;
+}
+
+.book-chapter-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.book-chapter-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.book-chapter-container::-webkit-scrollbar-thumb {
+    background: #4a7c59;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.book-chapter-container::-webkit-scrollbar-thumb:hover {
+    background: #3d6649;
+}
+
+.chapter-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.chapter-section h3 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.chapter-section b {
+    font-weight: 600;
+    color: #2c5f3f;
+}
+
+/* Verse Reference Badges */
+.verse-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 1px 3px;
+    background-color: #fffbeb;
+    color: #d97706;
+    border: 1.5px solid #f59e0b;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    letter-spacing: 0.1px;
+    transition: all 0.2s ease;
+}
+
+.verse-badge:hover {
+    background-color: #fef3c7;
+    border-color: #d97706;
+    box-shadow: 0 1px 3px rgba(217, 119, 6, 0.2);
+}
+
+
+/* ===== BOOK CHAPTER CONTENT STYLES ===== */
+.book-chapter-container {
+    scrollbar-width: thin;
+    scrollbar-color: #4a7c59 #f0f0f0;
+}
+
+.book-chapter-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.book-chapter-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.book-chapter-container::-webkit-scrollbar-thumb {
+    background: #4a7c59;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.book-chapter-container::-webkit-scrollbar-thumb:hover {
+    background: #3d6649;
+}
+
+.chapter-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.chapter-section h3 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.chapter-section b {
+    font-weight: 600;
+    color: #2c5f3f;
+}
+
