@@ -2382,19 +2382,23 @@ nav {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    display: none;
     z-index: 2100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
 .chapters-overlay.show {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s linear 0s;
 }
 
 .chapters-popup {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.9);
     width: 450px;
     max-height: 80vh;
     background: #ffffff;
@@ -2402,12 +2406,22 @@ nav {
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     padding: 30px;
     z-index: 2200;
-    display: none;
+    display: flex;
     flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0s linear 0.3s;
 }
 
 .chapters-popup.show {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0s linear 0s;
 }
 
 .chapters-popup .popup-header {
@@ -2491,6 +2505,33 @@ nav {
     transition: all 0.3s ease;
     font-weight: 500;
     color: #1f2937;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.chapters-popup.show .chapter-card {
+    animation: slideUpFade 0.4s ease forwards;
+}
+
+.chapters-popup.show .chapter-card:nth-child(1) { animation-delay: 0.05s; }
+.chapters-popup.show .chapter-card:nth-child(2) { animation-delay: 0.1s; }
+.chapters-popup.show .chapter-card:nth-child(3) { animation-delay: 0.15s; }
+.chapters-popup.show .chapter-card:nth-child(4) { animation-delay: 0.2s; }
+.chapters-popup.show .chapter-card:nth-child(5) { animation-delay: 0.05s; }
+.chapters-popup.show .chapter-card:nth-child(6) { animation-delay: 0.1s; }
+.chapters-popup.show .chapter-card:nth-child(7) { animation-delay: 0.15s; }
+.chapters-popup.show .chapter-card:nth-child(8) { animation-delay: 0.2s; }
+.chapters-popup.show .chapter-card:nth-child(9) { animation-delay: 0.05s; }
+.chapters-popup.show .chapter-card:nth-child(10) { animation-delay: 0.1s; }
+.chapters-popup.show .chapter-card:nth-child(11) { animation-delay: 0.15s; }
+.chapters-popup.show .chapter-card:nth-child(12) { animation-delay: 0.2s; }
+.chapters-popup.show .chapter-card:nth-child(n+13) { animation-delay: 0.25s; }
+
+@keyframes slideUpFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .chapter-card:hover {
