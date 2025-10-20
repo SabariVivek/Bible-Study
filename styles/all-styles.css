@@ -1973,6 +1973,66 @@ nav {
     overflow-x: hidden; /* Hide horizontal scroll */
 }
 
+.book-chapter-container {
+    height: 70vh;
+    width: 100%;
+    padding: 20px;
+    background-color: #ffffff;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.book-chapter-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.book-chapter-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.book-chapter-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.book-chapter-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Chapter Section Heading Styles */
+.chapter-section-heading {
+    position: relative;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding-left: 20px;
+    padding-bottom: 0.8rem;
+    border-left: 5px solid #4a7c59;
+    background: linear-gradient(to right, rgba(74, 124, 89, 0.08), transparent);
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    border-radius: 0 8px 8px 0;
+    transition: all 0.3s ease;
+}
+
+.chapter-section-heading:hover {
+    background: linear-gradient(to right, rgba(74, 124, 89, 0.12), transparent);
+    transform: translateX(5px);
+}
+
+.chapter-section-heading::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
 .life-of-jesus-cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

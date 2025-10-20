@@ -1709,7 +1709,7 @@ function showBookChapter(book, chapterNum) {
     
     if (bookChapterTitle && book) {
         if (chapterNum) {
-            bookChapterTitle.textContent = `${bookName} - Chapter ${chapterNum}`;
+            bookChapterTitle.textContent = `${bookName} - ${chapterNum}`;
         } else {
             bookChapterTitle.textContent = bookName;
         }
@@ -1800,13 +1800,8 @@ function displayChapterContent(bookName, chapterNum, container) {
             // Add section heading
             if (section.section) {
                 const sectionHeading = document.createElement('h3');
+                sectionHeading.className = 'chapter-section-heading';
                 sectionHeading.textContent = section.section;
-                sectionHeading.style.color = '#4a7c59';
-                sectionHeading.style.marginBottom = '1rem';
-                sectionHeading.style.fontSize = '1.4rem';
-                sectionHeading.style.fontWeight = '700';
-                sectionHeading.style.borderBottom = '2px solid #4a7c59';
-                sectionHeading.style.paddingBottom = '0.5rem';
                 sectionDiv.appendChild(sectionHeading);
             }
             
