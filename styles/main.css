@@ -25,12 +25,12 @@ body.modal-open {
     display: flex;
     width: 100%;
     max-width: 1400px;
-    margin: 20px auto;
+    margin: 20px auto 0;
     background: white;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    min-height: calc(100vh - 40px);
+    min-height: calc(100vh);
 }
 
 /* Sidebar Styles */

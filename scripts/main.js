@@ -306,11 +306,12 @@ function toggleDrawer() {
     const toggleIcon = document.getElementById('toggleIcon');
     
     sidebar.classList.toggle('collapsed');
+    document.body.classList.toggle('sidebar-collapsed');
     
     if (sidebar.classList.contains('collapsed')) {
-        toggleIcon.textContent = '⫸'; // Right arrow - click to expand right
+        toggleIcon.textContent = '›'; // Right chevron - click to expand
     } else {
-        toggleIcon.textContent = '⫷'; // Left arrow - click to collapse left
+        toggleIcon.textContent = '‹'; // Left chevron - click to collapse
     }
 }
 
