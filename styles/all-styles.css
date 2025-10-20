@@ -2329,3 +2329,122 @@ nav {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 }
+
+/* ===== CHAPTERS POPUP STYLES ===== */
+.chapters-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(3px);
+    display: none;
+    z-index: 2100;
+}
+
+.chapters-overlay.show {
+    display: block;
+}
+
+.chapters-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    max-height: 80vh;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 30px;
+    z-index: 2200;
+    display: none;
+    flex-direction: column;
+}
+
+.chapters-popup.show {
+    display: flex;
+}
+
+.chapters-popup .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.chapters-popup .popup-header .book-title {
+    color: #333;
+}
+
+.chapters-popup .popup-header .chapter-count {
+    font-size: 14px;
+    color: #666;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.chapters-popup .close-btn {
+    cursor: pointer;
+    font-size: 22px;
+    opacity: 0.6;
+    transition: 0.2s;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chapters-popup .close-btn:hover {
+    opacity: 1;
+}
+
+.chapters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-top: 15px;
+}
+
+.chapter-card {
+    padding: 12px;
+    background: #f8faff;
+    border: 1px solid #d0e3ff;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.chapter-card:hover {
+    background: #e3f0ff;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(107, 95, 191, 0.2);
+}
+
+.chapter-card:active {
+    transform: translateY(0);
+}
+
+/* Responsive styles for chapters popup */
+@media (max-width: 768px) {
+    .chapters-popup {
+        width: 90%;
+        max-width: 400px;
+        padding: 20px;
+    }
+    
+    .chapters {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

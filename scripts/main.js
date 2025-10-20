@@ -1423,7 +1423,7 @@ function initializeBooksTable() {
         nextBtnId: 'booksNextBtn',
         paginationControlsId: 'booksPaginationControls',
         itemsPerPage: 7,
-        onRowClick: (book) => showBookChapter(book),
+        onRowClick: (book) => openChaptersPopup(book.name, book.chapters),
         columns: [
             {
                 header: 'Testament',
@@ -1915,6 +1915,66 @@ function showHelp() {
     }
 }
 
+// ===== CHAPTERS POPUP FUNCTIONS =====
+function openChaptersPopup(bookName, chapterCount) {
+    // Set book title and count
+    const titleElement = document.getElementById('popupBookTitle');
+    const countElement = document.getElementById('popupChapterCount');
+    
+    if (!titleElement || !countElement) return;
+    
+    titleElement.textContent = bookName;
+    countElement.textContent = `(${chapterCount} chapter${chapterCount > 1 ? 's' : ''})`;
+    
+    // Generate chapter cards
+    const chaptersContainer = document.getElementById('chaptersContainer');
+    if (!chaptersContainer) return;
+    
+    chaptersContainer.innerHTML = '';
+    
+    for(let i = 1; i <= chapterCount; i++) {
+        const chapterCard = document.createElement('div');
+        chapterCard.className = 'chapter-card';
+        chapterCard.textContent = i;
+        chapterCard.onclick = () => chapterClick(bookName, i);
+        chaptersContainer.appendChild(chapterCard);
+    }
+    
+    // Show popup
+    const popup = document.getElementById('chaptersPopup');
+    const overlay = document.getElementById('chaptersOverlay');
+    
+    if (!popup || !overlay) return;
+    
+    popup.classList.add('show');
+    overlay.classList.add('show');
+}
+
+function closeChaptersPopup() {
+    const popup = document.getElementById('chaptersPopup');
+    const overlay = document.getElementById('chaptersOverlay');
+    
+    if (popup) popup.classList.remove('show');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function chapterClick(bookName, chapterNum) {
+    // Close the popup
+    closeChaptersPopup();
+    // You can add navigation logic here
+    // For example: showBookChapter({ name: bookName, chapter: chapterNum });
+}
+
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const chaptersPopup = document.getElementById('chaptersPopup');
+        if (chaptersPopup && chaptersPopup.classList.contains('show')) {
+            closeChaptersPopup();
+        }
+    }
+});
+
 // Make functions globally available
 window.openProphetModal = openProphetModal;
 window.openProphetByIndex = openProphetByIndex;
@@ -1938,3 +1998,5 @@ window.showGenealogy = showGenealogy;
 window.showMaps = showMaps;
 window.showSetting = showSetting;
 window.showHelp = showHelp;
+window.openChaptersPopup = openChaptersPopup;
+window.closeChaptersPopup = closeChaptersPopup;

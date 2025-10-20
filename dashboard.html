@@ -2382,6 +2382,21 @@
         </div>
     </div>
 
+    <!-- Chapters Popup -->
+    <div class="chapters-overlay" id="chaptersOverlay" onclick="closeChaptersPopup()"></div>
+    <div class="chapters-popup" id="chaptersPopup">
+        <div class="popup-header">
+            <div>
+                <span class="book-title" id="popupBookTitle">Genesis</span>
+                <span class="chapter-count" id="popupChapterCount">(50 chapters)</span>
+            </div>
+            <button class="close-btn" onclick="closeChaptersPopup()">✕</button>
+        </div>
+        <div class="chapters" id="chaptersContainer">
+            <!-- Chapters will be generated dynamically -->
+        </div>
+    </div>
+
     <!-- Load JavaScript files in the correct order -->
     <script src="scripts/auth.js"></script>
     <script src="scripts/data/kings-data.js"></script>
