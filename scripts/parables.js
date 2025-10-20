@@ -8,8 +8,12 @@ function showParablesCards() {
         parablesSection.id = 'parables-pdf-section';
         parablesSection.innerHTML = `
             <div class="content-header">
-                <h1 class="page-title">Parables of Jesus</h1>
-                <button onclick="hideParablesCards()" class="filter-btn" style="margin-left:auto; min-width:90px;">⟵ Back</button>
+                <div style="display: flex; align-items: center;">
+                    <button onclick="hideParablesCards()" class="back-btn-circle" title="Back to Dashboard">
+                        <span class="back-arrow">«</span>
+                    </button>
+                    <h1 class="page-title" style="margin: 0;">Parables of Jesus</h1>
+                </div>
             </div>
             <div class="dashboard-cards-container">
                 <div class="era-card parables-english" onclick="window.open('resources/pdf/parables-english.pdf','_blank')">

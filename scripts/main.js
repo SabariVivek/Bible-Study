@@ -1939,7 +1939,7 @@ function displayChapterContent(bookName, chapterNum, container) {
             if (section.section) {
                 const sectionHeading = document.createElement('h3');
                 sectionHeading.className = 'chapter-section-heading';
-                sectionHeading.textContent = section.section;
+                sectionHeading.innerHTML = section.section;
                 sectionDiv.appendChild(sectionHeading);
             }
             

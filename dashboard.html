@@ -290,7 +290,10 @@
 
             <!-- Book Chapter Content -->
             <div id="book-chapter-content" class="hidden">
-                <div class="content-header" style="padding-top: 24px;">
+                <div class="content-header content-header-centered" style="padding-top: 24px;">
+                    <button onclick="showBooks()" class="back-btn-circle" title="Back to Books">
+                        <span class="back-arrow">«</span>
+                    </button>
                     <h1 class="page-title" id="bookChapterTitle">Book Chapter</h1>
                     <div class="chapter-navigation-header">
                         <button id="prevChapterBtn" class="nav-chapter-btn" onclick="navigateToPreviousChapter()" title="Previous Chapter">
@@ -300,7 +303,6 @@
                             <span class="nav-arrow">→</span>
                         </button>
                     </div>
-                    <button onclick="showBooks()" class="filter-btn" style="margin-left:15px; min-width:90px;">⟵ Back</button>
                 </div>
                 <div class="book-chapter-container">
                     <!-- Book chapter content will be loaded here -->

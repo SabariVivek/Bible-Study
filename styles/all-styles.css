@@ -2012,8 +2012,8 @@ nav {
     padding-bottom: 0.8rem;
     border-left: 5px solid #4a7c59;
     background: linear-gradient(to right, rgba(74, 124, 89, 0.08), transparent);
-    padding-top: 0.5rem;
     padding-right: 1rem;
+    padding-top: 1rem;
     border-radius: 0 8px 8px 0;
     transition: all 0.3s ease;
 }
@@ -2033,6 +2033,49 @@ nav {
     opacity: 0.7;
 }
 
+/* Circular Back Button */
+.back-btn-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+    margin-right: 16px;
+}
+
+.back-btn-circle:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.back-btn-circle:active {
+    transform: translateY(0);
+}
+
+.back-btn-circle .back-arrow {
+    font-size: 1.5rem;
+    line-height: 1;
+    position:relative;
+}
+
+/* Centered Content Header (for detail views with back button) */
+.content-header-centered {
+    position: relative;
+}
+
+.content-header-centered .page-title {
+    flex: 1;
+    text-align: center;
+}
+
 /* Chapter Navigation Buttons in Header */
 .chapter-navigation-header {
     display: flex;
@@ -2046,7 +2089,7 @@ nav {
     align-items: center;
     justify-content: center;
     padding: 10px 16px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     color: white;
     border: 1px solid transparent;
     border-radius: 8px;
@@ -2059,7 +2102,7 @@ nav {
 }
 
 .nav-chapter-btn:hover:not(:disabled) {
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
@@ -2069,7 +2112,7 @@ nav {
 }
 
 .nav-chapter-btn:disabled {
-    background: #ccc;
+    background: #ccc !important;
     cursor: not-allowed;
     opacity: 0.6;
     box-shadow: none;
