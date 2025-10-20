@@ -292,7 +292,15 @@
             <div id="book-chapter-content" class="hidden">
                 <div class="content-header" style="padding-top: 24px;">
                     <h1 class="page-title" id="bookChapterTitle">Book Chapter</h1>
-                    <button onclick="showBooks()" class="filter-btn" style="margin-left:auto; min-width:90px;">⟵ Back</button>
+                    <div class="chapter-navigation-header">
+                        <button id="prevChapterBtn" class="nav-chapter-btn" onclick="navigateToPreviousChapter()" title="Previous Chapter">
+                            <span class="nav-arrow">←</span>
+                        </button>
+                        <button id="nextChapterBtn" class="nav-chapter-btn" onclick="navigateToNextChapter()" title="Next Chapter">
+                            <span class="nav-arrow">→</span>
+                        </button>
+                    </div>
+                    <button onclick="showBooks()" class="filter-btn" style="margin-left:15px; min-width:90px;">⟵ Back</button>
                 </div>
                 <div class="book-chapter-container">
                     <!-- Book chapter content will be loaded here -->

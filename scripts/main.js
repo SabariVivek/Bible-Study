@@ -1719,6 +1719,144 @@ function showBookChapter(book, chapterNum) {
     const bookChapterContainer = document.querySelector('.book-chapter-container');
     if (bookChapterContainer && chapterNum) {
         displayChapterContent(bookName, chapterNum, bookChapterContainer);
+        updateChapterNavigation(bookName, chapterNum);
+    }
+}
+
+// Store current chapter info for navigation
+let currentChapterInfo = {
+    bookName: '',
+    chapterNum: 0,
+    totalChapters: 0,
+    bookObject: null
+};
+
+// Function to get all books in order
+function getAllBooksInOrder() {
+    if (typeof allBooksData === 'undefined') {
+        return [];
+    }
+    return [...allBooksData.oldTestament, ...allBooksData.newTestament];
+}
+
+// Function to find book in allBooksData
+function findBookInAllData(bookName) {
+    if (typeof allBooksData === 'undefined') {
+        console.error('allBooksData is not defined');
+        return null;
+    }
+    
+    const normalizedName = bookName.toLowerCase();
+    
+    // Search in Old Testament
+    let book = allBooksData.oldTestament.find(b => b.name.toLowerCase() === normalizedName);
+    if (book) return book;
+    
+    // Search in New Testament
+    book = allBooksData.newTestament.find(b => b.name.toLowerCase() === normalizedName);
+    return book;
+}
+
+// Function to get next book
+function getNextBook(currentBookName) {
+    const allBooks = getAllBooksInOrder();
+    const currentIndex = allBooks.findIndex(b => b.name.toLowerCase() === currentBookName.toLowerCase());
+    
+    if (currentIndex !== -1 && currentIndex < allBooks.length - 1) {
+        return allBooks[currentIndex + 1];
+    }
+    return null;
+}
+
+// Function to get previous book
+function getPreviousBook(currentBookName) {
+    const allBooks = getAllBooksInOrder();
+    const currentIndex = allBooks.findIndex(b => b.name.toLowerCase() === currentBookName.toLowerCase());
+    
+    if (currentIndex > 0) {
+        return allBooks[currentIndex - 1];
+    }
+    return null;
+}
+
+// Function to update chapter navigation buttons
+function updateChapterNavigation(bookName, chapterNum) {
+    // Get total chapters for the book
+    const book = findBookInAllData(bookName);
+    const totalChapters = book ? book.chapters : 0;
+    
+    // Store current chapter info
+    currentChapterInfo = {
+        bookName: bookName,
+        chapterNum: parseInt(chapterNum),
+        totalChapters: totalChapters,
+        bookObject: book
+    };
+    
+    // Get navigation buttons
+    const prevBtn = document.getElementById('prevChapterBtn');
+    const nextBtn = document.getElementById('nextChapterBtn');
+    
+    // Check if we can go to previous chapter or book
+    const canGoPrevious = chapterNum > 1 || getPreviousBook(bookName) !== null;
+    
+    // Check if we can go to next chapter or book
+    const canGoNext = chapterNum < totalChapters || getNextBook(bookName) !== null;
+    
+    // Update previous button
+    if (prevBtn) {
+        prevBtn.disabled = !canGoPrevious;
+    }
+    
+    // Update next button
+    if (nextBtn) {
+        nextBtn.disabled = !canGoNext;
+    }
+}
+
+// Navigate to previous chapter
+function navigateToPreviousChapter() {
+    if (!currentChapterInfo.bookObject) return;
+    
+    if (currentChapterInfo.chapterNum > 1) {
+        // Go to previous chapter in same book
+        const prevChapter = currentChapterInfo.chapterNum - 1;
+        showBookChapter(currentChapterInfo.bookObject, prevChapter);
+    } else {
+        // Go to last chapter of previous book
+        const prevBook = getPreviousBook(currentChapterInfo.bookName);
+        if (prevBook) {
+            showBookChapter(prevBook, prevBook.chapters);
+        }
+    }
+    
+    // Scroll to top of container
+    const container = document.querySelector('.book-chapter-container');
+    if (container) {
+        container.scrollTop = 0;
+    }
+}
+
+// Navigate to next chapter
+function navigateToNextChapter() {
+    if (!currentChapterInfo.bookObject) return;
+    
+    if (currentChapterInfo.chapterNum < currentChapterInfo.totalChapters) {
+        // Go to next chapter in same book
+        const nextChapter = currentChapterInfo.chapterNum + 1;
+        showBookChapter(currentChapterInfo.bookObject, nextChapter);
+    } else {
+        // Go to first chapter of next book
+        const nextBook = getNextBook(currentChapterInfo.bookName);
+        if (nextBook) {
+            showBookChapter(nextBook, 1);
+        }
+    }
+    
+    // Scroll to top of container
+    const container = document.querySelector('.book-chapter-container');
+    if (container) {
+        container.scrollTop = 0;
     }
 }
 
