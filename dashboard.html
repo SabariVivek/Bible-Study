@@ -55,7 +55,7 @@
                     <span class="nav-text">Maps</span>
                 </div>
                 <div class="nav-item help" onclick="showHelp()">
-                    <span class="nav-icon">❓</span>
+                    <span class="nav-icon">✝️</span>
                     <span class="nav-text">Life of Christ</span>
                 </div>
                 
@@ -289,6 +289,16 @@
                 </div>
                 <div class="book-chapter-container">
                     <!-- Book chapter content will be loaded here -->
+                </div>
+                <div class="chapter-navigation-footer">
+                    <button id="prevChapterBtnBottom" class="nav-chapter-btn-bottom" onclick="navigateToPreviousChapter()" title="Previous Chapter">
+                        <span class="nav-arrow">←</span>
+                        <span class="nav-text">Previous</span>
+                    </button>
+                    <button id="nextChapterBtnBottom" class="nav-chapter-btn-bottom" onclick="navigateToNextChapter()" title="Next Chapter">
+                        <span class="nav-text">Next</span>
+                        <span class="nav-arrow">→</span>
+                    </button>
                 </div>
             </div>
 

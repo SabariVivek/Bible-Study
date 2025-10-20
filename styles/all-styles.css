@@ -1992,30 +1992,16 @@ nav {
 }
 
 .book-chapter-container {
-    height: 70vh;
+    min-height: 70vh;
     width: 100%;
     padding: 20px;
     background-color: #ffffff;
-    overflow-y: auto;
+    overflow-y: visible;
     overflow-x: hidden;
 }
 
 .book-chapter-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-.book-chapter-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-.book-chapter-container::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
-}
-
-.book-chapter-container::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+    display: none;
 }
 
 /* Chapter Section Heading Styles */
@@ -2146,6 +2132,65 @@ nav {
 }
 
 .nav-chapter-btn:first-child:hover:not(:disabled) .nav-arrow {
+    transform: translateX(-3px);
+}
+
+/* Chapter Navigation Footer */
+.chapter-navigation-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
+    margin-top: 40px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.nav-chapter-btn-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.nav-chapter-btn-bottom:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.nav-chapter-btn-bottom:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.nav-chapter-btn-bottom:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #9ca3af;
+}
+
+.nav-chapter-btn-bottom .nav-arrow {
+    font-size: 18px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.nav-chapter-btn-bottom .nav-text {
+    font-size: 16px;
+}
+
+.nav-chapter-btn-bottom:hover:not(:disabled) .nav-arrow {
+    transform: translateX(3px);
+}
+
+.nav-chapter-btn-bottom:first-child:hover:not(:disabled) .nav-arrow {
     transform: translateX(-3px);
 }
 
