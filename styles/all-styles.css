@@ -28,6 +28,7 @@ body {
     background: white !important;
     min-height: 100vh;
     display: flex;
+    zoom: 0.9;
 }
 
 body.modal-open {

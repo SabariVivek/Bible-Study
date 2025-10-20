@@ -752,15 +752,40 @@ function openBookByIndex(index) {
 
 // Function to play audio for specific books using enhanced audio player
 function playBookAudio(bookName) {
-    // Stop any currently playing audio
+    // Check if player already exists
     const existingPlayer = document.querySelector('.enhanced-audio-player-overlay');
+    
     if (existingPlayer) {
-        const audio = existingPlayer.querySelector('audio');
-        if (audio) {
-            audio.pause();
-            audio.currentTime = 0;
+        // Check if it's playing the same book
+        const playerTitle = existingPlayer.querySelector('.player-title');
+        const currentBookName = playerTitle ? playerTitle.textContent.trim() : '';
+        
+        // Remove playing indicator text from comparison
+        const cleanCurrentBookName = currentBookName.replace(/\s+/g, ' ').trim();
+        
+        if (cleanCurrentBookName === bookName) {
+            // Same book is already playing, just maximize if minimized
+            const playerContainer = existingPlayer.querySelector('.player-container');
+            if (playerContainer && playerContainer.classList.contains('minimized')) {
+                // Maximize the player
+                playerContainer.classList.remove('minimized');
+                existingPlayer.classList.remove('minimized');
+                playerContainer.style.position = 'relative';
+                playerContainer.style.bottom = 'auto';
+                playerContainer.style.right = 'auto';
+                playerContainer.style.top = 'auto';
+                playerContainer.style.left = 'auto';
+            }
+            return; // Don't create a new player
+        } else {
+            // Different book, stop the current one
+            const audio = existingPlayer.querySelector('audio');
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+            existingPlayer.remove();
         }
-        existingPlayer.remove();
     }
 
     // Create audio element based on book name
@@ -837,6 +862,7 @@ function loadEnhancedAudioPlayer(audioFile, bookName) {
                 height: 100%;
                 z-index: 10000;
                 pointer-events: none;
+                zoom: 1.2;
             }
             
             .enhanced-audio-player-overlay::before {
@@ -862,12 +888,15 @@ function loadEnhancedAudioPlayer(audioFile, bookName) {
             .enhanced-player-body {
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 background: transparent;
-                min-height: 100vh;
+                width: 100%;
+                height: 100vh;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 padding: 20px;
-                position: relative;
+                position: fixed;
+                top: 0;
+                left: 0;
                 pointer-events: none;
             }
 
