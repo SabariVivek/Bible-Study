@@ -1793,7 +1793,7 @@ function applyBooksFilter() {
     closeBooksFilterCard();
 }
 
-function showBookChapter(book) {
+function showBookChapter(book, chapterNum) {
     // Update navigation - keep books nav active
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
     document.querySelector('.nav-item.books').classList.add('active');
@@ -1812,10 +1812,15 @@ function showBookChapter(book) {
     // Show book chapter content
     document.getElementById('book-chapter-content').classList.remove('hidden');
     
-    // Update the title with the book name
+    // Update the title with the book name and chapter number
     const bookChapterTitle = document.getElementById('bookChapterTitle');
-    if (bookChapterTitle && book && book.name) {
-        bookChapterTitle.textContent = book.name;
+    if (bookChapterTitle && book) {
+        const bookName = typeof book === 'string' ? book : book.name;
+        if (chapterNum) {
+            bookChapterTitle.textContent = `${bookName} - ${chapterNum}`;
+        } else {
+            bookChapterTitle.textContent = bookName;
+        }
     }
 }
 
@@ -1961,8 +1966,8 @@ function closeChaptersPopup() {
 function chapterClick(bookName, chapterNum) {
     // Close the popup
     closeChaptersPopup();
-    // You can add navigation logic here
-    // For example: showBookChapter({ name: bookName, chapter: chapterNum });
+    // Navigate to book chapter page with chapter number
+    showBookChapter(bookName, chapterNum);
 }
 
 // Close on Escape key
@@ -1998,5 +2003,6 @@ window.showGenealogy = showGenealogy;
 window.showMaps = showMaps;
 window.showSetting = showSetting;
 window.showHelp = showHelp;
+window.showBookChapter = showBookChapter;
 window.openChaptersPopup = openChaptersPopup;
 window.closeChaptersPopup = closeChaptersPopup;
