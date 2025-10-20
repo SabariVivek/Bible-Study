@@ -2334,8 +2334,9 @@ nav {
 .chapters-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: none;
     z-index: 2100;
 }
@@ -2387,22 +2388,23 @@ nav {
 }
 
 .chapters-popup .close-btn {
-    cursor: pointer;
-    font-size: 22px;
-    opacity: 0.6;
-    transition: 0.2s;
-    background: none;
+    background: #f3f4f6;
     border: none;
-    padding: 0;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 16px;
+    color: #6b7280;
+    transition: all 0.2s ease;
 }
 
 .chapters-popup .close-btn:hover {
-    opacity: 1;
+    background: #e5e7eb;
+    color: #374151;
 }
 
 .chapters {
@@ -2410,8 +2412,27 @@ nav {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     overflow-y: auto;
-    padding-right: 5px;
+    padding-right: 10px;
     margin-top: 15px;
+}
+
+/* Custom scrollbar for chapters popup */
+.chapters::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chapters::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.chapters::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.chapters::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
 }
 
 .chapter-card {
