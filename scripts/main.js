@@ -2533,6 +2533,32 @@ function displayChapterContent(bookName, chapterNum, container) {
                 sectionDiv.appendChild(sectionText);
             }
             
+            // Add note card if note property exists
+            if (section.note) {
+                const noteCard = document.createElement('div');
+                noteCard.className = 'note-card';
+                
+                const noteCardInner = document.createElement('div');
+                noteCardInner.className = 'note-card-inner';
+                
+                const noteHeader = document.createElement('div');
+                noteHeader.className = 'note-header';
+                
+                const noteLabel = document.createElement('span');
+                noteLabel.className = 'note-label';
+                noteLabel.textContent = 'Note';
+                noteHeader.appendChild(noteLabel);
+                
+                const noteContent = document.createElement('div');
+                noteContent.className = 'note-content';
+                noteContent.innerHTML = section.note;
+                
+                noteCardInner.appendChild(noteHeader);
+                noteCardInner.appendChild(noteContent);
+                noteCard.appendChild(noteCardInner);
+                sectionDiv.appendChild(noteCard);
+            }
+            
             container.appendChild(sectionDiv);
         });
     } else {

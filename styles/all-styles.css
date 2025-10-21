@@ -3185,3 +3185,58 @@ nav {
         margin-right: 5px;
     }
 }
+
+/* Note Card Styles */
+.note-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    padding: 2px;
+    max-width: 700px;
+    margin: 1.5rem auto 0 auto;
+}
+
+.note-card-inner {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.note-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.note-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #667eea;
+    font-weight: 700;
+    padding-left: 15px;
+    border-left: 3px solid #667eea;
+}
+
+.note-content {
+    color: #4a5568;
+    font-size: 15px;
+    line-height: 1.6;
+    position: relative;
+}
+
+.note-content p {
+    margin: 0 0 10px 0;
+}
+
+.note-content ul {
+    margin: 10px 0 0 0;
+    padding-left: 20px;
+}
+
+.note-content li {
+    margin: 8px 0;
+}
+
+.note-content p:last-child {
+    margin-bottom: 0;
+}
