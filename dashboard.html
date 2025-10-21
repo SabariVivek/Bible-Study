@@ -279,6 +279,9 @@
                     </button>
                     <h1 class="page-title" id="bookChapterTitle">Book Chapter</h1>
                     <div class="chapter-navigation-header">
+                        <button id="synopsisBtn" class="synopsis-btn" onclick="openSynopsisDrawer()" title="View Synopsis">
+                            <span class="synopsis-text">Synopsis</span>
+                        </button>
                         <button id="prevChapterBtn" class="nav-chapter-btn" onclick="navigateToPreviousChapter()" title="Previous Chapter">
                             <span class="nav-arrow">←</span>
                         </button>
@@ -2400,6 +2403,110 @@
         </div>
     </div>
 
+    <!-- Synopsis Side Drawer -->
+    <div class="synopsis-drawer-overlay" id="synopsisDrawerOverlay"></div>
+    <div class="synopsis-side-drawer" id="synopsisSideDrawer">
+        <div class="synopsis-drawer-header">
+            <div class="synopsis-header-top">
+                <span class="synopsis-drawer-title" id="synopsisBookTitle">
+                    <span id="synopsisBookName">Genesis</span>
+                    <span class="synopsis-dropdown-icon" id="synopsisDropdownIcon">▼</span>
+                </span>
+                <select class="synopsis-book-selector" id="synopsisBookSelector" size="20">
+                    <optgroup label="Old Testament - Torah">
+                        <option value="0">Genesis</option>
+                        <option value="1">Exodus</option>
+                        <option value="2">Leviticus</option>
+                        <option value="3">Numbers</option>
+                        <option value="4">Deuteronomy</option>
+                    </optgroup>
+                    <optgroup label="Old Testament - Historical">
+                        <option value="5">Joshua</option>
+                        <option value="6">Judges</option>
+                        <option value="7">Ruth</option>
+                        <option value="8">1 Samuel</option>
+                        <option value="9">2 Samuel</option>
+                        <option value="10">1 Kings</option>
+                        <option value="11">2 Kings</option>
+                        <option value="12">1 Chronicles</option>
+                        <option value="13">2 Chronicles</option>
+                        <option value="14">Ezra</option>
+                        <option value="15">Nehemiah</option>
+                        <option value="16">Esther</option>
+                    </optgroup>
+                    <optgroup label="Old Testament - Wisdom">
+                        <option value="17">Job</option>
+                        <option value="18">Psalms</option>
+                        <option value="19">Proverbs</option>
+                        <option value="20">Ecclesiastes</option>
+                        <option value="21">Song of Solomon</option>
+                    </optgroup>
+                    <optgroup label="Old Testament - Major Prophets">
+                        <option value="22">Isaiah</option>
+                        <option value="23">Jeremiah</option>
+                        <option value="24">Lamentations</option>
+                        <option value="25">Ezekiel</option>
+                        <option value="26">Daniel</option>
+                    </optgroup>
+                    <optgroup label="Old Testament - Minor Prophets">
+                        <option value="27">Hosea</option>
+                        <option value="28">Joel</option>
+                        <option value="29">Amos</option>
+                        <option value="30">Obadiah</option>
+                        <option value="31">Jonah</option>
+                        <option value="32">Micah</option>
+                        <option value="33">Nahum</option>
+                        <option value="34">Habakkuk</option>
+                        <option value="35">Zephaniah</option>
+                        <option value="36">Haggai</option>
+                        <option value="37">Zechariah</option>
+                        <option value="38">Malachi</option>
+                    </optgroup>
+                    <optgroup label="New Testament - Gospels & Acts">
+                        <option value="39">Matthew</option>
+                        <option value="40">Mark</option>
+                        <option value="41">Luke</option>
+                        <option value="42">John</option>
+                        <option value="43">Acts</option>
+                    </optgroup>
+                    <optgroup label="New Testament - Paul's Letters">
+                        <option value="44">Romans</option>
+                        <option value="45">1 Corinthians</option>
+                        <option value="46">2 Corinthians</option>
+                        <option value="47">Galatians</option>
+                        <option value="48">Ephesians</option>
+                        <option value="49">Philippians</option>
+                        <option value="50">Colossians</option>
+                        <option value="51">1 Thessalonians</option>
+                        <option value="52">2 Thessalonians</option>
+                        <option value="53">1 Timothy</option>
+                        <option value="54">2 Timothy</option>
+                        <option value="55">Titus</option>
+                        <option value="56">Philemon</option>
+                    </optgroup>
+                    <optgroup label="New Testament - General Letters">
+                        <option value="57">Hebrews</option>
+                        <option value="58">James</option>
+                        <option value="59">1 Peter</option>
+                        <option value="60">2 Peter</option>
+                        <option value="61">1 John</option>
+                        <option value="62">2 John</option>
+                        <option value="63">3 John</option>
+                        <option value="64">Jude</option>
+                        <option value="65">Revelation</option>
+                    </optgroup>
+                </select>
+                <div class="synopsis-nav-buttons-right">
+                    <button class="synopsis-nav-btn" id="synopsisPrevBtn">←</button>
+                    <button class="synopsis-nav-btn" id="synopsisNextBtn">→</button>
+                </div>
+            </div>
+        </div>
+        <div class="synopsis-drawer-content" id="synopsisDrawerContent">
+            <!-- Content will be loaded dynamically -->
+        </div>
+    </div>
+
     <!-- Load JavaScript files in the correct order -->
     <script src="scripts/auth.js"></script>
     <script src="scripts/data/kings-data.js"></script>
@@ -2407,10 +2514,74 @@
     <script src="scripts/data/books-data.js"></script>
     <script src="scripts/data/passages.js"></script>
     <script src="scripts/data/individual-chapters/matthew-data.js"></script>
+    
+    <!-- Synopsis Data Files - Old Testament -->
+    <script src="scripts/data/synopsis/old-testament/genesis-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/exodus-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/leviticus-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/numbers-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/deuteronomy-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/joshua-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/judges-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/ruth-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/samuel1-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/samuel2-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/kings-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/chronicles-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/ezra-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/nehemiah-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/esther-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/job-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/psalms-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/proverbs-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/ecclesiastes-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/song-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/isaiah-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/jeremiah-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/lamentations-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/ezekiel-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/daniel-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/hosea-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/joel-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/amos-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/obadiah-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/jonah-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/micah-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/nahum-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/habakkuk-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/zephaniah-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/haggai-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/zechariah-synopsis.js"></script>
+    <script src="scripts/data/synopsis/old-testament/malachi-synopsis.js"></script>
+    
+    <!-- Synopsis Data Files - New Testament -->
+    <script src="scripts/data/synopsis/new-testament/matthew-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/mark-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/luke-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/john-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/acts-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/romans-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/corinthians-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/galatians-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/ephesians-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/philippians-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/colossians-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/thessalonians-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/timothy-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/titus-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/philemon-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/hebrews-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/james-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/peter-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/john-letters-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/jude-synopsis.js"></script>
+    <script src="scripts/data/synopsis/new-testament/revelation-synopsis.js"></script>
+    
     <script src="scripts/utils/table-utils.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/ui/modal.js"></script>
     <script src="scripts/ui/events.js"></script>
     <script src="scripts/ui/life-of-christ.js"></script>
+    <script src="scripts/ui/synopsis-drawer.js"></script>
 </body>
 </html>
