@@ -2495,6 +2495,11 @@ function displayChapterContent(bookName, chapterNum, container) {
         if (typeof MatthewData !== 'undefined' && MatthewData[chapterKey]) {
             chapterData = MatthewData[chapterKey];
         }
+    } else if (bookName.toLowerCase() === 'exodus') {
+        const chapterKey = `chapter_${chapterNum}`;
+        if (typeof ExodusData !== 'undefined' && ExodusData[chapterKey]) {
+            chapterData = ExodusData[chapterKey];
+        }
     }
     // Add more books here as needed
     // else if (bookName.toLowerCase() === 'mark') {
