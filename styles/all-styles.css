@@ -3207,6 +3207,18 @@ nav {
     margin-bottom: 15px;
 }
 
+.note-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+    padding-left: 15px;
+    border-left: 4px solid #667eea;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .note-label {
     font-size: 11px;
     text-transform: uppercase;

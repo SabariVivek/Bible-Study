@@ -2544,11 +2544,13 @@ function displayChapterContent(bookName, chapterNum, container) {
                 const noteHeader = document.createElement('div');
                 noteHeader.className = 'note-header';
                 
-                const noteLabel = document.createElement('span');
-                noteLabel.className = 'note-label';
-                noteLabel.textContent = 'Note';
-                noteHeader.appendChild(noteLabel);
+                // Always show "Note" as title
+                const noteTitle = document.createElement('h3');
+                noteTitle.className = 'note-title';
+                noteTitle.textContent = 'Note';
+                noteHeader.appendChild(noteTitle);
                 
+                // Show the note content (subject)
                 const noteContent = document.createElement('div');
                 noteContent.className = 'note-content';
                 noteContent.innerHTML = section.note;
