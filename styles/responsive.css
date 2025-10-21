@@ -294,6 +294,25 @@
     }
 }
 
+/* iPad and Tablet Landscape Styles (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .drawer-toggle {
+        left: 245px;
+    }
+
+    .sidebar.collapsed .drawer-toggle {
+        left: 55px;
+    }
+
+    .sidebar {
+        width: 260px;
+    }
+
+    .sidebar.collapsed {
+        width: 70px;
+    }
+}
+
 /* Large Desktop Styles (1200px and above) */
 @media (min-width: 1200px) {
     .container {

@@ -147,17 +147,20 @@ function isLoggedIn() {
 
 // Logout function
 function logout() {
-    // Show fancy loader
+    // Show fancy loader and overlay
     const loader = document.getElementById('logout-fancy-loader');
-    if (loader) loader.style.display = 'flex';
+    const overlay = document.getElementById('logout-overlay');
+    if (loader) loader.style.display = 'block';
+    if (overlay) overlay.style.display = 'block';
     // Simulate network delay for logout
     setTimeout(() => {
         // Clear session storage
         sessionStorage.removeItem('isLoggedIn');
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('loginTime');
-        // Hide loader and redirect
+        // Hide loader and overlay, then redirect
         if (loader) loader.style.display = 'none';
+        if (overlay) overlay.style.display = 'none';
         window.location.href = 'index.html';
     }, 1500); // 1.5 seconds delay
 }

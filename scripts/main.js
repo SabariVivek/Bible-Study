@@ -777,14 +777,11 @@ function playBookAudio(bookName) {
             // Same book is already playing, just maximize if minimized
             const playerContainer = existingPlayer.querySelector('.player-container');
             if (playerContainer && playerContainer.classList.contains('minimized')) {
-                // Maximize the player
-                playerContainer.classList.remove('minimized');
-                existingPlayer.classList.remove('minimized');
-                playerContainer.style.position = 'relative';
-                playerContainer.style.bottom = 'auto';
-                playerContainer.style.right = 'auto';
-                playerContainer.style.top = 'auto';
-                playerContainer.style.left = 'auto';
+                // Maximize the player by triggering the minimize button
+                const minimizeBtn = existingPlayer.querySelector('#minimizeBtn');
+                if (minimizeBtn) {
+                    minimizeBtn.click();
+                }
             }
             return; // Don't create a new player
         } else {
@@ -999,6 +996,63 @@ function loadEnhancedAudioPlayer(audioFile, bookName) {
 
             .player-container.minimized .player-header {
                 margin-bottom: 0;
+            }
+
+            /* Responsive styles for iPad and smaller devices */
+            @media screen and (max-width: 1024px) {
+                .player-container {
+                    max-width: 300px;
+                }
+                
+                .player-container.minimized {
+                    max-width: 220px;
+                    padding: 12px;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                .enhanced-player-body {
+                    padding: 15px;
+                }
+                
+                .player-container {
+                    max-width: 280px;
+                }
+                
+                .player-container.minimized {
+                    max-width: 200px;
+                    padding: 10px;
+                    bottom: 10px !important;
+                    right: 10px !important;
+                }
+                
+                .player-title {
+                    font-size: 16px;
+                }
+            }
+
+            @media screen and (max-width: 480px) {
+                .player-container {
+                    max-width: calc(100% - 30px);
+                }
+                
+                .player-container.minimized {
+                    max-width: 180px;
+                    padding: 8px;
+                    bottom: 8px !important;
+                    right: 8px !important;
+                }
+                
+                .player-title {
+                    font-size: 14px;
+                }
+                
+                .minimize-btn,
+                .close-btn {
+                    width: 24px;
+                    height: 24px;
+                    font-size: 18px;
+                }
             }
 
             .minimize-btn .minimize-icon {
@@ -1661,8 +1715,11 @@ function initializeEnhancedPlayer(overlay) {
             playerContainer.classList.add('minimized');
             overlay.classList.add('minimized');
             playerContainer.style.position = 'fixed';
-            playerContainer.style.bottom = '20px';
-            playerContainer.style.right = '20px';
+            // Use responsive positioning based on screen size
+            const isMobile = window.innerWidth <= 768;
+            const offset = isMobile ? '10px' : '20px';
+            playerContainer.style.bottom = offset;
+            playerContainer.style.right = offset;
             playerContainer.style.top = 'auto';
             playerContainer.style.left = 'auto';
             isMinimized = true;
@@ -1682,8 +1739,11 @@ function initializeEnhancedPlayer(overlay) {
             playerContainer.classList.add('minimized');
             overlay.classList.add('minimized');
             playerContainer.style.position = 'fixed';
-            playerContainer.style.bottom = '20px';
-            playerContainer.style.right = '20px';
+            // Use responsive positioning based on screen size
+            const isMobile = window.innerWidth <= 768;
+            const offset = isMobile ? '10px' : '20px';
+            playerContainer.style.bottom = offset;
+            playerContainer.style.right = offset;
             playerContainer.style.top = 'auto';
             playerContainer.style.left = 'auto';
             isMinimized = true;
