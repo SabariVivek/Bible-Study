@@ -243,6 +243,9 @@ function showDashboard() {
     document.getElementById('maps-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showKings() {
@@ -269,6 +272,9 @@ function showKings() {
     
     // Initialize filter buttons
     initializeKingsFilterButtons();
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showProphets() {
@@ -298,6 +304,9 @@ function showProphets() {
     
     // Initialize filter buttons
     initializeProphetsFilterButtons();
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Drawer toggle functionality
@@ -1799,6 +1808,9 @@ function showBooks() {
     
     // Initialize filter buttons
     initializeBooksFilterButtons();
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function initializeBooksTable() {
@@ -2328,7 +2340,10 @@ function navigateToPreviousChapter() {
         }
     }
     
-    // Scroll to top of container
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Also scroll container to top
     const container = document.querySelector('.book-chapter-container');
     if (container) {
         container.scrollTop = 0;
@@ -2351,7 +2366,10 @@ function navigateToNextChapter() {
         }
     }
     
-    // Scroll to top of container
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Also scroll container to top
     const container = document.querySelector('.book-chapter-container');
     if (container) {
         container.scrollTop = 0;
@@ -2490,6 +2508,9 @@ function showTimeline() {
     document.getElementById('maps-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showGenealogy() {
@@ -2508,6 +2529,9 @@ function showGenealogy() {
     document.getElementById('maps-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showMaps() {
@@ -2526,6 +2550,9 @@ function showMaps() {
     document.getElementById('maps-content').classList.remove('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showSetting() {
@@ -2544,6 +2571,9 @@ function showSetting() {
     document.getElementById('maps-content').classList.add('hidden');
     document.getElementById('setting-content').classList.remove('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showHelp() {
@@ -2567,6 +2597,9 @@ function showHelp() {
     if (typeof initializeLifeOfChrist === 'function') {
         initializeLifeOfChrist();
     }
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ===== CHAPTERS POPUP FUNCTIONS =====
