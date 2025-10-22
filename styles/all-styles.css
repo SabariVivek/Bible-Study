@@ -50,7 +50,7 @@ body.modal-open {
 
 .sidebar {
     width: 250px;
-    background: #f8f9fb;
+    background: linear-gradient(135deg, #fafbff 0%, #f8f9fe 100%);
     padding: 30px 0 0 0;
     border-right: 1px solid #e5e7eb;
     transition: all 0.3s ease;
