@@ -78,8 +78,6 @@ function applyFilter() {
  * Apply both kingdom and character filters to the data
  */
 function applyFilters() {
-    console.log('applyFilters called');
-    console.log('allKingsData:', typeof allKingsData !== 'undefined' ? 'defined' : 'undefined');
     
     let filteredKingdoms = [];
     
@@ -108,7 +106,6 @@ function applyFilters() {
     }
     
     currentKingdoms = filteredKingdoms;
-    console.log('Filtered kingdoms count:', currentKingdoms.length);
     updateTable();
     updatePagination();
 }
@@ -126,7 +123,6 @@ function initializeFilter() {
             });
         });
     });
-    console.log('Filter initialized');
 }
 
 // Add click handlers for filter options (matches original behavior)

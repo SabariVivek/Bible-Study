@@ -173,10 +173,8 @@ function updateTable() {
 
 // Function to open king modal by index
 function openKingModal(index) {
-    console.log('openKingModal called with index:', index);
     if (window.currentPageKings && window.currentPageKings[index]) {
         const king = window.currentPageKings[index];
-        console.log('Opening modal for king:', king.name);
         showKingDetails(king);
     } else {
         console.error('No king found at index:', index);
@@ -356,7 +354,6 @@ function applyFilter() {
 
 // Initialize when DOM loads
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing...');
     
     // Close dropdown when clicking outside
     document.addEventListener('click', function(event) {
@@ -413,7 +410,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the kings view with all kingdoms by default
     applyFilters();
     
-    console.log('Initialization complete');
 });
 
 // Make functions globally accessible
@@ -834,7 +830,6 @@ function playBookAudio(bookName) {
             audioFile = 'resources/audio/2-samuel-overview.mp3';
             break;
         default:
-            console.log(`No audio file available for ${bookName}`);
             // Do not show any card/modal, just return
             return;
     }
@@ -1507,7 +1502,6 @@ function initializeEnhancedPlayer(overlay) {
         
         // Autoplay on load
         audio.play().catch(error => {
-            console.log('Autoplay prevented:', error);
         });
     });
 
@@ -2035,7 +2029,6 @@ function initializeKingsFilterButtons() {
         filterBtn.parentNode.replaceChild(newFilterBtn, filterBtn);
         
         newFilterBtn.addEventListener('click', function() {
-            console.log('Kings filter button clicked');
             // Trigger the kings filter card
             openFilterCard();
         });
@@ -2106,7 +2099,6 @@ function initializeProphetsFilterButtons() {
         filterBtn.parentNode.replaceChild(newFilterBtn, filterBtn);
         
         newFilterBtn.addEventListener('click', function() {
-            console.log('Prophets filter button clicked');
             // Trigger the prophets filter card
             openProphetsFilterCard();
         });
@@ -2175,7 +2167,6 @@ function initializeBooksFilterButtons() {
         filterBtn.parentNode.replaceChild(newFilterBtn, filterBtn);
         
         newFilterBtn.addEventListener('click', function() {
-            console.log('Filter button clicked');
             // You can add filter menu/dropdown functionality here if needed
         });
     }
@@ -2255,6 +2246,7 @@ function applyBooksFilter() {
 }
 
 function showBookChapter(book, chapterNum) {
+    
     // Update navigation - keep books nav active
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
     document.querySelector('.nav-item.books').classList.add('active');
@@ -2273,24 +2265,44 @@ function showBookChapter(book, chapterNum) {
     // Show book chapter content
     document.getElementById('book-chapter-content').classList.remove('hidden');
     
+    // Clear the chapter container first to avoid showing old content
+    const bookChapterContainer = document.querySelector('.book-chapter-container');
+    if (bookChapterContainer) {
+        bookChapterContainer.innerHTML = '';
+        // Force a reflow to ensure the clear happens before new content
+        void bookChapterContainer.offsetHeight;
+    }
+    
     // Update the title with the book name and chapter number
     const bookChapterTitle = document.getElementById('bookChapterTitle');
     const bookName = typeof book === 'string' ? book : book.name;
     
+    // Ensure chapterNum is treated as a number
+    const chapterNumber = parseInt(chapterNum) || 1;
+    
     if (bookChapterTitle && book) {
-        if (chapterNum) {
-            bookChapterTitle.textContent = `${bookName} - ${chapterNum}`;
+        if (chapterNumber) {
+            bookChapterTitle.textContent = `${bookName} - ${chapterNumber}`;
         } else {
             bookChapterTitle.textContent = bookName;
         }
     }
     
-    // Display chapter data
-    const bookChapterContainer = document.querySelector('.book-chapter-container');
-    if (bookChapterContainer && chapterNum) {
-        displayChapterContent(bookName, chapterNum, bookChapterContainer);
-        updateChapterNavigation(bookName, chapterNum);
+    // Display chapter data after a small delay to ensure clearing is complete
+    if (bookChapterContainer && chapterNumber) {
+        setTimeout(() => {
+            displayChapterContent(bookName, chapterNumber, bookChapterContainer);
+            updateChapterNavigation(bookName, chapterNumber);
+        }, 10);
     }
+    
+    // Initialize testament navigation on the book chapter title
+    setTimeout(() => {
+        const titleElement = document.getElementById('bookChapterTitle');
+        if (titleElement && typeof initializeTestamentNav === 'function') {
+            initializeTestamentNav('bookChapterTitle', bookName);
+        }
+    }, 150);
 }
 
 // Store current chapter info for navigation
@@ -2572,13 +2584,19 @@ function displayChapterContent(bookName, chapterNum, container) {
         // No data available message
         const noDataDiv = document.createElement('div');
         noDataDiv.className = 'no-chapter-data';
-        noDataDiv.style.padding = '3rem';
+        noDataDiv.style.padding = '4rem 2rem';
         noDataDiv.style.textAlign = 'center';
         noDataDiv.style.color = '#666';
         noDataDiv.style.fontSize = '1.1rem';
+        noDataDiv.style.background = '#f9f9f9';
+        noDataDiv.style.borderRadius = '12px';
+        noDataDiv.style.margin = '2rem 0';
+        noDataDiv.style.border = '2px dashed #ddd';
         noDataDiv.innerHTML = `
-            <p style="font-size: 3rem; margin-bottom: 1rem;">📖</p>
-            <p>Chapter content for ${bookName} ${chapterNum} is not available yet.</p>
+            <p style="font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.5;">📖</p>
+            <p style="font-size: 1.3rem; font-weight: 600; color: #333; margin-bottom: 0.5rem;">Chapter Data Not Available</p>
+            <p style="color: #888; font-size: 1rem;">Content for <strong>${bookName} Chapter ${chapterNum}</strong> has not been seeded yet.</p>
+            <p style="color: #888; font-size: 0.9rem; margin-top: 1rem;">Currently available: Matthew and Exodus</p>
         `;
         container.appendChild(noDataDiv);
     }
@@ -2759,7 +2777,7 @@ document.addEventListener('keydown', function(e) {
 window.openProphetModal = openProphetModal;
 window.openProphetByIndex = openProphetByIndex;
 window.closeProphetPopup = closeProphetPopup;
-window.changeProphetsPage = changeProphetsPage;
+// window.changeProphetsPage = changeProphetsPage; // COMMENTED OUT - function doesn't exist
 window.selectProphetsCategory = selectProphetsCategory;
 window.toggleProphetsDropdown = toggleProphetsDropdown;
 window.openProphetsFilterCard = openProphetsFilterCard;
@@ -2779,5 +2797,33 @@ window.showMaps = showMaps;
 window.showSetting = showSetting;
 window.showHelp = showHelp;
 window.showBookChapter = showBookChapter;
+
+// Testament Navigation Integration - Define IMMEDIATELY after showBookChapter
+window.loadBookFromTestamentNav = function(bookName) {
+    
+    // Clear the chapter container immediately
+    const bookChapterContainer = document.querySelector('.book-chapter-container');
+    if (bookChapterContainer) {
+        bookChapterContainer.innerHTML = '';
+    }
+    
+    // Find the book object from allBooksData
+    let bookObject = null;
+    
+    if (typeof allBooksData !== 'undefined') {
+        const allBooks = [...allBooksData.oldTestament, ...allBooksData.newTestament];
+        bookObject = allBooks.find(book => book.name === bookName);
+    }
+    
+    if (bookObject) {
+        // IMPORTANT: Always load chapter 1 when selecting from testament nav
+        const chapterNumber = 1;
+        showBookChapter(bookObject, chapterNumber);
+    } else {
+        console.warn(`Book not found in allBooksData: ${bookName}`);
+        alert(`Chapter data for ${bookName} is not yet available. Currently, only Matthew and Exodus have full chapter content.`);
+    }
+};
+
 window.openChaptersPopup = openChaptersPopup;
 window.closeChaptersPopup = closeChaptersPopup;

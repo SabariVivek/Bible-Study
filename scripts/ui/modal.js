@@ -7,7 +7,6 @@
  * @param {Object} king - King object containing all the king's information
  */
 function showKingDetails(king) {
-    console.log('showKingDetails called for:', king ? king.name : 'null');
     
     if (!king) {
         console.error('No king data provided to showKingDetails');
@@ -130,7 +129,6 @@ function getCharacterColor(character) {
  * Initialize modal event listeners
  */
 function initializeModal() {
-    console.log('Modal initializing...');
     
     // Close popup with ESC key
     document.addEventListener('keydown', function(event) {
@@ -145,7 +143,6 @@ function initializeModal() {
             }
         }
     });
-    console.log('Modal initialized');
 }
 
 // Make functions globally accessible

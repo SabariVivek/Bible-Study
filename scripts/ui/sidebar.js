@@ -24,5 +24,4 @@ function toggleDrawer() {
 function initializeSidebar() {
     // Sidebar functionality is primarily handled by the toggleDrawer function
     // Additional sidebar-related initialization can be added here
-    console.log('Sidebar initialized');
 }

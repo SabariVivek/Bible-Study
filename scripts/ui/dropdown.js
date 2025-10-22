@@ -54,5 +54,4 @@ function initializeDropdown() {
             document.getElementById('dropdownMenu').classList.remove('show');
         }
     });
-    console.log('Dropdown initialized');
 }
