@@ -32,7 +32,7 @@ body {
 
 body.modal-open {
     overflow: hidden;
-    position: fixed;
+    /* Removed position: fixed to prevent scroll jump */
     width: 100%;
 }
 
@@ -2392,6 +2392,23 @@ nav {
 
 .verse-badge.acts:hover {
     background: #93c5fd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.verse-badge.corinthians {
+    background: #fef3c7;
+    color: #92400e;
+    border: none;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.verse-badge.corinthians:hover {
+    background: #fde68a;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }

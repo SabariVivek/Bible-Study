@@ -71,6 +71,8 @@ function generateLifeOfJesusCards() {
                     badge.classList.add('john');
                 } else if (verseLower.includes('acts')) {
                     badge.classList.add('acts');
+                } else if (verseLower.includes('corinthians')) {
+                    badge.classList.add('corinthians');
                 }
                 
                 badge.textContent = verse;
@@ -187,7 +189,7 @@ function loadPassageData(passageKey, verseReference) {
 // Helper function to add gospel-specific class to badge
 function addGospelClassToBadge(badge, verseReference) {
     // Remove any existing gospel classes
-    badge.classList.remove('matthew', 'mark', 'luke', 'john', 'acts');
+    badge.classList.remove('matthew', 'mark', 'luke', 'john', 'acts', 'corinthians');
     
     // Add gospel-specific class
     const verseLower = verseReference.toLowerCase();
@@ -201,6 +203,8 @@ function addGospelClassToBadge(badge, verseReference) {
         badge.classList.add('john');
     } else if (verseLower.includes('acts')) {
         badge.classList.add('acts');
+    } else if (verseLower.includes('corinthians')) {
+        badge.classList.add('corinthians');
     }
 }
 
