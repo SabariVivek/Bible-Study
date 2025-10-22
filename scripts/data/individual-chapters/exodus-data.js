@@ -1,4 +1,4 @@
-const ExodusData = {
+﻿const ExodusData = {
     chapter_1: [
         {
             section: "Jacob's Family <span class='verse-badge luke'>Verses 1-4</span>",
@@ -284,6 +284,364 @@ const ExodusData = {
             section: "Moses Questions God <span class='verse-badge luke'>Verses 22-23</span>",
             text: "Moses realized that Pharaoh would not release the Israelites, but he did not fully grasp the effect on the people. Though he had obeyed God, the Israelites’ burdens increased. The officers accused Moses of causing the trouble. Moses prayed, questioning why God had used him in a way that seemed to harm His people."
         }
+    ],
+    chapter_6: [
+        {
+            section: "The LORD’s Assurance to Moses <span class='verse-badge luke'>Verse 1</span>",
+            text: "Moses brought the people’s troubles before the *LORD. The *LORD replied that there would be no more delay. Soon He would display His power to *Pharaoh. In the end, *Pharaoh would be forced to let the *Israelites go—and even be eager to send them away."
+        },
+        {
+            section: "God Declares His Name <span class='verse-badge luke'>Verse 2</span>",
+            text: "God said to Moses, ‘I am the *LORD’—in *Hebrew, ‘I am Yahweh.’ This name carries divine authority and assurance that God will fulfill His word. Yahweh reveals God’s nature as One who is always present, faithful, and knowable to His people. In the *Old Testament, Yahweh appears 6,823 times—the most used name of God. Though first seen in Genesis 2:4, it was truly revealed in Exodus 3."
+        },
+        {
+            section: "God of the Patriarchs <span class='verse-badge luke'>Verse 3</span>",
+            text: "To Abraham, Isaac, and Jacob, God was known as El Shaddai—‘God Almighty.’ The *Hebrew word for God, Elohim, describes the Creator who possesses all power."
+        },
+        {
+            section: "The Covenant Remembered <span class='verse-badge luke'>Verse 4</span>",
+            text: "God reminded Moses that He made a *covenant with Abraham to give *Canaan to his *descendants (Genesis 17:1-8). Though Abraham, Isaac, and Jacob were foreigners in *Canaan, God had promised that their descendants would inherit it once the wickedness of the land’s people was complete (Genesis 15:16, 18)."
+        },
+        {
+            section: "God’s Compassion and Promise <span class='verse-badge luke'>Verse 5</span>",
+            text: "The *LORD heard the cries of His people in Egypt and saw their slavery. It was now time to act and fulfill His *covenant promise. God had not forgotten them—He was about to redeem them."
+        },
+        {
+            section: "God’s Message to Israel <span class='verse-badge luke'>Verse 6</span>",
+            text: "The *LORD told Moses: ‘I am the *LORD. I will free you from slavery, rescue you, and redeem you with mighty acts of judgment against the *Egyptians.’ These ten powerful deeds would reveal His supremacy and punish Egypt for its cruelty (see Exodus 3:20; 4:23; Genesis 15:14)."
+        },
+        {
+            section: "Israel Chosen as God’s People <span class='verse-badge luke'>Verse 7</span>",
+            text: "The *LORD would take *Israel as His own people and be their God. When He rescued them, they would know Him personally as their *LORD."
+        },
+        {
+            section: "Promise of the Land <span class='verse-badge luke'>Verse 8</span>",
+            text: "The *LORD reaffirmed His promise to bring the *Israelites into *Canaan—the land He swore to give Abraham, Isaac, and Jacob. It would belong to them because He is the *LORD."
+        },
+        {
+            section: "Israel’s Discouragement <span class='verse-badge luke'>Verse 9</span>",
+            text: "Moses relayed God’s promise to the *Israelites, but they would not listen. Their spirits were broken from harsh slavery and suffering. They were too discouraged to believe that God cared."
+        },
+        {
+            section: "Renewed Command to Confront Pharaoh <span class='verse-badge luke'>Verses 10-11</span>",
+            text: "Though the people would not listen, God’s plan continued. The *LORD commanded Moses to go again to *Pharaoh and demand full release of the *Israelites—not just a three-day journey, but freedom from Egypt itself."
+        },
+        {
+            section: "Moses’ Objection <span class='verse-badge luke'>Verse 12</span>",
+            text: "Moses protested again: if his own people would not listen, how could *Pharaoh? He repeated his old excuse—his speech was weak, and he felt unfit to speak before the king."
+        },
+        {
+            section: "God’s Commission to Moses and Aaron <span class='verse-badge luke'>Verse 13</span>",
+            text: "The *LORD spoke to Moses and Aaron together. Though Moses struggled to speak, Aaron would assist him. Together, under God’s guidance, they would confront *Pharaoh and lead the *Israelites out of Egypt."
+        },
+        {
+            section: "The Genealogy of Levi <span class='verse-badge luke'>Verses 14-16</span>",
+            text: "Jacob, renamed *Israel (Genesis 32:28), had twelve sons—the heads of the twelve *tribes. Reuben, Simeon, and Levi were his first three sons by Leah. Levi had three sons: Gershon, Kohath, and Merari."
+        },
+        {
+            section: "The Line of Levi to Moses and Aaron <span class='verse-badge luke'>Verses 17-25</span>",
+            text: "This genealogy continues with the *descendants of Levi’s sons. The *Israelites stayed in Egypt about 215 years, fulfilling God’s word that in the fourth *generation they would return to *Canaan (Genesis 15:16). Moses and Aaron were *descendants of Kohath through Amram, who married his aunt Jochebed—something later forbidden by the law (Leviticus 18:12). They had three children: Miriam, Aaron, and Moses.\n\nAaron’s four sons were Nadab, Abihu, Eleazar, and Ithamar. Aaron became Israel’s first chief priest, and his sons were priests (Exodus 28:1). Nadab and Abihu were struck dead for disobedience (Leviticus 10:1-2). Eleazar succeeded Aaron as chief priest (Numbers 20:28)."
+        },
+        {
+            section: "Timeline of the Covenant <span class='verse-badge luke'>Historical Note</span>",
+            text: "The law came 430 years after God’s *covenant with Abraham (Galatians 3:17). Abraham received the *covenant at age 75 (Genesis 12:4). Jacob went to Egypt at 130 (Genesis 47:9). Isaac was 60 when Jacob was born (Genesis 25:26), and Abraham was 100 when Isaac was born (Genesis 21:5). Together this equals 290 years; subtracting 75 leaves 215 years in or near *Canaan and 215 years in Egypt. Thus, the total 430 years covers both periods of sojourning and slavery (Genesis 15:13-14)."
+        },
+        {
+            section: "Aaron and Moses Chosen <span class='verse-badge luke'>Verses 26-27</span>",
+            text: "Aaron is listed first because he was older. The genealogy identifies Aaron and Moses as *descendants of Levi—the very men God chose to lead the *Israelites and confront *Pharaoh."
+        },
+        {
+            section: "Moses’ Renewed Hesitation <span class='verse-badge luke'>Verses 28-30</span>",
+            text: "God again instructed Moses to tell *Pharaoh everything He commanded. Moses repeated his concern about his lack of eloquence, fearing *Pharaoh would not listen. Indeed, Pharaoh would not be persuaded by Moses’ words alone—but by the *LORD’s power. God’s name itself would be Moses’ authority and strength."
+        }
+    ],
+    chapter_7: [
+        {
+            section: "Moses and Aaron appointed as God’s agents <span class='verse-badge luke'>Verses 1-2</span>",
+            text: "The *LORD gave to Moses the same answer as before. Aaron would speak on behalf of Moses. But Moses would be God’s agent. He would be like God to *Pharaoh. The *LORD gave great power and authority to Moses. So he could do great deeds as the *LORD ordered him. Aaron would be like a *prophet to Moses. The *Egyptian people considered *Pharaoh to be a god. *Pharaoh would listen to the *prophets who came to him in the name of their gods. Now Aaron would appear in front of him as such a *prophet. And Moses would seem to be like a god to *Pharaoh.\n\nMoses would hear from the *LORD. Moses must tell to Aaron everything that the *LORD had said. And Aaron must speak to *Pharaoh on behalf of Moses. On each occasion, the message would be the same. *Pharaoh must let the *Israelites go from his country, Egypt."
+        },
+        {
+            section: "God predicts Pharaoh’s stubbornness <span class='verse-badge luke'>Verses 3-4</span>",
+            text: "God had said that *Pharaoh would not listen to Moses. And *Pharaoh did not listen. But that would not be important. The *LORD would make *Pharaoh *stubborn. In the first 5 of the 10 powerful deeds, *Pharaoh would make his own heart hard. He would not agree to the requests or demands of God. Therefore, the *LORD would cause *Pharaoh’s heart to be hard during the last 5 wonderful deeds. Each of those *plagues would be greater than the previous one. Those *plagues would be terrible for the *Egyptian people. In the end, the *LORD would lead all his people out of Egypt."
+        },
+        {
+            section: "Purpose of the plagues <span class='verse-badge luke'>Verse 5</span>",
+            text: "*Pharaoh did not know who the *LORD was. However, in the end, *Pharaoh and his people will know that God is the *LORD. The *Egyptians will have suffered from the *LORD’s powerful deeds. The *plagues will prove that the *LORD is more powerful than all the gods of Egypt. And the people there will see the departure of the *Israelites from their country."
+        },
+        {
+            section: "Moses and Aaron’s credibility <span class='verse-badge luke'>Verses 6-7</span>",
+            text: "Moses and Aaron carried out the tasks given to them by the *LORD. Aaron and Moses were of mature years. Aaron was 83 years old and Moses was 80 years old. In that society, people respected older people. Their age would help them in their tasks."
+        },
+        {
+            section: "God provides a sign to prove authority <span class='verse-badge luke'>Verses 8-9</span>",
+            text: "The *LORD warned Moses and Aaron that *Pharaoh would not believe in their authority. He would demand proof that God had sent them. The request seems to be reasonable. When that happened, Moses must speak to Aaron. He must tell Aaron to throw his stick down in front of *Pharaoh. The stick would become a snake.\n\nIn the *desert, when Moses threw his stick down, it became a snake. (See Exodus 4:2-15.) But the word we have here is different. The word here may mean a crocodile. Crocodiles are large fierce animals with long tails and they live in the River Nile. The *Egyptians *worshipped Ammut the crocodile-god. In addition, they *worshipped Sobek another god of crocodiles. This *sign would prove that God was greater than those *Egyptian gods."
+        },
+        {
+            section: "Aaron’s stick becomes a snake before Pharaoh <span class='verse-badge luke'>Verse 10</span>",
+            text: "So it happened. Moses and Aaron came in the name of the *LORD to *Pharaoh. They requested that he should allow the *Israelites to leave Egypt. *Pharaoh wanted to see proof that God had sent them. He demanded a *sign. Aaron threw his stick down in front of *Pharaoh and his officials. The stick became a snake.\n\nThe stick belonged to Moses in the *desert. It became God’s stick. (See Exodus 4:19-20.) Aaron had this stick. And he used it to do the tasks. Therefore, the text calls the stick Aaron’s stick. However, it was the same stick."
+        },
+        {
+            section: "Magicians imitate Aaron but fail <span class='verse-badge luke'>Verses 11-12</span>",
+            text: "This *sign did not impress *Pharaoh. He sent for his wise men and the men who used magic. They each came with their special sticks. By their skill and magic, they did the same as Aaron. Each of them threw his stick down in front of *Pharaoh. Their sticks became snakes. These snakes probably covered the floor. However, Aaron’s snake swallowed up all the other snakes. All the wise men and those who did magic lost their sticks. Aaron took hold of his snake’s tail. It turned back into the stick that it was before. The *LORD proved that he was greater than those clever men."
+        },
+        {
+            section: "Pharaoh refuses to obey <span class='verse-badge luke'>Verse 13</span>",
+            text: "The power of the *LORD did not persuade *Pharaoh to change his mind. He would not listen to Moses and Aaron."
+        },
+        {
+            section: "Preparation for the first plague <span class='verse-badge luke'>Verses 14-15</span>",
+            text: "The 10 powerful deeds that the *LORD would do we call the 10 *plagues. This section is about the first of those *plagues.\n\nGod told Moses to go with Aaron early in the morning to the River Nile. They must take with them the stick that had become a snake. The stick that became a snake refers back to Moses’ stick. (See Exodus 4:2-4.) And they must wait there until *Pharaoh with his officials came to that same place. The *LORD warned Moses that *Pharaoh would not listen to them. *Pharaoh’s heart was hard and he would not give in.\n\nWe do not know why *Pharaoh would go to the river. Maybe it was to *worship. The *Egyptians believed in Hapi, the god of the River Nile and Anuket, the female god of the Nile."
+        },
+        {
+            section: "Moses and Aaron remind Pharaoh of God’s command <span class='verse-badge luke'>Verse 16</span>",
+            text: "Moses and Aaron must speak to *Pharaoh as God’s agents. They must remind *Pharaoh that the *LORD had sent them. The *LORD was the *Hebrew’s God. The message was the same as before. The *Israelites must go and they must *worship their God in the *desert. Until this time, *Pharaoh had refused to listen. This was another chance for him to obey God."
+        },
+        {
+            section: "Water of Nile turned to blood <span class='verse-badge luke'>Verse 17</span>",
+            text: "*Pharaoh had protested, ‘I do not know the *LORD’. (See Exodus 5:2.) After this first *plague, he would certainly know who the *LORD was. Moses would strike the water with his stick. And God would change the water of the River Nile into blood.\n\nThe action of the agent is in effect the action of the chief. Here we read that the *LORD would strike the river. But Aaron struck the river with the stick. (See Exodus 7:19-20.) Later we read that Moses struck the river. (See Exodus 17:5.) Aaron was Moses’ agent and Moses was God’s agent.\n\nTo the *Egyptians, the River Nile was a god. The *LORD God would strike *Pharaoh’s god. That would show that the *LORD was more powerful than *Pharaoh’s god. The *LORD has power over all things."
+        },
+        {
+            section: "Effect on fish and water use <span class='verse-badge luke'>Verse 18</span>",
+            text: "Because of the change in the water, the fish would die. The river would smell. The smell would be the smell of blood. Soon after, there would be the smell of dead fish. The *Egyptians depended on the water from the river. It was vital for their agriculture and they drank from it. This *plague would make the water of no use for any purpose. And people would not be able to drink it."
+        },
+        {
+            section: "Rivers, ponds, and pools affected <span class='verse-badge luke'>Verses 19-21</span>",
+            text: "Moses and Aaron obeyed the *LORD. Aaron took the stick and he struck the water of the River Nile. The water turned into blood. Then he reached his hand in the direction of other water. The change affected the streams that came off the Nile. There were canals that brought water to the fields for agriculture. They became full of blood. There were ponds, too. Many of those kept water from the Nile when it flooded. Each year, the Nile flooded and the *Egyptians depended on that water. The water in those ponds also turned to blood. Also, there were pools that the *Egyptians had made. They were to store water for domestic purposes. That water turned into blood too.\n\nThe fish died and the river smelled. It was so bad that the *Egyptians could not drink it."
+        },
+        {
+            section: "Egyptians try to restore water <span class='verse-badge luke'>Verses 22-24</span>",
+            text: "In the main places where the *Egyptians got water, the water had turned into blood. Therefore, they had to dig down near the river to get fresh water. The *Egyptians who did magic were able to change some of this water into blood. Therefore, as the *LORD had said, *Pharaoh would not change his mind.\n\nProbably they tried to turn blood back to water. If they did, then they failed to do so."
+        },
+        {
+            section: "Water restored after seven days <span class='verse-badge luke'>Verse 25</span>",
+            text: "It was 7 days before the water in the River Nile became free from blood."
+        }
+    ],
+    chapter_8: [
+        {
+            section: "Moses sent to Pharaoh after the blood plague <span class='verse-badge luke'>Verse 1</span>",
+            text: "The blood had gone after the 7 days. Probably in the next few days, the *LORD told Moses to go to *Pharaoh again. Probably *Pharaoh was in his palace. So they had to go there to meet with him. They had the same message to give to him. The *Israelites must go and they must *worship the *LORD. Therefore, *Pharaoh should let them go from Egypt."
+        },
+        {
+            section: "God warns of the frog plague <span class='verse-badge luke'>Verse 2</span>",
+            text: "Still *Pharaoh would not let the *Israelites go. Therefore, the *LORD would send *frogs all over Egypt. During the annual flood of the River Nile, there were always many *frogs. But in this *plague, the *LORD would send an enormous number of *frogs. They would not be just at the edge of the river. They would be all over the country."
+        },
+        {
+            section: "Frogs invade every part of Egypt <span class='verse-badge luke'>Verses 3-4</span>",
+            text: "The *frogs would be everywhere. This time the *LORD warned *Pharaoh that even he would suffer from this *plague. The River Nile would be full of *frogs. The *frogs would come in vast numbers from the river. They would go into the houses of the *Egyptians. Nobody would avoid the punishment. They would come into the palace and into the most private rooms. They would come into *Pharaoh’s bedroom and even into his bed. His officials would suffer in the same way. *Frogs would get into the food. They would jump and climb on *Pharaoh and on his people. The *Egyptians *worshipped the female god Heket (or Heqt). She was the *frog-god. Sometimes she was in the shape of a *frog. And sometimes she seemed like a woman with a *frog’s head. They believed that she helped in the birth of children. The *LORD controlled the *frogs. This showed again that the *LORD was superior to the *Egyptian gods."
+        },
+        {
+            section: "Aaron raises his stick over the waters <span class='verse-badge luke'>Verses 5-6</span>",
+            text: "*Pharaoh did not obey the *LORD’s message. Therefore, the *LORD told Moses to speak to Aaron. Then Aaron held his stick over the river, the streams and other areas of water. Moses had warned *Pharaoh about *frogs from the River Nile. But this time the *frogs came from the streams, canals and ponds as well as the River Nile. They covered the country."
+        },
+        {
+            section: "Magicians fail to stop the frogs <span class='verse-badge luke'>Verse 7</span>",
+            text: "At first, *Pharaoh was not worried. He called his men who did magic. They managed to cover the country with *frogs. However, they could not stop the process. All they could do was to make the situation worse."
+        },
+        {
+            section: "Pharaoh calls Moses and Aaron to pray <span class='verse-badge luke'>Verse 8</span>",
+            text: "Moses and Aaron had left *Pharaoh in this awful situation. The proud *Pharaoh had no choice. He had to call Moses and Aaron to come back. He asked them to pray to the *LORD. At last, *Pharaoh had to admit that the *LORD was God. If their God removed the *frogs from him and his people, the *Israelites could go. They could give gifts to the *LORD."
+        },
+        {
+            section: "Moses’ confident reply <span class='verse-badge luke'>Verses 9-11</span>",
+            text: "Moses’ reply was bold and confident. He would pray for *Pharaoh, his officials and all the people. He would ask the *LORD to remove the *frogs. He was sure that the *LORD would answer his prayer. He had complete trust in the *LORD. The *LORD would send the *frogs away. They would leave all the places where they should not be. *Frogs would remain in their proper place in the River Nile. However, Moses let *Pharaoh set the time for this to happen. *Pharaoh asked for it to happen on the next day. We do not know why he did not ask for that same day. Probably the next day was the earliest practical time. *Pharaoh would know that the *plague came from God. He would know that only God could remove the *frogs that quickly. He would know that God was more powerful than the *Egyptian gods."
+        },
+        {
+            section: "Moses prays for the frogs to be removed <span class='verse-badge luke'>Verse 12</span>",
+            text: "Immediately after Moses and Aaron had left *Pharaoh, Moses started to pray. He asked the *LORD to remove the *frogs."
+        },
+        {
+            section: "God answers by killing the frogs <span class='verse-badge luke'>Verse 13</span>",
+            text: "The *LORD did not remove the *frogs as Moses had asked. He had sent them to punish *Pharaoh. Therefore, in answer to Moses’ prayer he caused all the *frogs to die. They died where they were in houses and fields."
+        },
+        {
+            section: "People gather the dead frogs <span class='verse-badge luke'>Verse 14</span>",
+            text: "The people gathered the dead *frogs in heaps. The smell of the dead *frogs would have been awful."
+        },
+        {
+            section: "Pharaoh remains proud <span class='verse-badge luke'>Verse 15</span>",
+            text: "As the *LORD had told Moses and Aaron, *Pharaoh would not obey. He would not let the *Israelites go. He saw that the *frogs were dead. The *plague had passed. *Pharaoh was the proud king again. The purpose of these *plagues was not just to punish the *Egyptians. They would punish them for what they had done to God’s people. In addition to that, they would cause the *Israelites to grow in their trust in the *LORD. As they saw his powerful deeds, it would increase their trust in the *LORD and in Moses."
+        },
+        {
+            section: "Gnats from dust plague Pharaoh and Egyptians <span class='verse-badge luke'>Verses 16-17</span>",
+            text: "This time the *LORD did not warn *Pharaoh or his officials. *Pharaoh deserved this because of his false promise. He had said that he would let the *Israelites go. But he would not do so. As the *LORD told Moses, Aaron hit the dust on the ground with his stick. Everywhere dust became tiny insects called *gnats. These little insects flew onto the people and onto the animals. The insects would bite or they might sting the people and the animals."
+        },
+        {
+            section: "Magicians fail against gnats <span class='verse-badge luke'>Verses 18-19</span>",
+            text: "This time *Pharaoh’s men could not imitate Aaron. They could not cause *gnats to come from the dust. Those who did magic tried all their secret ways. They failed. And they had to agree that God had defeated them. They realised this time that the *plague of the *gnats was from God. They said that God had done it. They worked by means of the evil powers behind their gods. In effect, they confessed that God was greater than all the powers of their gods. They told *Pharaoh but he would not believe it. He would not listen."
+        },
+        {
+            section: "Flies plague announced <span class='verse-badge luke'>Verses 20-21</span>",
+            text: "Early in the morning, *Pharaoh would go down to the River Nile. The *LORD told Moses and Aaron to get up early. He told them that they must go. And they must speak to *Pharaoh. This time the *LORD warned *Pharaoh about the *plague of flies. The message was the same. *Pharaoh must let the *Israelites go. The *LORD’s people must go from Egypt to *worship him. If *Pharaoh would not obey, the *LORD would punish him and his people. He would send a *plague of flies. The flies would be everywhere in their houses, on the ground and on the people. The word ‘flies’ may mean a mixture of flying insects. These might carry diseases and they might even bite people and animals."
+        },
+        {
+            section: "Goshen protected from flies <span class='verse-badge luke'>Verses 22-23</span>",
+            text: "The *plague would not affect the region called Goshen. The *Israelites lived there and so they would not suffer this *plague. That would teach the *Egyptians that the *LORD was with the *Israelites. It would prove to the *Egyptians and to the *Israelites that the *LORD was with his people. The *Israelites were God’s special people. The *Egyptians would suffer the *plagues but the *Israelites would not do so. The *plague of flies would happen the next day unless *Pharaoh obeyed. However, his heart was hard and he would not obey. He would not let the *Israelites go from Egypt. When Joseph’s family first came to Egypt, they spoke to the *Pharaoh. They asked him to let them live in Goshen. The *Pharaoh agreed. He said that Goshen was the best part of the country. It was a good area for them to keep their sheep and goats in. Joseph took them to Goshen in the district called Rameses. (See Genesis 47:3-11.) We do not know where that district was. Probably it was east of the area where the River Nile reaches the sea."
+        },
+        {
+            section: "Flies swarm Egypt <span class='verse-badge luke'>Verse 24</span>",
+            text: "Moses and Aaron did what the *LORD told them. The next day the *LORD sent thick clouds of flies all over Egypt. They went into the palace and into the officials’ houses as well."
+        },
+        {
+            section: "Pharaoh allows sacrifices but refuses to leave <span class='verse-badge luke'>Verses 25-26</span>",
+            text: "*Pharaoh called for Moses and Aaron to come to him. *Pharaoh agreed that the *Israelites could make *sacrifices to their God. However, he would not let them leave Egypt. Moses replied that that would not be right. The *Israelites would *sacrifice sheep and goats to the *LORD. The *Egyptian people would think that this was an insult to their gods. They would see what the *Israelites did. And they would throw stones at them to kill them. To *sacrifice a *bull would offend their belief in the gods Apis, Mnevis and Amen-Ehe. To *sacrifice any cow would offend their belief in the gods Osiris, Atum, Ptah, and Isis. To *sacrifice a male sheep would offend their belief in the god Amon."
+        },
+        {
+            section: "Israelites must go three days’ journey to sacrifice <span class='verse-badge luke'>Verse 27</span>",
+            text: "Moses insisted that the *Israelites must obey God. They must go three days’ journey in the *desert. There they must make *sacrifices to the *LORD."
+        },
+        {
+            section: "Pharaoh allows partial journey <span class='verse-badge luke'>Verse 28</span>",
+            text: "*Pharaoh agreed to Moses’ argument. He would let them go into the *desert to make their *sacrifices to the *LORD. However, they could not go as far as the three days’ journey. He asked Moses to pray to *LORD. He wanted him to ask the *LORD to remove the flies."
+        },
+        {
+            section: "Moses prays to remove the flies <span class='verse-badge luke'>Verse 29</span>",
+            text: "Moses replied that he would leave *Pharaoh. Moses, not *Pharaoh, was in control of the situation. He agreed to pray to the *LORD. He was confident that the *LORD would answer his prayer. Tomorrow the flies would go. However, he warned *Pharaoh not to change his mind this time. *Pharaoh had done that before but he must not do it again. The *Israelites must go to *sacrifice to the *LORD."
+        },
+        {
+            section: "Flies removed <span class='verse-badge luke'>Verses 30-31</span>",
+            text: "Moses left *Pharaoh and he did pray. Then the *LORD removed all the flies."
+        },
+        {
+            section: "Pharaoh’s pride continues <span class='verse-badge luke'>Verse 32</span>",
+            text: "But when the flies had gone, *Pharaoh changed his mind. He was a proud king. He would not obey any God. He would not let those people go."
+        }
+    ],
+    chapter_9: [
+        {
+            section: "God commands Pharaoh to release His people <span class='verse-badge luke'>Verses 1-2</span>",
+            text: "The *LORD sent Moses to *Pharaoh again. Moses (or Aaron) must tell *Pharaoh what the *LORD said. This was not a request. It was an order from the *LORD God of the *Hebrews. *Pharaoh, you must let my people go. My people must go to *worship me. *Pharaoh, you must not refuse. You must not prevent them."
+        },
+        {
+            section: "Plague on Egyptian animals if Pharaoh refuses <span class='verse-badge luke'>Verses 3-4</span>",
+            text: "If Pharaoh refused, the animals of the *Egyptians would suffer a terrible disease. They would die. That would show the *LORD’s power against them. The farmers in Egypt depended on their animals for meat and milk. They used animals for agriculture and transport. The loss of the animals would be terrible for them. None of the *Israelites’ animals would get this disease. None of their animals would die. That would be because the *LORD would send the disease only on the *Egyptians’ animals."
+        },
+        {
+            section: "Pharaoh’s decision postponed, plague kills animals <span class='verse-badge luke'>Verses 5-6</span>",
+            text: "*Pharaoh must decide what he would do. The *LORD gave him until the next day to do that. Then the *LORD would send the *plague upon the animals. That is what happened. As the disease spread, the animals died. The word ‘all’ here means a large number and not every animal. Maybe the animals that were not in the fields did not die as a result of the *plague. However, none of the *Israelite animals got this disease. Therefore, none of them died. Again, this *plague showed that the *LORD was greater than the *Egyptian gods. They *worshipped several gods that animals were important to."
+        },
+        {
+            section: "Pharaoh remains proud despite evidence <span class='verse-badge luke'>Verse 7</span>",
+            text: "*Pharaoh heard that none of the *Israelite animals had died because of the *plague. He sent men to check. They found that it was true. Even after that, *Pharaoh would not obey God. He was too proud. He was the king. And he thought that he was in control. He would not let the *Israelites go."
+        },
+        {
+            section: "Ash from ovens causes boils on Egyptians <span class='verse-badge luke'>Verses 8-9</span>",
+            text: "The *LORD did not warn *Pharaoh about this next *plague. The *LORD told Moses and Aaron to fill their hands with ash from the brick-ovens. The *Egyptians forced the *Israelite slaves to make bricks. They left most of the bricks in the sun. The sun would bake the bricks. However, they baked some bricks by fire in ovens. The ash from the ovens would remind *Pharaoh that the *Israelites were his slaves. Moses and Aaron must take the ash to where *Pharaoh was. Probably they put the ash in a box. Moses must throw the ash into the air while *Pharaoh watched him. The ash would blow in the wind over a wide area. However, the *LORD would send dust all over Egypt. That dust would cause awful *boils on both people and animals. Those *boils would break open and they would cause awful pain."
+        },
+        {
+            section: "Boils afflict Egyptians and magicians fail <span class='verse-badge luke'>Verses 10-12</span>",
+            text: "Moses and Aaron did what God had told them. Moses threw the ash into the air. Painful *boils came on the *Egyptians and on their animals. The *boils were all over their bodies. Those men who did magic could not avoid this *plague. Even they had to suffer these painful *boils. It was so bad that they could not stand in front of Moses because of the pain. We do not read any more about these men. The *LORD had defeated them and their gods. *Pharaoh was proud and he would not give in. He had made his heart hard after the first 5 *plagues. He was still proud and he would not obey. Therefore, the *LORD made his heart hard. *Pharaoh would remain proud and hard until the *LORD had finished the last of the *plagues."
+        },
+        {
+            section: "Moses warns of even worse plagues <span class='verse-badge luke'>Verses 13-14</span>",
+            text: "Another early morning start for Moses as in the first and 4th *plagues. He must meet *Pharaoh and he must make *Pharaoh hear the message. The message was the same as before. However, this time the *LORD would punish *Pharaoh and his people with a series of awful *plagues. These *plagues would be much worse than the previous ones. This 7th *plague would be the first one that would kill people. *Pharaoh had said that he did not know the *LORD. The result of these *plagues would be that he would know about the *LORD. He would know that there is no god or person like the *LORD. The *LORD God was superior to every god including all the *Egyptian gods."
+        },
+        {
+            section: "God’s patience and purpose explained <span class='verse-badge luke'>Verses 15-16</span>",
+            text: "The *LORD had given to *Pharaoh and his people the opportunity to save themselves. They could have obeyed the *LORD at any time. The previous *plagues warned them that they must free the *Israelites. But they had refused to do so. The *LORD had been patient with them. He could have sent one *plague and killed *Pharaoh and all his people. However, the *LORD kept them alive. With these *plagues, the *LORD would show his power to them. And people all over the world would know about his powerful deeds. His purpose was that all people should give honour to his name. (See Romans 9:16-17.)"
+        },
+        {
+            section: "Pharaoh’s pride leads to hailstorm <span class='verse-badge luke'>Verses 17-18</span>",
+            text: "After the first 6 *plagues, *Pharaoh was still too proud and he would not change. He was against God’s people *Israel. He would not let them go from his country. Therefore, God said that on the next day he would rain down very heavy *hail. The storm would be very terrible. It would be the worst storm that there had ever been in Egypt."
+        },
+        {
+            section: "God warns Israelites to shelter animals <span class='verse-badge luke'>Verse 19</span>",
+            text: "God told *Pharaoh that he must speak to his people. He must tell his people to be ready. The people who believed would obey. They would take their animals and their slaves under the shelter of their sheds. The people would go into their houses. Those people and their animals would be safe. However, the people that did not believe would not obey the advice. They and their animals would remain out in the fields. The *hail would be so large and so heavy that it would kill those people and their animals. God sent the storm."
+        },
+        {
+            section: "Some officials obey, others do not <span class='verse-badge luke'>Verses 20-21</span>",
+            text: "Very little rain falls in Upper Egypt. And maybe about 10 inches each year fall in Lower Egypt. The talk of a storm of this type would be hard to believe. Among *Pharaoh’s officials, some did believe what God had said. Those people acted in a hurry to bring in their animals and their slaves. Many other officials did not believe. Therefore, they left their animals and their slaves outside. This storm happened in January or February. At that time, the *flax and *barley would be almost ready to harvest. The animals would be in the fields during January to April. From May, they would be in shelters to protect them from the heat."
+        },
+        {
+            section: "Hail destroys crops and livestock <span class='verse-badge luke'>Verses 22-25</span>",
+            text: "The next day, the *LORD told Moses to raise his hand toward the sky. Moses, not Aaron, raised the stick. As the *LORD said, *hail fell over Egypt. It came with *thunder and lightning. The lightning came down and it ran along the ground like balls of fire. The *hail hit people and animals in the fields. It destroyed what was growing in the fields. That included the crops of *flax and *barley. Even the trees suffered. The storm stripped their leaves. The storm ruined the agriculture of the country. Many people and animals suffered. And they died because of the *hail and the lightning."
+        },
+        {
+            section: "God protects Israelites in Goshen <span class='verse-badge luke'>Verse 26</span>",
+            text: "The storm did not come into Goshen where the *Israelites lived. *Israel’s God kept his people safe from the storm."
+        },
+        {
+            section: "Pharaoh requests relief and promises to release Israelites <span class='verse-badge luke'>Verses 27-28</span>",
+            text: "*Pharaoh asked Moses and Aaron to come to him. For the first time, *Pharaoh admitted that he and his people were wrong. They deserved all that the *LORD had done to them. The *LORD had hurt them and they wanted some relief. He asked Moses to pray that the *thunder and the *hail would stop. And he promised to let the *Israelites go."
+        },
+        {
+            section: "Moses assures Pharaoh of God’s control <span class='verse-badge luke'>Verse 29</span>",
+            text: "Moses told *Pharaoh that he would pray. He would do it when he got away from the city. The *LORD would answer his prayer. The *thunder and *hail would stop. The *LORD would do it because the whole earth belongs to him. The *Egyptians believed that different gods had control of different parts of the earth. Moses told *Pharaoh that the *LORD God controls all of it."
+        },
+        {
+            section: "Pharaoh’s disbelief persists <span class='verse-badge luke'>Verse 30</span>",
+            text: "Moses did not believe *Pharaoh. *Pharaoh and his officials would not let the *Israelites go. And they still had no fear of the *LORD God. Moses knew that. He agreed to pray so that *Pharaoh could have no excuse."
+        },
+        {
+            section: "Timing and effect of hailstorm on crops <span class='verse-badge luke'>Verses 31-32</span>",
+            text: "The *Egyptians sowed *barley in about August. It would be ready for harvest in February. The *flax would have flowers in January. They sowed wheat and the similar crop called spelt. But those two crops would not be ready for harvest until a couple of months later. The storm was probably in January or February. It destroyed the *barley and the *flax. It did not damage the other two crops, because the plants were still small. *Flax was an important plant in Egypt. They made cloth from it. They used *barley to make cheap bread for poor people and food for animals. They made the best bread from wheat."
+        },
+        {
+            section: "Pharaoh’s fear fades, refuses to release Israelites <span class='verse-badge luke'>Verses 33-35</span>",
+            text: "Moses prayed and the *LORD stopped the *hail and *thunder. *Pharaoh saw that. The danger had passed. His fear had gone. He and his officials changed their minds again. They would not let the *Israelites go from Egypt."
+        }
+    ],
+    chapter_10: [
+        {
+            section: "God hardens Pharaoh’s heart to show His power <span class='verse-badge luke'>Verse 1</span>",
+            text: "*Pharaoh and his officials were still proud. They had decided that they would not give in to the *LORD. Therefore, the *LORD made their hearts hard. The *LORD told Moses that he would do terrible deeds among them. Those awful deeds would prove to the *Egyptians that the *LORD was more powerful than any god or man.\n\nThe *Israelites too would learn this lesson. They must tell their children and their grandchildren what the *LORD had done. The *LORD punished the *Egyptians because of what they had done to God’s people in Egypt.\n\nThen the *Egyptians and the *Israelites would know that he is the *LORD."
+        },
+        {
+            section: "Moses warns Pharaoh of locusts <span class='verse-badge luke'>Verses 3-4</span>",
+            text: "Moses and Aaron took the message from the *LORD to *Pharaoh. Still *Pharaoh was refusing to fear God. But he must let the *Israelites leave Egypt. They must *worship the *LORD their God. If *Pharaoh did not let them go, the *LORD would send another *plague. The next day the *LORD would send *locusts."
+        },
+        {
+            section: "Locusts will destroy crops <span class='verse-badge luke'>Verses 5-6</span>",
+            text: "These terrible insects would attack the land like an enormous army. They would be like an immense cloud as they descended on the ground. There would be so many that they would cover the ground all over Egypt. Even today people in many countries in the east fear a *plague of *locusts. However, this *plague that God would send would be much worse than a normal *plague. There had never been a *plague as large and as dense as this one.\n\nThe *hail had damaged much of the crops in the field. The *locusts would eat what the *hail had left. That would include the wheat. They would eat every green thing. They would strip the trees bare. There would be nothing left for food in the fields. The *hail and the *locusts would have destroyed all the agriculture in Egypt. Also, the *locusts would get into the palace and into the houses.\n\nWhen they had finished, Moses and Aaron turned their backs on *Pharaoh. And they left him.\n\nThis kind of *locust was a large, spotted, red and black insect and it had double wings. It was about three inches long. Its two back legs were like springs of immense strength."
+        },
+        {
+            section: "Officials realize God’s power <span class='verse-badge luke'>Verse 7</span>",
+            text: "*Pharaoh’s officials were loyal to him. Therefore, they blamed the *plagues on Moses. However at last they realised that the *Hebrews’ God had ruined Egypt. The *hail had caused the death of many people and animals. It had destroyed the *flax and the *barley crops. If *locusts came, that would destroy the whole of their agriculture. Then they would not be able to produce any food that year.\n\nTheir advice to *Pharaoh was, ‘Let the *Israelite men go. Let them *worship their God.’"
+        },
+        {
+            section: "Pharaoh tries to bargain <span class='verse-badge luke'>Verse 8</span>",
+            text: "*Pharaoh listened to his officials. So, they brought Moses and Aaron back to him. He wanted to bargain with them. He told Moses that they could go to *worship the *LORD their God. But he asked how many of the *Israelites would go. He expected them to go on a three days’ journey. Then he would expect them to return. He would allow some of them to go."
+        },
+        {
+            section: "Moses insists all must go <span class='verse-badge luke'>Verse 9</span>",
+            text: "Moses and Aaron were not willing to bargain with *Pharaoh. Moses told him that all the *Israelites would go. There was no doubt that in the end they would all go. That included women and children. In addition, they would take with them all their animals. All *Israel must make the journey because all *Israel must *worship the *LORD. That must include the young persons, the old persons, the males and the females."
+        },
+        {
+            section: "Pharaoh refuses and throws them out <span class='verse-badge luke'>Verses 10-11</span>",
+            text: "*Pharaoh refused to agree to what Moses said. ‘You will certainly need the *LORD to be with you!’ he said. In modern talk that would be ‘God help you.’ He would never let the women and children go. Only the adult men could go. That would be enough for the purposes of their religion. He guessed that Moses might not intend to return. The women and children still in Egypt would mean that the men must return.\n\nHe suspected that Moses and his people had secret plans. He did not believe that it would be only three days.\n\nHe ordered that his officials throw Moses and Aaron out of the palace."
+        },
+        {
+            section: "Plague of locusts begins <span class='verse-badge luke'>Verses 12-15</span>",
+            text: "The *LORD ordered the *plague to begin. Moses stretched out his hand and his stick over Egypt. An east wind blew across the country. It blew for a whole day and a night and the wind brought the *locusts.\n\nThey came like waves into every part of Egypt. They were like a heavy cloud over all the land. They came down and they covered the ground. There had never before been so many *locusts. They ate everything that the *hail had not destroyed. After the *locusts, there was no wheat or other crops left. They had stripped all of the leaves and fruit from the trees."
+        },
+        {
+            section: "Pharaoh admits sin but repents falsely <span class='verse-badge luke'>Verses 16-17</span>",
+            text: "*Pharaoh sent for Moses and Aaron to come as quickly as possible to him. Again, he confessed that he was wrong. He had *sinned against the *LORD and against Moses and Aaron. He pretended that this was it. He would not change his mind again. He asked that they would forgive him. The *locusts would be the cause of the death of many people. He asked Moses and Aaron to pray that God would remove this death from him."
+        },
+        {
+            section: "God removes locusts but Pharaoh is proud again <span class='verse-badge luke'>Verses 18-20</span>",
+            text: "Moses and Aaron did pray. The *LORD heard their prayer and he answered it. He changed the direction of the wind. He sent a very strong wind. The wind carried away all the *locusts from Egypt.\n\nThe *LORD caused *Pharaoh to become proud again. *Pharaoh changed his mind. He would not let the *Israelites go."
+        },
+        {
+            section: "Darkness shows God’s superiority - Verses 21–22",
+            text: "The *LORD did not warn *Pharaoh about the 9th *plague. At God’s order, Moses raised his hand toward the sky. God sent a strange darkness upon the whole of Egypt. The sun could not shine through the darkness. The darkness was so bad that the people could feel it. The darkness probably frightened them. It lasted over all Egypt.\n\nBy this act, the *LORD God showed again that he was superior to the *Egyptian gods. The sun could not shine through the darkness. The *LORD was superior to Ra, their sun-god and Aten, their god of the sun’s shape. The sky was black with darkness. The *LORD was superior to Horus and Nut, the *Egyptians’ gods of the sky."
+        },
+        {
+            section: "Darkness spares Israelites <span class='verse-badge luke'>Verse 23</span>",
+            text: "Because they could not see, nobody went anywhere. However, the darkness did not affect the area where the *Israelites lived."
+        },
+        {
+            section: "Pharaoh tries to limit the Israelites’ departure <span class='verse-badge luke'>Verse 24</span>",
+            text: "After the three days of darkness, *Pharaoh again sent for Moses. *Pharaoh tried again to limit the departure of the *Israelites. The *Israelites could go to *worship the *LORD. The women and children could go as well. However, their animals must remain in Egypt. That would mean that the *Israelites would have to come back."
+        },
+        {
+            section: "All animals must go with Israelites <span class='verse-badge luke'>Verses 25-26</span>",
+            text: "Moses would not agree to Pharaoh’s idea. He told *Pharaoh that all their animals must go with them. Some of those animals would be *sacrifices to the *LORD. Until they were there, they would not know which ones.\n\nThe *Israelites needed to take their animals. They would depend on them for milk and meat. There would not be much in the *desert to provide food for such a large number of people."
+        },
+        {
+            section: "Pharaoh refuses and threatens Moses <span class='verse-badge luke'>Verses 27-29</span>",
+            text: "The *LORD had one more *plague for the *Egyptians. He let *Pharaoh become hard and proud again. *Pharaoh would not allow the *Israelites go. He became very angry with Moses. He told Moses to go. And he told him that he should not come to him again. If he saw Moses again, he would kill him. Moses agreed to what *Pharaoh said. He agreed that he would not come to *Pharaoh again.\n\n*Pharaoh did not think about his situation. He should have realised that the *LORD would send more punishment on him and his people. He might need to send for Moses again.\n\nBefore he went, Moses told *Pharaoh about the 10th and final *plague. There is a break in the story and it continues in verse 4 of the next chapter."
+        }
     ]
 };
 
@@ -291,5 +649,4 @@ const ExodusData = {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = ExodusData;
 }
-
 
