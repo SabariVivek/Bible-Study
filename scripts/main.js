@@ -2499,27 +2499,37 @@ function displayChapterContent(bookName, chapterNum, container) {
     // Clear previous content
     container.innerHTML = '';
     
-    // Get chapter data based on book name
+    // Get chapter data based on book name (Dynamic approach)
     let chapterData = null;
+    const chapterKey = `chapter_${chapterNum}`;
     
-    if (bookName.toLowerCase() === 'matthew') {
-        const chapterKey = `chapter_${chapterNum}`;
-        if (typeof MatthewData !== 'undefined' && MatthewData[chapterKey]) {
-            chapterData = MatthewData[chapterKey];
+    // Convert book name to PascalCase for the data object name
+    // E.g., "matthew" -> "MatthewData", "1 samuel" -> "Samuel1Data"
+    const formatBookDataName = (name) => {
+        // Remove numbers and spaces, capitalize first letter
+        let cleanName = name.toLowerCase();
+        
+        // Handle numbered books (e.g., "1 Samuel", "2 Kings")
+        const numberMatch = cleanName.match(/^(\d+)\s+(.+)$/);
+        if (numberMatch) {
+            const number = numberMatch[1];
+            const bookName = numberMatch[2];
+            // Capitalize first letter
+            const capitalizedBook = bookName.charAt(0).toUpperCase() + bookName.slice(1);
+            return `${capitalizedBook}${number}Data`;
         }
-    } else if (bookName.toLowerCase() === 'exodus') {
-        const chapterKey = `chapter_${chapterNum}`;
-        if (typeof ExodusData !== 'undefined' && ExodusData[chapterKey]) {
-            chapterData = ExodusData[chapterKey];
-        }
+        
+        // Regular books - just capitalize first letter
+        return cleanName.charAt(0).toUpperCase() + cleanName.slice(1) + 'Data';
+    };
+    
+    // Get the data object name dynamically
+    const dataObjectName = formatBookDataName(bookName);
+    
+    // Try to access the data object from the global window object
+    if (typeof window[dataObjectName] !== 'undefined' && window[dataObjectName][chapterKey]) {
+        chapterData = window[dataObjectName][chapterKey];
     }
-    // Add more books here as needed
-    // else if (bookName.toLowerCase() === 'mark') {
-    //     const chapterKey = `chapter_${chapterNum}`;
-    //     if (typeof MarkData !== 'undefined' && MarkData[chapterKey]) {
-    //         chapterData = MarkData[chapterKey];
-    //     }
-    // }
     
     // Display the chapter data
     if (chapterData && chapterData.length > 0) {

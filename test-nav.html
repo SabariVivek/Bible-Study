@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testament Nav - Simple Test</title>
+    <link rel="stylesheet" href="styles/testament-nav.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 100px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 60px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .status {
+            margin-top: 30px;
+            padding: 15px;
+            background: #e8f4f8;
+            border-radius: 6px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="bookTitle">Genesis - 1</h1>
+        <div class="status">
+            <div>Status: <span id="status">Loading...</span></div>
+            <div>Selected: <span id="selected">None</span></div>
+        </div>
+    </div>
+
+    <script src="scripts/ui/testament-nav.js"></script>
+    <script>
+        // Mock function for book loading
+        window.loadBookFromTestamentNav = function(bookName) {
+            console.log('Book selected:', bookName);
+            document.getElementById('selected').textContent = bookName;
+            
+            // Update title
+            const title = document.getElementById('bookTitle');
+            title.childNodes[0].textContent = bookName + ' - 1';
+            
+            // Update selection
+            if (typeof updateTestamentNavSelection === 'function') {
+                updateTestamentNavSelection(bookName);
+            }
+        };
+
+        // Initialize on load
+        window.addEventListener('load', function() {
+            console.log('Initializing testament nav...');
+            try {
+                initializeTestamentNav('bookTitle', 'Genesis');
+                document.getElementById('status').textContent = 'Initialized ✓';
+                document.getElementById('selected').textContent = 'Genesis';
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('status').textContent = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>

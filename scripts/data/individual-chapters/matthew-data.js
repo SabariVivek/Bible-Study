@@ -66,6 +66,11 @@ const MatthewData = {
     ]
 };
 
+// Make available globally
+if (typeof window !== 'undefined') {
+    window.MatthewData = MatthewData;
+}
+
 // Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = MatthewData;
