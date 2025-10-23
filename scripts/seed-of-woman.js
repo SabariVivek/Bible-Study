@@ -49,9 +49,10 @@ function loadSeedContent() {
     if (!container) return;
     
     let contentHTML = `
-        <div class="seed-section-header">
-            ${seedData.section}
-        </div>
+        <div class="seed-card">
+            <div class="seed-section-header">
+                ${seedData.section}
+            </div>
     `;
     
     // Add image if available
@@ -67,7 +68,6 @@ function loadSeedContent() {
     }
     
     contentHTML += `
-        <div class="seed-card">
             <div class="seed-text-content">
                 ${seedData.text}
             </div>

@@ -2212,12 +2212,13 @@ nav {
 
 .seed-card {
     background: #f5f5f5;
-    border-radius: 0;
-    padding: 32px;
-    box-shadow: none;
+    border-radius: 8px;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: background 0.2s ease;
     position: relative;
     margin-bottom: 24px;
+    overflow: hidden;
 }
 
 .seed-card:hover {
@@ -2237,11 +2238,11 @@ nav {
     font-weight: 700;
     color: #2c3e50;
     line-height: 1.6;
-    margin-bottom: 20px;
-    padding: 16px 20px;
+    margin-bottom: 0;
+    padding: 24px 28px;
     border-left: 4px solid #4a7c59;
-    background: linear-gradient(to right, #e8f5e9 0%, #ffffff 100%);
-    border-radius: 0 4px 4px 0;
+    background: linear-gradient(to right, #e8f5e9 0%, #f5f5f5 100%);
+    border-radius: 0;
 }
 
 .seed-section-header .verse-badge {
@@ -2260,7 +2261,7 @@ nav {
     color: #4a5568;
     font-size: 16px;
     line-height: 1.8;
-    margin-top: 16px;
+    padding: 0 28px 28px 28px;
 }
 
 .seed-text-content ul {
@@ -2275,12 +2276,18 @@ nav {
     color: #4a5568;
 }
 
+.seed-image-container {
+    margin: 0;
+    padding: 28px;
+    text-align: center;
+}
+
 .seed-image {
     max-width: 60%;
     height: auto;
     border-radius: 4px;
-    display: block;
-    margin: 0 auto 20px auto    ;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .seed-image:hover {
