@@ -15,7 +15,7 @@ function showPrayersForForgiveness() {
                 <button onclick="hidePrayersForForgiveness()" class="back-btn-circle" title="Back to Dashboard">
                     <span class="back-arrow">«</span>
                 </button>
-                <h1 class="page-title" id="prayerTitle">Prayers for Forgiveness</h1>
+                <h1 class="page-title" id="prayerTitle">Prayers in Bible</h1>
                 <div class="chapter-navigation-header">
                     <button id="prevPrayerBtn" class="nav-chapter-btn" onclick="navigateToPreviousPrayer()" title="Previous Prayer">
                         <span class="nav-arrow">←</span>
@@ -49,18 +49,49 @@ function loadPrayerContent() {
     
     let contentHTML = `
         <div class="prayer-card">
-            <h2 class="prayer-title">${prayer.title}</h2>
     `;
     
-    prayer.content.forEach(paragraph => {
-        contentHTML += `<p class="prayer-text">${paragraph}</p>`;
-    });
+    // Add verse reference badge if exists
+    if (prayer.verseRef) {
+        contentHTML += `<div class="prayer-verse-ref">${prayer.verseRef}</div>`;
+    }
+    
+    contentHTML += `<h2 class="prayer-title">${prayer.title}</h2>`;
+    
+    // Add "By" field if exists
+    if (prayer.by) {
+        contentHTML += `<p class="prayer-by"><strong>By:</strong> ${prayer.by}</p>`;
+    }
+    
+    // Add Background if exists
+    if (prayer.Background && Array.isArray(prayer.Background)) {
+        contentHTML += `<div class="prayer-background">
+            <h3 class="prayer-section-title">Background</h3>`;
+        prayer.Background.forEach(paragraph => {
+            contentHTML += `<p class="prayer-text">${paragraph}</p>`;
+        });
+        contentHTML += `</div>`;
+    }
+    
+    // Add Purpose if exists
+    if (prayer.purpose) {
+        contentHTML += `<div class="prayer-purpose">
+            <h3 class="prayer-section-title">Purpose</h3>
+            <p class="prayer-text">${prayer.purpose}</p>
+        </div>`;
+    }
+    
+    // Add verse array (Tamil verses) at the end
+    if (prayer.verse && Array.isArray(prayer.verse)) {
+        contentHTML += `<div class="prayer-verse">`;
+        prayer.verse.forEach(verseLine => {
+            contentHTML += `<p class="prayer-verse-line">${verseLine}</p>`;
+        });
+        contentHTML += `</div>`;
+    }
     
     contentHTML += `
-            <p class="prayer-verse">
-                <em>${prayer.verse}</em>
-            </p>
-            <p class="prayer-closing"> - In Jesus' name, Amen.</p>
+            <p class="prayer-closing">In Jesus' name, Amen.</p>
         </div>
     `;
     

@@ -2037,6 +2037,7 @@ nav {
     padding: 32px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
 }
 
 .prayer-card:hover {
@@ -2045,14 +2046,34 @@ nav {
 }
 
 .prayer-title {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #000;
     font-size: 24px;
     font-weight: 700;
     margin: 0 0 20px 0;
     letter-spacing: -0.02em;
+}
+
+.prayer-by {
+    color: #6b7280;
+    font-size: 14px;
+    margin: 0 0 10px 0;
+    font-style: italic;
+}
+
+.prayer-verse-ref {
+    background-image: url(../resources/images/bible-background.jpg);
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #ffffff;
+    border-left: 3px solid #FFD700;
+    color: #b8860b;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+    letter-spacing: 0.02em;
 }
 
 .prayer-text {
@@ -2064,19 +2085,48 @@ nav {
 }
 
 .prayer-verse {
-    background: rgba(255, 215, 0, 0.12);
+    background-image: url(../resources/images/bible-background.jpg);
     border-left: 3px solid #FFD700;
-    padding: 16px 20px;
+    padding: 16px 40px;
     margin: 20px 0;
     border-radius: 8px;
-    color: #b8860b;
-    font-size: 15px;
-    line-height: 1.7;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+    list-style-type: decimal;
+}
+
+.prayer-verse-line {
+    line-height: 2.5;
+    font-size: 100%;
+    color: black;
+    font-size-adjust: 0.9;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 1rem;
+    font-family: TSCu_InaiMathi, sooriyandotcom, vaigaiUni, ThendralUni, aVarangal, Latha, 'Kurale', serif;
+    text-align: left;
+    margin: 0 0 1em 0;
+    display: block;
+}
+
+.prayer-verse-line:last-child {
+    margin-bottom: 0;
 }
 
 .prayer-verse em {
     font-style: italic;
     font-weight: 500;
+}
+
+.prayer-background,
+.prayer-purpose {
+    margin: 24px 0;
+}
+
+.prayer-section-title {
+    color: #667eea;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
 }
 
 .prayer-closing {
@@ -2733,6 +2783,7 @@ nav {
     }
 
     .passage-modal-card {
+        background-image: url(../resources/images/bible-background.jpg);
         width: 95%;
         padding: 1.5rem;
         max-height: 90vh;
