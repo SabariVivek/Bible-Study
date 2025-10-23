@@ -1985,6 +1985,10 @@ nav {
     border-left-color: var(--color-mint);
 }
 
+.seed-of-woman {
+    border-left-color: var(--color-pink);
+}
+
 /* Sub-page cards - use remaining unique colors */
 .parables-english {
     border-left-color: var(--color-straw);
@@ -2159,6 +2163,69 @@ nav {
     .prayer-verse {
         font-size: 14px;
         padding: 12px 16px;
+    }
+}
+
+/* ============================================
+   SEED OF THE WOMAN STYLES
+   ============================================ */
+
+.seed-content-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.seed-card {
+    background: linear-gradient(135deg, rgba(236, 135, 192, 0.08) 0%, rgba(236, 135, 192, 0.05) 100%);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.seed-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.seed-title {
+    color: #000;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.02em;
+}
+
+.seed-text {
+    color: #374151;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0 0 16px 0;
+    text-align: justify;
+}
+
+/* Responsive adjustments for seed of woman */
+@media (max-width: 768px) {
+    .seed-content-container {
+        padding: 16px;
+        gap: 20px;
+    }
+    
+    .seed-card {
+        padding: 24px;
+    }
+    
+    .seed-title {
+        font-size: 20px;
+    }
+    
+    .seed-text {
+        font-size: 15px;
     }
 }
 
