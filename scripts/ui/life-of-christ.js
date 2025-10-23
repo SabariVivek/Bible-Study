@@ -58,10 +58,6 @@ function generateLifeOfJesusCards() {
                 const card = document.createElement('div');
                 card.className = 'life-of-jesus-card';
                 
-                // Add category data attribute for styling
-                const categoryClass = getLifeOfJesusCategoryClass(event.category);
-                card.setAttribute('data-category', categoryClass);
-                
                 // Store searchable text in data attribute
                 const searchableText = `${event.title} ${event.category || ''} ${(event.verses || []).join(' ')}`.toLowerCase();
                 card.setAttribute('data-search-text', searchableText);
@@ -122,22 +118,6 @@ function generateLifeOfJesusCards() {
     
     // Initialize search functionality after cards are generated
     initializeLifeOfChristSearch();
-}
-
-// Get category class for styling
-function getLifeOfJesusCategoryClass(category) {
-    if (!category) return 'default';
-    
-    const categoryUpper = category.toUpperCase();
-    if (categoryUpper.includes('PREPARATION') || categoryUpper.includes('BIRTH')) return 'preparation';
-    if (categoryUpper.includes('INTRODUCTION')) return 'introduction';
-    if (categoryUpper.includes('GALILEAN')) return 'galilean';
-    if (categoryUpper.includes('WITHDRAWAL')) return 'withdrawal';
-    if (categoryUpper.includes('JUDEAN')) return 'judean';
-    if (categoryUpper.includes('PEREAN')) return 'perean';
-    if (categoryUpper.includes('PASSION')) return 'passion';
-    if (categoryUpper.includes('RESURRECTION')) return 'resurrection';
-    return 'default';
 }
 
 // Convert verse reference to passage key
