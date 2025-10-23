@@ -2394,47 +2394,32 @@ nav {
     width: 100%;
 }
 
+/* Make chapter section headings span full width in Life of Christ grid */
+.life-of-jesus-cards-grid .chapter-section-heading {
+    grid-column: 1 / -1;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.life-of-jesus-cards-grid .chapter-section-heading:first-child {
+    margin-top: 0;
+}
+
+/* Hide section headers when no cards are visible in that section */
+.chapter-section-heading.hidden-by-search {
+    display: none;
+}
+
 .life-of-jesus-card {
     background: white;
     border-radius: 12px;
     padding: 24px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-bottom: 4px solid;
     transition: all 0.3s ease;
     cursor: pointer;
     overflow: hidden;
-}
-
-.life-of-jesus-card[data-category="preparation"] {
-    border-bottom-color: #ddd6fe;
-}
-
-.life-of-jesus-card[data-category="introduction"] {
-    border-bottom-color: #a5f3fc;
-}
-
-.life-of-jesus-card[data-category="galilean"] {
-    border-bottom-color: #bbf7d0;
-}
-
-.life-of-jesus-card[data-category="withdrawal"] {
-    border-bottom-color: #fde68a;
-}
-
-.life-of-jesus-card[data-category="judean"] {
-    border-bottom-color: #fecaca;
-}
-
-.life-of-jesus-card[data-category="perean"] {
-    border-bottom-color: #fbcfe8;
-}
-
-.life-of-jesus-card[data-category="passion"] {
-    border-bottom-color: #fca5a5;
-}
-
-.life-of-jesus-card[data-category="resurrection"] {
-    border-bottom-color: #86efac;
 }
 
 .life-of-jesus-card:hover {
@@ -2616,7 +2601,7 @@ nav {
 .search-results-info {
     margin-top: 8px;
     padding: 4px 12px;
-    text-align: left;
+    text-align: center;
     font-size: 12px;
     color: #10b981;
     font-weight: 600;
@@ -2923,7 +2908,15 @@ nav {
     }
 
     .life-of-jesus-card-title {
-        font-size: 16px;
+        font-size: 16px;    
+    }
+
+    /* Responsive chapter section headings in Life of Christ */
+    .life-of-jesus-cards-grid .chapter-section-heading {
+        margin-top: 30px;
+        margin-bottom: 16px;
+        font-size: 20px;
+        padding-left: 16px;
     }
     
     /* Responsive search bar */
