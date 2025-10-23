@@ -39,6 +39,10 @@ function generateLifeOfJesusCards() {
         const categoryClass = getLifeOfJesusCategoryClass(event.category);
         card.setAttribute('data-category', categoryClass);
         
+        // Store searchable text in data attribute
+        const searchableText = `${event.title} ${event.category || ''} ${(event.verses || []).join(' ')}`.toLowerCase();
+        card.setAttribute('data-search-text', searchableText);
+        
         const cardHeader = document.createElement('div');
         cardHeader.className = 'life-of-jesus-card-header';
         
@@ -90,6 +94,9 @@ function generateLifeOfJesusCards() {
         card.appendChild(badgeContainer);
         cardsGrid.appendChild(card);
     });
+    
+    // Initialize search functionality after cards are generated
+    initializeLifeOfChristSearch();
 }
 
 // Get category class for styling
@@ -240,8 +247,88 @@ function initializeLifeOfChrist() {
     generateLifeOfJesusCards();
 }
 
+// Initialize search functionality
+function initializeLifeOfChristSearch() {
+    const searchInput = document.getElementById('lifeOfChristSearch');
+    const clearBtn = document.getElementById('searchClearBtn');
+    const resultsInfo = document.getElementById('searchResultsInfo');
+    
+    if (!searchInput) return;
+    
+    // Handle search input
+    searchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        filterLifeOfChristCards(searchTerm);
+        
+        // Show/hide clear button
+        if (searchTerm) {
+            clearBtn.style.display = 'flex';
+        } else {
+            clearBtn.style.display = 'none';
+        }
+    });
+    
+    // Handle clear button
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            clearBtn.style.display = 'none';
+            filterLifeOfChristCards('');
+            searchInput.focus();
+        });
+    }
+    
+    // Handle Enter key
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    });
+}
+
+// Filter cards based on search term
+function filterLifeOfChristCards(searchTerm) {
+    const cards = document.querySelectorAll('.life-of-jesus-card');
+    const resultsInfo = document.getElementById('searchResultsInfo');
+    let visibleCount = 0;
+    
+    cards.forEach(card => {
+        const searchText = card.getAttribute('data-search-text') || '';
+        
+        if (!searchTerm || searchText.includes(searchTerm)) {
+            card.classList.remove('hidden-by-search');
+            card.classList.add('search-result');
+            visibleCount++;
+            
+            // Remove animation class after animation completes
+            setTimeout(() => {
+                card.classList.remove('search-result');
+            }, 300);
+        } else {
+            card.classList.add('hidden-by-search');
+        }
+    });
+    
+    // Update results info
+    if (resultsInfo) {
+        if (!searchTerm) {
+            resultsInfo.textContent = '';
+            resultsInfo.classList.remove('visible', 'no-results');
+        } else if (visibleCount === 0) {
+            resultsInfo.textContent = 'No events found matching your search';
+            resultsInfo.classList.add('visible', 'no-results');
+        } else {
+            const plural = visibleCount === 1 ? 'event' : 'events';
+            resultsInfo.textContent = `Found ${visibleCount} ${plural}`;
+            resultsInfo.classList.add('visible');
+            resultsInfo.classList.remove('no-results');
+        }
+    }
+}
+
 // Make functions globally available
 window.openPassagePopup = openPassagePopup;
 window.closePassagePopup = closePassagePopup;
 window.initializeLifeOfChrist = initializeLifeOfChrist;
 window.generateLifeOfJesusCards = generateLifeOfJesusCards;
+window.initializeLifeOfChristSearch = initializeLifeOfChristSearch;

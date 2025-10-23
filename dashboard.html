@@ -2018,7 +2018,27 @@
             <div id="help-content" class="hidden">
                 <div class="content-header">
                     <h1 class="page-title">Life of Jesus Christ</h1>
-                    <p class="page-subtitle">Complete Timeline from Birth to Ascension</p>
+                    <!-- Search Bar for Life of Christ -->
+                    <div class="life-of-christ-search-container-compact">
+                        <div class="search-bar-wrapper">
+                            <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <input 
+                                type="text" 
+                                id="lifeOfChristSearch" 
+                                class="life-of-christ-search-input" 
+                                placeholder="Search"
+                                autocomplete="off"
+                            />
+                            <button class="search-clear-btn" id="searchClearBtn" style="display: none;">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="search-results-info" id="searchResultsInfo"></div>
+                    </div>
                 </div>
                 
                 <div class="life-of-jesus-container">

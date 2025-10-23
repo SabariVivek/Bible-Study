@@ -2504,6 +2504,155 @@ nav {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* ============================================
+   LIFE OF CHRIST SEARCH BAR STYLES
+   ============================================ */
+
+.life-of-christ-search-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    padding: 0 20px;
+}
+
+/* Compact version in header */
+.life-of-christ-search-container-compact {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 12px;
+}
+
+.search-bar-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+/* Search Icon (Inside Input on Left) */
+.search-icon {
+    position: absolute;
+    left: 16px;
+    width: 20px;
+    height: 20px;
+    color: #3b82f6;
+    pointer-events: none;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* Search Input Container */
+.life-of-christ-search-input {
+    flex: 1;
+    width: 100%;
+    padding: 12px 50px 12px 46px;
+    border: 2px solid #e5e7eb;
+    background: #f8f9ff;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #1f2937;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.life-of-christ-search-input::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
+}
+
+.life-of-christ-search-input:hover {
+    border-color: #667eea;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.life-of-christ-search-input:focus {
+    border: 2px solid transparent;
+    background: linear-gradient(#ffffff, #ffffff) padding-box,
+                linear-gradient(90deg, #667eea 0%, #764ba2 100%) border-box;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.life-of-christ-search-input:focus ~ .search-icon {
+    color: #667eea;
+}
+
+/* Clear Button (Inside Input on Right) */
+.search-clear-btn {
+    position: absolute;
+    right: 6px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #f3f4f6;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.search-clear-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.search-clear-btn:hover {
+    background: #e5e7eb;
+    color: #374151;
+    transform: scale(1.1) rotate(90deg);
+}
+
+.search-clear-btn:active {
+    transform: scale(0.95);
+}
+
+.search-results-info {
+    margin-top: 8px;
+    padding: 4px 12px;
+    text-align: left;
+    font-size: 12px;
+    color: #10b981;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.search-results-info.visible {
+    opacity: 1;
+}
+
+.search-results-info.no-results {
+    color: #e53e3e;
+}
+
+/* Hidden card class for search filtering */
+.life-of-jesus-card.hidden-by-search {
+    display: none;
+}
+
+/* Animation for search results */
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.life-of-jesus-card.search-result {
+    animation: fadeInCard 0.3s ease;
+}
+
 .verse-badge.mark {
     background: #fecaca;
     color: #991b1b;
@@ -2776,6 +2925,51 @@ nav {
     .life-of-jesus-card-title {
         font-size: 16px;
     }
+    
+    /* Responsive search bar */
+    .life-of-christ-search-container {
+        padding: 0 10px;
+        margin-bottom: 20px;
+    }
+    
+    /* Responsive search bar */
+    .life-of-christ-search-container {
+        padding: 0 10px;
+        margin-bottom: 20px;
+    }
+    
+    .life-of-christ-search-container-compact {
+        max-width: 100%;
+        margin-top: 10px;
+    }
+    
+    .search-icon {
+        left: 14px;
+        width: 18px;
+        height: 18px;
+    }
+    
+    .life-of-christ-search-input {
+        padding: 10px 44px 10px 42px;
+        font-size: 14px;
+    }
+    
+    .search-clear-btn {
+        width: 30px;
+        height: 30px;
+        right: 5px;
+    }
+    
+    .search-clear-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .search-results-info {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+
 
     .verse-badge {
         font-size: 11px;
