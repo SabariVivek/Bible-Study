@@ -2180,17 +2180,18 @@ nav {
 }
 
 .seed-card {
-    background: linear-gradient(135deg, rgba(236, 135, 192, 0.08) 0%, rgba(236, 135, 192, 0.05) 100%);
-    border-radius: 12px;
+    background: #f5f5f5;
+    border-left: 4px solid #4a7c59;
+    border-radius: 0;
     padding: 32px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: none;
+    transition: background 0.2s ease;
     position: relative;
+    margin-bottom: 24px;
 }
 
 .seed-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    background: #efefef;
 }
 
 .seed-title {
@@ -2199,6 +2200,68 @@ nav {
     font-weight: 700;
     margin: 0 0 20px 0;
     letter-spacing: -0.02em;
+}
+
+.seed-section-header {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.seed-section-header .verse-badge {
+    display: inline-block;
+    background: #e8d5f2;
+    color: #7c3aed;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 12px;
+    vertical-align: middle;
+}
+
+.seed-text-content {
+    color: #4a5568;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-top: 16px;
+}
+
+.seed-text-content ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 16px 0;
+}
+
+.seed-text-content li {
+    padding: 10px 0;
+    position: relative;
+    padding-left: 0;
+    line-height: 1.8;
+    color: #4a5568;
+}
+
+.seed-text-content li:before {
+    content: none;
+}
+
+.seed-image-container {
+    margin: 24px 0;
+    text-align: center;
+}
+
+.seed-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.seed-image:hover {
+    transform: scale(1.01);
 }
 
 .seed-text {
@@ -2222,6 +2285,14 @@ nav {
     
     .seed-title {
         font-size: 20px;
+    }
+    
+    .seed-section-header {
+        font-size: 18px;
+    }
+    
+    .seed-text-content {
+        font-size: 15px;
     }
     
     .seed-text {
