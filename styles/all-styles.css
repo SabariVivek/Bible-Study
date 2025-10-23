@@ -10,6 +10,33 @@
 /* Import Kurale font for Tamil content */
 @import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
 
+/* ============================================
+   VIBRANT COLOR PALETTE - CSS VARIABLES
+   Based on modern vibrant color scheme
+   ============================================ */
+:root {
+    /* Row 1 - Reds to Yellows */
+    --color-ruby: #D8634A;
+    --color-grapefruit: #DD5555;
+    --color-bittersweet: #FC6E51;
+    --color-sunflower: #FFCE54;
+    --color-straw: #E0CE4D;
+    
+    /* Row 2 - Greens to Blues */
+    --color-grass: #A0D468;
+    --color-mint: #48CFAD;
+    --color-teal: #A0CECB;
+    --color-aqua: #4FC1E9;
+    --color-blue-jeans: #5D9CEC;
+    
+    /* Row 3 - Purples to Grays */
+    --color-lavender: #AC92EC;
+    --color-purple: #967ADC;
+    --color-pink: #EC87C0;
+    --color-light-gray: #E6E9ED;
+    --color-medium-gray: #CCD1D9;
+}
+
 /* CONSOLIDATED STYLES - All CSS in one file to match original exactly */
 
 * {
@@ -1921,49 +1948,54 @@ nav {
     font-weight: 500;
 }
 
-/* Era-specific colors */
+/* Era-specific colors using vibrant palette - Each card has unique color */
 .creation-era {
-    border-left-color: #bfdbfe;
+    border-left-color: var(--color-aqua);
 }
 
 .patriarchs-era {
-    border-left-color: #bbf7d0;
+    border-left-color: var(--color-grass);
 }
 
 .exodus-era {
-    border-left-color: #fde68a;
+    border-left-color: var(--color-sunflower);
 }
 
 .kingdom-era {
-    border-left-color: #fecaca;
+    border-left-color: var(--color-ruby);
 }
 
 .exile-era {
-    border-left-color: #ddd6fe;
+    border-left-color: var(--color-lavender);
 }
 
 .new-testament-era {
-    border-left-color: #a5f3fc;
+    border-left-color: var(--color-blue-jeans);
 }
 
 .parables-jesus {
-    border-left-color: #fed7aa;
+    border-left-color: var(--color-bittersweet);
 }
 
 .genealogy-card {
-    border-left-color: #fbcfe8;
+    border-left-color: var(--color-teal);
 }
 
+.prayers-forgiveness {
+    border-left-color: var(--color-mint);
+}
+
+/* Sub-page cards - use remaining unique colors */
 .parables-english {
-    border-left-color: #fed7aa;
+    border-left-color: var(--color-straw);
 }
 
 .parables-tamil {
-    border-left-color: #fecaca;
+    border-left-color: var(--color-grapefruit);
 }
 
 .genealogy-pdf {
-    border-left-color: #e9d5ff;
+    border-left-color: var(--color-purple);
 }
 
 /* Responsive adjustments */
@@ -1983,6 +2015,98 @@ nav {
     
     .era-subtitle {
         font-size: 13px;
+    }
+}
+
+/* ============================================
+   PRAYERS FOR FORGIVENESS STYLES
+   ============================================ */
+
+.prayers-content-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.prayer-card {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid var(--color-mint);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prayer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.prayer-title {
+    color: #0d9488;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.02em;
+}
+
+.prayer-text {
+    color: #374151;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0 0 16px 0;
+    text-align: justify;
+}
+
+.prayer-verse {
+    background: rgba(72, 207, 173, 0.15);
+    border-left: 3px solid var(--color-mint);
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    color: #0d9488;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.prayer-verse em {
+    font-style: italic;
+    font-weight: 500;
+}
+
+.prayer-closing {
+    color: #0d9488;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 20px 0 0 0;
+    text-align: right;
+}
+
+/* Responsive adjustments for prayers */
+@media (max-width: 768px) {
+    .prayers-content-container {
+        padding: 16px;
+        gap: 20px;
+    }
+    
+    .prayer-card {
+        padding: 24px;
+    }
+    
+    .prayer-title {
+        font-size: 20px;
+    }
+    
+    .prayer-text {
+        font-size: 15px;
+    }
+    
+    .prayer-verse {
+        font-size: 14px;
+        padding: 12px 16px;
     }
 }
 

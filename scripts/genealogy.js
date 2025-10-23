@@ -70,8 +70,6 @@ function attachGenealogyCardHandler() {
             window.open('resources/pdf/adam-to-jesuschrist.pdf', '_blank');
         });
         genealogyCard._genealogyHandlerAttached = true;
-        genealogyCard.style.borderLeft = '6px solid #7c3aed'; // or your preferred color
-        // Update card text
         const title = genealogyCard.querySelector('.era-title');
         if (title) title.textContent = 'Adam to Jesus Christ';
         const subtitle = genealogyCard.querySelector('.era-subtitle');
