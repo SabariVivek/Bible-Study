@@ -49,26 +49,25 @@ function loadSeedContent() {
     if (!container) return;
     
     let contentHTML = `
-        <div class="seed-card">
-            <div class="seed-section-header" style="margin-bottom: 24px;">
-                ${seedData.section}
-            </div>
+        <div class="seed-section-header">
+            ${seedData.section}
+        </div>
     `;
     
     // Add image if available
     if (seedData.image) {
         contentHTML += `
-            <div class="seed-image-container" style="margin-bottom: 24px; text-align: center;">
+            <div class="seed-image-container">
                 <img src="${seedData.image}.jpg" 
                      onerror="this.onerror=null; this.src='${seedData.image}.png';" 
                      alt="Seed of Woman Illustration" 
-                     class="seed-image" 
-                     style="max-width: 60%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+                     class="seed-image">
             </div>
         `;
     }
     
     contentHTML += `
+        <div class="seed-card">
             <div class="seed-text-content">
                 ${seedData.text}
             </div>

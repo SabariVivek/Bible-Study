@@ -1,10 +1,21 @@
 @keyframes fancy-spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
+
 @keyframes fancy-spin-reverse {
-    0% { transform: rotate(360deg); }
-    100% { transform: rotate(0deg); }
+    0% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 /* Import Kurale font for Tamil content */
@@ -21,14 +32,14 @@
     --color-bittersweet: #FC6E51;
     --color-sunflower: #FFCE54;
     --color-straw: #E0CE4D;
-    
+
     /* Row 2 - Greens to Blues */
     --color-grass: #A0D468;
     --color-mint: #48CFAD;
     --color-teal: #A0CECB;
     --color-aqua: #4FC1E9;
     --color-blue-jeans: #5D9CEC;
-    
+
     /* Row 3 - Purples to Grays */
     --color-lavender: #AC92EC;
     --color-purple: #967ADC;
@@ -89,12 +100,15 @@ body.modal-open {
     height: 100vh;
     overflow-y: auto;
     z-index: 100;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
 }
 
 .sidebar::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
+    /* Chrome, Safari, Opera */
 }
 
 .sidebar.collapsed {
@@ -371,7 +385,8 @@ nav {
     font-size: 14px;
 }
 
-.filter-btn, .export-btn {
+.filter-btn,
+.export-btn {
     padding: 10px 16px;
     border: 1px solid transparent;
     border-radius: 8px;
@@ -387,7 +402,8 @@ nav {
     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
 }
 
-.filter-btn:hover, .export-btn:hover {
+.filter-btn:hover,
+.export-btn:hover {
     background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
@@ -699,7 +715,7 @@ nav {
     background: -o-linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
     background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Animated Audio Icon Styles */
@@ -748,10 +764,13 @@ nav {
 }
 
 @keyframes audioWave {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scaleY(0.5);
         opacity: 0.7;
     }
+
     50% {
         transform: scaleY(1);
         opacity: 1;
@@ -987,7 +1006,7 @@ nav {
     .filter-options-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .filter-card {
         width: 95%;
         margin: 20px auto;
@@ -1576,7 +1595,8 @@ nav {
 }
 
 .password-input {
-    padding-right: 45px; /* Only one icon for password */
+    padding-right: 45px;
+    /* Only one icon for password */
 }
 
 .form-input:focus {
@@ -1604,7 +1624,8 @@ nav {
     cursor: pointer;
     padding: 4px;
     border-radius: 4px;
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
@@ -1635,7 +1656,8 @@ nav {
     cursor: pointer;
     padding: 4px;
     border-radius: 4px;
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
@@ -1698,8 +1720,13 @@ nav {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Responsive adjustments for login */
@@ -1708,7 +1735,7 @@ nav {
         padding: 30px 20px;
         margin: 10px;
     }
-    
+
     .login-title {
         font-size: 28px;
     }
@@ -1721,20 +1748,24 @@ nav {
     min-height: 100vh;
     width: 100%;
     display: flex;
-    align-items: flex-start; /* Changed from center to flex-start */
+    align-items: flex-start;
+    /* Changed from center to flex-start */
     justify-content: center;
-    padding: 40px 20px 20px 20px; /* Increased top padding to prevent cutoff */
+    padding: 40px 20px 20px 20px;
+    /* Increased top padding to prevent cutoff */
     background-color: #ffffff;
     font-family: "Montserrat", sans-serif;
     overflow-y: visible;
-    overflow-x: hidden; /* Hide horizontal scroll */
+    overflow-x: hidden;
+    /* Hide horizontal scroll */
 }
 
 .timeline-container .timeline {
     width: 80%;
     height: auto;
     max-width: 800px;
-    margin: 20px auto 0 auto; /* Added top margin to prevent cutoff */
+    margin: 20px auto 0 auto;
+    /* Added top margin to prevent cutoff */
     position: relative;
 }
 
@@ -1789,27 +1820,27 @@ nav {
         height: 100%;
         background-color: #ccc;
     }
-    
+
     .timeline-container .timeline ul li {
         width: 50%;
         position: relative;
         margin-bottom: 45px;
     }
-    
+
     .timeline-container .timeline ul li:nth-child(odd) {
         float: left;
         clear: right;
         transform: translateX(-30px);
         border-radius: 20px 0px 20px 20px;
     }
-    
+
     .timeline-container .timeline ul li:nth-child(even) {
         float: right;
         clear: left;
         transform: translateX(30px);
         border-radius: 0px 20px 20px 20px;
     }
-    
+
     .timeline-container .timeline ul li::before {
         content: "";
         position: absolute;
@@ -1819,28 +1850,28 @@ nav {
         background-color: #ccc;
         top: 0px;
     }
-    
+
     .timeline-container .timeline ul li:nth-child(odd)::before {
         transform: translate(50%, -50%);
         right: -30px;
     }
-    
+
     .timeline-container .timeline ul li:nth-child(even)::before {
         transform: translate(-50%, -50%);
         left: -30px;
     }
-    
+
     .timeline-container .timeline-content .date {
         position: absolute;
         top: -30px;
     }
-    
+
     .timeline-container .timeline ul li:hover::before {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         transform: translate(50%, -50%) scale(1.2);
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
-    
+
     .timeline-container .timeline ul li:nth-child(even):hover::before {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         transform: translate(-50%, -50%) scale(1.2);
@@ -2008,15 +2039,15 @@ nav {
         grid-template-columns: 1fr;
         gap: 16px;
     }
-    
+
     .era-card-content {
         padding: 20px;
     }
-    
+
     .era-title {
         font-size: 16px;
     }
-    
+
     .era-subtitle {
         font-size: 13px;
     }
@@ -2147,19 +2178,19 @@ nav {
         padding: 16px;
         gap: 20px;
     }
-    
+
     .prayer-card {
         padding: 24px;
     }
-    
+
     .prayer-title {
         font-size: 20px;
     }
-    
+
     .prayer-text {
         font-size: 15px;
     }
-    
+
     .prayer-verse {
         font-size: 14px;
         padding: 12px 16px;
@@ -2181,7 +2212,6 @@ nav {
 
 .seed-card {
     background: #f5f5f5;
-    border-left: 4px solid #4a7c59;
     border-radius: 0;
     padding: 32px;
     box-shadow: none;
@@ -2207,16 +2237,20 @@ nav {
     font-weight: 700;
     color: #2c3e50;
     line-height: 1.6;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    border-left: 4px solid #4a7c59;
+    background: linear-gradient(to right, #e8f5e9 0%, #ffffff 100%);
+    border-radius: 0 4px 4px 0;
 }
 
 .seed-section-header .verse-badge {
     display: inline-block;
     background: #e8d5f2;
     color: #7c3aed;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 13px;
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-size: 14px;
     font-weight: 600;
     margin-left: 12px;
     vertical-align: middle;
@@ -2230,38 +2264,27 @@ nav {
 }
 
 .seed-text-content ul {
-    list-style: none;
-    padding-left: 0;
+    list-style: disc;
+    padding-left: 24px;
     margin: 16px 0;
 }
 
 .seed-text-content li {
-    padding: 10px 0;
-    position: relative;
-    padding-left: 0;
+    padding: 6px 0;
     line-height: 1.8;
     color: #4a5568;
 }
 
-.seed-text-content li:before {
-    content: none;
-}
-
-.seed-image-container {
-    margin: 24px 0;
-    text-align: center;
-}
-
 .seed-image {
-    max-width: 100%;
+    max-width: 60%;
     height: auto;
     border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto 20px auto    ;
 }
 
 .seed-image:hover {
-    transform: scale(1.01);
+    opacity: 0.95;
 }
 
 .seed-text {
@@ -2278,23 +2301,23 @@ nav {
         padding: 16px;
         gap: 20px;
     }
-    
+
     .seed-card {
         padding: 24px;
     }
-    
+
     .seed-title {
         font-size: 20px;
     }
-    
+
     .seed-section-header {
         font-size: 18px;
     }
-    
+
     .seed-text-content {
         font-size: 15px;
     }
-    
+
     .seed-text {
         font-size: 15px;
     }
@@ -2312,8 +2335,10 @@ nav {
     justify-content: center;
     padding: 20px;
     background-color: #ffffff;
-    overflow-y: auto; /* Add vertical scroll */
-    overflow-x: hidden; /* Hide horizontal scroll */
+    overflow-y: auto;
+    /* Add vertical scroll */
+    overflow-x: hidden;
+    /* Hide horizontal scroll */
 }
 
 .book-chapter-container {
@@ -2695,11 +2720,11 @@ nav {
 .life-of-christ-search-input:focus {
     border: 2px solid transparent;
     background: linear-gradient(#ffffff, #ffffff) padding-box,
-                linear-gradient(90deg, #667eea 0%, #764ba2 100%) border-box;
+        linear-gradient(90deg, #667eea 0%, #764ba2 100%) border-box;
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
-.life-of-christ-search-input:focus ~ .search-icon {
+.life-of-christ-search-input:focus~.search-icon {
     color: #667eea;
 }
 
@@ -2766,6 +2791,7 @@ nav {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -2998,7 +3024,8 @@ nav {
     max-height: 400px;
     overflow-y: auto;
     padding-right: 1rem;
-    font-family: 'Kurale', serif; /* Tamil font */
+    font-family: 'Kurale', serif;
+    /* Tamil font */
     text-align: left;
 }
 
@@ -3031,7 +3058,8 @@ nav {
 /* Responsive for Life of Christ */
 @media (max-width: 768px) {
     .life-of-jesus-container {
-        height: 75vh; /* Slightly taller on mobile */
+        height: 75vh;
+        /* Slightly taller on mobile */
         padding: 10px;
     }
 
@@ -3046,7 +3074,7 @@ nav {
     }
 
     .life-of-jesus-card-title {
-        font-size: 16px;    
+        font-size: 16px;
     }
 
     /* Responsive chapter section headings in Life of Christ */
@@ -3056,40 +3084,40 @@ nav {
         font-size: 20px;
         padding-left: 16px;
     }
-    
+
     /* Responsive search bar */
     .life-of-christ-search-container {
         padding: 0 10px;
         margin-bottom: 20px;
     }
-    
+
     .life-of-christ-search-container-compact {
         max-width: 100%;
         margin-top: 10px;
     }
-    
+
     .search-icon {
         left: 14px;
         width: 18px;
         height: 18px;
     }
-    
+
     .life-of-christ-search-input {
         padding: 10px 44px 10px 42px;
         font-size: 14px;
     }
-    
+
     .search-clear-btn {
         width: 30px;
         height: 30px;
         right: 5px;
     }
-    
+
     .search-clear-btn svg {
         width: 14px;
         height: 14px;
     }
-    
+
     .search-results-info {
         font-size: 11px;
         padding: 4px 8px;
@@ -3152,7 +3180,7 @@ nav {
     max-height: 80vh;
     background: #ffffff;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     padding: 30px;
     z-index: 2200;
     display: flex;
@@ -3160,8 +3188,8 @@ nav {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                visibility 0s linear 0.3s;
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0.3s;
 }
 
 .chapters-popup.show {
@@ -3169,8 +3197,8 @@ nav {
     visibility: visible;
     transform: translate(-50%, -50%) scale(1);
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                visibility 0s linear 0s;
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0s;
 }
 
 .chapters-popup .popup-header {
@@ -3262,19 +3290,57 @@ nav {
     animation: slideUpFade 0.4s ease forwards;
 }
 
-.chapters-popup.show .chapter-card:nth-child(1) { animation-delay: 0.05s; }
-.chapters-popup.show .chapter-card:nth-child(2) { animation-delay: 0.1s; }
-.chapters-popup.show .chapter-card:nth-child(3) { animation-delay: 0.15s; }
-.chapters-popup.show .chapter-card:nth-child(4) { animation-delay: 0.2s; }
-.chapters-popup.show .chapter-card:nth-child(5) { animation-delay: 0.05s; }
-.chapters-popup.show .chapter-card:nth-child(6) { animation-delay: 0.1s; }
-.chapters-popup.show .chapter-card:nth-child(7) { animation-delay: 0.15s; }
-.chapters-popup.show .chapter-card:nth-child(8) { animation-delay: 0.2s; }
-.chapters-popup.show .chapter-card:nth-child(9) { animation-delay: 0.05s; }
-.chapters-popup.show .chapter-card:nth-child(10) { animation-delay: 0.1s; }
-.chapters-popup.show .chapter-card:nth-child(11) { animation-delay: 0.15s; }
-.chapters-popup.show .chapter-card:nth-child(12) { animation-delay: 0.2s; }
-.chapters-popup.show .chapter-card:nth-child(n+13) { animation-delay: 0.25s; }
+.chapters-popup.show .chapter-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(5) {
+    animation-delay: 0.05s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(6) {
+    animation-delay: 0.1s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(7) {
+    animation-delay: 0.15s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(8) {
+    animation-delay: 0.2s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(9) {
+    animation-delay: 0.05s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(10) {
+    animation-delay: 0.1s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(11) {
+    animation-delay: 0.15s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(12) {
+    animation-delay: 0.2s;
+}
+
+.chapters-popup.show .chapter-card:nth-child(n+13) {
+    animation-delay: 0.25s;
+}
 
 @keyframes slideUpFade {
     to {
@@ -3302,7 +3368,7 @@ nav {
         max-width: 400px;
         padding: 20px;
     }
-    
+
     .chapters {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -3688,11 +3754,11 @@ nav {
         width: 90%;
         right: -90%;
     }
-    
+
     .synopsis-btn .synopsis-text {
         display: none;
     }
-    
+
     .synopsis-btn {
         padding: 10px 14px;
         margin-right: 5px;
