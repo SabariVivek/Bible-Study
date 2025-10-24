@@ -1,6 +1,7 @@
 const charactersData = [
     {
         name: "Aaron",
+        tamilName: "ஆரோன்",
         description: "The first high priest of Israel and brother of Moses who spoke on his behalf before Pharaoh.",
         lesson: "Spiritual leadership requires humility and obedience to God's instructions."
     },

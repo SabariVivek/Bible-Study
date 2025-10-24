@@ -91,10 +91,12 @@ function createCharacterCard(character, index) {
 
     card.innerHTML = `
         <div class="character-card-content">
-            <h3 class="character-card-name">${character.name}</h3>
+            <h3 class="character-card-name${character.tamilName ? ' has-tamil-name' : ''}" ${character.tamilName ? `data-tamil="${character.tamilName}"` : ''}>
+                <span class="english-name">${character.name}</span>
+                ${character.tamilName ? `<span class="tamil-name">${character.tamilName}</span>` : ''}
+            </h3>
             <p class="character-card-description">${character.description}</p>
             <div class="character-card-lesson">
-                <div class="lesson-icon">💡</div>
                 <p class="lesson-text">${character.lesson}</p>
             </div>
         </div>
