@@ -799,6 +799,7 @@ function initializeLifeOfChristSearch() {
 
 // Filter cards using smart search
 function filterLifeOfChristCardsWithFuse(searchTerm) {
+    const cardsGrid = document.getElementById('lifeOfJesusCardsGrid');
     const cards = document.querySelectorAll('.life-of-jesus-card');
     const sectionHeaders = document.querySelectorAll('.chapter-section-heading');
     const resultsInfo = document.getElementById('searchResultsInfo');
@@ -812,6 +813,12 @@ function filterLifeOfChristCardsWithFuse(searchTerm) {
         sectionHeaders.forEach(header => {
             header.classList.remove('hidden-by-search');
         });
+        
+        // Remove no results message if it exists
+        const noResultsMsg = document.querySelector('.life-of-christ-no-results');
+        if (noResultsMsg) {
+            noResultsMsg.remove();
+        }
         
         if (resultsInfo) {
             resultsInfo.textContent = '';
@@ -847,11 +854,34 @@ function filterLifeOfChristCardsWithFuse(searchTerm) {
         }
     });
     
-    // Update results info
+    // Remove existing no results message
+    const existingNoResults = document.querySelector('.life-of-christ-no-results');
+    if (existingNoResults) {
+        existingNoResults.remove();
+    }
+    
+    // Update results info or show no results message
     if (resultsInfo) {
         if (visibleCount === 0) {
-            resultsInfo.textContent = 'No events found matching your search';
-            resultsInfo.classList.add('visible', 'no-results');
+            // Hide results info text
+            resultsInfo.textContent = '';
+            resultsInfo.classList.remove('visible', 'no-results');
+            
+            // Show the styled no results message
+            if (cardsGrid) {
+                const noResultsDiv = document.createElement('div');
+                noResultsDiv.className = 'life-of-christ-no-results';
+                noResultsDiv.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <circle cx="12" cy="16" r="0.5" fill="currentColor"/>
+                    </svg>
+                    <h3>No events found</h3>
+                    <p>Try adjusting your search terms</p>
+                `;
+                cardsGrid.appendChild(noResultsDiv);
+            }
         } else {
             const plural = visibleCount === 1 ? 'event' : 'events';
             resultsInfo.textContent = `Found ${visibleCount} ${plural}`;

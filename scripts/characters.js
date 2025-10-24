@@ -43,16 +43,24 @@ function renderCharacterCards(searchTerm = '') {
     // Clear container
     container.innerHTML = '';
 
-    // Add search info if searching
+    // Update search info
+    const searchInfo = document.getElementById('charactersSearchInfo');
     if (searchTerm.trim()) {
-        const searchInfo = document.getElementById('charactersSearchInfo');
         if (searchInfo) {
-            searchInfo.textContent = `Found ${filteredCharacters.length} character${filteredCharacters.length !== 1 ? 's' : ''}`;
-            searchInfo.style.display = 'block';
+            if (filteredCharacters.length === 0) {
+                searchInfo.textContent = '';
+                searchInfo.classList.remove('visible');
+            } else {
+                const plural = filteredCharacters.length === 1 ? 'character' : 'characters';
+                searchInfo.textContent = `Found ${filteredCharacters.length} ${plural}`;
+                searchInfo.classList.add('visible');
+            }
         }
     } else {
-        const searchInfo = document.getElementById('charactersSearchInfo');
-        if (searchInfo) searchInfo.style.display = 'none';
+        if (searchInfo) {
+            searchInfo.textContent = '';
+            searchInfo.classList.remove('visible');
+        }
     }
 
     // Render all cards
@@ -90,16 +98,8 @@ function createCharacterCard(character, index) {
                 <p class="lesson-text">${character.lesson}</p>
             </div>
         </div>
+        <div class="shine"></div>
     `;
-
-    // Add hover effect
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-8px)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-    });
 
     return card;
 }
