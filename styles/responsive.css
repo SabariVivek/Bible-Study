@@ -311,6 +311,36 @@
     .sidebar.collapsed {
         width: 70px;
     }
+
+    /* Seed of Woman Header Styles for iPad */
+    .content-header-centered {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: nowrap;
+    }
+
+    .content-header-centered .page-title {
+        font-size: 28px;
+        flex: 0 1 auto;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    .chapter-navigation-header {
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+
+    .back-btn-circle {
+        flex-shrink: 0;
+    }
+
+    /* Ensure proper spacing on iPad */
+    .main-content {
+        padding: 24px 32px;
+    }
 }
 
 /* Large Desktop Styles (1200px and above) */

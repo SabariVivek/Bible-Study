@@ -2130,8 +2130,8 @@ nav {
 }
 
 .prayer-verse-line {
-    line-height: 2.5;
-    font-size: 100%;
+    line-height: 2.2;
+    font-size: 16px;
     color: black;
     font-size-adjust: 0.9;
     max-height: 400px;
@@ -2194,6 +2194,50 @@ nav {
     .prayer-verse {
         font-size: 14px;
         padding: 12px 16px;
+    }
+
+    .prayer-verse-line {
+        font-size: 15px;
+        line-height: 2.2;
+    }
+}
+
+/* iPad and Tablet Landscape Styles for Prayers (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .prayers-content-container {
+        max-width: 700px;
+        padding: 24px 20px;
+        gap: 24px;
+    }
+
+    .prayer-card {
+        padding: 28px;
+    }
+
+    .prayer-title {
+        font-size: 22px;
+    }
+
+    .prayer-text {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    .prayer-verse {
+        padding: 16px 32px;
+    }
+
+    .prayer-verse-line {
+        font-size: 16px;
+        line-height: 2.0;
+    }
+
+    .prayer-section-title {
+        font-size: 17px;
+    }
+
+    .prayer-by {
+        font-size: 14px;
     }
 }
 
@@ -2310,7 +2354,7 @@ nav {
     }
 
     .seed-card {
-        padding: 24px;
+        padding: 0;
     }
 
     .seed-title {
@@ -2319,14 +2363,83 @@ nav {
 
     .seed-section-header {
         font-size: 18px;
+        padding: 20px 24px;
     }
 
     .seed-text-content {
         font-size: 15px;
+        padding: 0 24px 24px 24px;
     }
 
     .seed-text {
         font-size: 15px;
+    }
+
+    .seed-image-container {
+        padding: 24px;
+    }
+
+    .seed-image {
+        max-width: 100%;
+    }
+}
+
+/* iPad and Tablet Landscape Styles for Seed of Woman (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .seed-content-container {
+        max-width: 700px;
+        padding: 24px 20px;
+        gap: 24px;
+    }
+
+    .seed-card {
+        padding: 0;
+        margin-bottom: 24px;
+    }
+
+    .seed-section-header {
+        font-size: 20px;
+        padding: 24px 28px;
+        line-height: 1.5;
+    }
+
+    .seed-image-container {
+        padding: 28px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .seed-image {
+        max-width: 70%;
+        width: auto;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .seed-text-content {
+        font-size: 16px;
+        line-height: 1.8;
+        padding: 0 28px 28px 28px;
+        text-align: left;
+    }
+
+    .seed-text-content ul {
+        padding-left: 24px;
+        margin: 16px 0;
+    }
+
+    .seed-text-content li {
+        padding: 6px 0;
+        line-height: 1.8;
+    }
+
+    .seed-text {
+        font-size: 16px;
+        line-height: 1.8;
+        text-align: left;
     }
 }
 
