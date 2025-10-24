@@ -63,19 +63,15 @@ async function updateChapterAudioIconVisibility(bookName, chapterNum) {
         return;
     }
     
-    console.log(`Checking audio for: ${bookName} Chapter ${chapterNum}`);
     const audioCheck = await checkChapterAudioExists(bookName, chapterNum);
-    console.log(`Audio check result:`, audioCheck);
     
     if (audioCheck.exists) {
         audioBtn.style.display = 'flex';
         audioBtn.dataset.audioPath = audioCheck.path;
         audioBtn.dataset.bookName = bookName;
         audioBtn.dataset.chapterNum = chapterNum;
-        console.log(`Audio icon shown for ${bookName} Chapter ${chapterNum}`);
     } else {
         audioBtn.style.display = 'none';
-        console.log(`Audio icon hidden for ${bookName} Chapter ${chapterNum}`);
     }
 }
 

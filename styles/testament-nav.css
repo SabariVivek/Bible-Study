@@ -37,6 +37,13 @@
     visibility: visible;
 }
 
+/* Disable hover when menu is closing after a selection */
+.testament-nav-wrapper.menu-closing:hover .testament-mega-menu {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
 .testament-mega-menu-content {
     padding: 0;
     text-align: left;

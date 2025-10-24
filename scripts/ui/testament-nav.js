@@ -37,6 +37,7 @@ const testamentBooksData = {
 // Store currently selected book
 let selectedTestamentBook = null;
 let selectedTestamentBookElement = null;
+let isMenuClosing = false; // Flag to prevent immediate reopening after click
 
 /**
  * Initialize the testament navigation menu
@@ -59,8 +60,17 @@ function initializeTestamentNav(triggerElementId, currentBook = null) {
     // Check if already initialized - remove old initialization if exists
     const existingWrapper = triggerElement.closest('.testament-nav-wrapper');
     if (existingWrapper) {
-        if (selectedTestamentBook) {
-            markSelectedBook(selectedTestamentBook);
+        // If menu is currently closing, wait for it to finish before updating
+        if (isMenuClosing) {
+            setTimeout(() => {
+                if (selectedTestamentBook) {
+                    markSelectedBook(selectedTestamentBook);
+                }
+            }, 450);
+        } else {
+            if (selectedTestamentBook) {
+                markSelectedBook(selectedTestamentBook);
+            }
         }
         return;
     }
@@ -353,6 +363,11 @@ function selectTestamentBook(bookLink) {
  * Mark a book as selected in the navigation menu
  */
 function markSelectedBook(bookName) {
+    // Don't update selection if menu is closing
+    if (isMenuClosing) {
+        return;
+    }
+    
     // Remove any existing selected class
     const allBookLinks = document.querySelectorAll('.testament-menu-item a');
     allBookLinks.forEach(link => link.classList.remove('selected'));
@@ -387,15 +402,30 @@ function isOldTestamentBook(bookName) {
  */
 function closeTestamentMenu() {
     const megaMenu = document.querySelector('.testament-mega-menu');
-    if (megaMenu) {
+    const wrapper = document.querySelector('.testament-nav-wrapper');
+    
+    if (megaMenu && wrapper) {
+        // Set flag to prevent immediate reopening
+        isMenuClosing = true;
+        
+        // Add a class to disable hover
+        wrapper.classList.add('menu-closing');
+        
+        // Force hide the menu immediately
         megaMenu.style.opacity = '0';
         megaMenu.style.visibility = 'hidden';
+        megaMenu.style.pointerEvents = 'none';
         
-        // Reset styles after animation
+        // Reset styles and flag after animation
         setTimeout(() => {
-            megaMenu.style.opacity = '';
-            megaMenu.style.visibility = '';
-        }, 300);
+            if (megaMenu && wrapper) {
+                megaMenu.style.opacity = '';
+                megaMenu.style.visibility = '';
+                megaMenu.style.pointerEvents = '';
+                wrapper.classList.remove('menu-closing');
+            }
+            isMenuClosing = false;
+        }, 400);
     }
 }
 
