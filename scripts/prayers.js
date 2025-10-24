@@ -115,6 +115,7 @@ function navigateToNextPrayer() {
         currentPrayerIndex = 0;
     }
     loadPrayerContent();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function navigateToPreviousPrayer() {
@@ -125,6 +126,7 @@ function navigateToPreviousPrayer() {
         currentPrayerIndex = prayersData.length - 1;
     }
     loadPrayerContent();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function updatePrayerNavigationButtons() {
@@ -176,6 +178,126 @@ function attachPrayersCardHandler() {
     hidePrayersSectionOnTabSwitch();
 }
 
+// Keyboard Navigation for Prayers
+function initPrayersKeyboardNavigation() {
+    document.addEventListener('keydown', function(e) {
+        const prayersSection = document.getElementById('prayers-forgiveness-section');
+        
+        // Only handle if prayers section is visible
+        if (!prayersSection || prayersSection.classList.contains('hidden')) {
+            return;
+        }
+        
+        // Left arrow - previous prayer
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            navigateToPreviousPrayer();
+        }
+        // Right arrow - next prayer
+        else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            navigateToNextPrayer();
+        }
+    });
+}
+
+// Swipe/Touch Navigation for Prayers
+function initPrayersSwipeNavigation() {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    let wheelTimeout = null;
+    let isNavigating = false;
+    const minSwipeDistance = 50;
+    const maxVerticalDistance = 100;
+
+    function handlePrayerSwipeGesture() {
+        const horizontalDistance = touchEndX - touchStartX;
+        const verticalDistance = Math.abs(touchEndY - touchStartY);
+        
+        // Check if it's a horizontal swipe (not vertical scroll)
+        if (Math.abs(horizontalDistance) > minSwipeDistance && verticalDistance < maxVerticalDistance) {
+            if (horizontalDistance > 0) {
+                // Swipe right - go to previous prayer
+                handlePrayerSwipeRight();
+            } else {
+                // Swipe left - go to next prayer
+                handlePrayerSwipeLeft();
+            }
+        }
+    }
+
+    function handlePrayerSwipeLeft() {
+        if (isNavigating) return;
+        
+        const prayersSection = document.getElementById('prayers-forgiveness-section');
+        if (prayersSection && !prayersSection.classList.contains('hidden')) {
+            isNavigating = true;
+            navigateToNextPrayer();
+            setTimeout(() => {
+                isNavigating = false;
+            }, 500);
+        }
+    }
+
+    function handlePrayerSwipeRight() {
+        if (isNavigating) return;
+        
+        const prayersSection = document.getElementById('prayers-forgiveness-section');
+        if (prayersSection && !prayersSection.classList.contains('hidden')) {
+            isNavigating = true;
+            navigateToPreviousPrayer();
+            setTimeout(() => {
+                isNavigating = false;
+            }, 500);
+        }
+    }
+
+    // Touch events for mobile and tablet
+    document.addEventListener('touchstart', function(e) {
+        const prayersSection = document.getElementById('prayers-forgiveness-section');
+        if (prayersSection && !prayersSection.classList.contains('hidden')) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+        const prayersSection = document.getElementById('prayers-forgiveness-section');
+        if (prayersSection && !prayersSection.classList.contains('hidden')) {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handlePrayerSwipeGesture();
+        }
+    }, { passive: true });
+
+    // Trackpad horizontal scroll (two-finger swipe)
+    document.addEventListener('wheel', function(e) {
+        const prayersSection = document.getElementById('prayers-forgiveness-section');
+        
+        if (prayersSection && !prayersSection.classList.contains('hidden') && !isNavigating) {
+            
+            // Detect horizontal scroll (two-finger swipe on trackpad)
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
+                e.preventDefault();
+                
+                // Debounce to prevent multiple triggers
+                clearTimeout(wheelTimeout);
+                wheelTimeout = setTimeout(function() {
+                    if (e.deltaX > 0 && !isNavigating) {
+                        // Scrolling right - go to next prayer
+                        handlePrayerSwipeLeft();
+                    } else if (e.deltaX < 0 && !isNavigating) {
+                        // Scrolling left - go to previous prayer
+                        handlePrayerSwipeRight();
+                    }
+                }, 150);
+            }
+        }
+    }, { passive: false });
+}
+
 // Attach handler on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
     attachPrayersCardHandler();
@@ -190,4 +312,8 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(attachPrayersCardHandler, 0);
         };
     }
+    
+    // Initialize keyboard navigation and swipe for prayers section
+    initPrayersKeyboardNavigation();
+    initPrayersSwipeNavigation();
 });
