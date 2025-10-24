@@ -57,8 +57,8 @@
                     <span class="nav-text">Timeline</span>
                 </div>
                 <div class="nav-item genealogy" onclick="showGenealogy()">
-                    <span class="nav-icon">🌳</span>
-                    <span class="nav-text">Genealogy</span>
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">Character Study</span>
                 </div>
                 <div class="nav-item maps" onclick="showMaps()">
                     <span class="nav-icon">🗺️</span>
@@ -137,10 +137,10 @@
                     </div>
                     <div class="era-card genealogy-card" style="cursor:pointer;">
                         <div class="era-card-content" style="position:relative;">
-                            <h3 class="era-title">Adam to Jesus Christ</h3>
-                            <p class="era-subtitle">Family Lineage</p>  
+                            <h3 class="era-title">Character Study</h3>
+                            <p class="era-subtitle">Biblical Characters</p>  
                             <span class="pdf-icon" style="position:absolute; right:24px; top:50%; transform:translateY(-50%);">
-                                <img src="resources/icon/pdf-icon.png" alt="PDF" style="height:32px; width:32px; vertical-align:middle;" />
+                                <span style="font-size:32px;">👤</span>
                             </span>
                         </div>
                     </div>
@@ -1994,14 +1994,37 @@
                 </div>
             </div>
 
-            <!-- Genealogy Content -->
+            <!-- Character Study Content -->
             <div id="genealogy-content" class="hidden">
                 <div class="content-header">     
-                    <h1 class="page-title">Biblical Genealogy</h1>
+                    <h1 class="page-title">Character Study</h1>
+                    <!-- Search Bar for Characters -->
+                    <div class="characters-search-container">
+                        <div class="search-bar-wrapper">
+                            <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <input 
+                                type="text" 
+                                id="charactersSearch" 
+                                class="characters-search-input" 
+                                placeholder="Search characters by name, description, or lesson..."
+                                autocomplete="off"
+                            />
+                            <button class="search-clear-btn" id="charactersClearBtn" style="display: none;">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="search-results-info" id="charactersSearchInfo"></div>
+                    </div>
                 </div>
-                <div style="text-align: center; padding: 50px;">
-                    <h2>Biblical Genealogy</h2>
-                    <p style="color: #6b7280; margin-top: 20px;">Genealogy features are coming soon. This will include family trees and lineage information from the Bible.</p>
+                
+                <div class="characters-container">
+                    <div class="characters-cards-grid" id="charactersCardsGrid">
+                        <!-- Cards will be dynamically generated here -->
+                    </div>
                 </div>
             </div>
 
@@ -2557,6 +2580,7 @@
     <script src="scripts/data/prophets-data.js"></script>
     <script src="scripts/data/books-data.js"></script>
     <script src="scripts/data/passages.js"></script>
+    <script src="scripts/data/characters-data.js"></script>
     <script src="scripts/data/individual-chapters/matthew-data.js"></script>
     <script src="scripts/data/individual-chapters/exodus-data.js"></script>
     <script src="scripts/data/individual-chapters/job-data.js"></script>
@@ -2626,6 +2650,7 @@
     
     <script src="scripts/utils/table-utils.js"></script>
     <script src="scripts/main.js"></script>
+    <script src="scripts/characters.js"></script>
     <script src="scripts/ui/testament-nav.js"></script>
     <script src="scripts/ui/modal.js"></script>
     <script src="scripts/ui/events.js"></script>

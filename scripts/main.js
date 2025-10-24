@@ -2751,6 +2751,14 @@ function showGenealogy() {
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
+    // Initialize character study
+    if (typeof initializeCharacterStudy === 'function') {
+        setTimeout(() => {
+            initializeCharacterStudy();
+            setupCharactersSearch();
+        }, 100);
+    }
+    
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
