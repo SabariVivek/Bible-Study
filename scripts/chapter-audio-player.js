@@ -6,7 +6,9 @@
 // Store current chapter info for drawer access
 let currentChapterAudioInfo = {
     bookName: '',
-    chapterNum: ''
+    chapterNum: '',
+    isMinimized: false,
+    testament: '' // 'old' or 'new'
 };
 
 // Format book name for file paths
@@ -124,7 +126,34 @@ function handleChapterAudioClick(event) {
     const chapterNum = audioBtn.dataset.chapterNum;
     
     if (audioPath && bookName && chapterNum) {
-        loadChapterAudioPlayer(audioPath, bookName, chapterNum);
+        // Check if the same chapter is already playing
+        const existingPlayer = document.querySelector('.chapter-audio-player-overlay');
+        
+        if (existingPlayer && 
+            currentChapterAudioInfo.bookName === bookName && 
+            currentChapterAudioInfo.chapterNum === chapterNum) {
+            
+            // Same chapter - just maximize if minimized
+            const playerContainer = existingPlayer.querySelector('.player-container');
+            if (playerContainer && playerContainer.classList.contains('minimized')) {
+                playerContainer.classList.remove('minimized');
+                existingPlayer.classList.remove('minimized');
+                // Reset to default centered position
+                playerContainer.style.position = 'relative';
+                playerContainer.style.bottom = 'auto';
+                playerContainer.style.right = 'auto';
+                playerContainer.style.top = 'auto';
+                playerContainer.style.left = 'auto';
+                playerContainer.style.transform = 'none';
+                
+                // Update global minimized state
+                currentChapterAudioInfo.isMinimized = false;
+            }
+            // If already maximized, do nothing
+        } else {
+            // Different chapter or no player - load new player
+            loadChapterAudioPlayer(audioPath, bookName, chapterNum);
+        }
     }
 }
 
@@ -133,6 +162,16 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
     // Store current chapter info for drawer access
     currentChapterAudioInfo.bookName = bookName;
     currentChapterAudioInfo.chapterNum = chapterNum;
+    currentChapterAudioInfo.isMinimized = false; // Reset minimized state for new player
+    
+    // Detect testament from audio file path
+    if (audioFile.includes('chapters-old')) {
+        currentChapterAudioInfo.testament = 'old';
+    } else if (audioFile.includes('chapters-new')) {
+        currentChapterAudioInfo.testament = 'new';
+    } else {
+        currentChapterAudioInfo.testament = 'old'; // Default to old
+    }
     
     // Remove any existing player
     const existingPlayer = document.querySelector('.chapter-audio-player-overlay');
@@ -178,6 +217,10 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
                 background: rgba(0, 0, 0, 0);
                 backdrop-filter: blur(0px);
                 pointer-events: none;
+            }
+
+            .chapter-audio-player-overlay.minimized {
+                z-index: 10003 !important;
             }
 
             .chapter-audio-player-overlay .enhanced-player-body {
@@ -273,6 +316,8 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
 
             .chapter-audio-player-overlay .player-container.minimized {
                 max-width: 250px;
+                z-index: 10002;
+                position: relative;
             }
 
             .chapter-audio-player-overlay .player-container.minimized .waveform-container,
@@ -1017,7 +1062,8 @@ function initializeChapterPlayer(overlay) {
     });
 
     // Minimize button
-    minimizeBtn.addEventListener('click', () => {
+    minimizeBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent overlay click from interfering
         if (!isMinimized) {
             playerContainer.classList.add('minimized');
             overlay.classList.add('minimized');
@@ -1029,20 +1075,40 @@ function initializeChapterPlayer(overlay) {
             playerContainer.style.right = offset;
             playerContainer.style.top = 'auto';
             playerContainer.style.left = 'auto';
+            playerContainer.style.transform = 'none';
             isMinimized = true;
+            currentChapterAudioInfo.isMinimized = true; // Update global state
         } else {
+            // Maximize - reset to default centered position
             playerContainer.classList.remove('minimized');
             overlay.classList.remove('minimized');
             playerContainer.style.position = 'relative';
             playerContainer.style.bottom = 'auto';
             playerContainer.style.right = 'auto';
+            playerContainer.style.top = 'auto';
+            playerContainer.style.left = 'auto';
+            playerContainer.style.transform = 'none';
             isMinimized = false;
+            currentChapterAudioInfo.isMinimized = false; // Update global state
         }
     });
 
     // Click outside to minimize
     overlay.addEventListener('click', (e) => {
-        if (!playerContainer.contains(e.target) && !isMinimized) {
+        // Check if player is minimized by looking at the actual state (CSS class)
+        const isCurrentlyMinimized = playerContainer.classList.contains('minimized');
+        
+        if (!playerContainer.contains(e.target) && !isCurrentlyMinimized) {
+            // Close drawer if open
+            const drawer = document.getElementById('chapterReadDrawer');
+            const drawerOverlay = document.getElementById('chapterReadDrawerOverlay');
+            if (drawer && drawer.classList.contains('active')) {
+                drawer.classList.remove('active');
+                drawerOverlay.classList.remove('active');
+                // Restore body scrolling
+                document.body.style.overflow = '';
+            }
+            
             playerContainer.classList.add('minimized');
             overlay.classList.add('minimized');
             playerContainer.style.position = 'fixed';
@@ -1054,11 +1120,23 @@ function initializeChapterPlayer(overlay) {
             playerContainer.style.top = 'auto';
             playerContainer.style.left = 'auto';
             isMinimized = true;
+            currentChapterAudioInfo.isMinimized = true; // Update global state
         }
     });
 
     // Close button
     closeBtn.addEventListener('click', () => {
+        // Close drawer if open
+        const drawer = document.getElementById('chapterReadDrawer');
+        const drawerOverlay = document.getElementById('chapterReadDrawerOverlay');
+        if (drawer && drawer.classList.contains('active')) {
+            drawer.classList.remove('active');
+            drawerOverlay.classList.remove('active');
+            // Restore body scrolling
+            document.body.style.overflow = '';
+        }
+        
+        // Close audio player
         audio.pause();
         audio.currentTime = 0;
         overlay.style.opacity = '0';
@@ -1068,11 +1146,21 @@ function initializeChapterPlayer(overlay) {
         }, 300);
     });
 
-    // Read button - Open drawer
+    // Read button - Toggle drawer
     const readBtn = overlay.querySelector('#readBtn');
     if (readBtn) {
-        readBtn.addEventListener('click', () => {
-            openChapterReadDrawer();
+        readBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const drawer = document.getElementById('chapterReadDrawer');
+            
+            // Check if drawer is already open
+            if (drawer && drawer.classList.contains('active')) {
+                // Close drawer if already open
+                closeChapterReadDrawer();
+            } else {
+                // Open drawer if closed
+                openChapterReadDrawer();
+            }
         });
     } else {
         console.error('Read button not found in chapter audio player');
@@ -1133,46 +1221,214 @@ function openChapterReadDrawer() {
         
         console.log('Drawer created and appended to body');
         
-        // Add close event listeners
-        drawerOverlay.addEventListener('click', closeChapterReadDrawer);
-        drawer.querySelector('#chapterReadCloseBtn').addEventListener('click', closeChapterReadDrawer);
+        // Add close event listeners - only on overlay clicks, not drawer clicks
+        drawerOverlay.addEventListener('click', (e) => {
+            // Only close if clicking the overlay itself, not the drawer
+            if (e.target === drawerOverlay) {
+                closeChapterReadDrawer(true); // Minimize player when clicking overlay
+            }
+        });
+        drawer.querySelector('#chapterReadCloseBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeChapterReadDrawer(false); // Don't minimize player when clicking close button
+        });
+        
+        // Prevent drawer clicks from closing
+        drawer.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
     } else {
         console.log('Drawer already exists, updating title');
         // Update title if drawer already exists
         drawer.querySelector('#chapterReadTitle').textContent = `${bookName} - Chapter ${chapterNum}`;
     }
     
+    // Load chapter content with testament info
+    const testament = currentChapterAudioInfo.testament || 'old';
+    loadChapterContent(bookName, chapterNum, testament);
+    
+    // Prevent body scrolling when drawer is open
+    document.body.style.overflow = 'hidden';
+    
     // Open drawer
     setTimeout(() => {
         console.log('Activating drawer');
         drawer.classList.add('active');
         drawerOverlay.classList.add('active');
+        
+        // Adjust audio player position to center of remaining space
+        const audioPlayerOverlay = document.querySelector('.chapter-audio-player-overlay');
+        const playerContainer = audioPlayerOverlay?.querySelector('.player-container');
+        
+        if (audioPlayerOverlay && playerContainer && !playerContainer.classList.contains('minimized')) {
+            const drawerWidth = 450; // Width of the drawer
+            const remainingWidth = window.innerWidth - drawerWidth;
+            const playerWidth = playerContainer.offsetWidth;
+            
+            // Center the player in the remaining space (left side)
+            const leftPosition = (remainingWidth - playerWidth) / 2;
+            
+            playerContainer.style.position = 'fixed';
+            playerContainer.style.left = `${leftPosition}px`;
+            playerContainer.style.top = '50%';
+            playerContainer.style.transform = 'translateY(-50%)';
+            playerContainer.style.right = 'auto';
+            playerContainer.style.bottom = 'auto';
+        }
     }, 10);
 }
 
-function closeChapterReadDrawer() {
+// Dynamically load chapter captions file
+function loadChapterCaptionsFile(bookName, testament) {
+    return new Promise((resolve) => {
+        const formattedBookName = formatBookNameForAudio(bookName);
+        const formattedBookNameCapitalized = formattedBookName.charAt(0).toUpperCase() + formattedBookName.slice(1);
+        
+        // Construct the path to the captions file
+        // Pattern: resources/audio/chapters-old/bookname/bookname-chapter-captions.js
+        const captionsPath = `resources/audio/chapters-${testament}/${formattedBookName}/${formattedBookName}-chapter-captions.js`;
+        
+        // Check if the captions object already exists in window
+        const captionsObjectName = `${formattedBookNameCapitalized}ChapterCaptions`;
+        if (typeof window[captionsObjectName] !== 'undefined') {
+            resolve(true);
+            return;
+        }
+        
+        // Try to load the captions file dynamically
+        const script = document.createElement('script');
+        script.src = captionsPath;
+        
+        script.onload = () => {
+            console.log(`Loaded captions for ${bookName}`);
+            // Give the script a moment to execute and define the global object
+            setTimeout(() => {
+                // Verify the object was created
+                if (typeof window[captionsObjectName] !== 'undefined') {
+                    console.log(`${captionsObjectName} object is now available`);
+                    resolve(true);
+                } else {
+                    console.warn(`Script loaded but ${captionsObjectName} object not found`);
+                    resolve(false);
+                }
+            }, 50);
+        };
+        
+        script.onerror = () => {
+            console.log(`No captions file found for ${bookName} at ${captionsPath}`);
+            resolve(false);
+        };
+        
+        document.head.appendChild(script);
+    });
+}
+
+// Load chapter content from captions file
+async function loadChapterContent(bookName, chapterNum, testament) {
+    const drawerContent = document.getElementById('chapterReadDrawerContent');
+    if (!drawerContent) return;
+    
+    console.log('Loading content for:', bookName, 'Chapter', chapterNum, 'Testament:', testament);
+    
+    // Show loading state
+    drawerContent.innerHTML = `
+        <div class="loading-content">
+            <p>Loading content...</p>
+        </div>
+    `;
+    
+    // Try to load the captions file
+    const captionsLoaded = await loadChapterCaptionsFile(bookName, testament);
+    console.log('Captions loaded:', captionsLoaded);
+    
+    if (!captionsLoaded) {
+        // No captions file found
+        drawerContent.innerHTML = `
+            <div class="no-content">
+                <p>Content for ${bookName} Chapter ${chapterNum} is not available yet.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Format book name to match the data structure
+    const formattedBookName = formatBookNameForAudio(bookName);
+    const formattedBookNameCapitalized = formattedBookName.charAt(0).toUpperCase() + formattedBookName.slice(1);
+    const chapterKey = `chapter_${chapterNum}`;
+    
+    // Get the chapter captions data
+    const captionsObjectName = `${formattedBookNameCapitalized}ChapterCaptions`;
+    console.log('Looking for object:', captionsObjectName, 'with key:', chapterKey);
+    console.log('Object exists:', typeof window[captionsObjectName] !== 'undefined');
+    const chapterData = window[captionsObjectName]?.[chapterKey];
+    console.log('Chapter data found:', !!chapterData);
+    
+    if (chapterData && Array.isArray(chapterData)) {
+        // Build the HTML content
+        let html = '<div class="chapter-content">';
+        
+        chapterData.forEach((paragraph, index) => {
+            if (index === 0) {
+                // First item is the title
+                html += `<h2 class="chapter-title">${paragraph.text}</h2>`;
+            } else {
+                // Rest are paragraphs
+                html += `<p class="chapter-paragraph">${paragraph.text}</p>`;
+            }
+        });
+        
+        html += '</div>';
+        drawerContent.innerHTML = html;
+    } else {
+        // Chapter data not found in captions file
+        drawerContent.innerHTML = `
+            <div class="no-content">
+                <p>Content for ${bookName} Chapter ${chapterNum} is not available yet.</p>
+            </div>
+        `;
+    }
+}
+
+function closeChapterReadDrawer(shouldMinimizePlayer = false) {
     const drawer = document.getElementById('chapterReadDrawer');
     const drawerOverlay = document.getElementById('chapterReadDrawerOverlay');
     
     if (drawer) drawer.classList.remove('active');
     if (drawerOverlay) drawerOverlay.classList.remove('active');
     
-    // Also minimize the audio player
+    // Restore body scrolling
+    document.body.style.overflow = '';
+    
+    // Reset audio player position when drawer closes
     const audioPlayerOverlay = document.querySelector('.chapter-audio-player-overlay');
     const playerContainer = audioPlayerOverlay?.querySelector('.player-container');
     
-    if (audioPlayerOverlay && playerContainer && !playerContainer.classList.contains('minimized')) {
-        playerContainer.classList.add('minimized');
-        audioPlayerOverlay.classList.add('minimized');
-        playerContainer.style.position = 'fixed';
-        
-        // Use responsive positioning based on screen size
-        const isMobile = window.innerWidth <= 768;
-        const offset = isMobile ? '10px' : '20px';
-        playerContainer.style.bottom = offset;
-        playerContainer.style.right = offset;
-        playerContainer.style.top = 'auto';
+    if (playerContainer && !playerContainer.classList.contains('minimized')) {
+        // Reset to default centered position
+        playerContainer.style.position = 'relative';
         playerContainer.style.left = 'auto';
+        playerContainer.style.top = 'auto';
+        playerContainer.style.transform = 'none';
+        playerContainer.style.right = 'auto';
+        playerContainer.style.bottom = 'auto';
+    }
+    
+    // Only minimize the audio player if requested (when clicking overlay)
+    if (shouldMinimizePlayer) {
+        if (audioPlayerOverlay && playerContainer && !playerContainer.classList.contains('minimized')) {
+            playerContainer.classList.add('minimized');
+            audioPlayerOverlay.classList.add('minimized');
+            playerContainer.style.position = 'fixed';
+            
+            // Use responsive positioning based on screen size
+            const isMobile = window.innerWidth <= 768;
+            const offset = isMobile ? '10px' : '20px';
+            playerContainer.style.bottom = offset;
+            playerContainer.style.right = offset;
+            playerContainer.style.top = 'auto';
+            playerContainer.style.left = 'auto';
+            playerContainer.style.transform = 'none';
+        }
     }
 }
 
@@ -1189,7 +1445,7 @@ function addChapterReadDrawerStyles() {
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.5);
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -1213,7 +1469,7 @@ function addChapterReadDrawerStyles() {
             background-color: white;
             box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
             transition: right 0.3s ease;
-            z-index: 10002;
+            z-index: 10001;
             pointer-events: auto;
             display: flex;
             flex-direction: column;
@@ -1230,7 +1486,6 @@ function addChapterReadDrawerStyles() {
             display: flex;
             flex-direction: column;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-bottom: 3px solid transparent;
         }
 
         .chapter-read-header-top {
@@ -1275,6 +1530,46 @@ function addChapterReadDrawerStyles() {
             overflow-y: auto;
             padding: 25px;
             background: #f8f9fa;
+        }
+        
+        /* Chapter content styling */
+        .chapter-content {
+            max-width: 100%;
+        }
+        
+        .chapter-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .chapter-paragraph {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+        
+        .no-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #666;
+            font-size: 15px;
+        }
+        
+        .loading-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+            font-size: 15px;
         }
 
         @media (max-width: 768px) {

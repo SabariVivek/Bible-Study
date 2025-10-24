@@ -2379,10 +2379,142 @@ nav {
     border-radius: 4px;
     display: inline-block;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .seed-image:hover {
     opacity: 0.95;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Lightbox Styles - Similar to Jira Screenshot Viewer */
+.image-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-lightbox.show {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+}
+
+.lightbox-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px 40px 40px;
+    z-index: 10001;
+}
+
+.lightbox-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    background: white;
+    font-size: 20px;
+    z-index: 10002;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lightbox-close-btn:hover {
+    background: #f3f4f6;
+}
+
+.lightbox-close-btn span {
+    line-height: 1;
+    margin-top: -2px;
+}
+
+.lightbox-image-wrapper {
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-image {
+    max-width: 90%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    animation: lightboxZoomIn 0.3s ease;
+}
+
+.lightbox-caption {
+    margin-top: 20px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    max-width: 80%;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+}
+
+@keyframes lightboxZoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments for lightbox */
+@media (max-width: 768px) {
+    .lightbox-content {
+        padding: 50px 20px 30px 20px;
+    }
+    
+    .lightbox-close-btn {
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+    
+    .lightbox-image {
+        max-width: 95%;
+        max-height: 80vh;
+    }
+    
+    .lightbox-caption {
+        font-size: 14px;
+        max-width: 90%;
+        padding: 8px 16px;
+    }
 }
 
 .seed-text {
@@ -2561,7 +2693,7 @@ nav {
     justify-content: center;
     width: 32px;
     height: 32px;
-    border-radius: 0;
+    border-radius: 4px;
     background: rgba(102, 126, 234, 0.1);
     color: #667eea;
     border: 2px solid #667eea;
@@ -2623,7 +2755,7 @@ nav {
     background: rgba(102, 126, 234, 0.1);
     color: #667eea;
     border: 2px solid #667eea;
-    border-radius: 0;
+    border-radius: 4px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -2681,7 +2813,7 @@ nav {
     background: rgba(102, 126, 234, 0.1);
     color: #667eea;
     border: 2px solid #667eea;
-    border-radius: 0;
+    border-radius: 4px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;

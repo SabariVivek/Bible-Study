@@ -2881,6 +2881,22 @@ document.addEventListener('keydown', function(e) {
             closeChaptersPopup();
         }
     }
+    
+    // Arrow key navigation for book chapters
+    const bookChapterContent = document.getElementById('book-chapter-content');
+    if (bookChapterContent && !bookChapterContent.classList.contains('hidden')) {
+        // Only navigate if we're on the book chapter page
+        // And not typing in an input/textarea
+        if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault(); // Prevent page scroll
+                navigateToPreviousChapter();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault(); // Prevent page scroll
+                navigateToNextChapter();
+            }
+        }
+    }
 });
 
 // Make functions globally available

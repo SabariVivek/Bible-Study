@@ -62,7 +62,8 @@ function loadSeedContent() {
                 <img src="${seedData.image}.jpg" 
                      onerror="this.onerror=null; this.src='${seedData.image}.png';" 
                      alt="Seed of Woman Illustration" 
-                     class="seed-image">
+                     class="seed-image"
+                     onclick="openImageLightbox(this.src, this.alt)">
             </div>
         `;
     }
@@ -171,4 +172,75 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(attachSeedOfWomanCardHandler, 0);
         };
     }
+    
+    // Create lightbox container on page load
+    createImageLightbox();
 });
+
+// Image Lightbox Functions (Similar to Jira screenshot functionality)
+function createImageLightbox() {
+    // Check if lightbox already exists
+    if (document.getElementById('imageLightbox')) return;
+    
+    const lightbox = document.createElement('div');
+    lightbox.id = 'imageLightbox';
+    lightbox.className = 'image-lightbox';
+    lightbox.innerHTML = `
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="close-btn lightbox-close-btn" onclick="closeImageLightbox()" title="Close (Esc)">
+                <span>&times;</span>
+            </button>
+            <div class="lightbox-image-wrapper">
+                <img id="lightboxImage" src="" alt="" class="lightbox-image">
+            </div>
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    `;
+    document.body.appendChild(lightbox);
+    
+    // Add keyboard listener for ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+            closeImageLightbox();
+        }
+    });
+    
+    // Add click listener for clicking outside the image
+    lightbox.addEventListener('click', function(e) {
+        const lightboxImage = document.getElementById('lightboxImage');
+        const closeBtn = lightbox.querySelector('.lightbox-close-btn');
+        
+        // Close if not clicking on the image or close button
+        if (e.target !== lightboxImage && !closeBtn.contains(e.target)) {
+            closeImageLightbox();
+        }
+    });
+}
+
+function openImageLightbox(imageSrc, imageAlt) {
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    
+    if (!lightbox || !lightboxImage) return;
+    
+    lightboxImage.src = imageSrc;
+    lightboxImage.alt = imageAlt || '';
+    lightboxCaption.textContent = imageAlt || '';
+    
+    lightbox.classList.add('show');
+    document.body.classList.add('modal-open');
+}
+
+function closeImageLightbox() {
+    const lightbox = document.getElementById('imageLightbox');
+    if (!lightbox) return;
+    
+    lightbox.classList.remove('show');
+    
+    // Wait for animation to complete before removing modal-open class
+    setTimeout(() => {
+        document.body.classList.remove('modal-open');
+    }, 300);
+}
