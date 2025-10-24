@@ -2293,6 +2293,10 @@ function showBookChapter(book, chapterNum) {
         setTimeout(() => {
             displayChapterContent(bookName, chapterNumber, bookChapterContainer);
             updateChapterNavigation(bookName, chapterNumber);
+            // Update audio icon visibility based on audio file availability
+            if (typeof updateChapterAudioIconVisibility === 'function') {
+                updateChapterAudioIconVisibility(bookName, chapterNumber);
+            }
         }, 10);
     }
     

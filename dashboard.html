@@ -15,6 +15,7 @@
     <script src="scripts/data/seed-of-the-woman.js"></script>
     <script src="scripts/seed-of-woman.js"></script>
     <script src="scripts/data/life-of-jesus.js"></script>
+    <script src="scripts/chapter-audio-player.js"></script>
 </head>
 <body>
         <div id="logout-fancy-loader" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);z-index:9999;">
@@ -300,7 +301,7 @@
                     </button>
                     <h1 class="page-title" id="bookChapterTitle">Book Chapter</h1>
                     <div class="chapter-navigation-header">
-                        <button class="info-btn audio-btn" title="Audio">
+                        <button class="info-btn audio-btn" title="Audio" onclick="handleChapterAudioClick(event)" style="display: none;">
                             <div class="audio-icon-animated">
                                 <div class="sound-bar bar1"></div>
                                 <div class="sound-bar bar2"></div>
