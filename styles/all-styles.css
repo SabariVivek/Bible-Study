@@ -684,6 +684,20 @@ nav {
     text-align: center;
 }
 
+.table .info-cell {
+    text-align: center !important;
+    vertical-align: middle;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table .info-btn {
+    margin: 0;
+    display: flex;
+}
+
 .info-btn {
     color: white !important;
     width: 30px;
@@ -702,10 +716,26 @@ nav {
     border: none !important;
     border-radius: 4px;
     transition: all 0.2s ease;
-    margin: 0px auto;
+    margin: 0 auto;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+/* Synopsis button with text needs wider width */
+.info-btn .synopsis-text {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    padding: 0 8px;
+}
+
+.info-btn:has(.synopsis-text) {
+    width: auto;
+    min-width: 75px;
+    padding: 0 12px;
 }
 
 .info-btn:hover {
@@ -721,11 +751,28 @@ nav {
 /* Animated Audio Icon Styles */
 .audio-btn {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    margin-right: 10px;
 }
 
 .audio-btn:hover {
     background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
     transform: scale(1.05);
+}
+
+/* Audio button in books table - keep original size */
+.table .audio-btn {
+    margin-right: 0;
+}
+
+/* Add margin to synopsis button when it has text */
+.info-btn:has(.synopsis-text) {
+    margin-right: 10px;
+}
+
+/* Audio button in chapter detail page only */
+.chapter-navigation-header .audio-btn {
+    width: 35px;
+    height: 35px;
 }
 
 .audio-icon-animated {
@@ -2562,6 +2609,12 @@ nav {
     margin-left: auto;
 }
 
+/* Audio button in chapter detail page */
+.chapter-navigation-header .audio-btn {
+    width: 35px;
+    height: 35px;
+}
+
 .nav-chapter-btn {
     display: flex;
     align-items: center;
@@ -3506,7 +3559,7 @@ nav {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     color: white;
     border: 1px solid transparent;
-    border-radius: 0;
+    border-radius: 4px;
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
@@ -3529,6 +3582,29 @@ nav {
 
 .synopsis-btn .synopsis-icon {
     font-size: 1.2rem;
+    display: inline-block;
+    animation: synopsisFlip 2s ease-in-out infinite;
+}
+
+/* Synopsis icon animation */
+@keyframes synopsisFlip {
+    0%, 100% {
+        transform: rotateY(0deg) scale(1);
+    }
+    25% {
+        transform: rotateY(180deg) scale(1.1);
+    }
+    50% {
+        transform: rotateY(360deg) scale(1);
+    }
+    75% {
+        transform: rotateY(180deg) scale(1.1);
+    }
+}
+
+/* Pause animation on hover */
+.info-btn:hover .synopsis-icon {
+    animation-play-state: paused;
 }
 
 /* Overlay */
@@ -3877,6 +3953,10 @@ nav {
 
     .synopsis-btn .synopsis-text {
         display: none;
+    }
+
+    .synopsis-btn .synopsis-icon {
+        font-size: 1.1rem;
     }
 
     .synopsis-btn {

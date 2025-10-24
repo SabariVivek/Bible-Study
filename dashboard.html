@@ -300,14 +300,16 @@
                     </button>
                     <h1 class="page-title" id="bookChapterTitle">Book Chapter</h1>
                     <div class="chapter-navigation-header">
+                        <button class="info-btn audio-btn" title="Audio">
+                            <div class="audio-icon-animated">
+                                <div class="sound-bar bar1"></div>
+                                <div class="sound-bar bar2"></div>
+                                <div class="sound-bar bar3"></div>
+                                <div class="sound-bar bar4"></div>
+                            </div>
+                        </button>
                         <button id="synopsisBtn" class="synopsis-btn" onclick="openSynopsisDrawer()" title="View Synopsis">
                             <span class="synopsis-text">Synopsis</span>
-                        </button>
-                        <button id="prevChapterBtn" class="nav-chapter-btn" onclick="navigateToPreviousChapter()" title="Previous Chapter">
-                            <span class="nav-arrow">←</span>
-                        </button>
-                        <button id="nextChapterBtn" class="nav-chapter-btn" onclick="navigateToNextChapter()" title="Next Chapter">
-                            <span class="nav-arrow">→</span>
                         </button>
                     </div>
                 </div>
@@ -2628,5 +2630,6 @@
     <script src="scripts/ui/events.js"></script>
     <script src="scripts/ui/life-of-christ.js"></script>
     <script src="scripts/ui/synopsis-drawer.js"></script>
+    <script src="scripts/ui/swipe.js"></script>
 </body>
 </html>
