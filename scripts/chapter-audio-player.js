@@ -3,6 +3,12 @@
  * Exact copy of book audio player, modified for chapters
  */
 
+// Store current chapter info for drawer access
+let currentChapterAudioInfo = {
+    bookName: '',
+    chapterNum: ''
+};
+
 // Format book name for file paths
 function formatBookNameForAudio(bookName) {
     return bookName.toLowerCase()
@@ -124,6 +130,10 @@ function handleChapterAudioClick(event) {
 
 // Load Chapter Audio Player (EXACT COPY of book player)
 function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
+    // Store current chapter info for drawer access
+    currentChapterAudioInfo.bookName = bookName;
+    currentChapterAudioInfo.chapterNum = chapterNum;
+    
     // Remove any existing player
     const existingPlayer = document.querySelector('.chapter-audio-player-overlay');
     if (existingPlayer) {
@@ -326,6 +336,7 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
                 }
                 
                 .chapter-audio-player-overlay .minimize-btn,
+                .chapter-audio-player-overlay .read-btn,
                 .chapter-audio-player-overlay .close-btn {
                     width: 24px;
                     height: 24px;
@@ -356,6 +367,7 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
             }
 
             .chapter-audio-player-overlay .minimize-btn,
+            .chapter-audio-player-overlay .read-btn,
             .chapter-audio-player-overlay .close-btn {
                 background: rgba(255, 255, 255, 0.2);
                 border: none;
@@ -372,11 +384,16 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
             }
 
             .chapter-audio-player-overlay .minimize-btn:hover,
+            .chapter-audio-player-overlay .read-btn:hover,
             .chapter-audio-player-overlay .close-btn:hover {
                 background: rgba(255, 255, 255, 0.3);
             }
 
             .chapter-audio-player-overlay .minimize-btn:hover {
+                transform: scale(1.1);
+            }
+
+            .chapter-audio-player-overlay .read-btn:hover {
                 transform: scale(1.1);
             }
 
@@ -387,6 +404,13 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
             }
 
             .chapter-audio-player-overlay .minimize-btn svg {
+                width: 16px;
+                height: 16px;
+                fill: none;
+                stroke: white;
+            }
+
+            .chapter-audio-player-overlay .read-btn svg {
                 width: 16px;
                 height: 16px;
                 fill: none;
@@ -635,7 +659,7 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
                             <div class="playing-bar"></div>
                             <div class="playing-bar"></div>
                         </span>
-                        ${bookName} - Ch ${chapterNum}
+                        ${bookName} - ${chapterNum}
                     </h2>
                     <div class="header-buttons">
                         <button class="minimize-btn" id="minimizeBtn">
@@ -643,6 +667,12 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
                             <svg class="maximize-icon" viewBox="0 0 24 24">
                                 <path d="M4 8V4h4M4 4l5 5M20 8V4h-4M20 4l-5 5M4 16v4h4M4 20l5-5M20 16v4h-4M20 20l-5-5" 
                                       stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="read-btn" id="readBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                             </svg>
                         </button>
                         <button class="close-btn" id="closeBtn">×</button>
@@ -1038,6 +1068,16 @@ function initializeChapterPlayer(overlay) {
         }, 300);
     });
 
+    // Read button - Open drawer
+    const readBtn = overlay.querySelector('#readBtn');
+    if (readBtn) {
+        readBtn.addEventListener('click', () => {
+            openChapterReadDrawer();
+        });
+    } else {
+        console.error('Read button not found in chapter audio player');
+    }
+
     // ESC key to close
     function handleEscKey(e) {
         if (e.key === 'Escape') {
@@ -1048,6 +1088,208 @@ function initializeChapterPlayer(overlay) {
     }
     document.addEventListener('keydown', handleEscKey);
 }
+
+// Chapter Read Drawer Functions
+function openChapterReadDrawer() {
+    const bookName = currentChapterAudioInfo.bookName;
+    const chapterNum = currentChapterAudioInfo.chapterNum;
+    
+    console.log('Opening chapter read drawer for:', bookName, chapterNum);
+    
+    // Check if drawer already exists
+    let drawer = document.getElementById('chapterReadDrawer');
+    let drawerOverlay = document.getElementById('chapterReadDrawerOverlay');
+    
+    if (!drawer) {
+        console.log('Creating new drawer');
+        
+        // Create drawer overlay
+        drawerOverlay = document.createElement('div');
+        drawerOverlay.id = 'chapterReadDrawerOverlay';
+        drawerOverlay.className = 'chapter-read-drawer-overlay';
+        
+        // Create drawer
+        drawer = document.createElement('div');
+        drawer.id = 'chapterReadDrawer';
+        drawer.className = 'chapter-read-side-drawer';
+        
+        drawer.innerHTML = `
+            <div class="chapter-read-drawer-header">
+                <div class="chapter-read-header-top">
+                    <span class="chapter-read-drawer-title">
+                        <span id="chapterReadTitle">${bookName} - Chapter ${chapterNum}</span>
+                    </span>
+                    <button class="chapter-read-close-btn" id="chapterReadCloseBtn">×</button>
+                </div>
+            </div>
+            <div class="chapter-read-drawer-content" id="chapterReadDrawerContent">
+                <!-- Content will be loaded here -->
+            </div>
+        `;
+        
+        // Append to body
+        document.body.appendChild(drawerOverlay);
+        document.body.appendChild(drawer);
+        
+        console.log('Drawer created and appended to body');
+        
+        // Add close event listeners
+        drawerOverlay.addEventListener('click', closeChapterReadDrawer);
+        drawer.querySelector('#chapterReadCloseBtn').addEventListener('click', closeChapterReadDrawer);
+    } else {
+        console.log('Drawer already exists, updating title');
+        // Update title if drawer already exists
+        drawer.querySelector('#chapterReadTitle').textContent = `${bookName} - Chapter ${chapterNum}`;
+    }
+    
+    // Open drawer
+    setTimeout(() => {
+        console.log('Activating drawer');
+        drawer.classList.add('active');
+        drawerOverlay.classList.add('active');
+    }, 10);
+}
+
+function closeChapterReadDrawer() {
+    const drawer = document.getElementById('chapterReadDrawer');
+    const drawerOverlay = document.getElementById('chapterReadDrawerOverlay');
+    
+    if (drawer) drawer.classList.remove('active');
+    if (drawerOverlay) drawerOverlay.classList.remove('active');
+    
+    // Also minimize the audio player
+    const audioPlayerOverlay = document.querySelector('.chapter-audio-player-overlay');
+    const playerContainer = audioPlayerOverlay?.querySelector('.player-container');
+    
+    if (audioPlayerOverlay && playerContainer && !playerContainer.classList.contains('minimized')) {
+        playerContainer.classList.add('minimized');
+        audioPlayerOverlay.classList.add('minimized');
+        playerContainer.style.position = 'fixed';
+        
+        // Use responsive positioning based on screen size
+        const isMobile = window.innerWidth <= 768;
+        const offset = isMobile ? '10px' : '20px';
+        playerContainer.style.bottom = offset;
+        playerContainer.style.right = offset;
+        playerContainer.style.top = 'auto';
+        playerContainer.style.left = 'auto';
+    }
+}
+
+// Add drawer styles
+function addChapterReadDrawerStyles() {
+    if (document.getElementById('chapterReadDrawerStyles')) return;
+    
+    const style = document.createElement('style');
+    style.id = 'chapterReadDrawerStyles';
+    style.textContent = `
+        .chapter-read-drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 9999;
+            backdrop-filter: none;
+            pointer-events: none;
+        }
+
+        .chapter-read-drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .chapter-read-side-drawer {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+            transition: right 0.3s ease;
+            z-index: 10002;
+            pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chapter-read-side-drawer.active {
+            right: 0;
+        }
+
+        .chapter-read-drawer-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-bottom: 3px solid transparent;
+        }
+
+        .chapter-read-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+        }
+
+        .chapter-read-drawer-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .chapter-read-close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .chapter-read-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .chapter-read-drawer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            background: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .chapter-read-side-drawer {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    `;
+    
+    document.head.appendChild(style);
+}
+
+// Initialize drawer styles on load
+addChapterReadDrawerStyles();
 
 // Export
 window.updateChapterAudioIconVisibility = updateChapterAudioIconVisibility;
