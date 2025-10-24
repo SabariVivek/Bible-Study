@@ -19,38 +19,64 @@ function checkChapterAudioExists(bookName, chapterNum) {
             `resources/audio/chapters-new/${formattedBookName}/${formattedBookName}-chapter-${chapterNum}.mp3`
         ];
         
-        const checkPath = (index) => {
-            if (index >= paths.length) {
-                resolve({ exists: false, path: null });
-                return;
-            }
-            
-            const path = paths[index];
+        let checkedPaths = 0;
+        const totalPaths = paths.length;
+        
+        const checkPath = (path) => {
             const audio = new Audio();
+            let resolved = false;
             
             const onCanPlay = () => {
+                if (resolved) return;
+                resolved = true;
                 cleanup();
                 resolve({ exists: true, path: path });
             };
             
             const onError = () => {
+                if (resolved) return;
+                resolved = true;
                 cleanup();
-                checkPath(index + 1);
+                checkedPaths++;
+                
+                if (checkedPaths >= totalPaths) {
+                    resolve({ exists: false, path: null });
+                }
             };
             
             const cleanup = () => {
                 audio.removeEventListener('canplaythrough', onCanPlay);
                 audio.removeEventListener('error', onError);
+                audio.removeEventListener('loadeddata', onCanPlay);
                 audio.src = '';
             };
             
-            audio.addEventListener('canplaythrough', onCanPlay);
-            audio.addEventListener('error', onError);
+            // Set a timeout to prevent hanging
+            const timeout = setTimeout(() => {
+                if (!resolved) {
+                    onError();
+                }
+            }, 3000); // 3 second timeout
+            
+            audio.addEventListener('canplaythrough', () => {
+                clearTimeout(timeout);
+                onCanPlay();
+            });
+            audio.addEventListener('loadeddata', () => {
+                clearTimeout(timeout);
+                onCanPlay();
+            });
+            audio.addEventListener('error', () => {
+                clearTimeout(timeout);
+                onError();
+            });
+            
             audio.src = path;
             audio.load();
         };
         
-        checkPath(0);
+        // Check all paths in parallel for better performance
+        paths.forEach(path => checkPath(path));
     });
 }
 
@@ -63,15 +89,24 @@ async function updateChapterAudioIconVisibility(bookName, chapterNum) {
         return;
     }
     
+    // Show loading state while checking
+    audioBtn.style.display = 'flex';
+    audioBtn.style.opacity = '0.5';
+    audioBtn.style.pointerEvents = 'none';
+    
     const audioCheck = await checkChapterAudioExists(bookName, chapterNum);
     
     if (audioCheck.exists) {
         audioBtn.style.display = 'flex';
+        audioBtn.style.opacity = '1';
+        audioBtn.style.pointerEvents = 'auto';
         audioBtn.dataset.audioPath = audioCheck.path;
         audioBtn.dataset.bookName = bookName;
         audioBtn.dataset.chapterNum = chapterNum;
     } else {
         audioBtn.style.display = 'none';
+        audioBtn.style.opacity = '1';
+        audioBtn.style.pointerEvents = 'auto';
     }
 }
 

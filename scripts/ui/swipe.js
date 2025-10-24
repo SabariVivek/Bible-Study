@@ -5,6 +5,7 @@
     let touchStartY = 0;
     let touchEndY = 0;
     let wheelTimeout = null;
+    let isNavigating = false; // Prevent multiple simultaneous navigations
     const minSwipeDistance = 50; // Minimum distance for a swipe to be registered
     const maxVerticalDistance = 100; // Maximum vertical movement allowed for horizontal swipe
 
@@ -25,23 +26,39 @@
     }
 
     function handleSwipeLeft() {
+        // Prevent navigation if already navigating
+        if (isNavigating) return;
+        
         // Only trigger if we're on the chapter detail page
         const chapterContent = document.getElementById('book-chapter-content');
         if (chapterContent && !chapterContent.classList.contains('hidden')) {
             // Navigate to next chapter
             if (typeof navigateToNextChapter === 'function') {
+                isNavigating = true;
                 navigateToNextChapter();
+                // Reset the flag after navigation completes
+                setTimeout(() => {
+                    isNavigating = false;
+                }, 500); // Increased timeout to prevent rapid swipes
             }
         }
     }
 
     function handleSwipeRight() {
+        // Prevent navigation if already navigating
+        if (isNavigating) return;
+        
         // Only trigger if we're on the chapter detail page
         const chapterContent = document.getElementById('book-chapter-content');
         if (chapterContent && !chapterContent.classList.contains('hidden')) {
             // Navigate to previous chapter
             if (typeof navigateToPreviousChapter === 'function') {
+                isNavigating = true;
                 navigateToPreviousChapter();
+                // Reset the flag after navigation completes
+                setTimeout(() => {
+                    isNavigating = false;
+                }, 500); // Increased timeout to prevent rapid swipes
             }
         }
     }
@@ -76,7 +93,7 @@
 
             // Prevent wheel/trackpad horizontal scroll navigation
             document.addEventListener('wheel', function(e) {
-                if (!chapterContent.classList.contains('hidden')) {
+                if (!chapterContent.classList.contains('hidden') && !isNavigating) {
                     // Detect horizontal scroll (two-finger swipe on trackpad)
                     if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
                         e.preventDefault();
@@ -85,14 +102,14 @@
                         clearTimeout(wheelTimeout);
                         wheelTimeout = setTimeout(function() {
                             // Trigger chapter navigation based on scroll direction
-                            if (e.deltaX > 0) {
+                            if (e.deltaX > 0 && !isNavigating) {
                                 // Scrolling right - go to next chapter
                                 handleSwipeLeft();
-                            } else if (e.deltaX < 0) {
+                            } else if (e.deltaX < 0 && !isNavigating) {
                                 // Scrolling left - go to previous chapter
                                 handleSwipeRight();
                             }
-                        }, 100);
+                        }, 150); // Increased debounce time
                     }
                 }
             }, { passive: false });

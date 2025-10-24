@@ -2317,7 +2317,86 @@ let currentChapterInfo = {
     bookObject: null
 };
 
-// Function to get all books in order
+// Add a flag to prevent simultaneous chapter loads
+let isLoadingChapter = false;
+
+function showBookChapter(book, chapterNum) {
+    // Prevent multiple simultaneous chapter loads
+    if (isLoadingChapter) {
+        console.log('Chapter load already in progress, ignoring request');
+        return;
+    }
+    
+    isLoadingChapter = true;
+    
+    // Update navigation - keep books nav active
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelector('.nav-item.books').classList.add('active');
+    
+    // Hide all content sections
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
+    
+    // Show book chapter content
+    document.getElementById('book-chapter-content').classList.remove('hidden');
+    
+    // Clear the chapter container first to avoid showing old content
+    const bookChapterContainer = document.querySelector('.book-chapter-container');
+    if (bookChapterContainer) {
+        bookChapterContainer.innerHTML = '';
+        // Force a reflow to ensure the clear happens before new content
+        void bookChapterContainer.offsetHeight;
+    }
+    
+    // Update the title with the book name and chapter number
+    const bookChapterTitle = document.getElementById('bookChapterTitle');
+    const bookName = typeof book === 'string' ? book : book.name;
+    
+    // Ensure chapterNum is treated as a number
+    const chapterNumber = parseInt(chapterNum) || 1;
+    
+    if (bookChapterTitle && book) {
+        if (chapterNumber) {
+            bookChapterTitle.textContent = `${bookName} - ${chapterNumber}`;
+        } else {
+            bookChapterTitle.textContent = bookName;
+        }
+    }
+    
+    // Display chapter data after a small delay to ensure clearing is complete
+    if (bookChapterContainer && chapterNumber) {
+        setTimeout(() => {
+            displayChapterContent(bookName, chapterNumber, bookChapterContainer);
+            updateChapterNavigation(bookName, chapterNumber);
+            // Update audio icon visibility based on audio file availability
+            if (typeof updateChapterAudioIconVisibility === 'function') {
+                updateChapterAudioIconVisibility(bookName, chapterNumber);
+            }
+            // Reset the loading flag after content is displayed
+            setTimeout(() => {
+                isLoadingChapter = false;
+            }, 100);
+        }, 10);
+    } else {
+        // Reset flag if no content to load
+        isLoadingChapter = false;
+    }
+    
+    // Initialize testament navigation on the book chapter title
+    setTimeout(() => {
+        const titleElement = document.getElementById('bookChapterTitle');
+        if (titleElement && typeof initializeTestamentNav === 'function') {
+            initializeTestamentNav('bookChapterTitle', bookName);
+        }
+    }, 150);
+}
 function getAllBooksInOrder() {
     if (typeof allBooksData === 'undefined') {
         return [];
@@ -2500,120 +2579,137 @@ function formatVerseReferences(text) {
 
 // Function to display chapter content
 function displayChapterContent(bookName, chapterNum, container) {
-    // Clear previous content
-    container.innerHTML = '';
+    // Show loading indicator
+    container.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: center; min-height: 300px; flex-direction: column; gap: 20px;">
+            <div style="width: 50px; height: 50px; border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+            <p style="color: #666; font-size: 1rem;">Loading chapter...</p>
+        </div>
+        <style>
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+    `;
     
-    // Get chapter data based on book name (Dynamic approach)
-    let chapterData = null;
-    const chapterKey = `chapter_${chapterNum}`;
-    
-    // Convert book name to PascalCase for the data object name
-    // E.g., "matthew" -> "MatthewData", "1 samuel" -> "Samuel1Data"
-    const formatBookDataName = (name) => {
-        // Remove numbers and spaces, capitalize first letter
-        let cleanName = name.toLowerCase();
+    // Use requestAnimationFrame to ensure smooth rendering
+    requestAnimationFrame(() => {
+        // Get chapter data based on book name (Dynamic approach)
+        let chapterData = null;
+        const chapterKey = `chapter_${chapterNum}`;
         
-        // Handle numbered books (e.g., "1 Samuel", "2 Kings")
-        const numberMatch = cleanName.match(/^(\d+)\s+(.+)$/);
-        if (numberMatch) {
-            const number = numberMatch[1];
-            const bookName = numberMatch[2];
-            // Capitalize first letter
-            const capitalizedBook = bookName.charAt(0).toUpperCase() + bookName.slice(1);
-            return `${capitalizedBook}${number}Data`;
+        // Convert book name to PascalCase for the data object name
+        // E.g., "matthew" -> "MatthewData", "1 samuel" -> "Samuel1Data"
+        const formatBookDataName = (name) => {
+            // Remove numbers and spaces, capitalize first letter
+            let cleanName = name.toLowerCase();
+            
+            // Handle numbered books (e.g., "1 Samuel", "2 Kings")
+            const numberMatch = cleanName.match(/^(\d+)\s+(.+)$/);
+            if (numberMatch) {
+                const number = numberMatch[1];
+                const bookName = numberMatch[2];
+                // Capitalize first letter
+                const capitalizedBook = bookName.charAt(0).toUpperCase() + bookName.slice(1);
+                return `${capitalizedBook}${number}Data`;
+            }
+            
+            // Regular books - just capitalize first letter
+            return cleanName.charAt(0).toUpperCase() + cleanName.slice(1) + 'Data';
+        };
+        
+        // Get the data object name dynamically
+        const dataObjectName = formatBookDataName(bookName);
+        
+        // Try to access the data object from the global window object
+        if (typeof window[dataObjectName] !== 'undefined' && window[dataObjectName][chapterKey]) {
+            chapterData = window[dataObjectName][chapterKey];
         }
         
-        // Regular books - just capitalize first letter
-        return cleanName.charAt(0).toUpperCase() + cleanName.slice(1) + 'Data';
-    };
-    
-    // Get the data object name dynamically
-    const dataObjectName = formatBookDataName(bookName);
-    
-    // Try to access the data object from the global window object
-    if (typeof window[dataObjectName] !== 'undefined' && window[dataObjectName][chapterKey]) {
-        chapterData = window[dataObjectName][chapterKey];
-    }
-    
-    // Display the chapter data
-    if (chapterData && chapterData.length > 0) {
-        chapterData.forEach((section, index) => {
-            const sectionDiv = document.createElement('div');
-            sectionDiv.className = 'chapter-section';
-            sectionDiv.style.marginBottom = index < chapterData.length - 1 ? '2.5rem' : '0';
-            
-            // Add section heading
-            if (section.section) {
-                const sectionHeading = document.createElement('h3');
-                sectionHeading.className = 'chapter-section-heading';
-                sectionHeading.innerHTML = section.section;
-                sectionDiv.appendChild(sectionHeading);
-            }
-            
-            // Add section text with formatted verse references
-            if (section.text) {
-                const sectionText = document.createElement('div');
-                // Format verse references as badges
-                const formattedText = formatVerseReferences(section.text);
-                sectionText.innerHTML = formattedText;
-                sectionText.style.lineHeight = '2.2';
-                sectionText.style.color = '#2c3e50';
-                sectionText.style.fontSize = '1.05rem';
-                sectionText.style.whiteSpace = 'pre-wrap';
-                sectionText.style.marginTop = '1rem';
-                sectionDiv.appendChild(sectionText);
-            }
-            
-            // Add note card if note property exists
-            if (section.note) {
-                const noteCard = document.createElement('div');
-                noteCard.className = 'note-card';
+        // Clear loading indicator before displaying content
+        container.innerHTML = '';
+        
+        // Display the chapter data
+        if (chapterData && chapterData.length > 0) {
+            chapterData.forEach((section, index) => {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'chapter-section';
+                sectionDiv.style.marginBottom = index < chapterData.length - 1 ? '2.5rem' : '0';
                 
-                const noteCardInner = document.createElement('div');
-                noteCardInner.className = 'note-card-inner';
+                // Add section heading
+                if (section.section) {
+                    const sectionHeading = document.createElement('h3');
+                    sectionHeading.className = 'chapter-section-heading';
+                    sectionHeading.innerHTML = section.section;
+                    sectionDiv.appendChild(sectionHeading);
+                }
                 
-                const noteHeader = document.createElement('div');
-                noteHeader.className = 'note-header';
+                // Add section text with formatted verse references
+                if (section.text) {
+                    const sectionText = document.createElement('div');
+                    // Format verse references as badges
+                    const formattedText = formatVerseReferences(section.text);
+                    sectionText.innerHTML = formattedText;
+                    sectionText.style.lineHeight = '2.2';
+                    sectionText.style.color = '#2c3e50';
+                    sectionText.style.fontSize = '1.05rem';
+                    sectionText.style.whiteSpace = 'pre-wrap';
+                    sectionText.style.marginTop = '1rem';
+                    sectionDiv.appendChild(sectionText);
+                }
                 
-                // Always show "Note" as title
-                const noteTitle = document.createElement('h3');
-                noteTitle.className = 'note-title';
-                noteTitle.textContent = 'Note';
-                noteHeader.appendChild(noteTitle);
+                // Add note card if note property exists
+                if (section.note) {
+                    const noteCard = document.createElement('div');
+                    noteCard.className = 'note-card';
+                    
+                    const noteCardInner = document.createElement('div');
+                    noteCardInner.className = 'note-card-inner';
+                    
+                    const noteHeader = document.createElement('div');
+                    noteHeader.className = 'note-header';
+                    
+                    // Always show "Note" as title
+                    const noteTitle = document.createElement('h3');
+                    noteTitle.className = 'note-title';
+                    noteTitle.textContent = 'Note';
+                    noteHeader.appendChild(noteTitle);
+                    
+                    // Show the note content (subject)
+                    const noteContent = document.createElement('div');
+                    noteContent.className = 'note-content';
+                    noteContent.innerHTML = section.note;
+                    
+                    noteCardInner.appendChild(noteHeader);
+                    noteCardInner.appendChild(noteContent);
+                    noteCard.appendChild(noteCardInner);
+                    sectionDiv.appendChild(noteCard);
+                }
                 
-                // Show the note content (subject)
-                const noteContent = document.createElement('div');
-                noteContent.className = 'note-content';
-                noteContent.innerHTML = section.note;
-                
-                noteCardInner.appendChild(noteHeader);
-                noteCardInner.appendChild(noteContent);
-                noteCard.appendChild(noteCardInner);
-                sectionDiv.appendChild(noteCard);
-            }
-            
-            container.appendChild(sectionDiv);
-        });
-    } else {
-        // No data available message
-        const noDataDiv = document.createElement('div');
-        noDataDiv.className = 'no-chapter-data';
-        noDataDiv.style.padding = '4rem 2rem';
-        noDataDiv.style.textAlign = 'center';
-        noDataDiv.style.color = '#666';
-        noDataDiv.style.fontSize = '1.1rem';
-        noDataDiv.style.background = '#f9f9f9';
-        noDataDiv.style.borderRadius = '12px';
-        noDataDiv.style.margin = '2rem 0';
-        noDataDiv.style.border = '2px dashed #ddd';
-        noDataDiv.innerHTML = `
-            <p style="font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.5;">📖</p>
-            <p style="font-size: 1.3rem; font-weight: 600; color: #333; margin-bottom: 0.5rem;">Chapter Data Not Available</p>
-            <p style="color: #888; font-size: 1rem;">Content for <strong>${bookName} Chapter ${chapterNum}</strong> has not been seeded yet.</p>
-            <p style="color: #888; font-size: 0.9rem; margin-top: 1rem;">Currently available: Matthew and Exodus</p>
-        `;
-        container.appendChild(noDataDiv);
-    }
+                container.appendChild(sectionDiv);
+            });
+        } else {
+            // No data available message
+            const noDataDiv = document.createElement('div');
+            noDataDiv.className = 'no-chapter-data';
+            noDataDiv.style.padding = '4rem 2rem';
+            noDataDiv.style.textAlign = 'center';
+            noDataDiv.style.color = '#666';
+            noDataDiv.style.fontSize = '1.1rem';
+            noDataDiv.style.background = '#f9f9f9';
+            noDataDiv.style.borderRadius = '12px';
+            noDataDiv.style.margin = '2rem 0';
+            noDataDiv.style.border = '2px dashed #ddd';
+            noDataDiv.innerHTML = `
+                <p style="font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.5;">📖</p>
+                <p style="font-size: 1.3rem; font-weight: 600; color: #333; margin-bottom: 0.5rem;">Chapter Data Not Available</p>
+                <p style="color: #888; font-size: 1rem;">Content for <strong>${bookName} Chapter ${chapterNum}</strong> has not been seeded yet.</p>
+                <p style="color: #888; font-size: 0.9rem; margin-top: 1rem;">Currently available: Matthew and Exodus</p>
+            `;
+            container.appendChild(noDataDiv);
+        }
+    });
 }
 
 // Additional Navigation Functions

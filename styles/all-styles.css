@@ -4031,3 +4031,76 @@ nav {
 .note-content p:last-child {
     margin-bottom: 0;
 }
+
+/* iPad and Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Optimize audio button for touch devices like iPad */
+    .chapter-navigation-header .audio-btn {
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px;
+        min-height: 44px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    .audio-icon-animated {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .sound-bar {
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    /* Improve touch target for all buttons */
+    .info-btn, .synopsis-btn {
+        min-width: 44px;
+        min-height: 44px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    /* Prevent double-tap zoom on buttons */
+    button {
+        touch-action: manipulation;
+    }
+}
+
+/* iPad specific media queries */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    
+    /* Ensure audio button is visible and properly sized on iPad */
+    .chapter-navigation-header .audio-btn {
+        display: flex !important;
+        width: 44px !important;
+        height: 44px !important;
+        visibility: visible !important;
+    }
+    
+    /* Force show audio icon elements */
+    .audio-icon-animated,
+    .sound-bar {
+        display: flex !important;
+        visibility: visible !important;
+    }
+    
+    /* Improve swipe performance */
+    .book-chapter-container {
+        -webkit-overflow-scrolling: touch;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+    }
+    
+    /* Prevent blank page during rapid swipes */
+    #book-chapter-content {
+        min-height: 100vh;
+        will-change: contents;
+    }
+}
