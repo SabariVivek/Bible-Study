@@ -738,26 +738,57 @@ function closeProphetPopup() {
 }
 
 // Book popup functions
-function openBookByIndex(index) {
+async function openBookByIndex(index) {
     const currentData = booksTableManager.getCurrentData();
     const book = currentData[index];
     if (book) {
-        // Play audio for supported books using the custom player
-        const audioBooks = [
-            "Genesis", "Exodus", "Leviticus", "Levi", "Numbers", "Deuteronomy",
-            "Joshua", "Judges", "Ruth", "1 Samuel", "1st Samuel", "First Samuel",
-            "2 Samuel", "2nd Samuel", "Second Samuel"
-        ];
-        if (audioBooks.includes(book.name)) {
+        // Check if audio exists for this book
+        const audioFile = await checkBookAudioExists(book.name);
+        
+        if (audioFile) {
+            // Audio exists, play it
             playBookAudio(book.name);
         } else {
+            // No audio, show the modal
             openBookModal(book);
         }
     }
 }
 
+// Helper function to format book name for audio file
+function formatBookNameForAudioFile(bookName) {
+    return bookName.toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with hyphens
+        .replace(/^(\d+)(st|nd|rd|th)\s+/, '$1-')  // Handle "1st Samuel" -> "1-samuel"
+        .replace(/^first\s+/i, '1-')    // Handle "First Samuel" -> "1-samuel"
+        .replace(/^second\s+/i, '2-')   // Handle "Second Samuel" -> "2-samuel"
+        .replace(/^third\s+/i, '3-')    // Handle "Third John" -> "3-john"
+        .replace(/leviticus/, 'levi');   // Special case for Leviticus -> levi
+}
+
+// Function to check if book audio exists
+function checkBookAudioExists(bookName) {
+    return new Promise((resolve) => {
+        const formattedName = formatBookNameForAudioFile(bookName);
+        const audioPath = `resources/audio/books-overview/${formattedName}-overview.mp3`;
+        
+        // Create a temporary audio element to check if file exists
+        const audio = new Audio();
+        
+        audio.addEventListener('loadedmetadata', () => {
+            resolve(audioPath);
+        });
+        
+        audio.addEventListener('error', () => {
+            resolve(null);
+        });
+        
+        audio.src = audioPath;
+    });
+}
+
 // Function to play audio for specific books using enhanced audio player
-function playBookAudio(bookName) {
+async function playBookAudio(bookName) {
     // Check if player already exists
     const existingPlayer = document.querySelector('.enhanced-audio-player-overlay');
     
@@ -791,47 +822,13 @@ function playBookAudio(bookName) {
         }
     }
 
-    // Create audio element based on book name
-    let audioFile = '';
-    switch(bookName) {
-        case 'Genesis':
-            audioFile = 'resources/audio/genesis-overview.mp3';
-            break;
-        case 'Exodus':
-            audioFile = 'resources/audio/exodus-overview.mp3';
-            break;
-        case 'Leviticus':
-        case 'Levi':
-            audioFile = 'resources/audio/levi-overview.mp3';
-            break;
-        case 'Numbers':
-            audioFile = 'resources/audio/numbers-overview.mp3';
-            break;
-        case 'Deuteronomy':
-            audioFile = 'resources/audio/deuteronomy-overview.mp3';
-            break;
-        case 'Joshua':
-            audioFile = 'resources/audio/joshua-overview.mp3';
-            break;
-        case 'Judges':
-            audioFile = 'resources/audio/judges-overview.mp3';
-            break;
-        case 'Ruth':
-            audioFile = 'resources/audio/ruth-overview.mp3';
-            break;
-        case '1 Samuel':
-        case '1st Samuel':
-        case 'First Samuel':
-            audioFile = 'resources/audio/1-samuel-overview.mp3';
-            break;
-        case '2 Samuel':
-        case '2nd Samuel':
-        case 'Second Samuel':
-            audioFile = 'resources/audio/2-samuel-overview.mp3';
-            break;
-        default:
-            // Do not show any card/modal, just return
-            return;
+    // Check if audio file exists for this book
+    const audioFile = await checkBookAudioExists(bookName);
+    
+    if (!audioFile) {
+        // No audio file found, show the modal instead
+        console.log(`No audio file found for ${bookName}`);
+        return;
     }
 
     // Load the enhanced audio player

@@ -1289,11 +1289,36 @@ function openChapterReadDrawer() {
     }, 10);
 }
 
+// Helper function to generate the correct variable name from folder name
+// For books like "1-peter", it should generate "Peter1" not "1Peter"
+function getCaptionsVariableName(formattedBookName) {
+    // Check if the book name starts with a number (e.g., "1-peter", "2-corinthians")
+    const match = formattedBookName.match(/^(\d+)-(.+)$/);
+    
+    if (match) {
+        const number = match[1];
+        const bookPart = match[2];
+        
+        // Capitalize each part after splitting by hyphen
+        const capitalizedBook = bookPart.split('-')
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+            .join('');
+        
+        // Return with number at the end: "Peter1", "Corinthians1", etc.
+        return `${capitalizedBook}${number}`;
+    } else {
+        // No number prefix, just capitalize normally
+        return formattedBookName.split('-')
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+            .join('');
+    }
+}
+
 // Dynamically load chapter captions file
 function loadChapterCaptionsFile(bookName, testament) {
     return new Promise((resolve) => {
         const formattedBookName = formatBookNameForAudio(bookName);
-        const formattedBookNameCapitalized = formattedBookName.charAt(0).toUpperCase() + formattedBookName.slice(1);
+        const formattedBookNameCapitalized = getCaptionsVariableName(formattedBookName);
         
         // Construct the path to the captions file
         // Pattern: resources/audio/chapters-old/bookname/bookname-chapter-captions.js
@@ -1364,7 +1389,7 @@ async function loadChapterContent(bookName, chapterNum, testament) {
     
     // Format book name to match the data structure
     const formattedBookName = formatBookNameForAudio(bookName);
-    const formattedBookNameCapitalized = formattedBookName.charAt(0).toUpperCase() + formattedBookName.slice(1);
+    const formattedBookNameCapitalized = getCaptionsVariableName(formattedBookName);
     const chapterKey = `chapter_${chapterNum}`;
     
     // Get the chapter captions data
