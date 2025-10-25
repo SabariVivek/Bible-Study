@@ -1904,6 +1904,18 @@ function initializeBooksTable() {
                 render: (item) => `<td class="name-cell"><div class="name-container"><span class="name">${item.name}</span></div></td>`
             },
             {
+                header: 'Verses',
+                key: 'verses',
+                className: 'verses-cell',
+                render: (item) => `<td class="verses-cell"><span class="status-badge badge-verses">${item.verses}</span></td>`
+            },
+            {
+                header: 'Author',
+                key: 'author',
+                className: 'author-cell',
+                render: (item) => `<td class="author-cell">${item.author}</td>`
+            },
+            {
                 header: 'Category',
                 key: 'category',
                 className: 'category-cell',
@@ -1911,12 +1923,6 @@ function initializeBooksTable() {
                     const categoryBadge = getCategoryBadge(item.category);
                     return `<td class="category-cell"><span class="status-badge ${categoryBadge.class}">${categoryBadge.text}</span></td>`;
                 }
-            },
-            {
-                header: 'Author',
-                key: 'author',
-                className: 'author-cell',
-                render: (item) => `<td class="author-cell">${item.author}</td>`
             },
             {
                 header: 'Audio',

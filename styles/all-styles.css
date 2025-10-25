@@ -598,6 +598,12 @@ nav {
     color: #a16207;
 }
 
+/* Verses Badge Style */
+.badge-verses {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
 .action-btn {
     background: none;
     border: none;
