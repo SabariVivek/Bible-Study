@@ -173,7 +173,7 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
         currentChapterAudioInfo.testament = 'old'; // Default to old
     }
     
-    // Remove any existing player
+    // Remove any existing chapter audio player
     const existingPlayer = document.querySelector('.chapter-audio-player-overlay');
     if (existingPlayer) {
         const audio = existingPlayer.querySelector('audio');
@@ -182,6 +182,17 @@ function loadChapterAudioPlayer(audioFile, bookName, chapterNum) {
             audio.currentTime = 0;
         }
         existingPlayer.remove();
+    }
+    
+    // Stop and remove any existing book audio player
+    const existingBookPlayer = document.querySelector('.enhanced-audio-player-overlay');
+    if (existingBookPlayer) {
+        const bookAudio = existingBookPlayer.querySelector('audio');
+        if (bookAudio) {
+            bookAudio.pause();
+            bookAudio.currentTime = 0;
+        }
+        existingBookPlayer.remove();
     }
 
     // Create overlay container with embedded player

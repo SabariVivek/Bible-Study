@@ -840,7 +840,7 @@ function playBookAudio(bookName) {
 
 // Enhanced Audio Player Function - creates the player directly in the page
 function loadEnhancedAudioPlayer(audioFile, bookName) {
-    // Remove any existing player
+    // Stop and remove any existing book audio player
     const existingPlayer = document.querySelector('.enhanced-audio-player-overlay');
     if (existingPlayer) {
         const audio = existingPlayer.querySelector('audio');
@@ -849,6 +849,17 @@ function loadEnhancedAudioPlayer(audioFile, bookName) {
             audio.currentTime = 0;
         }
         existingPlayer.remove();
+    }
+    
+    // Stop and remove any existing chapter audio player
+    const existingChapterPlayer = document.querySelector('.chapter-audio-player-overlay');
+    if (existingChapterPlayer) {
+        const chapterAudio = existingChapterPlayer.querySelector('audio');
+        if (chapterAudio) {
+            chapterAudio.pause();
+            chapterAudio.currentTime = 0;
+        }
+        existingChapterPlayer.remove();
     }
 
     // Create overlay container with embedded player

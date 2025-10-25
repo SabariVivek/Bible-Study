@@ -647,11 +647,11 @@ nav {
 }
 
 .pagination-btn.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #6B5FBF 0%, #8B7FC5 100%) !important;
     color: white;
     border-color: transparent;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(107, 95, 191, 0.3);
 }
 
 .pagination-btn:disabled {
@@ -4457,7 +4457,7 @@ nav {
 }
 
 .pagination-btn {
-    padding: 10px 16px;
+    padding: 8px 12px;
     border: 2px solid #e5e7eb;
     background: white;
     color: #374151;
@@ -4466,23 +4466,24 @@ nav {
     font-size: 14px;
     font-weight: 500;
     transition: all 0.2s ease;
-    min-width: 44px;
-    height: 44px;
+    min-width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .pagination-btn:hover:not(:disabled) {
-    border-color: #5D9CEC;
-    background: #f0f7ff;
-    color: #5D9CEC;
+    border-color: #6B5FBF;
+    background: #f5f3ff;
+    color: #6B5FBF;
 }
 
 .pagination-btn.active {
-    background: #5D9CEC;
+    background: linear-gradient(135deg, #6B5FBF 0%, #8B7FC5 100%) !important;
     color: white;
-    border-color: #5D9CEC;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(107, 95, 191, 0.3);
 }
 
 .pagination-btn:disabled {
