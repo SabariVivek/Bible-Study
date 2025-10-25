@@ -5,15 +5,15 @@
 
 // Check if user is already logged in on page load
 document.addEventListener('DOMContentLoaded', function() {
-    // If on login page (index.html or root) and already logged in, redirect to dashboard
-    if ((window.location.pathname.includes('index.html') || window.location.pathname === '/') && isLoggedIn()) {
-        window.location.href = 'dashboard.html';
+    // If on login page and already logged in, redirect to dashboard
+    if (window.location.pathname.includes('login.html') && isLoggedIn()) {
+        window.location.href = 'index.html#/dashboard';
         return;
     }
     
-    // If on dashboard and not logged in, redirect to login
-    if (window.location.pathname.includes('dashboard.html') && !isLoggedIn()) {
-        window.location.href = 'index.html';
+    // If on index (dashboard) and not logged in, redirect to login
+    if ((window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/Bible-Study/')) && !isLoggedIn()) {
+        window.location.href = 'login.html';
         return;
     }
 });
@@ -93,8 +93,8 @@ async function handleLogin(event) {
         sessionStorage.setItem('username', username);
         sessionStorage.setItem('loginTime', new Date().toISOString());
         
-        // Redirect to dashboard
-        window.location.href = 'dashboard.html';
+        // Redirect to dashboard with hash route
+        window.location.href = 'index.html#/dashboard';
         
     } catch (error) {
         showError(error.message);
@@ -161,7 +161,7 @@ function logout() {
         // Hide loader and overlay, then redirect
         if (loader) loader.style.display = 'none';
         if (overlay) overlay.style.display = 'none';
-        window.location.href = 'index.html';
+        window.location.href = 'login.html';
     }, 1500); // 1.5 seconds delay
 }
 

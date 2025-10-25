@@ -111,10 +111,20 @@ function updateRoute(section) {
  * Handle hash change events (browser back/forward or direct hash change)
  */
 function handleHashChange() {
-    const hash = window.location.hash || '#/dashboard';
+    const hash = window.location.hash;
     
-    if (routes[hash]) {
+    // If there's a hash and it's a valid route, navigate to it
+    if (hash && routes[hash]) {
         navigateTo(hash, false);
+    } else if (!hash) {
+        // If hash is empty (user went back to initial state), show dashboard
+        if (typeof showDashboard === 'function') {
+            isNavigating = true;
+            showDashboard();
+            setTimeout(() => {
+                isNavigating = false;
+            }, 100);
+        }
     }
 }
 
@@ -122,14 +132,13 @@ function handleHashChange() {
  * Load the correct section based on the current URL hash
  */
 function loadRouteFromURL() {
-    const hash = window.location.hash || '#/dashboard';
+    const hash = window.location.hash;
     
-    if (routes[hash]) {
+    // Only navigate if there's actually a hash in the URL
+    if (hash && routes[hash]) {
         navigateTo(hash, false);
-    } else {
-        // Default to dashboard
-        navigateTo('#/dashboard', false);
     }
+    // Don't auto-navigate to dashboard - let the default HTML state show
 }
 
 /**
@@ -139,7 +148,7 @@ function initializeRouter() {
     // Handle hash changes (back/forward buttons, direct hash changes)
     window.addEventListener('hashchange', handleHashChange);
     
-    // Load the route from URL on page load
+    // Load the route from URL on page load (only if hash exists)
     loadRouteFromURL();
 }
 

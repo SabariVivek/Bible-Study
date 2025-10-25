@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Study - Login</title>
+    <link rel="stylesheet" href="styles/all-styles.css">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="login-title">Bible Study</h1>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-container">
+                        <input type="text" id="username" name="username" class="form-input" placeholder="Enter username" required>
+                        <button type="button" class="clear-btn" id="clearBtn" onclick="clearFields()" title="Clear all fields">
+                            <span class="clear-icon">✕</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-container">
+                        <input type="password" id="password" name="password" class="form-input password-input" placeholder="Enter password" required>
+                        <button type="button" class="toggle-password-btn" id="togglePasswordBtn" onclick="togglePassword()" title="Show/Hide password">
+                            <span class="eye-icon" id="eyeIcon">👁️‍🗨️</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span class="btn-text">Sign In</span>
+                    <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="scripts/auth.js"></script>
+</body>
+</html>
