@@ -242,6 +242,11 @@ function showDashboard() {
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
+    // Update URL route
+    if (typeof updateRoute === 'function') {
+        updateRoute('dashboard');
+    }
+    
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -270,6 +275,11 @@ function showKings() {
     
     // Initialize filter buttons
     initializeKingsFilterButtons();
+    
+    // Update URL route
+    if (typeof updateRoute === 'function') {
+        updateRoute('kings');
+    }
     
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -302,6 +312,11 @@ function showProphets() {
     
     // Initialize filter buttons
     initializeProphetsFilterButtons();
+    
+    // Update URL route
+    if (typeof updateRoute === 'function') {
+        updateRoute('prophets');
+    }
     
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1871,6 +1886,11 @@ function showBooks() {
     // Initialize filter buttons
     initializeBooksFilterButtons();
     
+    // Update URL route
+    if (typeof updateRoute === 'function') {
+        updateRoute('books');
+    }
+    
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -2744,6 +2764,11 @@ function showTimeline() {
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
+    // Update URL route
+    if (typeof updateRoute === 'function') {
+        updateRoute('timeline');
+    }
+    
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -2773,6 +2798,11 @@ function showGenealogy() {
         }, 100);
     }
     
+    // Update URL route
+    if (typeof updateRoute === 'function') {
+        updateRoute('genealogy');
+    }
+    
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -2793,6 +2823,11 @@ function showMaps() {
     document.getElementById('maps-content').classList.remove('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Update URL route
+    if (typeof updateRoute === 'function') {
+        updateRoute('maps');
+    }
     
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2839,6 +2874,11 @@ function showHelp() {
     // Initialize Life of Christ cards
     if (typeof initializeLifeOfChrist === 'function') {
         initializeLifeOfChrist();
+    }
+    
+    // Update URL route
+    if (typeof updateRoute === 'function') {
+        updateRoute('help');
     }
     
     // Scroll to top

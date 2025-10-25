@@ -2649,6 +2649,7 @@
     <script src="scripts/data/synopsis/new-testament/revelation-synopsis.js"></script>
     
     <script src="scripts/utils/table-utils.js"></script>
+    <script src="scripts/utils/router.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/characters.js"></script>
     <script src="scripts/ui/testament-nav.js"></script>
@@ -2657,5 +2658,11 @@
     <script src="scripts/ui/life-of-christ.js"></script>
     <script src="scripts/ui/synopsis-drawer.js"></script>
     <script src="scripts/ui/swipe.js"></script>
+    <script>
+        // Initialize router when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeRouter();
+        });
+    </script>
 </body>
 </html>
