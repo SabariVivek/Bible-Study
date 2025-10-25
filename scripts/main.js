@@ -143,7 +143,7 @@ function updateTable() {
         const badgeClass = getCharacterBadge(king.character);
         
         const row = `
-            <tr>
+            <tr onclick="showKingPage('${king.name.replace(/'/g, "\\'")}', ${index})" style="cursor: pointer;">
                 <td class="order-number">${king.order}<sup>${getOrdinalSuffix(king.order)}</sup></td>
                 <td>
                     <div class="king-info">
@@ -160,7 +160,7 @@ function updateTable() {
                     <span class="status-badge ${badgeClass}">${king.character}</span>
                 </td>
                 <td>
-                    <button class="info-btn" onclick="openKingModal(${index})">ℹ</button>
+                    <button class="info-btn" onclick="event.stopPropagation(); openKingModal(${index})">ℹ</button>
                 </td>
             </tr>
         `;
@@ -236,6 +236,7 @@ function showDashboard() {
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.add('hidden');
@@ -262,6 +263,7 @@ function showKings() {
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.add('hidden');
@@ -285,6 +287,46 @@ function showKings() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function showKingPage(kingName, index) {
+    // Update navigation - keep kings nav active
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    document.querySelector('.nav-item.kings').classList.add('active');
+    
+    // Hide all content sections
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
+    
+    // Show king page content
+    document.getElementById('king-page-content').classList.remove('hidden');
+    
+    // Update the title with the king name
+    const kingPageTitle = document.getElementById('kingPageTitle');
+    if (kingPageTitle) {
+        kingPageTitle.textContent = `King ${kingName}`;
+    }
+    
+    // Clear the king page container
+    const kingPageContainer = document.querySelector('.king-page-container');
+    if (kingPageContainer) {
+        kingPageContainer.innerHTML = '';
+        // Force a reflow to ensure the clear happens before new content
+        void kingPageContainer.offsetHeight;
+    }
+    
+    // Content will be added here in the future
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function showProphets() {
     // Update navigation
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
@@ -296,6 +338,7 @@ function showProphets() {
     document.getElementById('prophets-content').classList.remove('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.add('hidden');
@@ -1869,6 +1912,7 @@ function showBooks() {
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.remove('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.add('hidden');
@@ -2290,6 +2334,7 @@ function showBookChapter(book, chapterNum) {
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.add('hidden');
@@ -2372,6 +2417,7 @@ function showBookChapter(book, chapterNum) {
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.add('hidden');
@@ -2758,6 +2804,7 @@ function showTimeline() {
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.remove('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.add('hidden');
@@ -2784,6 +2831,7 @@ function showGenealogy() {
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.remove('hidden');
     document.getElementById('maps-content').classList.add('hidden');
@@ -2818,6 +2866,7 @@ function showMaps() {
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.remove('hidden');
@@ -2865,6 +2914,7 @@ function showHelp() {
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.add('hidden');
