@@ -1,7 +1,7 @@
-const davidFullTimeline = [
+var davidLifeData = [
     // Early Life & Rise
     {
-        incident: "David’s Family & Lineage",
+        incident: "David's Family & Lineage",
         samuel: "1 Sam 16:1",
         kings: "—",
         chronicles: "1 Chr 2:13–15",

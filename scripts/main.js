@@ -321,10 +321,85 @@ function showKingPage(kingName, index) {
         void kingPageContainer.offsetHeight;
     }
     
-    // Content will be added here in the future
+    // Load and display king timeline data using the loader
+    const timelineData = typeof getKingTimelineData === 'function' 
+        ? getKingTimelineData(kingName) 
+        : null;
+    
+    if (timelineData) {
+        displayKingTimeline(kingPageContainer, timelineData);
+    } else {
+        // Show message if no data available
+        kingPageContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: #6b7280;">No timeline data available for this king yet.</p>';
+    }
     
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function displayKingTimeline(container, timelineData) {
+    if (!container || !timelineData || timelineData.length === 0) {
+        return;
+    }
+    
+    // Helper function to check if verse is empty (— or -)
+    const isEmptyVerse = (verse) => verse === '—' || verse === '-';
+    
+    // Detect columns dynamically from the first data item
+    // Always exclude 'incident' and 'notes' as they are fixed columns
+    const firstItem = timelineData[0];
+    const allKeys = Object.keys(firstItem);
+    const dataColumns = allKeys.filter(key => key !== 'incident' && key !== 'notes');
+    
+    // Helper function to get badge class based on column name
+    const getBadgeClass = (colName) => {
+        const lowerCol = colName.toLowerCase();
+        if (lowerCol.includes('samuel')) return 'verse-samuel';
+        if (lowerCol.includes('king')) return 'verse-kings';
+        if (lowerCol.includes('chronicle')) return 'verse-chronicles';
+        return 'verse-samuel'; // default
+    };
+    
+    // Helper function to format column header
+    const formatHeader = (colName) => {
+        // Capitalize first letter and handle common patterns
+        return colName
+            .replace(/([A-Z])/g, ' $1') // Add space before capitals
+            .replace(/^./, str => str.toUpperCase()) // Capitalize first letter
+            .replace(/\d+/g, ' $&') // Add space before numbers
+            .trim();
+    };
+    
+    // Create table HTML matching the kings table format
+    const tableHTML = `
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Incident</th>
+                        ${dataColumns.map(col => `<th>${formatHeader(col)}</th>`).join('')}
+                        <th style="text-align: left;">Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="king-timeline-tbody">
+                    ${timelineData.map(item => `
+                        <tr>
+                            <td style="text-align: left;">${item.incident || ''}</td>
+                            ${dataColumns.map(col => {
+                                const value = item[col] || '—';
+                                const badgeClass = getBadgeClass(col);
+                                const emptyClass = isEmptyVerse(value) ? 'verse-empty' : '';
+                                return `<td><span class="verse-badge ${badgeClass} ${emptyClass}">${value}</span></td>`;
+                            }).join('')}
+                            <td style="text-align: left;">${item.notes || ''}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+    
+    container.innerHTML = tableHTML;
 }
 
 function showProphets() {

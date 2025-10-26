@@ -2979,6 +2979,51 @@ nav {
     box-shadow: 0 1px 3px rgba(217, 119, 6, 0.2);
 }
 
+/* Verse badge modifier classes for king timeline */
+.verse-badge.verse-samuel {
+    background: #fef3c7;
+    color: #92400e;
+    border-color: #fbbf24;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.verse-badge.verse-kings {
+    background: #dbeafe;
+    color: #1e3a8a;
+    border-color: #60a5fa;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.verse-badge.verse-chronicles {
+    background: #d1fae5;
+    color: #065f46;
+    border-color: #34d399;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+/* Empty verse style - shows only colored dash without badge styling */
+.verse-badge.verse-empty {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-weight: 600;
+}
+
+.verse-badge.verse-samuel.verse-empty {
+    color: #92400e;
+}
+
+.verse-badge.verse-kings.verse-empty {
+    color: #1e3a8a;
+}
+
+.verse-badge.verse-chronicles.verse-empty {
+    color: #065f46;
+}
+
 /* Life of Christ colored badges */
 .verse-badge.matthew {
     background: #d1fae5;

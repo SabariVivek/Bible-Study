@@ -119,6 +119,55 @@
     color: #065f46;
 }
 
+/* Verse Badge Styles - For biblical references */
+.verse-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid;
+    transition: all 0.2s ease;
+}
+
+.verse-samuel {
+    background: #fef3c7;
+    color: #92400e;
+    border-color: #fbbf24;
+}
+
+.verse-kings {
+    background: #dbeafe;
+    color: #1e3a8a;
+    border-color: #60a5fa;
+}
+
+.verse-chronicles {
+    background: #d1fae5;
+    color: #065f46;
+    border-color: #34d399;
+}
+
+/* Empty verse style - shows only colored dash without badge styling */
+.verse-badge.verse-empty {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-weight: 600;
+}
+
+.verse-badge.verse-samuel.verse-empty {
+    color: #92400e;
+}
+
+.verse-badge.verse-kings.verse-empty {
+    color: #1e3a8a;
+}
+
+.verse-badge.verse-chronicles.verse-empty {
+    color: #065f46;
+}
+
 /* Author Badge Styles - Distinct from status badges */
 .author-badge {
     display: inline-block;
