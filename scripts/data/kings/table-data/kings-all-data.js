@@ -99,3 +99,26 @@ window.getKingTimelineData = function(kingName) {
     console.warn(`No timeline data found for king: ${kingName}`);
     return null;
 };
+
+/**
+ * Get king summary data by king name
+ * @param {string} kingName - The name of the king
+ * @returns {Array|null} - The summary data or null if not found
+ */
+window.getKingSummaryData = function(kingName) {
+    // Normalize the king name (lowercase, trim)
+    const normalizedName = kingName.toLowerCase().trim();
+    
+    // Remove any extra text in parentheses and special characters
+    const simpleName = normalizedName.replace(/[^a-z]/g, '');
+    
+    // Try to find summary data variable: {kingname}SummaryData
+    const summaryVariableName = simpleName + 'SummaryData';
+    
+    if (typeof window[summaryVariableName] !== 'undefined') {
+        return window[summaryVariableName];
+    }
+    
+    console.warn(`No summary data found for king: ${kingName}`);
+    return null;
+};

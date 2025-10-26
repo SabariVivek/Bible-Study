@@ -326,11 +326,135 @@ function showKingPage(kingName, index) {
         ? getKingTimelineData(kingName) 
         : null;
     
-    if (timelineData) {
-        displayKingTimeline(kingPageContainer, timelineData);
+    const summaryData = typeof getKingSummaryData === 'function' 
+        ? getKingSummaryData(kingName) 
+        : null;
+    
+    // Store the timeline data and king name globally for the table view toggle
+    window.currentKingData = {
+        name: kingName,
+        data: timelineData,
+        summary: summaryData,
+        isTableView: false
+    };
+    
+    if (summaryData && summaryData.length > 0) {
+        // Display summary data by default in book chapter format
+        displayKingSummary(kingPageContainer, summaryData, kingName);
+    } else if (timelineData) {
+        // Fallback to showing welcome message if no summary
+        kingPageContainer.innerHTML = `
+            <div style="text-align: center; padding: 60px 20px;">
+                <h2 style="color: #667eea; margin-bottom: 16px; font-size: 24px;">Welcome to King ${kingName}'s Timeline</h2>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">Click the table icon above to view the timeline details</p>
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" style="opacity: 0.3;">
+                    <rect x="3" y="3" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
+                    <rect x="3" y="13" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
+                    <rect x="13" y="3" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
+                    <rect x="13" y="13" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
+                </svg>
+            </div>
+        `;
     } else {
         // Show message if no data available
         kingPageContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: #6b7280;">No timeline data available for this king yet.</p>';
+    }
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function displayKingSummary(container, summaryData, kingName) {
+    if (!container || !summaryData || summaryData.length === 0) {
+        return;
+    }
+    
+    // Clear container first
+    container.innerHTML = '';
+    
+    // Create sections similar to book chapter format
+    summaryData.forEach((section, index) => {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'chapter-section';
+        sectionDiv.style.marginBottom = index < summaryData.length - 1 ? '2.5rem' : '0';
+        
+        // Add section heading
+        if (section.heading) {
+            const sectionHeading = document.createElement('h3');
+            sectionHeading.className = 'chapter-section-heading';
+            sectionHeading.textContent = section.heading;
+            sectionDiv.appendChild(sectionHeading);
+        }
+        
+        // Add section text
+        if (section.text) {
+            const sectionText = document.createElement('div');
+            sectionText.innerHTML = section.text;
+            sectionText.style.lineHeight = '2.2';
+            sectionText.style.color = '#2c3e50';
+            sectionText.style.fontSize = '1.05rem';
+            sectionText.style.whiteSpace = 'pre-wrap';
+            sectionText.style.marginTop = '1rem';
+            sectionText.style.textAlign = 'justify';
+            sectionDiv.appendChild(sectionText);
+        }
+        
+        container.appendChild(sectionDiv);
+    });
+}
+
+function openKingTableView() {
+    const kingPageContainer = document.querySelector('.king-page-container');
+    const tableViewBtn = document.querySelector('.table-view-btn');
+    
+    if (!window.currentKingData) {
+        return;
+    }
+    
+    // Check current view state
+    if (!window.currentKingData.isTableView) {
+        // Switch to table view
+        if (!window.currentKingData.data) {
+            alert('No timeline data available for this king.');
+            return;
+        }
+        
+        kingPageContainer.innerHTML = '';
+        displayKingTimeline(kingPageContainer, window.currentKingData.data);
+        window.currentKingData.isTableView = true;
+        
+        // Highlight the button
+        if (tableViewBtn) {
+            tableViewBtn.classList.add('active');
+        }
+    } else {
+        // Switch back to summary view
+        kingPageContainer.innerHTML = '';
+        
+        if (window.currentKingData.summary && window.currentKingData.summary.length > 0) {
+            displayKingSummary(kingPageContainer, window.currentKingData.summary, window.currentKingData.name);
+        } else if (window.currentKingData.data) {
+            // Show welcome message if no summary
+            kingPageContainer.innerHTML = `
+                <div style="text-align: center; padding: 60px 20px;">
+                    <h2 style="color: #667eea; margin-bottom: 16px; font-size: 24px;">Welcome to King ${window.currentKingData.name}'s Timeline</h2>
+                    <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">Click the table icon above to view the timeline details</p>
+                    <svg width="120" height="120" viewBox="0 0 24 24" fill="none" style="opacity: 0.3;">
+                        <rect x="3" y="3" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
+                        <rect x="3" y="13" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
+                        <rect x="13" y="3" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
+                        <rect x="13" y="13" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
+                    </svg>
+                </div>
+            `;
+        }
+        
+        window.currentKingData.isTableView = false;
+        
+        // Remove highlight from button
+        if (tableViewBtn) {
+            tableViewBtn.classList.remove('active');
+        }
     }
     
     // Scroll to top

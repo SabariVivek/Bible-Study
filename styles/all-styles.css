@@ -2729,6 +2729,53 @@ nav {
     display: block;
 }
 
+/* Table View Button (on king detail page) */
+.table-view-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    border: 2px solid #667eea;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px 8px;
+}
+
+.table-view-btn:hover {
+    background: #667eea;
+    color: #ffffff;
+    transform: translateY(-50%) translateY(-2px);
+}
+
+.table-view-btn:active {
+    transform: translateY(-50%) translateY(0);
+}
+
+.table-view-btn.active {
+    background: #667eea;
+    color: #ffffff;
+    transform: translateY(-50%);
+}
+
+.table-view-btn.active:hover {
+    background: #5568d3;
+    transform: translateY(-50%) translateY(-2px);
+}
+
+.table-view-btn .table-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
 /* Centered Content Header (for detail views with back button) */
 .content-header-centered {
     position: relative;
