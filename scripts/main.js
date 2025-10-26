@@ -152,6 +152,9 @@ function updateTable() {
                     </div>
                 </td>
                 <td>
+                    ${king.reign || 'N/A'}
+                </td>
+                <td>
                     ${king.kingdom}
                 </td>
                 <td>
