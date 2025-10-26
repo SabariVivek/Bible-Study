@@ -46,18 +46,6 @@ class TableManager {
                         <!-- Table content will be populated by JavaScript -->
                     </tbody>
                 </table>
-
-                <div class="pagination" id="${this.config.paginationId}">
-                    <div class="pagination-info">
-                        <button class="pagination-btn" id="${this.config.prevBtnId}">Previous</button>
-                    </div>
-                    <div class="pagination-controls" id="${this.config.paginationControlsId}">
-                        <!-- Pagination controls will be populated by JavaScript -->
-                    </div>
-                    <div>
-                        <button class="pagination-btn" id="${this.config.nextBtnId}">Next</button>
-                    </div>
-                </div>
             </div>
         `;
     }
@@ -68,18 +56,6 @@ class TableManager {
             window.tableManagers = {};
         }
         window.tableManagers[this.config.containerId] = this;
-
-        // Set up event listeners for existing buttons
-        const prevBtn = document.getElementById(this.config.prevBtnId);
-        const nextBtn = document.getElementById(this.config.nextBtnId);
-        
-        if (prevBtn) {
-            prevBtn.onclick = () => this.changePage(-1);
-        }
-        
-        if (nextBtn) {
-            nextBtn.onclick = () => this.changePage(1);
-        }
     }
 
     setData(data) {
@@ -101,9 +77,8 @@ class TableManager {
 
         tbody.innerHTML = '';
 
-        const startIndex = (this.config.currentPage - 1) * this.config.itemsPerPage;
-        const endIndex = startIndex + this.config.itemsPerPage;
-        const itemsToShow = this.config.filteredData.slice(startIndex, endIndex);
+        // Show all items without pagination
+        const itemsToShow = this.config.filteredData;
 
         itemsToShow.forEach((item, index) => {
             const row = document.createElement('tr');
@@ -111,13 +86,13 @@ class TableManager {
             row.style.cursor = 'pointer';
             
             if (this.config.onRowClick) {
-                row.onclick = () => this.config.onRowClick(item, startIndex + index);
+                row.onclick = () => this.config.onRowClick(item, index);
             }
 
             // Generate cells based on column configuration
             const cells = this.config.columns.map(col => {
                 if (col.render) {
-                    return col.render(item, startIndex + index);
+                    return col.render(item, index);
                 } else {
                     return `<td class="${col.className || ''}">${this.getNestedValue(item, col.key) || ''}</td>`;
                 }
@@ -128,7 +103,6 @@ class TableManager {
         });
 
         this.updateShowingCount();
-        this.updatePagination();
     }
 
     getNestedValue(obj, path) {
@@ -138,47 +112,8 @@ class TableManager {
     updateShowingCount() {
         const showingCount = document.getElementById(this.config.showingCountId);
         if (showingCount) {
-            const startIndex = (this.config.currentPage - 1) * this.config.itemsPerPage;
-            const endIndex = Math.min(startIndex + this.config.itemsPerPage, this.config.filteredData.length);
-            showingCount.textContent = `Showing ${endIndex}`;
+            showingCount.textContent = `Showing ${this.config.filteredData.length}`;
         }
-    }
-
-    updatePagination() {
-        const totalPages = Math.ceil(this.config.filteredData.length / this.config.itemsPerPage);
-        const paginationControls = document.getElementById(this.config.paginationControlsId);
-        const prevBtn = document.getElementById(this.config.prevBtnId);
-        const nextBtn = document.getElementById(this.config.nextBtnId);
-
-        if (paginationControls) {
-            paginationControls.innerHTML = '';
-
-            for (let i = 1; i <= totalPages; i++) {
-                const pageBtn = document.createElement('button');
-                pageBtn.className = `pagination-btn ${i === this.config.currentPage ? 'active' : ''}`;
-                pageBtn.textContent = i.toString().padStart(2, '0');
-                pageBtn.onclick = () => this.goToPage(i);
-                paginationControls.appendChild(pageBtn);
-            }
-        }
-
-        if (prevBtn) prevBtn.disabled = this.config.currentPage === 1;
-        if (nextBtn) nextBtn.disabled = this.config.currentPage === totalPages || totalPages === 0;
-    }
-
-    changePage(direction) {
-        const totalPages = Math.ceil(this.config.filteredData.length / this.config.itemsPerPage);
-        const newPage = this.config.currentPage + direction;
-
-        if (newPage >= 1 && newPage <= totalPages) {
-            this.config.currentPage = newPage;
-            this.updateTable();
-        }
-    }
-
-    goToPage(page) {
-        this.config.currentPage = page;
-        this.updateTable();
     }
 
     getCurrentData() {

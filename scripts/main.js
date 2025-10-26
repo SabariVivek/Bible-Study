@@ -48,7 +48,6 @@ function applyFilters() {
     
     currentKingdoms = filteredKingdoms;
     updateTable();
-    updatePagination();
 }
 
 function toggleDropdown() {
@@ -75,7 +74,6 @@ function selectKingdom(value, text, icon, count) {
     
     // Filter kingdoms
     currentFilter = value;
-    currentPage = 1;
     applyFilters();
 }
 
@@ -130,16 +128,16 @@ function getCharacterColor(character) {
 
 function updateTable() {
     const tbody = document.getElementById('kings-table-body');
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const pageKings = currentKingdoms.slice(startIndex, endIndex);
+    
+    // Show all kings without pagination
+    const allKings = currentKingdoms;
     
     // Store kings globally for easy access
-    window.currentPageKings = pageKings;
+    window.currentPageKings = allKings;
     
     tbody.innerHTML = '';
     
-    pageKings.forEach((king, index) => {
+    allKings.forEach((king, index) => {
         const badgeClass = getCharacterBadge(king.character);
         
         const row = `
@@ -168,7 +166,7 @@ function updateTable() {
     });
     
     // Update showing count
-    document.getElementById('showing-count').textContent = `Showing ${pageKings.length}`;
+    document.getElementById('showing-count').textContent = `Showing ${allKings.length}`;
 }
 
 // Function to open king modal by index
