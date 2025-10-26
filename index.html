@@ -241,8 +241,24 @@
                         <thead>
                             <tr>
                                 <th>Order</th>
-                                <th>King Name</th>
-                                <th>Reign</th>
+                                <th class="sortable" data-column="name">
+                                    King Name
+                                    <span class="sort-icon">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 10L12 15L17 10H7Z" fill="currentColor"/>
+                                            <path d="M7 14L12 9L17 14H7Z" fill="currentColor" opacity="0.4"/>
+                                        </svg>
+                                    </span>
+                                </th>
+                                <th class="sortable" data-column="reign">
+                                    Reign
+                                    <span class="sort-icon">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 10L12 15L17 10H7Z" fill="currentColor"/>
+                                            <path d="M7 14L12 9L17 14H7Z" fill="currentColor" opacity="0.4"/>
+                                        </svg>
+                                    </span>
+                                </th>
                                 <th>Kingdom</th>
                                 <th>Character</th>
                             </tr>

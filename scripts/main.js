@@ -10,6 +10,10 @@ let currentCharacterFilter = 'all';
 let selectedFilterValue = 'all'; // For the filter card
 const itemsPerPage = 7;
 
+// Sorting state
+let currentSortColumn = null;
+let currentSortDirection = 'asc'; // 'asc' or 'desc'
+
 function getOrdinalSuffix(number) {
     const j = number % 7;
     const k = number % 100;
@@ -48,6 +52,145 @@ function applyFilters() {
     
     currentKingdoms = filteredKingdoms;
     updateTable();
+}
+
+/**
+ * Parse reign string to get numeric value for sorting
+ * Converts "40 years", "3 months", "7 days" to comparable numbers
+ */
+function parseReignForSorting(reign) {
+    if (!reign || reign === 'N/A') return 0;
+    
+    const lowerReign = reign.toLowerCase();
+    
+    // Extract number from the string
+    const match = lowerReign.match(/(\d+)/);
+    if (!match) return 0;
+    
+    const num = parseInt(match[1]);
+    
+    // Convert to days for comparison
+    if (lowerReign.includes('year')) {
+        return num * 365;
+    } else if (lowerReign.includes('month')) {
+        return num * 30;
+    } else if (lowerReign.includes('day')) {
+        return num;
+    }
+    
+    return num;
+}
+
+/**
+ * Sort the current kingdoms array by specified column
+ */
+function sortKingdoms(column, direction) {
+    currentKingdoms.sort((a, b) => {
+        let valueA, valueB;
+        
+        if (column === 'name') {
+            valueA = a.name.toLowerCase();
+            valueB = b.name.toLowerCase();
+            
+            if (direction === 'asc') {
+                return valueA.localeCompare(valueB);
+            } else {
+                return valueB.localeCompare(valueA);
+            }
+        } else if (column === 'reign') {
+            valueA = parseReignForSorting(a.reign);
+            valueB = parseReignForSorting(b.reign);
+            
+            if (direction === 'asc') {
+                return valueA - valueB;
+            } else {
+                return valueB - valueA;
+            }
+        }
+        
+        return 0;
+    });
+}
+
+/**
+ * Handle sort column click
+ */
+function handleSort(column) {
+    // Toggle direction if clicking the same column, otherwise start with ascending
+    if (currentSortColumn === column) {
+        currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+        currentSortColumn = column;
+        currentSortDirection = 'asc';
+    }
+    
+    // Sort the data
+    sortKingdoms(currentSortColumn, currentSortDirection);
+    
+    // Update sort indicators
+    updateSortIndicators();
+    
+    // Re-render table
+    updateTable();
+}
+
+/**
+ * Update sort indicators in table headers
+ */
+function updateSortIndicators() {
+    // SVG icons for different sort states
+    const unsortedIcon = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 10L12 15L17 10H7Z" fill="currentColor"/>
+            <path d="M7 14L12 9L17 14H7Z" fill="currentColor" opacity="0.4"/>
+        </svg>
+    `;
+    
+    const ascendingIcon = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 14L12 9L17 14H7Z" fill="currentColor"/>
+        </svg>
+    `;
+    
+    const descendingIcon = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 10L12 15L17 10H7Z" fill="currentColor"/>
+        </svg>
+    `;
+    
+    // Reset all sort icons
+    document.querySelectorAll('.sortable').forEach(th => {
+        th.classList.remove('sort-asc', 'sort-desc');
+        const icon = th.querySelector('.sort-icon');
+        if (icon) {
+            icon.innerHTML = unsortedIcon;
+        }
+    });
+    
+    // Set active sort indicator
+    if (currentSortColumn) {
+        const activeHeader = document.querySelector(`.sortable[data-column="${currentSortColumn}"]`);
+        if (activeHeader) {
+            activeHeader.classList.add(currentSortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
+            const icon = activeHeader.querySelector('.sort-icon');
+            if (icon) {
+                icon.innerHTML = currentSortDirection === 'asc' ? ascendingIcon : descendingIcon;
+            }
+        }
+    }
+}
+
+/**
+ * Initialize sorting event listeners
+ */
+function initializeSorting() {
+    document.querySelectorAll('.sortable').forEach(th => {
+        th.style.cursor = 'pointer';
+        th.addEventListener('click', function() {
+            const column = this.getAttribute('data-column');
+            handleSort(column);
+        });
+    });
 }
 
 function toggleDropdown() {
@@ -288,6 +431,9 @@ function showKings() {
     
     // Initialize filter buttons
     initializeKingsFilterButtons();
+    
+    // Initialize sorting
+    initializeSorting();
     
     // Update URL route
     if (typeof updateRoute === 'function') {
@@ -2420,12 +2566,14 @@ function initializeBooksTable() {
                 header: 'Book Name',
                 key: 'name',
                 className: 'name-cell',
+                sortable: true,
                 render: (item) => `<td class="name-cell"><div class="name-container"><span class="name">${item.name}</span></div></td>`
             },
             {
                 header: 'Verses',
                 key: 'verses',
                 className: 'verses-cell',
+                sortable: true,
                 render: (item) => `<td class="verses-cell"><span class="status-badge badge-verses">${item.verses}</span></td>`
             },
             {

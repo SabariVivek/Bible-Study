@@ -19,7 +19,9 @@ class TableManager {
             onRowClick: config.onRowClick || null,
             data: [],
             currentPage: 1,
-            filteredData: []
+            filteredData: [],
+            sortColumn: null,
+            sortDirection: 'asc'
         };
         
         this.init();
@@ -39,7 +41,21 @@ class TableManager {
                 <table class="table" id="${this.config.tableId}">
                     <thead>
                         <tr>
-                            ${this.config.columns.map(col => `<th>${col.header}</th>`).join('')}
+                            ${this.config.columns.map(col => {
+                                if (col.sortable) {
+                                    return `<th class="sortable" data-column="${col.key}">
+                                        ${col.header}
+                                        <span class="sort-icon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M7 10L12 15L17 10H7Z" fill="currentColor"/>
+                                                <path d="M7 14L12 9L17 14H7Z" fill="currentColor" opacity="0.4"/>
+                                            </svg>
+                                        </span>
+                                    </th>`;
+                                } else {
+                                    return `<th>${col.header}</th>`;
+                                }
+                            }).join('')}
                         </tr>
                     </thead>
                     <tbody id="${this.config.tableBodyId}">
@@ -48,6 +64,9 @@ class TableManager {
                 </table>
             </div>
         `;
+        
+        // Setup sorting event listeners
+        this.setupSortingListeners();
     }
 
     setupEventListeners() {
@@ -64,7 +83,7 @@ class TableManager {
         this.config.currentPage = 1;
         this.updateTable();
     }
-
+    
     filterData(filterFn) {
         this.config.filteredData = this.config.data.filter(filterFn);
         this.config.currentPage = 1;
@@ -73,7 +92,11 @@ class TableManager {
 
     updateTable() {
         const tbody = document.getElementById(this.config.tableBodyId);
-        if (!tbody) return;
+        if (!tbody) {
+            // If table doesn't exist, re-render it completely
+            this.renderTable();
+            return;
+        }
 
         tbody.innerHTML = '';
 
@@ -103,6 +126,14 @@ class TableManager {
         });
 
         this.updateShowingCount();
+        
+        // Ensure sorting listeners are attached
+        this.setupSortingListeners();
+        
+        // Update sort indicators if a column is sorted
+        if (this.config.sortColumn) {
+            this.updateSortIndicators();
+        }
     }
 
     getNestedValue(obj, path) {
@@ -126,6 +157,119 @@ class TableManager {
 
     getCurrentPage() {
         return this.config.currentPage;
+    }
+
+    setupSortingListeners() {
+        const tableElement = document.getElementById(this.config.tableId);
+        if (!tableElement) return;
+
+        const sortableHeaders = tableElement.querySelectorAll('.sortable');
+        sortableHeaders.forEach(th => {
+            th.style.cursor = 'pointer';
+            
+            // Remove old event listener if exists by cloning the node
+            const newTh = th.cloneNode(true);
+            th.parentNode.replaceChild(newTh, th);
+            
+            // Add new event listener
+            newTh.addEventListener('click', () => {
+                const column = newTh.getAttribute('data-column');
+                this.handleSort(column);
+            });
+        });
+    }
+
+    handleSort(column) {
+        // Toggle direction if clicking the same column, otherwise start with ascending
+        if (this.config.sortColumn === column) {
+            this.config.sortDirection = this.config.sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            this.config.sortColumn = column;
+            this.config.sortDirection = 'asc';
+        }
+
+        // Sort the data
+        this.sortData(column, this.config.sortDirection);
+
+        // Update sort indicators
+        this.updateSortIndicators();
+
+        // Re-render table
+        this.updateTable();
+    }
+
+    sortData(column, direction) {
+        const columnConfig = this.config.columns.find(col => col.key === column);
+        
+        this.config.filteredData.sort((a, b) => {
+            let valueA = this.getNestedValue(a, column);
+            let valueB = this.getNestedValue(b, column);
+
+            // Handle numeric sorting for verses
+            if (column === 'verses') {
+                valueA = parseInt(valueA) || 0;
+                valueB = parseInt(valueB) || 0;
+                return direction === 'asc' ? valueA - valueB : valueB - valueA;
+            }
+
+            // Handle string sorting (for name, etc.)
+            if (typeof valueA === 'string') {
+                valueA = valueA.toLowerCase();
+                valueB = valueB.toLowerCase();
+            }
+
+            if (direction === 'asc') {
+                return valueA > valueB ? 1 : valueA < valueB ? -1 : 0;
+            } else {
+                return valueA < valueB ? 1 : valueA > valueB ? -1 : 0;
+            }
+        });
+    }
+
+    updateSortIndicators() {
+        const tableElement = document.getElementById(this.config.tableId);
+        if (!tableElement) return;
+
+        const unsortedIcon = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L12 15L17 10H7Z" fill="currentColor"/>
+                <path d="M7 14L12 9L17 14H7Z" fill="currentColor" opacity="0.4"/>
+            </svg>
+        `;
+        
+        const ascendingIcon = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 14L12 9L17 14H7Z" fill="currentColor"/>
+            </svg>
+        `;
+        
+        const descendingIcon = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L12 15L17 10H7Z" fill="currentColor"/>
+            </svg>
+        `;
+
+        // Reset all sort icons
+        const sortableHeaders = tableElement.querySelectorAll('.sortable');
+        sortableHeaders.forEach(th => {
+            th.classList.remove('sort-asc', 'sort-desc');
+            const icon = th.querySelector('.sort-icon');
+            if (icon) {
+                icon.innerHTML = unsortedIcon;
+            }
+        });
+
+        // Set active sort indicator
+        if (this.config.sortColumn) {
+            const activeHeader = tableElement.querySelector(`.sortable[data-column="${this.config.sortColumn}"]`);
+            if (activeHeader) {
+                activeHeader.classList.add(this.config.sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
+                const icon = activeHeader.querySelector('.sort-icon');
+                if (icon) {
+                    icon.innerHTML = this.config.sortDirection === 'asc' ? ascendingIcon : descendingIcon;
+                }
+            }
+        }
     }
 }
 

@@ -455,6 +455,55 @@ nav {
     border-bottom: 1px solid #e5e7eb;
 }
 
+/* Sortable column styles */
+.table th.sortable {
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.table th.sortable:hover {
+    background: #f3f4f6;
+    color: #667eea;
+}
+
+.table th.sortable .sort-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    vertical-align: middle;
+    color: #9ca3af;
+    transition: all 0.2s ease;
+}
+
+.table th.sortable .sort-icon svg {
+    width: 14px;
+    height: 14px;
+    transition: all 0.2s ease;
+}
+
+.table th.sortable:hover .sort-icon {
+    color: #667eea;
+}
+
+.table th.sortable.sort-asc,
+.table th.sortable.sort-desc {
+    background: #eef2ff;
+    color: #667eea;
+}
+
+.table th.sortable.sort-asc .sort-icon,
+.table th.sortable.sort-desc .sort-icon {
+    color: #667eea;
+}
+
+.table th.sortable.sort-asc .sort-icon svg,
+.table th.sortable.sort-desc .sort-icon svg {
+    transform: scale(1.1);
+}
+
 .table td {
     padding: 16px;
     border-bottom: 1px solid #f3f4f6;
