@@ -126,6 +126,24 @@ function getCharacterColor(character) {
     return colors[character] || '#1f2937'; // Default dark gray
 }
 
+function getReignBadge(reign) {
+    if (!reign || reign === 'N/A') {
+        return { class: 'reign-unknown', text: 'N/A' };
+    }
+    
+    const lowerReign = reign.toLowerCase();
+    
+    if (lowerReign.includes('year')) {
+        return { class: 'reign-years', text: reign };
+    } else if (lowerReign.includes('month')) {
+        return { class: 'reign-months', text: reign };
+    } else if (lowerReign.includes('day')) {
+        return { class: 'reign-days', text: reign };
+    }
+    
+    return { class: 'reign-unknown', text: reign };
+}
+
 function updateTable() {
     const tbody = document.getElementById('kings-table-body');
     
@@ -139,6 +157,7 @@ function updateTable() {
     
     allKings.forEach((king, index) => {
         const badgeClass = getCharacterBadge(king.character);
+        const reignBadge = getReignBadge(king.reign);
         
         const row = `
             <tr onclick="showKingPage('${king.name.replace(/'/g, "\\'")}', ${index})" style="cursor: pointer;">
@@ -152,16 +171,13 @@ function updateTable() {
                     </div>
                 </td>
                 <td>
-                    ${king.reign || 'N/A'}
+                    <span class="status-badge ${reignBadge.class}">${reignBadge.text}</span>
                 </td>
                 <td>
                     ${king.kingdom}
                 </td>
                 <td>
                     <span class="status-badge ${badgeClass}">${king.character}</span>
-                </td>
-                <td>
-                    <button class="info-btn" onclick="event.stopPropagation(); openKingModal(${index})">ℹ</button>
                 </td>
             </tr>
         `;
@@ -172,15 +188,8 @@ function updateTable() {
     document.getElementById('showing-count').textContent = `Showing ${allKings.length}`;
 }
 
-// Function to open king modal by index
-function openKingModal(index) {
-    if (window.currentPageKings && window.currentPageKings[index]) {
-        const king = window.currentPageKings[index];
-        showKingDetails(king);
-    } else {
-        console.error('No king found at index:', index);
-    }
-}
+// Removed: openKingModal function - Info column has been removed from the table
+// Users can click on the table row to view king details
 
 function updatePagination() {
     const totalPages = Math.ceil(currentKingdoms.length / itemsPerPage);
@@ -265,6 +274,7 @@ function showKings() {
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
+    document.getElementById('kings-timeline-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.add('hidden');
@@ -299,6 +309,7 @@ function showKingPage(kingName, index) {
     document.getElementById('prophets-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('kings-timeline-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('maps-content').classList.add('hidden');
@@ -527,6 +538,251 @@ function displayKingTimeline(container, timelineData) {
     container.innerHTML = tableHTML;
 }
 
+function showKingsTimeline(currentKingName = null) {
+    // Hide all content sections
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
+    
+    // Show kings timeline
+    document.getElementById('kings-timeline-content').classList.remove('hidden');
+    
+    // Add click handlers to timeline cards
+    document.querySelectorAll('.timeline-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const kingName = this.textContent.trim();
+            // Navigate to king detail page
+            showKingPageFromTimeline(kingName);
+        });
+    });
+    
+    // Highlight current king if provided - use setTimeout to ensure DOM is ready
+    if (currentKingName) {
+        setTimeout(() => {
+            highlightKingInTimeline(currentKingName);
+        }, 50);
+    }
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function highlightKingInTimeline(kingName) {
+    // Remove any existing highlights
+    document.querySelectorAll('.timeline-card').forEach(card => {
+        card.classList.remove('current-king-highlight');
+    });
+    
+    if (!kingName) return;
+    
+    // Normalize king name for matching
+    const normalizedSearchName = kingName.toLowerCase().trim();
+    
+    // Find and highlight the matching king
+    const cards = document.querySelectorAll('.timeline-card');
+    let found = false;
+    
+    cards.forEach(card => {
+        const cardText = card.textContent.trim();
+        const normalizedCardName = cardText.toLowerCase();
+        
+        // Try exact match first
+        if (normalizedCardName === normalizedSearchName) {
+            card.classList.add('current-king-highlight');
+            found = true;
+            // Scroll to the highlighted king
+            setTimeout(() => {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 150);
+        }
+        // Try matching if card name is in search name or vice versa
+        else if (!found) {
+            // Extract first word from both for partial matching
+            const searchFirstWord = normalizedSearchName.split(' ')[0];
+            const cardFirstWord = normalizedCardName.split(' ')[0];
+            
+            // Check if the main names match (handles cases like "Jehoram" vs "Jehoram (Joram)")
+            if (searchFirstWord === cardFirstWord || 
+                normalizedCardName.includes(normalizedSearchName) || 
+                normalizedSearchName.includes(normalizedCardName)) {
+                card.classList.add('current-king-highlight');
+                found = true;
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            }
+        }
+    });
+}
+
+function showKingPageFromTimeline(kingName) {
+    // Find the king in all kings data
+    const allKings = [
+        ...allKingsData.united.map(king => ({...king, kingdom: 'United Kingdom'})),
+        ...allKingsData.israel.map(king => ({...king, kingdom: 'Israel'})),
+        ...allKingsData.judah.map(king => ({...king, kingdom: 'Judah'}))
+    ];
+    
+    const normalizedSearchName = kingName.toLowerCase().trim();
+    
+    const kingIndex = allKings.findIndex(king => {
+        const normalizedKingName = king.name.toLowerCase();
+        return normalizedKingName === normalizedSearchName || 
+               normalizedKingName.includes(normalizedSearchName) ||
+               normalizedSearchName.includes(normalizedKingName);
+    });
+    
+    if (kingIndex !== -1) {
+        showKingPage(allKings[kingIndex].name, kingIndex);
+    }
+}
+
+function goBackFromKingsTimeline() {
+    // Check if we came from a king page
+    if (window.currentKingData && window.currentKingData.name) {
+        // Go back to the king detail page
+        showKingPage(window.currentKingData.name, 0);
+    } else {
+        // Go back to kings list
+        showKings();
+    }
+}
+
+function showKingsTimelineFromKingPage() {
+    // Get the current king name from the stored data
+    const currentKingName = window.currentKingData ? window.currentKingData.name : null;
+    openKingsTimelineModal(currentKingName);
+}
+
+function handleKingAudioClick(event) {
+    event.stopPropagation();
+    
+    // Get the current king name from the stored data
+    const currentKingName = window.currentKingData ? window.currentKingData.name : null;
+    
+    if (!currentKingName) {
+        console.warn('No king data available for audio');
+        return;
+    }
+    
+    // For now, show a message that audio is not yet available
+    // This can be updated later when king audio files are added
+    alert(`Audio feature for King ${currentKingName} will be available soon!`);
+    
+    // TODO: Implement actual audio playback when king audio files are added
+    // Similar to how chapter audio works:
+    // const audioPath = `resources/audio/kings/${currentKingName.toLowerCase()}.mp3`;
+    // openChapterAudioPlayer(audioPath, currentKingName, 'Kings');
+}
+
+function openKingsTimelineModal(currentKingName = null) {
+    // Show the modal
+    const modal = document.getElementById('kings-timeline-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        
+        // Reset scroll to top
+        const modalBody = modal.querySelector('.timeline-modal-body');
+        if (modalBody) {
+            modalBody.scrollTop = 0;
+        }
+        
+        // Add click handlers to timeline cards in modal
+        modal.querySelectorAll('.timeline-card').forEach(card => {
+            // Remove old event listeners by cloning
+            const newCard = card.cloneNode(true);
+            card.parentNode.replaceChild(newCard, card);
+            
+            newCard.addEventListener('click', function() {
+                const kingName = this.textContent.trim();
+                // Close modal and navigate to king detail page
+                closeKingsTimelineModal();
+                setTimeout(() => {
+                    showKingPageFromTimeline(kingName);
+                }, 300);
+            });
+        });
+        
+        // Prevent body scroll when modal is open
+        document.body.style.overflow = 'hidden';
+        
+        // Highlight current king if provided (but don't scroll to it)
+        if (currentKingName) {
+            highlightKingInTimelineModal(currentKingName);
+        }
+    }
+}
+
+function closeKingsTimelineModal() {
+    const modal = document.getElementById('kings-timeline-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        // Restore body scroll
+        document.body.style.overflow = '';
+        
+        // Remove all highlights
+        modal.querySelectorAll('.timeline-card').forEach(card => {
+            card.classList.remove('current-king-highlight');
+        });
+    }
+}
+
+function highlightKingInTimelineModal(kingName) {
+    const modal = document.getElementById('kings-timeline-modal');
+    if (!modal) return;
+    
+    // Remove any existing highlights
+    modal.querySelectorAll('.timeline-card').forEach(card => {
+        card.classList.remove('current-king-highlight');
+    });
+    
+    if (!kingName) return;
+    
+    // Normalize king name for matching
+    const normalizedSearchName = kingName.toLowerCase().trim();
+    
+    // Find and highlight the matching king - only one card
+    const cards = modal.querySelectorAll('.timeline-card');
+    
+    for (let card of cards) {
+        const cardText = card.textContent.trim();
+        const normalizedCardName = cardText.toLowerCase();
+        
+        // Try exact match first (case insensitive)
+        if (normalizedCardName === normalizedSearchName) {
+            card.classList.add('current-king-highlight');
+            break; // Stop after finding the first exact match
+        }
+    }
+    
+    // If no exact match found, try partial matching
+    if (!modal.querySelector('.current-king-highlight')) {
+        for (let card of cards) {
+            const cardText = card.textContent.trim();
+            const normalizedCardName = cardText.toLowerCase();
+            
+            const searchFirstWord = normalizedSearchName.split(' ')[0];
+            const cardFirstWord = normalizedCardName.split(' ')[0];
+            
+            // Check if main names match (for cases like "Jehoram" vs "Jehoram (Joram)")
+            if (searchFirstWord === cardFirstWord && searchFirstWord.length > 3) {
+                card.classList.add('current-king-highlight');
+                break; // Stop after finding the first partial match
+            }
+        }
+    }
+    
+    // Note: No scrolling - modal always shows from the top
+}
+
 function showProphets() {
     // Update navigation
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
@@ -670,8 +926,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
-// Make functions globally accessible
-window.openKingModal = openKingModal;
+// Removed: window.openKingModal - function no longer exists after Info column removal
 
 // Prophets Filter Variables
 let selectedProphetsFilterValue = 'all';

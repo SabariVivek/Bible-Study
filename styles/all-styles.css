@@ -542,6 +542,11 @@ nav {
     color: #d97706;
 }
 
+.status-wise {
+    background: #fef3c7;
+    color: #d97706;
+}
+
 .status-ancient {
     background: #e0e7ff;
     color: #3730a3;
@@ -550,6 +555,27 @@ nav {
 .status-other {
     background: #fce7f3;
     color: #be185d;
+}
+
+/* Reign Badge Styles */
+.reign-years {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reign-months {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.reign-days {
+    background: #fecaca;
+    color: #991b1b;
+}
+
+.reign-unknown {
+    background: #f3f4f6;
+    color: #6b7280;
 }
 
 /* Category Badge Styles - Unique colors for each book category */
@@ -1377,6 +1403,162 @@ nav {
     font-size: 14px;
 }
 
+/* ============================================
+   KING HOVER CARD STYLES
+   ============================================ */
+
+.king-hover-card {
+    position: absolute;
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+    min-width: 280px;
+    max-width: 320px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    border: 2px solid #e5e7eb;
+}
+
+.king-hover-card.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.king-hover-card-header {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.king-hover-card-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 6px 0;
+}
+
+.king-hover-card-description {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0 0 8px 0;
+    font-weight: 500;
+}
+
+.king-hover-card-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.king-hover-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.king-hover-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.king-hover-card-label {
+    color: #6b7280;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.king-hover-card-value {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+/* Make king names hoverable in timeline table */
+.king-timeline-tbody tr {
+    position: relative;
+}
+
+.king-timeline-tbody td {
+    position: relative;
+}
+
+/* Style for clickable king names in the notes column */
+.king-name-link {
+    color: #667eea;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.king-name-link:hover {
+    color: #764ba2;
+    text-decoration-style: solid;
+}
+
+/* Special styling for king name in page title - only full "King Name" is hoverable */
+#kingPageTitle {
+    position: relative;
+}
+
+#kingPageTitle .king-full-name {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+}
+
+#kingPageTitle .king-name-link {
+    color: inherit;
+    text-decoration: none;
+    font-weight: inherit;
+}
+
+#kingPageTitle .king-name-link:hover {
+    color: inherit;
+}
+
+/* Smooth scrolling for king page container on touch devices */
+.king-page-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+}
+
+/* Ensure table containers scroll smoothly on mobile */
+.table-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+/* Touch-friendly scrolling for all main content areas */
+@media (hover: none) and (pointer: coarse) {
+    /* This targets touch devices */
+    .main-content,
+    .king-page-container,
+    .table-container,
+    .book-chapter-container {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    /* Make hover card easier to dismiss on touch devices */
+    .king-hover-card {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
 .king-info-value {
     font-weight: 500;
     color: #1f2937;
@@ -1796,6 +1978,12 @@ nav {
 
 /* Timeline Styles */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap");
+
+/* Timeline content section - white background */
+#timeline-content {
+    background-color: #ffffff !important;
+    min-height: 100vh;
+}
 
 .timeline-container {
     min-height: 100vh;
@@ -2774,6 +2962,379 @@ nav {
     width: 20px;
     height: 20px;
     object-fit: contain;
+}
+
+/* Audio Button in King Page Header */
+#king-page-content .content-header .audio-btn {
+    position: absolute;
+    right: 88px; /* Position to the left of timeline button (44px + 44px gap) */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    margin-right: 0;
+}
+
+/* Timeline View Button (positioned to the left of table view button) */
+.timeline-view-btn {
+    position: absolute;
+    right: 44px; /* Position to the left of table button (32px + 12px gap) */
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    border: 2px solid #667eea;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px 8px;
+}
+
+.timeline-view-btn:hover {
+    background: #667eea;
+    color: #ffffff;
+    transform: translateY(-50%) translateY(-2px);
+}
+
+.timeline-view-btn:active {
+    transform: translateY(-50%) translateY(0);
+}
+
+.timeline-view-btn .timeline-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* Kings Timeline Styles */
+.kings-timeline-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.kings-timeline-container .subtitle {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 60px;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.kings-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+
+.kings-timeline .section-header {
+    position: relative;
+    text-align: center;
+    margin: 32px 0 24px;
+    width: 100%;
+}
+
+.kings-timeline .section-header h2 {
+    display: inline-block;
+    background: white;
+    border: 2px solid #667eea;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 1.04rem;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: #2c3e50;
+    box-shadow: 0 3px 12px rgba(102, 126, 234, 0.2);
+    position: relative;
+    font-weight: bold;
+}
+
+.split-indicator {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 480px;
+    margin: 24px 0;
+}
+
+.split-line {
+    flex: 1;
+    height: 2.4px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent);
+}
+
+.split-text {
+    color: #667eea;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    white-space: nowrap;
+}
+
+.timeline-card {
+    background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: 2px solid #f6d365;
+    text-align: center;
+    width: 176px;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.84rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    color: #c17900;
+}
+
+.timeline-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(246, 211, 101, 0.2) 0%, transparent 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.timeline-card:hover::before {
+    transform: scale(1);
+}
+
+.timeline-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(246, 211, 101, 0.4);
+    border-color: #f6d365;
+}
+
+.kingdom-division {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    margin-top: 40px;
+}
+
+.timeline-subcolumn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    position: relative;
+    padding-top: 16px;
+}
+
+.timeline-subcolumn::before {
+    content: 'JUDAH';
+    position: absolute;
+    top: -44px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.04rem;
+    font-weight: bold;
+    color: #2c3e50;
+    letter-spacing: 2.4px;
+    background: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    border: 2px solid #667eea;
+    box-shadow: 0 3px 12px rgba(102, 126, 234, 0.2);
+}
+
+.timeline-subcolumn:last-child::before {
+    content: 'ISRAEL';
+}
+
+.current-king-highlight {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%) !important;
+    border: 3px solid #fff !important;
+    color: #fff !important;
+    transform: scale(1.15);
+    box-shadow: 0 0 30px rgba(255, 107, 107, 0.7), 0 10px 40px rgba(255, 107, 107, 0.5) !important;
+    animation: kingBounce 1s ease-out;
+    z-index: 10;
+    position: relative;
+}
+
+@keyframes kingBounce {
+    0% {
+        transform: scale(1) translateY(0);
+    }
+    30% {
+        transform: scale(1.2) translateY(-15px);
+    }
+    50% {
+        transform: scale(1.1) translateY(-8px);
+    }
+    70% {
+        transform: scale(1.18) translateY(-12px);
+    }
+    100% {
+        transform: scale(1.15) translateY(0);
+    }
+}
+
+.kingdom-division::after {
+    content: '';
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(100% - 80px);
+    background: linear-gradient(180deg, #667eea, transparent);
+    opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+    .kingdom-division {
+        flex-direction: column;
+        gap: 50px;
+        align-items: center;
+    }
+    
+    .kingdom-division::after {
+        display: none;
+    }
+    
+    .timeline-card {
+        width: 200px;
+    }
+}
+
+/* Kings Timeline Modal Styles */
+.timeline-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline-modal .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.timeline-modal-content {
+    position: relative;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 16px;
+    max-width: 80vw;
+    max-height: 70vh;
+    width: 800px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.timeline-modal .modal-header {
+    padding: 10px 20px;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.timeline-modal .modal-title {
+    margin: 0;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+}
+
+.timeline-modal .modal-close {
+    background: #f3f4f6;
+    border: none;
+    font-size: 16px;
+    color: #6b7280;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.timeline-modal .modal-close:hover {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.timeline-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.timeline-modal-body .subtitle {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 32px;
+    font-size: 0.88rem;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+}
+
+.timeline-modal-body .kings-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .timeline-modal-content {
+        max-width: 100vw;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    
+    .timeline-modal .modal-header {
+        padding: 15px 20px;
+    }
+    
+    .timeline-modal .modal-title {
+        font-size: 1.3rem;
+    }
+    
+    .timeline-modal-body {
+        padding: 20px;
+    }
 }
 
 /* Centered Content Header (for detail views with back button) */

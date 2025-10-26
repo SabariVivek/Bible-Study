@@ -458,3 +458,6 @@ const allKingsData = {
         { name: "Zedekiah", order: 20, description: "Last King of Judah", character: "Evil", reign: "11 years", biblicalRef: "2 Kings 24:18-25:7" }
     ]
 };
+
+// Make allKingsData globally accessible via window object
+window.allKingsData = allKingsData;
