@@ -3170,6 +3170,66 @@ html #king-page-content.dark-mode-kings .order-number {
     box-shadow: 0 4px 16px rgba(107, 95, 191, 0.4) !important;
 }
 
+#books-content.dark-mode-books .status-ancient {
+    background: #3730a3;
+    color: #c7d2fe;
+}
+
+#books-content.dark-mode-books .status-righteous {
+    background: #78350f;
+    color: #fde68a;
+}
+
+#books-content.dark-mode-books .badge-verses {
+    background: #854d0e;
+    color: #fef08a;
+}
+
+#books-content.dark-mode-books .category-law {
+    background: #78350f;
+    color: #fde68a;
+}
+
+#books-content.dark-mode-books .category-history {
+    background: #5b21b6;
+    color: #ddd6fe;
+}
+
+#books-content.dark-mode-books .category-poetry {
+    background: #3f6212;
+    color: #d9f99d;
+}
+
+#books-content.dark-mode-books .category-major-prophet {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+#books-content.dark-mode-books .category-minor-prophet {
+    background: #9a3412;
+    color: #fdba74;
+}
+
+#books-content.dark-mode-books .category-gospel {
+    background: #1e3a8a;
+    color: #93c5fd;
+}
+
+#books-content.dark-mode-books .category-acts {
+    background: #3730a3;
+    color: #c7d2fe;
+}
+
+#books-content.dark-mode-books .category-letters {
+    background: #065f46;
+    color: #6ee7b7;
+}
+
+#books-content.dark-mode-books .category-revelation {
+    background: #854d0e;
+    color: #fef08a;
+}
+
 #kings-content.dark-mode-kings .card {
     background: #232325 !important;
     color: #f3f4f6;
