@@ -2521,6 +2521,73 @@ body .dark-mode-maps .page-title {
     background: transparent;
 }
 
+.dark-mode-dashboard .dashboard-cards-container {
+    background: transparent;
+}
+
+.dark-mode-dashboard .era-card {
+    background: #2a2a2a;
+    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.25);
+}
+
+.dark-mode-dashboard .era-card:hover {
+    background: #2d2d2d;
+    box-shadow: 0 4px 16px rgba(20, 20, 30, 0.35);
+}
+
+.dark-mode-dashboard .era-card-content {
+    background: transparent;
+}
+
+.dark-mode-dashboard .era-title {
+    color: #ececec;
+}
+
+.dark-mode-dashboard .era-subtitle {
+    color: #a1a1a1;
+}
+
+.dark-mode-dashboard .seed-content-container {
+    background: transparent;
+}
+
+.dark-mode-dashboard .seed-card {
+    background: #2a2a2a;
+    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.25);
+}
+
+.dark-mode-dashboard .seed-card:hover {
+    background: #2d2d2d;
+}
+
+.dark-mode-dashboard .seed-title {
+    color: #ececec;
+}
+
+.dark-mode-dashboard .seed-section-header {
+    color: #ececec;
+    background: linear-gradient(to right, #1f2f1f 0%, #2a2a2a 100%);
+    border-left-color: #6ba876;
+}
+
+.dark-mode-dashboard .seed-section-header .verse-badge {
+    background: #3d2f4f;
+    color: #b794f6;
+}
+
+.dark-mode-dashboard .seed-text-content {
+    color: #d1d1d1;
+}
+
+.dark-mode-dashboard .seed-text-content ul li {
+    color: #d1d1d1;
+}
+
+.dark-mode-dashboard .seed-text-content strong,
+.dark-mode-dashboard .seed-text-content b {
+    color: #ececec;
+}
+
 /* ============================================
    DARK MODE - TIMELINE
    ============================================ */
