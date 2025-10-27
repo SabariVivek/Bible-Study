@@ -3880,6 +3880,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (booksFilterOverlay) {
                 booksFilterOverlay.classList.add('dark-mode-books');
             }
+            
+            // Apply dark mode to chapters popup
+            const chaptersPopup = document.getElementById('chaptersPopup');
+            if (chaptersPopup) {
+                chaptersPopup.classList.add('dark-mode-books');
+            }
         }
         
         // Apply dark theme on page load if it's checked
@@ -3974,6 +3980,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const booksFilterOverlay = document.getElementById('booksFilterCardOverlay');
                 if (booksFilterOverlay) {
                     booksFilterOverlay.classList.remove('dark-mode-books');
+                }
+                
+                // Remove dark mode from chapters popup
+                const chaptersPopup = document.getElementById('chaptersPopup');
+                if (chaptersPopup) {
+                    chaptersPopup.classList.remove('dark-mode-books');
                 }
                 
                 // Light mode - using original light colors

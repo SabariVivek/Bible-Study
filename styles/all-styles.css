@@ -5571,6 +5571,7 @@ html #king-page-content.dark-mode-kings .order-number {
 .dark-mode-books .chapters-popup {
     background: #2a2a2a;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 20px !important;
 }
 
 .dark-mode-books .chapters-popup .popup-header {
@@ -5617,6 +5618,12 @@ html #king-page-content.dark-mode-kings .order-number {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border-color: #667eea;
+}
+
+.dark-mode-books.chapters-popup.show {
+    background: #2a2a2a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border-radius: 20px !important;
 }
 
 /* ===== SYNOPSIS SIDE DRAWER STYLES ===== */
