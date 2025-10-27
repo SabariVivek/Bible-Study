@@ -2861,6 +2861,61 @@ html #king-page-content.dark-mode-kings .order-number {
     color: #d1d1d1 !important;
 }
 
+/* Dark mode for Kings Table Content */
+#kings-content.dark-mode-kings .page-title {
+    color: #ececec !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+#kings-content.dark-mode-kings .content-header {
+    background: transparent;
+}
+
+#kings-content.dark-mode-kings .table-container {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+#kings-content.dark-mode-kings .table {
+    background: #2a2a2a;
+}
+
+#kings-content.dark-mode-kings .table th {
+    background: #1f1f1f;
+    color: #ececec;
+    border-bottom-color: #3a3a3a;
+}
+
+#kings-content.dark-mode-kings .table td {
+    color: #d1d1d1 !important;
+    border-bottom-color: #3a3a3a !important;
+    background: #2a2a2a !important;
+}
+
+#kings-content.dark-mode-kings .table tbody tr {
+    background: #2a2a2a !important;
+}
+
+#kings-content.dark-mode-kings .table tbody tr:hover {
+    background: #2f2f2f !important;
+}
+
+#kings-content.dark-mode-kings .table tbody tr:hover td {
+    background: #2f2f2f !important;
+}
+
+#kings-content.dark-mode-kings .king-name {
+    color: #d1d1d1 !important;
+}
+
+#kings-content.dark-mode-kings .king-kingdom {
+    color: #a1a1a1 !important;
+}
+
+#kings-content.dark-mode-kings .order-number {
+    color: #d1d1d1 !important;
+}
+
 .dark-mode-prophets .page-title {
     color: #ececec !important;
 }
@@ -2902,10 +2957,55 @@ html #king-page-content.dark-mode-kings .order-number {
 
 .dark-mode-books .page-title {
     color: #ececec !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .dark-mode-books .content-header {
-    background: transparent;
+    background: #1f1f1f;
+}
+
+.dark-mode-books #bookChapterTitle {
+    color: #ececec !important;
+}
+
+.dark-mode-books .book-chapter-container {
+    background-color: #1f1f1f;
+    color: #ececec;
+}
+
+.dark-mode-books .book-chapter-container div,
+.dark-mode-books .book-chapter-container p,
+.dark-mode-books .book-chapter-container span,
+.dark-mode-books .book-chapter-container b,
+.dark-mode-books .book-chapter-container strong {
+    color: #e5e7eb !important;
+}
+
+.dark-mode-books .chapter-section {
+    color: #e5e7eb;
+}
+
+.dark-mode-books .chapter-section-heading {
+    color: #ececec;
+    border-left-color: #5D9CEC;
+    background: linear-gradient(to right, rgba(93, 156, 236, 0.15), transparent);
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge {
+    background-color: rgba(251, 191, 36, 0.2);
+    color: #fbbf24 !important;
+    border-color: #d97706;
+}
+
+.dark-mode-books .verse-badge {
+    background-color: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    border-color: #d97706;
+}
+
+.dark-mode-books .verse-badge:hover {
+    background-color: rgba(251, 191, 36, 0.25);
+    border-color: #f59e0b;
 }
 
 .dark-mode-books .table-container {
@@ -5024,6 +5124,58 @@ html #king-page-content.dark-mode-kings .order-number {
     .chapters {
         grid-template-columns: repeat(3, 1fr);
     }
+}
+
+/* ===== DARK MODE - CHAPTERS POPUP ===== */
+.dark-mode-books .chapters-popup {
+    background: #2a2a2a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode-books .chapters-popup .popup-header {
+    border-bottom-color: #3a3a3a;
+}
+
+.dark-mode-books .chapters-popup .popup-header .book-title {
+    color: #ececec;
+}
+
+.dark-mode-books .chapters-popup .popup-header .chapter-count {
+    color: #a1a1a1;
+}
+
+.dark-mode-books .chapters-popup .close-btn {
+    background: #353535;
+    color: #a1a1a1;
+}
+
+.dark-mode-books .chapters-popup .close-btn:hover {
+    background: #404040;
+    color: #ececec;
+}
+
+.dark-mode-books .chapters::-webkit-scrollbar-track {
+    background: #353535;
+}
+
+.dark-mode-books .chapters::-webkit-scrollbar-thumb {
+    background: #4a4a4a;
+}
+
+.dark-mode-books .chapters::-webkit-scrollbar-thumb:hover {
+    background: #5a5a5a;
+}
+
+.dark-mode-books .chapter-card {
+    background: #353535;
+    border-color: #4a4a4a;
+    color: #d1d1d1;
+}
+
+.dark-mode-books .chapter-card:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
 }
 
 /* ===== SYNOPSIS SIDE DRAWER STYLES ===== */

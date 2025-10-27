@@ -208,3 +208,12 @@
         max-width: calc(100vw - 20px);
     }
 }
+
+/* Dark Mode Styles */
+.dark-mode-books .testament-nav-trigger {
+    color: #ececec !important;
+}
+
+.dark-mode-books .testament-nav-trigger:hover {
+    color: #5D9CEC !important;
+}

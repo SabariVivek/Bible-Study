@@ -3841,6 +3841,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 kingsContent.classList.add('dark-mode-kings');
             }
             
+            // Apply dark mode to Kings Table
+            const kingsTableContent = document.getElementById('kings-content');
+            if (kingsTableContent) {
+                kingsTableContent.classList.add('dark-mode-kings');
+            }
+            
             // Apply dark mode to Prophets
             const prophetsContent = document.getElementById('prophets-content');
             if (prophetsContent) {
@@ -3851,6 +3857,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const booksContent = document.getElementById('books-content');
             if (booksContent) {
                 booksContent.classList.add('dark-mode-books');
+            }
+            
+            // Apply dark mode to Book Chapter Content
+            const bookChapterContent = document.getElementById('book-chapter-content');
+            if (bookChapterContent) {
+                bookChapterContent.classList.add('dark-mode-books');
             }
         }
         
@@ -3908,6 +3920,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     kingsContent.classList.remove('dark-mode-kings');
                 }
                 
+                // Remove dark mode from Kings Table
+                const kingsTableContent = document.getElementById('kings-content');
+                if (kingsTableContent) {
+                    kingsTableContent.classList.remove('dark-mode-kings');
+                }
+                
                 // Remove dark mode from Prophets
                 const prophetsContent = document.getElementById('prophets-content');
                 if (prophetsContent) {
@@ -3918,6 +3936,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const booksContent = document.getElementById('books-content');
                 if (booksContent) {
                     booksContent.classList.remove('dark-mode-books');
+                }
+                
+                // Remove dark mode from Book Chapter Content
+                const bookChapterContent = document.getElementById('book-chapter-content');
+                if (bookChapterContent) {
+                    bookChapterContent.classList.remove('dark-mode-books');
                 }
                 
                 // Light mode - using original light colors
