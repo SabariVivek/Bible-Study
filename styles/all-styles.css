@@ -5663,3 +5663,83 @@ body:has(.left-sidebar.collapsed) .main-content {
     scrollbar-color: auto;
 }
 /* ===== END SCROLLBAR RESET ===== */
+
+/* Theme Toggle Responsive Styles for iPad and Tablets */
+@media (max-width: 1024px) {
+    .theme-toggle-container {
+        padding: 10px;
+        display: flex !important;
+        visibility: visible !important;
+    }
+    
+    .theme-toggle {
+        display: flex !important;
+        width: 100%;
+        gap: 4px;
+        padding: 3px;
+    }
+    
+    .theme-option {
+        flex: 1;
+        min-height: 32px;
+        padding: 0 10px;
+        font-size: 12px;
+        display: flex !important;
+    }
+    
+    .theme-option svg {
+        width: 14px !important;
+        height: 14px !important;
+        display: block !important;
+    }
+    
+    .theme-option-text {
+        font-size: 12px;
+        display: inline-block !important;
+    }
+}
+
+/* Tablet specific (768px and below) */
+@media (max-width: 768px) {
+    .theme-option {
+        padding: 0 8px;
+    }
+    
+    .left-sidebar.collapsed .theme-option-text {
+        display: none !important;
+    }
+    
+    .left-sidebar.collapsed .theme-toggle {
+        flex-direction: column;
+        gap: 3px;
+    }
+    
+    .left-sidebar.collapsed .theme-option {
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        justify-content: center;
+    }
+}
+
+/* Small tablets and large phones */
+@media (max-width: 600px) {
+    .theme-toggle-container {
+        padding: 8px;
+    }
+    
+    .theme-option {
+        padding: 0 6px;
+        font-size: 11px;
+        min-height: 30px;
+    }
+    
+    .theme-option svg {
+        width: 13px !important;
+        height: 13px !important;
+    }
+    
+    .theme-option-text {
+        font-size: 11px;
+    }
+}
