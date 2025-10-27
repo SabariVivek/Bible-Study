@@ -361,7 +361,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    padding-bottom: 30px;
 }
 
 .page-title {
@@ -1290,6 +1290,29 @@ nav {
     box-shadow: 0 4px 24px rgba(20, 20, 30, 0.10);
 }
 
+/* Dark mode styles for king info sections */
+.dark-mode-kings .king-info-row {
+    border-bottom-color: #3a3a3a;
+}
+
+.dark-mode-kings .king-info-label {
+    color: #a1a1a1;
+}
+
+.dark-mode-kings .king-info-value {
+    color: #ececec;
+}
+
+.dark-mode-kings .biography-text {
+    color: #d1d1d1;
+}
+
+.dark-mode-kings .biblical-refs-container .biblical-ref {
+    background: #2f2f2f;
+    color: #5D9CEC;
+    border-color: #3a3a3a;
+}
+
 /* Dark mode titles for kings */
 .dark-mode-kings .filter-card-title,
 .dark-mode-kings .king-card-title,
@@ -1299,16 +1322,16 @@ nav {
 }
 
 /* Dark mode titles for maps */
-.dark-mode-maps .page-title,
-.dark-mode-maps .section-title,
-.dark-mode-maps .location-title {
-    color: #f3f4f6 !important;
+body .dark-mode-maps .page-title,
+body .dark-mode-maps .section-title,
+body .dark-mode-maps .location-title {
+    color: #ececec !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.dark-mode-kings .page-title,
-.dark-mode-maps .page-title {
-    color: #ffffff !important;
+body .dark-mode-kings .page-title,
+body .dark-mode-maps .page-title {
+    color: #ececec !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     font-weight: 600;
 }
@@ -1632,6 +1655,28 @@ nav {
 .king-hover-card-value {
     color: #1f2937;
     font-weight: 600;
+}
+
+/* Dark mode hover card styles */
+.dark-mode-kings .king-hover-card {
+    background: #232325;
+    border-color: #3a3a3a;
+}
+
+.dark-mode-kings .king-hover-card-title {
+    color: #ececec;
+}
+
+.dark-mode-kings .king-hover-card-description {
+    color: #a1a1a1;
+}
+
+.dark-mode-kings .king-hover-card-label {
+    color: #a1a1a1;
+}
+
+.dark-mode-kings .king-hover-card-value {
+    color: #d1d1d1;
 }
 
 /* Make king names hoverable in timeline table */
@@ -2484,11 +2529,15 @@ nav {
 }
 
 .dark-mode-timeline .content-header {
-    background: #212121;
+    background: rgb(33, 33, 33);
+}
+
+.dark-mode-timeline .main-content {
+    background: rgb(33, 33, 33);
 }
 
 .dark-mode-timeline .timeline-container {
-    background-color: #212121;
+    background-color: rgb(33, 33, 33);
 }
 
 .dark-mode-timeline .timeline ul li {
@@ -2661,12 +2710,155 @@ nav {
 /* ============================================
    DARK MODE - KINGS, PROPHETS, BOOKS
    ============================================ */
-.dark-mode-kings .page-title {
+body .dark-mode-kings .page-title {
     color: #ececec !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .dark-mode-kings .content-header {
     background: transparent;
+}
+
+/* Dark mode table styles for kings and books */
+/* Base Table Styles */
+.table-container {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background: #f9fafb;
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #374151;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table td {
+    padding: 16px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #1f2937;
+    font-size: 14px;
+}
+
+/* Dark Mode Table Styles */
+#king-page-content.dark-mode-kings .table-container {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+#king-page-content.dark-mode-kings .table {
+    background: #2a2a2a;
+}
+
+#king-page-content.dark-mode-kings .chapter-section-heading {
+    color: #ffffff;
+    font-size: 1.5rem;  /* Matched with light mode */
+    font-weight: 700;   /* Matched with light mode */
+    margin-bottom: 1.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+#king-page-content.dark-mode-kings .chapter-section,
+#king-page-content.dark-mode-kings .chapter-section div {
+    color: #e5e7eb;
+    font-size: 1.05rem;  /* Matched with light mode */
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+#king-page-content.dark-mode-kings .chapter-section b {
+    color: #60a5fa;
+    font-weight: 600;
+}
+
+#king-page-content.dark-mode-kings .verse-badge {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #60a5fa;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin: 0 0.25rem;
+}
+
+#king-page-content.dark-mode-kings .table th {
+    background: #1f1f1f;
+    color: #ececec;
+    border-bottom-color: #3a3a3a;
+}
+
+#king-page-content.dark-mode-kings .table td {
+    color: #d1d1d1;
+    border-bottom-color: #3a3a3a;
+    background: #2a2a2a;
+}
+
+#king-page-content.dark-mode-kings .table tbody tr:hover {
+    background: #2f2f2f;
+}
+
+#king-page-content.dark-mode-kings .king-name {
+    color: #d1d1d1;
+}
+
+#king-page-content.dark-mode-kings .king-kingdom {
+    color: #a1a1a1;
+}
+
+#king-page-content.dark-mode-kings .order-number {
+    color: #d1d1d1;
+}
+
+#king-page-content.dark-mode-kings .table td,
+html #king-page-content.dark-mode-kings .table td {
+    color: #d1d1d1 !important;
+    border-bottom-color: #3a3a3a !important;
+    background: #2a2a2a !important;
+}
+
+#king-page-content.dark-mode-kings .table tbody tr,
+html #king-page-content.dark-mode-kings .table tbody tr {
+    background: #2a2a2a !important;
+}
+
+#king-page-content.dark-mode-kings .table tbody tr:hover,
+html #king-page-content.dark-mode-kings .table tbody tr:hover {
+    background: #2f2f2f !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+#king-page-content.dark-mode-kings .table tbody tr:hover td,
+html #king-page-content.dark-mode-kings .table tbody tr:hover td {
+    background: #2f2f2f !important;
+}
+
+#king-page-content.dark-mode-kings .king-name,
+html #king-page-content.dark-mode-kings .king-name {
+    color: #d1d1d1 !important;
+}
+
+#king-page-content.dark-mode-kings .king-kingdom,
+html #king-page-content.dark-mode-kings .king-kingdom {
+    color: #a1a1a1 !important;
+}
+
+#king-page-content.dark-mode-kings .order-number,
+html #king-page-content.dark-mode-kings .order-number {
+    color: #d1d1d1 !important;
 }
 
 .dark-mode-prophets .page-title {
@@ -2714,6 +2906,37 @@ nav {
 
 .dark-mode-books .content-header {
     background: transparent;
+}
+
+.dark-mode-books .table-container {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+.dark-mode-books .table th {
+    background: #1f1f1f;
+    color: #ececec;
+    border-bottom-color: #3a3a3a;
+}
+
+.dark-mode-books .table th.sortable:hover {
+    background: #2f2f2f;
+    color: #5D9CEC;
+}
+
+.dark-mode-books .table th.sortable.sort-asc,
+.dark-mode-books .table th.sortable.sort-desc {
+    background: #2a2a4a;
+    color: #5D9CEC;
+}
+
+.dark-mode-books .table td {
+    color: #d1d1d1;
+    border-bottom-color: #3a3a3a;
+}
+
+.dark-mode-books .table tr:hover {
+    background: #2f2f2f;
 }
 
 /* ============================================
@@ -3276,7 +3499,7 @@ nav {
     color: #2c3e50;
     margin-bottom: 1.5rem;
     margin-top: 0;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 700;
     padding-left: 20px;
     padding-bottom: 0.8rem;

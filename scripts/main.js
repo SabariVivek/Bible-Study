@@ -566,7 +566,7 @@ function displayKingSummary(container, summaryData, kingName) {
             const sectionText = document.createElement('div');
             sectionText.innerHTML = section.text;
             sectionText.style.lineHeight = '2.2';
-            sectionText.style.color = '#2c3e50';
+            sectionText.style.color = 'inherit';  // This will inherit from parent dark mode styles
             sectionText.style.fontSize = '1.05rem';
             sectionText.style.whiteSpace = 'pre-wrap';
             sectionText.style.marginTop = '1rem';
