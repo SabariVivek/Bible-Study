@@ -3898,6 +3898,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (passagePopup) {
                 passagePopup.classList.add('dark-mode-life-of-christ');
             }
+            
+            // Apply dark mode to king hover card
+            const kingHoverCard = document.getElementById('kingHoverCard');
+            if (kingHoverCard) {
+                kingHoverCard.classList.add('dark-mode-kings');
+            }
+            
+            // Apply dark mode to kings timeline modal
+            const kingsTimelineModal = document.getElementById('kings-timeline-modal');
+            if (kingsTimelineModal) {
+                kingsTimelineModal.classList.add('dark-mode-kings');
+            }
         }
         
         // Apply dark theme on page load if it's checked
@@ -4010,6 +4022,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 const passagePopup = document.getElementById('passagePopup');
                 if (passagePopup) {
                     passagePopup.classList.remove('dark-mode-life-of-christ');
+                }
+                
+                // Remove dark mode from king hover card
+                const kingHoverCard = document.getElementById('kingHoverCard');
+                if (kingHoverCard) {
+                    kingHoverCard.classList.remove('dark-mode-kings');
+                }
+                
+                // Remove dark mode from kings timeline modal
+                const kingsTimelineModal = document.getElementById('kings-timeline-modal');
+                if (kingsTimelineModal) {
+                    kingsTimelineModal.classList.remove('dark-mode-kings');
                 }
                 
                 // Light mode - using original light colors
