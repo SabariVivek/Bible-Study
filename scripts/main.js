@@ -3892,6 +3892,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (synopsisSideDrawer) {
                 synopsisSideDrawer.classList.add('dark-mode-books');
             }
+            
+            // Apply dark mode to passage popup
+            const passagePopup = document.getElementById('passagePopup');
+            if (passagePopup) {
+                passagePopup.classList.add('dark-mode-life-of-christ');
+            }
         }
         
         // Apply dark theme on page load if it's checked
@@ -3998,6 +4004,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const synopsisSideDrawer = document.getElementById('synopsisSideDrawer');
                 if (synopsisSideDrawer) {
                     synopsisSideDrawer.classList.remove('dark-mode-books');
+                }
+                
+                // Remove dark mode from passage popup
+                const passagePopup = document.getElementById('passagePopup');
+                if (passagePopup) {
+                    passagePopup.classList.remove('dark-mode-life-of-christ');
                 }
                 
                 // Light mode - using original light colors

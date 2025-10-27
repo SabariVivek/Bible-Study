@@ -1224,7 +1224,7 @@ nav {
 
 /* Custom scrollbar for dropdown */
 .dropdown-menu::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
 }
 
 .dropdown-menu::-webkit-scrollbar-track {
@@ -1830,7 +1830,7 @@ body .dark-mode-maps .page-title {
 }
 
 .biography-text::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
 }
 
 .biography-text::-webkit-scrollbar-track {
@@ -2362,7 +2362,7 @@ body .dark-mode-maps .page-title {
 
 /* Custom Scrollbar for Timeline Container */
 .timeline-container::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
 }
 
 .timeline-container::-webkit-scrollbar-track {
@@ -2381,7 +2381,7 @@ body .dark-mode-maps .page-title {
 
 /* Custom Scrollbar for Life of Jesus Container */
 .life-of-jesus-container::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
 }
 
 .life-of-jesus-container::-webkit-scrollbar-track {
@@ -2400,7 +2400,7 @@ body .dark-mode-maps .page-title {
 
 /* Custom Scrollbar for Main Content */
 .main-content::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
 }
 
 .main-content::-webkit-scrollbar-track {
@@ -2811,6 +2811,76 @@ body .dark-mode-maps .page-title {
     background: #a16207;
 }
 
+/* Passage Modal Dark Mode */
+.dark-mode-life-of-christ .passage-modal-card {
+    background: #2a2a2a;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode-life-of-christ .passage-modal-card .close-btn {
+    color: #d1d1d1;
+    background: #1f1f1f;
+}
+
+.dark-mode-life-of-christ .passage-modal-card .close-btn:hover {
+    background: #404040;
+    color: #ececec;
+}
+
+.dark-mode-life-of-christ .passage-modal-title {
+    color: #667eea;
+}
+
+.dark-mode-life-of-christ .passage-modal-badge {
+    color: #93c5fd;
+    background-color: #1e3a8a;
+}
+
+.dark-mode-life-of-christ .passage-modal-badge.matthew {
+    background: #065f46;
+    color: #a7f3d0;
+}
+
+.dark-mode-life-of-christ .passage-modal-badge.mark {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+.dark-mode-life-of-christ .passage-modal-badge.luke {
+    background: #4c1d95;
+    color: #c4b5fd;
+}
+
+.dark-mode-life-of-christ .passage-modal-badge.john {
+    background: #9a3412;
+    color: #fdba74;
+}
+
+.dark-mode-life-of-christ .passage-modal-badge.acts {
+    background: #1e3a8a;
+    color: #93c5fd;
+}
+
+.dark-mode-life-of-christ .passage-modal-content {
+    color: #d1d1d1;
+}
+
+.dark-mode-life-of-christ .passage-modal-content::-webkit-scrollbar-track {
+    background: #353535;
+}
+
+.dark-mode-life-of-christ .passage-modal-content::-webkit-scrollbar-thumb {
+    background: #4a4a4a;
+}
+
+.dark-mode-life-of-christ .passage-modal-content::-webkit-scrollbar-thumb:hover {
+    background: #5a5a5a;
+}
+
+.dark-mode-life-of-christ .passage-no-data {
+    color: #888;
+}
+
 .dark-mode-life-of-christ .characters-search-input {
     background: #2a2a2a;
     border-color: #3a3a3a;
@@ -2831,7 +2901,13 @@ body .dark-mode-maps .page-title {
 }
 
 .dark-mode-life-of-christ .search-clear-btn {
-    color: #a1a1a1;
+    background: #353535;
+    color: #9ca3af;
+}
+
+.dark-mode-life-of-christ .search-clear-btn:hover {
+    background: #4a4a4a;
+    color: #d1d1d1;
 }
 
 .dark-mode-life-of-christ .search-results-info {
@@ -2908,7 +2984,13 @@ body .dark-mode-maps .page-title {
 }
 
 .dark-mode-characters .search-clear-btn {
-    color: #a1a1a1;
+    background: #353535;
+    color: #9ca3af;
+}
+
+.dark-mode-characters .search-clear-btn:hover {
+    background: #4a4a4a;
+    color: #d1d1d1;
 }
 
 .dark-mode-characters .search-results-info {
@@ -5231,7 +5313,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .passage-modal-content::-webkit-scrollbar {
-    width: 6px;
+    width: 3px;
 }
 
 .passage-modal-content::-webkit-scrollbar-track {
@@ -5455,7 +5537,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 /* Custom scrollbar for chapters popup */
 .chapters::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
 }
 
 .chapters::-webkit-scrollbar-track {
@@ -6143,7 +6225,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 /* Scrollbar Styling for Content */
 .synopsis-drawer-content::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
 }
 
 .synopsis-drawer-content::-webkit-scrollbar-track {
