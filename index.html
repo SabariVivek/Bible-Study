@@ -74,52 +74,100 @@
         <!-- Logout Overlay Background -->
         <div id="logout-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:9998;"></div>
         <div class="container">
-        <div class="sidebar" id="sidebar">
-            <button class="drawer-toggle" id="drawerToggle" onclick="toggleDrawer()">
-                <span id="toggleIcon">‹</span>
-            </button>
-            <div class="logo">Bible Study</div>
-            <nav>
-                <div class="nav-item dashboard active" onclick="showDashboard()">
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-text">Dashboard</span>
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar" id="leftSidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo"></div>
+                <h2 class="sidebar-title">
+                    <span>Bible Study</span>
+                </h2>
+                <!-- Collapsible Toggle Button -->
+                <button class="sidebar-collapse-btn" onclick="toggleSidebar()" title="Collapse sidebar">
+                    <svg class="chevron-icon" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="chat-history">  
+                <div class="history-section">
+                    <div class="history-item active" onclick="showDashboard()">
+                        <span class="nav-icon">📊</span>
+                        <span>Dashboard</span>
+                    </div>
+                    <div class="history-item" onclick="showKings()">
+                        <span class="nav-icon">👑</span>
+                        <span>Kings</span>
+                    </div>
+                    <div class="history-item" onclick="showProphets()">
+                        <span class="nav-icon">🎤</span>
+                        <span>Prophets</span>
+                    </div>
+                    <div class="history-item" onclick="showBooks()">
+                        <span class="nav-icon">📚</span>
+                        <span>Books</span>
+                    </div>
+                    <div class="history-item" onclick="showTimeline()">
+                        <span class="nav-icon">⏰</span>
+                        <span>Timeline</span>
+                    </div>
+                    <div class="history-item" onclick="showGenealogy()">
+                        <span class="nav-icon">👤</span>
+                        <span>Character Study</span>
+                    </div>
+                    <div class="history-item" onclick="showMaps()">
+                        <span class="nav-icon">🗺️</span>
+                        <span>Maps</span>
+                    </div>
+                    <div class="history-item" onclick="showHelp()">
+                        <span class="nav-icon">✝️</span>
+                        <span>Life of Christ</span>
+                    </div>
                 </div>
-                <div class="nav-item kings" onclick="showKings()">
-                    <span class="nav-icon">👑</span>
-                    <span class="nav-text">Kings</span>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-item">
+                    <svg class="icon-sm" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                    </svg>
+                    <span>Your Profile</span>
                 </div>
-                <div class="nav-item prophets" onclick="showProphets()">
-                    <span class="nav-icon">🎤</span>
-                    <span class="nav-text">Prophets</span>
+                <div class="sidebar-footer-item">
+                    <svg class="icon-sm" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                    </svg>
+                    <span>Settings</span>
                 </div>
-                <div class="nav-item books" onclick="showBooks()">
-                    <span class="nav-icon">📚</span>
-                    <span class="nav-text">Books</span>
+                <div class="sidebar-footer-item" onclick="logout()">
+                    <svg class="icon-sm" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                    </svg>
+                    <span>Logout</span>
                 </div>
-                <div class="nav-item timeline" onclick="showTimeline()">
-                    <span class="nav-icon">⏰</span>
-                    <span class="nav-text">Timeline</span>
+            </div>
+
+            <!-- Theme Toggle -->
+            <div class="theme-toggle-container">
+                <div class="theme-toggle">
+                    <input type="radio" name="theme" id="dark-theme" checked>
+                    <label for="dark-theme" class="theme-option" title="Dark Mode">
+                        <svg fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+                        </svg>
+                        <span class="theme-option-text">Dark</span>
+                    </label>
+                    <input type="radio" name="theme" id="light-theme">
+                    <label for="light-theme" class="theme-option" title="Light Mode">
+                        <svg fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                        </svg>
+                        <span class="theme-option-text">Light</span>
+                    </label>
                 </div>
-                <div class="nav-item genealogy" onclick="showGenealogy()">
-                    <span class="nav-icon">👤</span>
-                    <span class="nav-text">Character Study</span>
-                </div>
-                <div class="nav-item maps" onclick="showMaps()">
-                    <span class="nav-icon">🗺️</span>
-                    <span class="nav-text">Maps</span>
-                </div>
-                <div class="nav-item help" onclick="showHelp()">
-                    <span class="nav-icon">✝️</span>
-                    <span class="nav-text">Life of Christ</span>
-                </div>
-                
-                <!-- Logout Button at Bottom -->
-                <div class="nav-item logout-nav-item" onclick="logout()">
-                    <span class="nav-icon">⏻</span>
-                    <span class="nav-text">Logout</span>
-                </div>
-            </nav>
-        </div>
+            </div>
+        </aside>
 
         <div class="main-content">
             <!-- Dashboard Content -->

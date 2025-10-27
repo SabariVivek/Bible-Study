@@ -370,18 +370,36 @@ function changePage(direction) {
     }
 }
 
+// Helper function to update navigation active state
+function updateNavActive(activeClass) {
+    // Remove active from both old and new sidebar styles
+    document.querySelectorAll('.nav-item, .history-item').forEach(item => item.classList.remove('active'));
+    
+    // Add active to both old and new sidebar styles
+    const oldNavItem = document.querySelector('.nav-item.' + activeClass);
+    if (oldNavItem) oldNavItem.classList.add('active');
+    
+    // For new sidebar, we need to match by onclick function (case-insensitive)
+    const historyItems = document.querySelectorAll('.history-item');
+    historyItems.forEach(item => {
+        const onclick = item.getAttribute('onclick');
+        if (onclick && onclick.toLowerCase().includes(activeClass.toLowerCase())) {
+            item.classList.add('active');
+        }
+    });
+}
+
 function showDashboard() {
     // Always reset dashboard to show cards and hide Parables section
     var cardsWrapper = document.getElementById('dashboard-cards-wrapper');
     if (cardsWrapper) cardsWrapper.classList.remove('hidden');
-    var dashTitle = document.getElementById('dashboard-title-header');
+    var dashTitle = document.getElementById('dashboard-title-header');  
     if (dashTitle) dashTitle.style.display = '';
     var parablesSection = document.getElementById('parables-pdf-section');
     if (parablesSection) parablesSection.remove();
 
     // Update navigation
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.dashboard').classList.add('active');
+    updateNavActive('dashboard');
 
     // Show/hide content
     document.getElementById('dashboard-content').classList.remove('hidden');
@@ -407,8 +425,7 @@ function showDashboard() {
 
 function showKings() {
     // Update navigation
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.kings').classList.add('active');
+    updateNavActive('kings');
     
     // Show/hide content
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -446,8 +463,7 @@ function showKings() {
 
 function showKingPage(kingName, index) {
     // Update navigation - keep kings nav active
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.kings').classList.add('active');
+    updateNavActive('kings');
     
     // Hide all content sections
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -932,8 +948,7 @@ function highlightKingInTimelineModal(kingName) {
 
 function showProphets() {
     // Update navigation
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.prophets').classList.add('active');
+    updateNavActive('prophets');
     
     // Show/hide content
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -970,17 +985,25 @@ function showProphets() {
 
 // Drawer toggle functionality
 function toggleDrawer() {
-    const sidebar = document.getElementById('sidebar');
+    const sidebar = document.getElementById('sidebar') || document.getElementById('leftSidebar');
     const toggleIcon = document.getElementById('toggleIcon');
     
     sidebar.classList.toggle('collapsed');
     document.body.classList.toggle('sidebar-collapsed');
     
-    if (sidebar.classList.contains('collapsed')) {
-        toggleIcon.textContent = '›'; // Right chevron - click to expand
-    } else {
-        toggleIcon.textContent = '‹'; // Left chevron - click to collapse
+    if (toggleIcon) {
+        if (sidebar.classList.contains('collapsed')) {
+            toggleIcon.textContent = '›'; // Right chevron - click to expand
+        } else {
+            toggleIcon.textContent = '‹'; // Left chevron - click to collapse
+        }
     }
+}
+
+// New sidebar toggle function
+function toggleSidebar() {
+    const sidebar = document.getElementById('leftSidebar');
+    sidebar.classList.toggle('collapsed');
 }
 
 // Filter Card Functions
@@ -2505,8 +2528,7 @@ let selectedBooksCategoryFilterValue = 'all';
 
 function showBooks() {
     // Update navigation
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.books').classList.add('active');
+    updateNavActive('books');
     
     // Show/hide content
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -2930,8 +2952,7 @@ function applyBooksFilter() {
 function showBookChapter(book, chapterNum) {
     
     // Update navigation - keep books nav active
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.books').classList.add('active');
+    updateNavActive('books');
     
     // Hide all content sections
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -3013,8 +3034,7 @@ function showBookChapter(book, chapterNum) {
     isLoadingChapter = true;
     
     // Update navigation - keep books nav active
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.books').classList.add('active');
+    updateNavActive('books');
     
     // Hide all content sections
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -3399,8 +3419,7 @@ function displayChapterContent(bookName, chapterNum, container) {
 // Additional Navigation Functions
 function showTimeline() {
     // Update navigation
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.timeline').classList.add('active');
+    updateNavActive('timeline');
     
     // Show/hide content
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -3426,8 +3445,7 @@ function showTimeline() {
 
 function showGenealogy() {
     // Update navigation
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.genealogy').classList.add('active');
+    updateNavActive('genealogy');
     
     // Show/hide content
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -3461,8 +3479,7 @@ function showGenealogy() {
 
 function showMaps() {
     // Update navigation
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.maps').classList.add('active');
+    updateNavActive('maps');
     
     // Show/hide content
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -3488,8 +3505,7 @@ function showMaps() {
 
 function showSetting() {
     // Update navigation
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.setting').classList.add('active');
+    updateNavActive('setting');
     
     // Show/hide content
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -3509,8 +3525,7 @@ function showSetting() {
 
 function showHelp() {
     // Update navigation
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    document.querySelector('.nav-item.help').classList.add('active');
+    updateNavActive('help');
     
     // Show/hide content
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -3669,3 +3684,220 @@ window.loadBookFromTestamentNav = function(bookName) {
 
 window.openChaptersPopup = openChaptersPopup;
 window.closeChaptersPopup = closeChaptersPopup;
+
+// Theme toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const darkTheme = document.getElementById('dark-theme');
+    const lightTheme = document.getElementById('light-theme');
+    
+    if (darkTheme && lightTheme) {
+        const leftSidebar = document.getElementById('leftSidebar');
+        const container = document.querySelector('.container');
+        
+        // Function to apply dark theme
+        function applyDarkTheme() {
+            // Remove light mode hover styles if they exist
+            const lightModeStyle = document.getElementById('light-mode-hover');
+            if (lightModeStyle) {
+                lightModeStyle.remove();
+            }
+            
+            // Dark mode - using dark colors
+            if (leftSidebar) {
+                leftSidebar.style.background = '#171717';
+                leftSidebar.style.borderRight = '1px solid #2f2f2f';
+            }
+            
+            if (container) {
+                container.style.background = '#212121';
+            }
+            
+            // Update all sidebar items colors
+            document.querySelectorAll('.sidebar-header, .history-item, .sidebar-footer-item, .sidebar-footer, .theme-toggle-container').forEach(el => {
+                el.style.borderColor = '#2f2f2f';
+            });
+            
+            document.querySelectorAll('.history-item, .sidebar-footer-item, .sidebar-title').forEach(el => {
+                el.style.color = '#ececec';
+            });
+            
+            document.querySelectorAll('.theme-toggle').forEach(el => {
+                el.style.background = '#2f2f2f';
+            });
+            
+            // Update toggle button
+            const toggleBtn = document.querySelector('.sidebar-collapse-btn');
+            if (toggleBtn) {
+                toggleBtn.style.background = '#2f2f2f';
+                toggleBtn.style.borderColor = '#4d4d4d';
+                toggleBtn.style.color = '#ececec';
+            }
+            
+            // Reset SVG icons to light color
+            document.querySelectorAll('.history-item svg, .sidebar-footer-item svg, .sidebar-collapse-btn svg').forEach(svg => {
+                svg.setAttribute('fill', '#ececec');
+            });
+            
+            // Update theme toggle
+            document.querySelectorAll('.theme-option').forEach(option => {
+                const radio = option.previousElementSibling;
+                if (radio && radio.checked) {
+                    option.style.background = '#4d4d4d';
+                    option.style.color = '#ececec';
+                } else {
+                    option.style.background = 'transparent';
+                    option.style.color = '#8e8e8e';
+                }
+            });
+            
+            // Add dark mode hover styles
+            const darkModeStyle = document.createElement('style');
+            darkModeStyle.id = 'dark-mode-hover';
+            darkModeStyle.innerHTML = `
+                .history-item:hover:not(.active),
+                .sidebar-footer-item:hover {
+                    background: #2f2f2f !important;
+                    color: #ececec !important;
+                }
+                .sidebar-footer-item:last-child:hover {
+                    background: #dc3545 !important;
+                    color: #ffffff !important;
+                }
+                .sidebar-footer-item:last-child:hover svg {
+                    fill: #ffffff !important;
+                }
+                .sidebar-toggle-btn:hover {
+                    background: #2f2f2f !important;
+                }
+                .sidebar-collapse-btn {
+                    border-color: #e5e7eb !important;
+                    color: #ececec !important;
+                }
+                .sidebar-collapse-btn:hover {
+                    background: #2f2f2f !important;
+                    border-color: #ececec !important;
+                }
+                .history-item.active {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+                    color: white !important;
+                    border-radius: 10px !important;
+                    margin: 0 8px 12px 8px !important;
+                }
+                .left-sidebar.collapsed .history-item.active {
+                    margin: 0 auto 12px auto !important;
+                }
+            `;
+            document.head.appendChild(darkModeStyle);
+        }
+        
+        // Apply dark theme on page load if it's checked
+        if (darkTheme.checked) {
+            applyDarkTheme();
+        }
+        
+        darkTheme.addEventListener('change', function() {
+            if (this.checked) {
+                applyDarkTheme();
+            }
+        });
+
+        lightTheme.addEventListener('change', function() {
+            if (this.checked) {
+                // Remove dark mode hover styles if they exist
+                const darkModeStyle = document.getElementById('dark-mode-hover');
+                if (darkModeStyle) {
+                    darkModeStyle.remove();
+                }
+                
+                // Light mode - using original light colors
+                if (leftSidebar) {
+                    leftSidebar.style.background = '#f8f9fb';
+                    leftSidebar.style.borderRight = '1px solid #e5e7eb';
+                }
+                
+                if (container) {
+                    container.style.background = 'white';
+                }
+                
+                // Update all sidebar items colors
+                document.querySelectorAll('.sidebar-header, .history-item, .sidebar-footer-item, .sidebar-footer, .theme-toggle-container').forEach(el => {
+                    el.style.borderColor = '#e5e7eb';
+                });
+                
+                document.querySelectorAll('.history-item, .sidebar-footer-item, .sidebar-title').forEach(el => {
+                    el.style.color = '#374151';
+                });
+                
+                document.querySelectorAll('.theme-toggle').forEach(el => {
+                    el.style.background = '#e5e7eb';
+                });
+                
+                // Update toggle button
+                const toggleBtn = document.querySelector('.sidebar-collapse-btn');
+                if (toggleBtn) {
+                    toggleBtn.style.background = 'white';
+                    toggleBtn.style.borderColor = '#e5e7eb';
+                    toggleBtn.style.color = '#374151';
+                }
+                
+                // Update SVG icons to dark color
+                document.querySelectorAll('.history-item svg, .sidebar-footer-item svg, .sidebar-collapse-btn svg').forEach(svg => {
+                    svg.setAttribute('fill', '#374151');
+                });
+                
+                // Update theme toggle
+                document.querySelectorAll('.theme-option').forEach(option => {
+                    const radio = option.previousElementSibling;
+                    if (radio && radio.checked) {
+                        option.style.background = '#cbd5e1';
+                        option.style.color = '#1f2937';
+                    } else {
+                        option.style.background = 'transparent';
+                        option.style.color = '#6b7280';
+                    }
+                });
+                
+                // Update hover states for light mode
+                const style = document.createElement('style');
+                style.id = 'light-mode-hover';
+                style.innerHTML = `
+                    .history-item:hover:not(.active),
+                    .sidebar-footer-item:hover {
+                        background: #e5e7eb !important;
+                    }
+                    .sidebar-footer-item:last-child:hover {
+                        background: #dc3545 !important;
+                        color: #ffffff !important;
+                    }
+                    .sidebar-footer-item:last-child:hover svg {
+                        fill: #ffffff !important;
+                    }
+                    .sidebar-toggle-btn:hover {
+                        background: #e5e7eb !important;
+                    }
+                    .sidebar-collapse-btn {
+                        border-color: #6c757d !important;
+                        color: #1a1a1a !important;
+                    }
+                    .sidebar-collapse-btn svg {
+                        fill: #1a1a1a !important;
+                    }
+                    .sidebar-collapse-btn:hover {
+                        background: #e9ecef !important;
+                        border-color: #495057 !important;
+                    }
+                    .history-item.active {
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+                        color: white !important;
+                        border-radius: 10px !important;
+                        margin: 0 8px 12px 8px !important;
+                    }
+                    .left-sidebar.collapsed .history-item.active {
+                        margin: 0 auto 12px auto !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        });
+    }
+});
