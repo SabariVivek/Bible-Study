@@ -95,7 +95,8 @@ body.modal-open {
     position: fixed;
     left: 0;
     top: 0;
-    display: none; /* Hide old sidebar - using left-sidebar now */
+    display: none;
+    /* Hide old sidebar - using left-sidebar now */
     flex-direction: column;
     height: 100vh;
     overflow-y: auto;
@@ -380,6 +381,61 @@ nav {
     display: flex;
     align-items: center;
     gap: 15px;
+}
+
+/* Dark mode for content-actions on kings, prophets, and books pages */
+.dark-mode-kings .content-actions,
+.dark-mode-prophets .content-actions,
+.dark-mode-books .content-actions {
+    background: #23272f;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.25);
+}
+
+.dark-mode-kings .content-actions .showing-text,
+.dark-mode-prophets .content-actions .showing-text,
+.dark-mode-books .content-actions .showing-text {
+    color: #bfc7d5;
+}
+
+.dark-mode-kings .filter-btn,
+.dark-mode-kings .export-btn,
+.dark-mode-prophets .filter-btn,
+.dark-mode-prophets .export-btn,
+.dark-mode-books .filter-btn,
+.dark-mode-books .export-btn {
+    background: linear-gradient(135deg, #232a3a 0%, #3a3f4b 100%);
+    color: #f3f4f6;
+    border: 1px solid #353a45;
+    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.18);
+}
+
+.dark-mode-kings .filter-btn:hover,
+.dark-mode-kings .export-btn:hover,
+.dark-mode-prophets .filter-btn:hover,
+.dark-mode-prophets .export-btn:hover,
+.dark-mode-books .filter-btn:hover,
+.dark-mode-books .export-btn:hover {
+    background: linear-gradient(135deg, #2d3342 0%, #484e5c 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(20, 20, 30, 0.28);
+}
+
+.dark-mode-kings .add-btn,
+.dark-mode-prophets .add-btn,
+.dark-mode-books .add-btn {
+    background: linear-gradient(135deg, #232a3a 0%, #3a3f4b 100%);
+    color: #f3f4f6;
+    border: 1px solid #353a45;
+    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.18);
+}
+
+.dark-mode-kings .add-btn:hover,
+.dark-mode-prophets .add-btn:hover,
+.dark-mode-books .add-btn:hover {
+    background: linear-gradient(135deg, #2d3342 0%, #484e5c 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(20, 20, 30, 0.28);
 }
 
 .showing-text {
@@ -1219,15 +1275,60 @@ nav {
 
 .king-card {
     background: white;
-    border-radius: 16px;
-    padding: 35px;
-    max-width: 600px;
-    width: 600px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    transform: scale(0.8) translateX(-50px);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode for card elements under content-actions on kings, prophets, and books pages */
+.dark-mode-kings .card,
+.dark-mode-prophets .card,
+.dark-mode-books .card,
+.dark-mode-kings .king-card,
+.dark-mode-prophets .king-card,
+.dark-mode-books .king-card {
+    background: #232325 !important;
+    color: #f3f4f6;
+    border: 1px solid #35363a;
+    box-shadow: 0 4px 24px rgba(20, 20, 30, 0.10);
+}
+
+/* Dark mode titles for kings */
+.dark-mode-kings .filter-card-title,
+.dark-mode-kings .king-card-title,
+.dark-mode-kings .side-card-label {
+    color: #f3f4f6 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode titles for maps */
+.dark-mode-maps .page-title,
+.dark-mode-maps .section-title,
+.dark-mode-maps .location-title {
+    color: #f3f4f6 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode-kings .page-title,
+.dark-mode-maps .page-title {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    font-weight: 600;
+}
+
+.dark-mode-kings .side-card,
+.dark-mode-prophets .side-card,
+.dark-mode-books .side-card {
+    background: #232325 !important;
+    color: #f3f4f6;
+    border: 1px solid #35363a;
+    box-shadow: 0 2px 12px rgba(20, 20, 30, 0.08);
+}
+
+.dark-mode-kings .filter-card,
+.dark-mode-prophets .filter-card,
+.dark-mode-books .filter-card {
+    background: #232325 !important;
+    color: #f3f4f6;
+    border: 1px solid #35363a;
+    box-shadow: 0 4px 24px rgba(20, 20, 30, 0.10);
 }
 
 .king-popup-overlay.show .king-card {
@@ -1595,6 +1696,7 @@ nav {
 
 /* Touch-friendly scrolling for all main content areas */
 @media (hover: none) and (pointer: coarse) {
+
     /* This targets touch devices */
     .main-content,
     .king-page-container,
@@ -1603,7 +1705,7 @@ nav {
         -webkit-overflow-scrolling: touch;
         scroll-behavior: smooth;
     }
-    
+
     /* Make hover card easier to dismiss on touch devices */
     .king-hover-card {
         -webkit-tap-highlight-color: transparent;
@@ -2999,6 +3101,7 @@ nav {
         transform: scale(0.8);
         opacity: 0;
     }
+
     to {
         transform: scale(1);
         opacity: 1;
@@ -3010,7 +3113,7 @@ nav {
     .lightbox-content {
         padding: 50px 20px 30px 20px;
     }
-    
+
     .lightbox-close-btn {
         top: 10px;
         right: 10px;
@@ -3018,12 +3121,12 @@ nav {
         height: 32px;
         font-size: 18px;
     }
-    
+
     .lightbox-image {
         max-width: 95%;
         max-height: 80vh;
     }
-    
+
     .lightbox-caption {
         font-size: 14px;
         max-width: 90%;
@@ -3287,7 +3390,8 @@ nav {
 /* Audio Button in King Page Header */
 #king-page-content .content-header .audio-btn {
     position: absolute;
-    right: 88px; /* Position to the left of timeline button (44px + 44px gap) */
+    right: 88px;
+    /* Position to the left of timeline button (44px + 44px gap) */
     top: 50%;
     transform: translateY(-50%);
     width: 32px;
@@ -3298,7 +3402,8 @@ nav {
 /* Timeline View Button (positioned to the left of table view button) */
 .timeline-view-btn {
     position: absolute;
-    right: 44px; /* Position to the left of table button (32px + 12px gap) */
+    right: 44px;
+    /* Position to the left of table button (32px + 12px gap) */
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -3497,15 +3602,19 @@ nav {
     0% {
         transform: scale(1) translateY(0);
     }
+
     30% {
         transform: scale(1.2) translateY(-15px);
     }
+
     50% {
         transform: scale(1.1) translateY(-8px);
     }
+
     70% {
         transform: scale(1.18) translateY(-12px);
     }
+
     100% {
         transform: scale(1.15) translateY(0);
     }
@@ -3529,11 +3638,11 @@ nav {
         gap: 50px;
         align-items: center;
     }
-    
+
     .kingdom-division::after {
         display: none;
     }
-    
+
     .timeline-card {
         width: 200px;
     }
@@ -3643,15 +3752,15 @@ nav {
         max-height: 100vh;
         border-radius: 0;
     }
-    
+
     .timeline-modal .modal-header {
         padding: 15px 20px;
     }
-    
+
     .timeline-modal .modal-title {
         font-size: 1.3rem;
     }
-    
+
     .timeline-modal-body {
         padding: 20px;
     }
@@ -4735,15 +4844,20 @@ nav {
 
 /* Synopsis icon animation */
 @keyframes synopsisFlip {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: rotateY(0deg) scale(1);
     }
+
     25% {
         transform: rotateY(180deg) scale(1.1);
     }
+
     50% {
         transform: rotateY(360deg) scale(1);
     }
+
     75% {
         transform: rotateY(180deg) scale(1.1);
     }
@@ -5181,6 +5295,7 @@ nav {
 
 /* iPad and Touch Device Optimizations */
 @media (hover: none) and (pointer: coarse) {
+
     /* Optimize audio button for touch devices like iPad */
     .chapter-navigation-header .audio-btn {
         width: 44px !important;
@@ -5190,26 +5305,27 @@ nav {
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
     }
-    
+
     .audio-icon-animated {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
     }
-    
+
     .sound-bar {
         display: block !important;
         visibility: visible !important;
     }
-    
+
     /* Improve touch target for all buttons */
-    .info-btn, .synopsis-btn {
+    .info-btn,
+    .synopsis-btn {
         min-width: 44px;
         min-height: 44px;
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
     }
-    
+
     /* Prevent double-tap zoom on buttons */
     button {
         touch-action: manipulation;
@@ -5217,11 +5333,8 @@ nav {
 }
 
 /* iPad specific media queries */
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 1) {
-    
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+
     /* Ensure audio button is visible and properly sized on iPad */
     .chapter-navigation-header .audio-btn {
         display: flex !important;
@@ -5229,14 +5342,14 @@ nav {
         height: 44px !important;
         visibility: visible !important;
     }
-    
+
     /* Force show audio icon elements */
     .audio-icon-animated,
     .sound-bar {
         display: flex !important;
         visibility: visible !important;
     }
-    
+
     /* Improve swipe performance */
     .book-chapter-container {
         -webkit-overflow-scrolling: touch;
@@ -5244,7 +5357,7 @@ nav {
         backface-visibility: hidden;
         perspective: 1000px;
     }
-    
+
     /* Prevent blank page during rapid swipes */
     #book-chapter-content {
         min-height: 100vh;
@@ -5303,7 +5416,7 @@ nav {
 
 .character-card::before {
     content: '';
-    position: absolute; 
+    position: absolute;
     inset: 0;
     border-radius: 16px;
     background: linear-gradient(135deg, transparent 0%, transparent 70%, rgba(16, 185, 129, 0.08) 85%, rgba(16, 185, 129, 0.15) 100%);
@@ -5476,15 +5589,15 @@ nav {
         grid-template-columns: 1fr;
         gap: 16px;
     }
-    
+
     .character-card {
         padding: 20px;
     }
-    
+
     .character-card-name {
         font-size: 20px;
     }
-    
+
     .pagination-btn {
         min-width: 40px;
         height: 40px;
@@ -5612,7 +5725,7 @@ body:has(.left-sidebar.collapsed) .main-content {
     flex-shrink: 0;
     position: relative;
     border: 2px solid #654321;
-    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.2);
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.2);
     transition: opacity 0.2s;
 }
 
@@ -5684,7 +5797,7 @@ body:has(.left-sidebar.collapsed) .main-content {
     pointer-events: none;
 }
 
-.history-item span:not(.nav-icon) { 
+.history-item span:not(.nav-icon) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -5843,12 +5956,12 @@ body:has(.left-sidebar.collapsed) .main-content {
     display: none;
 }
 
-.theme-toggle input[type="radio"]:checked + .theme-option {
+.theme-toggle input[type="radio"]:checked+.theme-option {
     background: #cbd5e1;
     color: #1f2937;
 }
 
-.theme-toggle input[type="radio"]:not(:checked) + .theme-option {
+.theme-toggle input[type="radio"]:not(:checked)+.theme-option {
     color: #6b7280;
 }
 
@@ -5856,7 +5969,7 @@ body:has(.left-sidebar.collapsed) .main-content {
     background: #d1d5db;
 }
 
-.theme-toggle input[type="radio"]:checked + .theme-option:hover {
+.theme-toggle input[type="radio"]:checked+.theme-option:hover {
     background: #b0b9c7;
 }
 
@@ -5931,6 +6044,7 @@ body:has(.left-sidebar.collapsed) .main-content {
     scrollbar-width: auto;
     scrollbar-color: auto;
 }
+
 /* ===== END SCROLLBAR RESET ===== */
 
 /* Theme Toggle Responsive Styles for iPad and Tablets */
@@ -5940,14 +6054,14 @@ body:has(.left-sidebar.collapsed) .main-content {
         display: flex !important;
         visibility: visible !important;
     }
-    
+
     .theme-toggle {
         display: flex !important;
         width: 100%;
         gap: 4px;
         padding: 3px;
     }
-    
+
     .theme-option {
         flex: 1;
         min-height: 32px;
@@ -5955,13 +6069,13 @@ body:has(.left-sidebar.collapsed) .main-content {
         font-size: 12px;
         display: flex !important;
     }
-    
+
     .theme-option svg {
         width: 14px !important;
         height: 14px !important;
         display: block !important;
     }
-    
+
     .theme-option-text {
         font-size: 12px;
         display: inline-block !important;
@@ -5973,16 +6087,16 @@ body:has(.left-sidebar.collapsed) .main-content {
     .theme-option {
         padding: 0 8px;
     }
-    
+
     .left-sidebar.collapsed .theme-option-text {
         display: none !important;
     }
-    
+
     .left-sidebar.collapsed .theme-toggle {
         flex-direction: column;
         gap: 3px;
     }
-    
+
     .left-sidebar.collapsed .theme-option {
         width: 44px;
         height: 44px;
@@ -5996,18 +6110,18 @@ body:has(.left-sidebar.collapsed) .main-content {
     .theme-toggle-container {
         padding: 8px;
     }
-    
+
     .theme-option {
         padding: 0 6px;
         font-size: 11px;
         min-height: 30px;
     }
-    
+
     .theme-option svg {
         width: 13px !important;
         height: 13px !important;
     }
-    
+
     .theme-option-text {
         font-size: 11px;
     }
