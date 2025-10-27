@@ -217,3 +217,61 @@
 .dark-mode-books .testament-nav-trigger:hover {
     color: #5D9CEC !important;
 }
+
+.dark-mode-books .testament-mega-menu {
+    background: #2a2a2a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode-books .testament-tabs {
+    border-bottom: 1px solid #4a4a4a;
+    background: #1f1f1f;
+}
+
+.dark-mode-books .testament-tab-button {
+    color: #9ca3af;
+}
+
+.dark-mode-books .testament-tab-button:hover {
+    color: #ececec;
+    background: linear-gradient(90deg, rgba(93, 156, 236, 0.25) 0%, rgba(74, 85, 104, 0) 100%);
+}
+
+.dark-mode-books .testament-tab-button:last-child:hover {
+    background: linear-gradient(270deg, rgba(93, 156, 236, 0.25) 0%, rgba(74, 85, 104, 0) 100%);
+}
+
+.dark-mode-books .testament-tab-button.active {
+    background: linear-gradient(90deg, rgba(93, 156, 236, 0.25) 0%, rgba(74, 85, 104, 0) 100%);
+    color: #5D9CEC;
+}
+
+.dark-mode-books .testament-tab-button:last-child.active {
+    background: linear-gradient(270deg, rgba(93, 156, 236, 0.25) 0%, rgba(74, 85, 104, 0) 100%);
+}
+
+.dark-mode-books .testament-content {
+    background: #2a2a2a;
+}
+
+.dark-mode-books .testament-column-title {
+    color: #ffffff;
+}
+
+.dark-mode-books .testament-menu-item a {
+    color: #9ca3af;
+}
+
+.dark-mode-books .testament-menu-item a:hover {
+    color: #ececec;
+}
+
+.dark-mode-books .testament-menu-item a::before {
+    background: linear-gradient(135deg, #5D9CEC 0%, #4a5568 100%);
+}
+
+.dark-mode-books .testament-menu-item a.selected {
+    background: linear-gradient(90deg, rgba(93, 156, 236, 0.25) 0%, rgba(74, 85, 104, 0) 100%);
+    color: #5D9CEC;
+}
+

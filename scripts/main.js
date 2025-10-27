@@ -3886,6 +3886,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (chaptersPopup) {
                 chaptersPopup.classList.add('dark-mode-books');
             }
+            
+            // Apply dark mode to synopsis side drawer
+            const synopsisSideDrawer = document.getElementById('synopsisSideDrawer');
+            if (synopsisSideDrawer) {
+                synopsisSideDrawer.classList.add('dark-mode-books');
+            }
         }
         
         // Apply dark theme on page load if it's checked
@@ -3986,6 +3992,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const chaptersPopup = document.getElementById('chaptersPopup');
                 if (chaptersPopup) {
                     chaptersPopup.classList.remove('dark-mode-books');
+                }
+                
+                // Remove dark mode from synopsis side drawer
+                const synopsisSideDrawer = document.getElementById('synopsisSideDrawer');
+                if (synopsisSideDrawer) {
+                    synopsisSideDrawer.classList.remove('dark-mode-books');
                 }
                 
                 // Light mode - using original light colors

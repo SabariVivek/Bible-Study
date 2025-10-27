@@ -5617,16 +5617,20 @@ html #king-page-content.dark-mode-kings .order-number {
     color: #ececec;
 }
 
+.dark-mode-books.chapters-popup .chapters::-webkit-scrollbar {
+    width: auto;
+}
+
 .dark-mode-books .chapters::-webkit-scrollbar-track {
-    background: #353535;
+    background: transparent;
 }
 
 .dark-mode-books .chapters::-webkit-scrollbar-thumb {
-    background: #4a4a4a;
+    background: transparent;
 }
 
 .dark-mode-books .chapters::-webkit-scrollbar-thumb:hover {
-    background: #5a5a5a;
+    background: transparent;
 }
 
 .dark-mode-books .chapter-card {
@@ -5645,6 +5649,112 @@ html #king-page-content.dark-mode-kings .order-number {
     background: #2a2a2a;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     border-radius: 20px !important;
+}
+
+/* Dark Mode for Synopsis Side Drawer */
+.dark-mode-books.synopsis-side-drawer {
+    background-color: #1f1f1f;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode-books.synopsis-side-drawer.active {
+    right: 0;
+}
+
+.dark-mode-books .synopsis-drawer-header {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    border-bottom: 3px solid #5D9CEC;
+}
+
+.dark-mode-books .synopsis-drawer-title {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode-books .synopsis-nav-btn {
+    color: #5D9CEC;
+    background: #2a2a2a;
+    border-color: #2a2a2a;
+}
+
+.dark-mode-books .synopsis-nav-btn:hover:not(:disabled) {
+    background: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.dark-mode-books .synopsis-book-selector {
+    background: #2a2a2a;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+    border: 1px solid #4a4a4a;
+}
+
+.dark-mode-books .synopsis-book-selector option {
+    background: #2a2a2a;
+    color: #d1d1d1;
+}
+
+.dark-mode-books .synopsis-book-selector option:hover {
+    background: rgba(93, 156, 236, 0.2);
+}
+
+.dark-mode-books .synopsis-book-selector optgroup {
+    background: #353535;
+    color: #5D9CEC;
+}
+
+.dark-mode-books .synopsis-drawer-content {
+    background: #1a1a1a;
+}
+
+.dark-mode-books .synopsis-section-title {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, rgba(93, 156, 236, 0.3) 0%, rgba(74, 85, 104, 0.3) 100%);
+    border-left: 4px solid #5D9CEC;
+}
+
+.dark-mode-books .synopsis-timeline-item {
+    background: #2a2a2a;
+    border-color: #4a4a4a;
+}
+
+.dark-mode-books .synopsis-timeline-item::before {
+    background: linear-gradient(135deg, rgba(93, 156, 236, 0.8) 0%, rgba(74, 85, 104, 0.8) 100%);
+    color: #ffffff;
+}
+
+.dark-mode-books .synopsis-timeline-item::after {
+    background: linear-gradient(135deg, rgba(93, 156, 236, 0.1) 0%, rgba(74, 85, 104, 0.1) 100%);
+}
+
+.dark-mode-books .synopsis-timeline-item:hover {
+    border-color: #5D9CEC;
+    box-shadow: 0 4px 15px rgba(93, 156, 236, 0.4);
+}
+
+.dark-mode-books .synopsis-timeline-item:hover .synopsis-item-title {
+    color: #5D9CEC;
+}
+
+.dark-mode-books .synopsis-timeline-item:hover .synopsis-item-reference {
+    background: linear-gradient(135deg, #5D9CEC 0%, #4a5568 100%);
+    color: #ffffff;
+}
+
+.dark-mode-books .synopsis-item-title {
+    color: #d1d1d1;
+}
+
+.dark-mode-books .synopsis-item-reference {
+    color: #5D9CEC;
+    background: rgba(93, 156, 236, 0.15);
+    border-color: #5D9CEC;
+}
+
+.dark-mode-books .synopsis-no-data {
+    color: #9ca3af;
 }
 
 /* ===== SYNOPSIS SIDE DRAWER STYLES ===== */
