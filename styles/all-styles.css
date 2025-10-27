@@ -2642,6 +2642,8 @@ body .dark-mode-maps .page-title {
 
 .dark-mode-life-of-christ .chapter-section-heading {
     color: #ececec !important;
+    background: linear-gradient(to right, #1f2f1f 0%, #2a2a2a 100%);
+    border-left-color: #6ba876;
 }
 
 .dark-mode-life-of-christ .life-of-jesus-card {
@@ -3158,8 +3160,8 @@ html #king-page-content.dark-mode-kings .order-number {
 
 .dark-mode-books .chapter-section-heading {
     color: #ececec;
-    border-left-color: #5D9CEC;
-    background: linear-gradient(to right, rgba(93, 156, 236, 0.15), transparent);
+    background: linear-gradient(to right, #1f2f1f 0%, #2a2a2a 100%);
+    border-left-color: #6ba876;
 }
 
 .dark-mode-books .chapter-section-heading .verse-badge {
