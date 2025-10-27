@@ -3712,6 +3712,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 container.style.background = '#212121';
             }
             
+            // Update main content background for dark mode
+            const mainContent = document.querySelector('.main-content');
+            if (mainContent) {
+                mainContent.style.background = '#212121';
+            }
+            
             // Update all sidebar items colors
             document.querySelectorAll('.sidebar-header, .history-item, .sidebar-footer-item, .sidebar-footer, .theme-toggle-container').forEach(el => {
                 el.style.borderColor = '#2f2f2f';
@@ -3799,6 +3805,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             `;
             document.head.appendChild(darkModeStyle);
+            
+            // Apply dark mode to dashboard cards and content
+            const dashboardCardsContainer = document.querySelector('.dashboard-cards-container');
+            if (dashboardCardsContainer) {
+                dashboardCardsContainer.classList.add('dark-mode-cards');
+            }
+            
+            const dashboardContent = document.getElementById('dashboard-content');
+            if (dashboardContent) {
+                dashboardContent.classList.add('dark-mode-dashboard');
+            }
+            
+            // Apply dark mode to timeline
+            const timelineContent = document.getElementById('timeline-content');
+            if (timelineContent) {
+                timelineContent.classList.add('dark-mode-timeline');
+            }
+            
+            // Apply dark mode to Life of Christ
+            const lifeOfChristContent = document.getElementById('help-content');
+            if (lifeOfChristContent) {
+                lifeOfChristContent.classList.add('dark-mode-life-of-christ');
+            }
+            
+            // Apply dark mode to Characters
+            const charactersContent = document.getElementById('genealogy-content');
+            if (charactersContent) {
+                charactersContent.classList.add('dark-mode-characters');
+            }
+            
+            // Apply dark mode to Kings
+            const kingsContent = document.getElementById('king-page-content');
+            if (kingsContent) {
+                kingsContent.classList.add('dark-mode-kings');
+            }
+            
+            // Apply dark mode to Prophets
+            const prophetsContent = document.getElementById('prophets-content');
+            if (prophetsContent) {
+                prophetsContent.classList.add('dark-mode-prophets');
+            }
+            
+            // Apply dark mode to Books
+            const booksContent = document.getElementById('books-content');
+            if (booksContent) {
+                booksContent.classList.add('dark-mode-books');
+            }
         }
         
         // Apply dark theme on page load if it's checked
@@ -3820,6 +3873,53 @@ document.addEventListener('DOMContentLoaded', function() {
                     darkModeStyle.remove();
                 }
                 
+                // Remove dark mode from dashboard cards
+                const dashboardCardsContainer = document.querySelector('.dashboard-cards-container');
+                if (dashboardCardsContainer) {
+                    dashboardCardsContainer.classList.remove('dark-mode-cards');
+                }
+                
+                const dashboardContent = document.getElementById('dashboard-content');
+                if (dashboardContent) {
+                    dashboardContent.classList.remove('dark-mode-dashboard');
+                }
+                
+                // Remove dark mode from timeline
+                const timelineContent = document.getElementById('timeline-content');
+                if (timelineContent) {
+                    timelineContent.classList.remove('dark-mode-timeline');
+                }
+                
+                // Remove dark mode from Life of Christ
+                const lifeOfChristContent = document.getElementById('help-content');
+                if (lifeOfChristContent) {
+                    lifeOfChristContent.classList.remove('dark-mode-life-of-christ');
+                }
+                
+                // Remove dark mode from Characters
+                const charactersContent = document.getElementById('genealogy-content');
+                if (charactersContent) {
+                    charactersContent.classList.remove('dark-mode-characters');
+                }
+                
+                // Remove dark mode from Kings
+                const kingsContent = document.getElementById('king-page-content');
+                if (kingsContent) {
+                    kingsContent.classList.remove('dark-mode-kings');
+                }
+                
+                // Remove dark mode from Prophets
+                const prophetsContent = document.getElementById('prophets-content');
+                if (prophetsContent) {
+                    prophetsContent.classList.remove('dark-mode-prophets');
+                }
+                
+                // Remove dark mode from Books
+                const booksContent = document.getElementById('books-content');
+                if (booksContent) {
+                    booksContent.classList.remove('dark-mode-books');
+                }
+                
                 // Light mode - using original light colors
                 if (leftSidebar) {
                     leftSidebar.style.background = '#f8f9fb';
@@ -3828,6 +3928,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (container) {
                     container.style.background = 'white';
+                }
+                
+                // Update main content background for light mode
+                const mainContent = document.querySelector('.main-content');
+                if (mainContent) {
+                    mainContent.style.background = 'white';
                 }
                 
                 // Update all sidebar items colors

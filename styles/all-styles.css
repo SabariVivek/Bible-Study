@@ -2346,6 +2346,275 @@ nav {
 }
 
 /* ============================================
+   DARK MODE - DASHBOARD CARDS ONLY
+   ============================================ */
+.dark-mode-cards .era-card {
+    background: #2a2a2a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode-cards .era-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode-cards .era-title {
+    color: #ececec;
+}
+
+.dark-mode-cards .era-subtitle {
+    color: #a1a1a1;
+}
+
+/* Dark mode for dashboard page title */
+.dark-mode-dashboard .page-title {
+    color: #ececec !important;
+}
+
+.dark-mode-dashboard .content-header {
+    background: transparent;
+}
+
+/* ============================================
+   DARK MODE - TIMELINE
+   ============================================ */
+.dark-mode-timeline .page-title {
+    color: #ececec !important;
+}
+
+.dark-mode-timeline .content-header {
+    background: #212121;
+}
+
+.dark-mode-timeline .timeline-container {
+    background-color: #212121;
+}
+
+.dark-mode-timeline .timeline ul li {
+    background-color: #2a2a2a;
+    color: #ececec;
+    border: 1px solid #3a3a3a;
+}
+
+.dark-mode-timeline .timeline-content h1 {
+    color: #ececec;
+}
+
+.dark-mode-timeline .timeline-content p {
+    color: #a1a1a1;
+}
+
+.dark-mode-timeline .timeline-content .date {
+    color: #8a8a8a;
+}
+
+/* ============================================
+   DARK MODE - LIFE OF CHRIST
+   ============================================ */
+.dark-mode-life-of-christ .page-title {
+    color: #ececec !important;
+}
+
+.dark-mode-life-of-christ .content-header {
+    background: transparent;
+}
+
+.dark-mode-life-of-christ .life-of-jesus-container {
+    background-color: #212121;
+}
+
+.dark-mode-life-of-christ .chapter-section-heading {
+    color: #ececec !important;
+}
+
+.dark-mode-life-of-christ .life-of-jesus-card {
+    background: #2a2a2a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid #3a3a3a;
+}
+
+.dark-mode-life-of-christ .life-of-jesus-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    border-color: #4a4a4a;
+}
+
+.dark-mode-life-of-christ .life-of-jesus-card-title {
+    color: #ececec;
+}
+
+.dark-mode-life-of-christ .verse-badge {
+    background-color: #3a3a2a;
+    color: #fbbf24;
+    border-color: #d97706;
+}
+
+.dark-mode-life-of-christ .verse-badge:hover {
+    background-color: #4a4a3a;
+    border-color: #f59e0b;
+}
+
+.dark-mode-life-of-christ .characters-search-input {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+    color: #ececec;
+}
+
+.dark-mode-life-of-christ .characters-search-input::placeholder {
+    color: #8a8a8a;
+}
+
+.dark-mode-life-of-christ .characters-search-input:focus {
+    border-color: #5D9CEC;
+    background: #2a2a2a;
+}
+
+.dark-mode-life-of-christ .search-icon {
+    color: #a1a1a1;
+}
+
+.dark-mode-life-of-christ .search-clear-btn {
+    color: #a1a1a1;
+}
+
+.dark-mode-life-of-christ .search-results-info {
+    color: #a1a1a1;
+}
+
+/* ============================================
+   DARK MODE - CHARACTERS
+   ============================================ */
+.dark-mode-characters .page-title {
+    color: #ececec !important;
+}
+
+.dark-mode-characters .content-header {
+    background: transparent;
+}
+
+.dark-mode-characters .characters-container {
+    background-color: #212121;
+}
+
+.dark-mode-characters .character-card {
+    background: #2a2a2a;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2), 0px 2px 7px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    border: 1px solid #3a3a3a;
+}
+
+.dark-mode-characters .character-card::before {
+    background: linear-gradient(135deg, transparent 0%, transparent 70%, rgba(16, 185, 129, 0.12) 85%, rgba(16, 185, 129, 0.2) 100%);
+}
+
+.dark-mode-characters .character-card::after {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.15) 100%);
+}
+
+.dark-mode-characters .character-card:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3), 0px 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode-characters .character-card-name {
+    color: #ececec;
+}
+
+.dark-mode-characters .character-card-description {
+    color: #a1a1a1;
+}
+
+.dark-mode-characters .character-card-lesson {
+    background: linear-gradient(135deg, #3a3a3a 0%, #2f2f2f 100%);
+    border-left-color: #5D9CEC;
+}
+
+.dark-mode-characters .lesson-text {
+    color: #d1d1d1;
+}
+
+.dark-mode-characters .characters-search-input {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+    color: #ececec;
+}
+
+.dark-mode-characters .characters-search-input::placeholder {
+    color: #8a8a8a;
+}
+
+.dark-mode-characters .characters-search-input:focus {
+    border-color: #5D9CEC;
+    background: #2a2a2a;
+}
+
+.dark-mode-characters .search-icon {
+    color: #a1a1a1;
+}
+
+.dark-mode-characters .search-clear-btn {
+    color: #a1a1a1;
+}
+
+.dark-mode-characters .search-results-info {
+    color: #a1a1a1;
+}
+
+/* ============================================
+   DARK MODE - KINGS, PROPHETS, BOOKS
+   ============================================ */
+.dark-mode-kings .page-title {
+    color: #ececec !important;
+}
+
+.dark-mode-kings .content-header {
+    background: transparent;
+}
+
+.dark-mode-prophets .page-title {
+    color: #ececec !important;
+}
+
+.dark-mode-prophets .content-header {
+    background: transparent;
+}
+
+.dark-mode-prophets .table-container {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+.dark-mode-prophets .table th {
+    background: #1f1f1f;
+    color: #ececec;
+    border-bottom-color: #3a3a3a;
+}
+
+.dark-mode-prophets .table th.sortable:hover {
+    background: #2f2f2f;
+    color: #5D9CEC;
+}
+
+.dark-mode-prophets .table th.sortable.sort-asc,
+.dark-mode-prophets .table th.sortable.sort-desc {
+    background: #2a2a4a;
+    color: #5D9CEC;
+}
+
+.dark-mode-prophets .table td {
+    color: #d1d1d1;
+    border-bottom-color: #3a3a3a;
+}
+
+.dark-mode-prophets .table tr:hover {
+    background: #2f2f2f;
+}
+
+.dark-mode-books .page-title {
+    color: #ececec !important;
+}
+
+.dark-mode-books .content-header {
+    background: transparent;
+}
+
+/* ============================================
    PRAYERS FOR FORGIVENESS STYLES
    ============================================ */
 
