@@ -392,25 +392,30 @@
      * Get all kings in order for navigation
      */
     function getAllKingsInOrder() {
+        // Use the same order as the "All Kings" table
+        // This matches the chronological order: United Kingdom → Israel → Judah
         const allKings = [];
         if (window.allKingsData) {
-            // Add united kingdom kings
+            // Add united kingdom kings first (Saul, David, Solomon)
             if (window.allKingsData.united) {
-                window.allKingsData.united.forEach(king => {
-                    allKings.push({ ...king, kingdom: 'united' });
-                });
+                allKings.push(...window.allKingsData.united.map(king => ({
+                    ...king, 
+                    kingdom: 'United Kingdom'
+                })));
             }
-            // Add israel kingdom kings
+            // Then add Israel kingdom kings (Northern Kingdom)
             if (window.allKingsData.israel) {
-                window.allKingsData.israel.forEach(king => {
-                    allKings.push({ ...king, kingdom: 'israel' });
-                });
+                allKings.push(...window.allKingsData.israel.map(king => ({
+                    ...king, 
+                    kingdom: 'Israel'
+                })));
             }
-            // Add judah kingdom kings
+            // Finally add Judah kingdom kings (Southern Kingdom)
             if (window.allKingsData.judah) {
-                window.allKingsData.judah.forEach(king => {
-                    allKings.push({ ...king, kingdom: 'judah' });
-                });
+                allKings.push(...window.allKingsData.judah.map(king => ({
+                    ...king, 
+                    kingdom: 'Judah'
+                })));
             }
         }
         return allKings;
@@ -420,19 +425,30 @@
      * Navigate to next or previous king
      */
     function navigateToKing(direction) {
-        const kingPageTitle = document.getElementById('kingPageTitle');
-        if (!kingPageTitle) return;
-
-        const currentTitleText = kingPageTitle.textContent;
-        const kingNameMatch = currentTitleText.match(/King\s+(.+)/i);
-        if (!kingNameMatch) return;
-
-        const currentKingName = kingNameMatch[1].trim();
         const allKings = getAllKingsInOrder();
         
-        // Find current king index
-        const currentIndex = allKings.findIndex(k => k.name === currentKingName);
-        if (currentIndex === -1) return;
+        // Get current index from stored data instead of searching by name
+        // This handles duplicate names like "Jehoram (Joram)"
+        let currentIndex = -1;
+        
+        if (window.currentKingData && typeof window.currentKingData.currentIndex !== 'undefined') {
+            currentIndex = window.currentKingData.currentIndex;
+        } else {
+            // Fallback: try to find by name (may fail with duplicate names)
+            const kingPageTitle = document.getElementById('kingPageTitle');
+            if (kingPageTitle) {
+                const currentTitleText = kingPageTitle.textContent;
+                const kingNameMatch = currentTitleText.match(/King\s+(.+)/i);
+                if (kingNameMatch) {
+                    const currentKingName = kingNameMatch[1].trim();
+                    currentIndex = allKings.findIndex(k => k.name === currentKingName);
+                }
+            }
+        }
+        
+        if (currentIndex === -1) {
+            return;
+        }
 
         let newIndex;
         if (direction === 'next') {
@@ -442,6 +458,7 @@
         }
 
         const nextKing = allKings[newIndex];
+        
         if (nextKing && window.showKingPage) {
             window.showKingPage(nextKing.name, newIndex);
         }

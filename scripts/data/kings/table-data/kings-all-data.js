@@ -109,8 +109,11 @@ window.getKingSummaryData = function(kingName) {
     // Normalize the king name (lowercase, trim)
     const normalizedName = kingName.toLowerCase().trim();
     
-    // Remove any extra text in parentheses and special characters
-    const simpleName = normalizedName.replace(/[^a-z]/g, '');
+    // Remove any text in parentheses first (e.g., "Uzziah (Azariah)" -> "Uzziah")
+    const nameWithoutParens = normalizedName.replace(/\s*\([^)]*\)/g, '').trim();
+    
+    // Remove any special characters (hyphens, spaces, etc.)
+    const simpleName = nameWithoutParens.replace(/[^a-z]/g, '');
     
     // Try to find summary data variable: {kingname}SummaryData
     const summaryVariableName = simpleName + 'SummaryData';

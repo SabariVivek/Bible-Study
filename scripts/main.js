@@ -493,7 +493,8 @@ function showKingPage(kingName, index) {
         name: kingName,
         data: timelineData,
         summary: summaryData,
-        isTableView: false
+        isTableView: false,
+        currentIndex: index // Store the current index for navigation
     };
     
     if (summaryData && summaryData.length > 0) {

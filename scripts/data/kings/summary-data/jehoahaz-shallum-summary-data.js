@@ -1,3 +1,3 @@
-var jehoahazshallumSummaryData = [
+var jehoahazSummaryData = [
     // Add summary sections here
 ];
