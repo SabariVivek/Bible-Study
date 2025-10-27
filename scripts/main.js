@@ -3738,7 +3738,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 svg.setAttribute('fill', '#ececec');
             });
             
-            // Update theme toggle
+            // Update theme toggle options
             document.querySelectorAll('.theme-option').forEach(option => {
                 const radio = option.previousElementSibling;
                 if (radio && radio.checked) {
@@ -3746,7 +3746,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     option.style.color = '#ececec';
                 } else {
                     option.style.background = 'transparent';
-                    option.style.color = '#8e8e8e';
+                    option.style.color = '#a1a1a1';
+                }
+            });
+            
+            // Update theme toggle SVG icons
+            document.querySelectorAll('.theme-option svg').forEach(svg => {
+                const option = svg.closest('.theme-option');
+                const radio = option.previousElementSibling;
+                if (radio && radio.checked) {
+                    svg.style.fill = '#ececec';
+                } else {
+                    svg.style.fill = '#a1a1a1';
                 }
             });
             
@@ -3845,7 +3856,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     svg.setAttribute('fill', '#374151');
                 });
                 
-                // Update theme toggle
+                // Update theme toggle options
                 document.querySelectorAll('.theme-option').forEach(option => {
                     const radio = option.previousElementSibling;
                     if (radio && radio.checked) {
@@ -3854,6 +3865,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         option.style.background = 'transparent';
                         option.style.color = '#6b7280';
+                    }
+                });
+                
+                // Update theme toggle SVG icons
+                document.querySelectorAll('.theme-option svg').forEach(svg => {
+                    const option = svg.closest('.theme-option');
+                    const radio = option.previousElementSibling;
+                    if (radio && radio.checked) {
+                        svg.style.fill = '#1f2937';
+                    } else {
+                        svg.style.fill = '#6b7280';
                     }
                 });
                 

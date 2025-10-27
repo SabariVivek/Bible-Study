@@ -5563,6 +5563,7 @@ body:has(.left-sidebar.collapsed) .main-content {
     height: 16px !important;
     transition: all 0.3s ease;
     flex-shrink: 0;
+    fill: currentColor !important;
 }
 
 .theme-option-text {
