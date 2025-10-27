@@ -1321,6 +1321,14 @@ nav {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+.dark-mode-prophets .filter-card-title,
+.dark-mode-books .filter-card-title {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
 /* Dark mode titles for maps */
 body .dark-mode-maps .page-title,
 body .dark-mode-maps .section-title,
@@ -5576,14 +5584,27 @@ html #king-page-content.dark-mode-kings .order-number {
 
 .dark-mode-books .chapters-popup .popup-header {
     border-bottom-color: #3a3a3a;
+    background: #1a1a1a !important;
 }
 
 .dark-mode-books .chapters-popup .popup-header .book-title {
-    color: #ececec;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .dark-mode-books .chapters-popup .popup-header .chapter-count {
-    color: #a1a1a1;
+    color: #cccccc !important;
+    opacity: 1 !important;
+}
+
+.dark-mode-books.chapters-popup.show .popup-header .book-title {
+    color: #ffffff !important;
+}
+
+.dark-mode-books.chapters-popup.show .popup-header .chapter-count {
+    color: #cccccc !important;
 }
 
 .dark-mode-books .chapters-popup .close-btn {
