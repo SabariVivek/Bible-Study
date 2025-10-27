@@ -3864,6 +3864,22 @@ document.addEventListener('DOMContentLoaded', function() {
             if (bookChapterContent) {
                 bookChapterContent.classList.add('dark-mode-books');
             }
+            
+            // Apply dark mode to filter overlays
+            const kingsFilterOverlay = document.getElementById('filterCardOverlay');
+            if (kingsFilterOverlay) {
+                kingsFilterOverlay.classList.add('dark-mode-kings');
+            }
+            
+            const prophetsFilterOverlay = document.getElementById('prophetsFilterCardOverlay');
+            if (prophetsFilterOverlay) {
+                prophetsFilterOverlay.classList.add('dark-mode-prophets');
+            }
+            
+            const booksFilterOverlay = document.getElementById('booksFilterCardOverlay');
+            if (booksFilterOverlay) {
+                booksFilterOverlay.classList.add('dark-mode-books');
+            }
         }
         
         // Apply dark theme on page load if it's checked
@@ -3942,6 +3958,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 const bookChapterContent = document.getElementById('book-chapter-content');
                 if (bookChapterContent) {
                     bookChapterContent.classList.remove('dark-mode-books');
+                }
+                
+                // Remove dark mode from filter overlays
+                const kingsFilterOverlay = document.getElementById('filterCardOverlay');
+                if (kingsFilterOverlay) {
+                    kingsFilterOverlay.classList.remove('dark-mode-kings');
+                }
+                
+                const prophetsFilterOverlay = document.getElementById('prophetsFilterCardOverlay');
+                if (prophetsFilterOverlay) {
+                    prophetsFilterOverlay.classList.remove('dark-mode-prophets');
+                }
+                
+                const booksFilterOverlay = document.getElementById('booksFilterCardOverlay');
+                if (booksFilterOverlay) {
+                    booksFilterOverlay.classList.remove('dark-mode-books');
                 }
                 
                 // Light mode - using original light colors
