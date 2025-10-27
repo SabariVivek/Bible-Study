@@ -2588,6 +2588,49 @@ body .dark-mode-maps .page-title {
     color: #ececec;
 }
 
+.dark-mode-dashboard .prayers-content-container {
+    background: transparent;
+}
+
+.dark-mode-dashboard .prayer-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.1) 100%);
+    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.25);
+}
+
+.dark-mode-dashboard .prayer-card:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.18) 0%, rgba(118, 75, 162, 0.12) 100%);
+    box-shadow: 0 4px 16px rgba(20, 20, 30, 0.35);
+}
+
+.dark-mode-dashboard .prayer-title {
+    color: #ececec;
+}
+
+.dark-mode-dashboard .prayer-by {
+    color: #a1a1a1;
+}
+
+.dark-mode-dashboard .prayer-verse-ref {
+    background: #2a2a2a;
+    color: #fbbf24;
+    border-left-color: #fbbf24;
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.2);
+}
+
+.dark-mode-dashboard .prayer-text {
+    color: #d1d1d1;
+}
+
+.dark-mode-dashboard .prayer-verse {
+    background: #2a2a2a;
+    border-left-color: #fbbf24;
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.2);
+}
+
+.dark-mode-dashboard .prayer-verse-line {
+    color: #ececec;
+}
+
 /* ============================================
    DARK MODE - TIMELINE
    ============================================ */
@@ -2670,6 +2713,60 @@ body .dark-mode-maps .page-title {
 .dark-mode-life-of-christ .verse-badge:hover {
     background-color: #4a4a3a;
     border-color: #f59e0b;
+}
+
+.dark-mode-life-of-christ .verse-badge.matthew {
+    background: #065f46;
+    color: #a7f3d0;
+}
+
+.dark-mode-life-of-christ .verse-badge.matthew:hover {
+    background: #047857;
+}
+
+.dark-mode-life-of-christ .verse-badge.mark {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+.dark-mode-life-of-christ .verse-badge.mark:hover {
+    background: #991b1b;
+}
+
+.dark-mode-life-of-christ .verse-badge.luke {
+    background: #4c1d95;
+    color: #c4b5fd;
+}
+
+.dark-mode-life-of-christ .verse-badge.luke:hover {
+    background: #5b21b6;
+}
+
+.dark-mode-life-of-christ .verse-badge.john {
+    background: #9a3412;
+    color: #fdba74;
+}
+
+.dark-mode-life-of-christ .verse-badge.john:hover {
+    background: #c2410c;
+}
+
+.dark-mode-life-of-christ .verse-badge.acts {
+    background: #1e3a8a;
+    color: #93c5fd;
+}
+
+.dark-mode-life-of-christ .verse-badge.acts:hover {
+    background: #1e40af;
+}
+
+.dark-mode-life-of-christ .verse-badge.corinthians {
+    background: #854d0e;
+    color: #fef08a;
+}
+
+.dark-mode-life-of-christ .verse-badge.corinthians:hover {
+    background: #a16207;
 }
 
 .dark-mode-life-of-christ .characters-search-input {
@@ -2837,6 +2934,8 @@ body .dark-mode-kings .page-title {
     font-weight: 700;   /* Matched with light mode */
     margin-bottom: 1.5rem;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to right, #1f2f1f 0%, #2a2a2a 100%);
+    border-left-color: #6ba876;
 }
 
 #king-page-content.dark-mode-kings .chapter-section,
@@ -3087,6 +3186,81 @@ html #king-page-content.dark-mode-kings .order-number {
 
 #kings-content.dark-mode-kings .order-number {
     color: #d1d1d1 !important;
+}
+
+#kings-content.dark-mode-kings .status-united {
+    background: #78350f;
+    color: #fde68a;
+}
+
+#kings-content.dark-mode-kings .status-israel {
+    background: #1e3a8a;
+    color: #93c5fd;
+}
+
+#kings-content.dark-mode-kings .status-judah {
+    background: #065f46;
+    color: #6ee7b7;
+}
+
+#kings-content.dark-mode-kings .reign-years {
+    background: #1e3a8a;
+    color: #93c5fd;
+}
+
+#kings-content.dark-mode-kings .reign-months {
+    background: #78350f;
+    color: #fde68a;
+}
+
+#kings-content.dark-mode-kings .reign-days {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+#kings-content.dark-mode-kings .reign-unknown {
+    background: #374151;
+    color: #9ca3af;
+}
+
+#kings-content.dark-mode-kings .status-good {
+    background: #065f46;
+    color: #6ee7b7;
+}
+
+#kings-content.dark-mode-kings .status-neutral {
+    background: #374151;
+    color: #9ca3af;
+}
+
+#kings-content.dark-mode-kings .status-righteous {
+    background: #78350f;
+    color: #fde68a;
+}
+
+#kings-content.dark-mode-kings .status-wise {
+    background: #78350f;
+    color: #fde68a;
+}
+
+#kings-content.dark-mode-kings .status-ancient {
+    background: #3730a3;
+    color: #c7d2fe;
+}
+
+#kings-content.dark-mode-kings .status-other {
+    background: #831843;
+    color: #f9a8d4;
+}
+
+#kings-content.dark-mode-kings .status-evil {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+#kings-content.dark-mode-kings .status-wicked {
+    background: #991b1b;
+    color: #fecaca;
 }
 
 .dark-mode-prophets .page-title {
