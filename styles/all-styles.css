@@ -387,7 +387,7 @@ nav {
 .dark-mode-kings .content-actions,
 .dark-mode-prophets .content-actions,
 .dark-mode-books .content-actions {
-    background: #23272f;
+    background: rgb(33, 33, 33);
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(20, 20, 30, 0.25);
 }
@@ -2869,6 +2869,110 @@ html #king-page-content.dark-mode-kings .order-number {
 
 #kings-content.dark-mode-kings .content-header {
     background: transparent;
+}
+
+
+#kings-content.dark-mode-kings .content-actions {
+    background: rgb(33, 33, 33);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.25);
+}
+
+#kings-content.dark-mode-kings .content-actions .showing-text {
+    color: #bfc7d5;
+}
+
+#kings-content.dark-mode-kings .content-actions .card {
+    border: 1px solid #353a45 !important;
+}
+
+#prophets-content.dark-mode-prophets .content-actions .card {
+    border: 1px solid #353a45 !important;
+}
+
+#books-content.dark-mode-books .content-actions .card {
+    border: 1px solid #353a45 !important;
+}
+
+#kings-content.dark-mode-kings .filter-btn,
+#kings-content.dark-mode-kings .export-btn,
+#kings-content.dark-mode-kings .add-btn {
+    background: linear-gradient(135deg, #232a3a 0%, #3a3f4b 100%);
+    color: #f3f4f6;
+    border: 1px solid #353a45;
+    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.18);
+}
+
+#kings-content.dark-mode-kings .filter-btn:hover,
+#kings-content.dark-mode-kings .export-btn:hover,
+#kings-content.dark-mode-kings .add-btn:hover {
+    background: linear-gradient(135deg, #2d3342 0%, #484e5c 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(20, 20, 30, 0.28);
+}
+
+#kings-content.dark-mode-kings .theme-btn {
+    background: linear-gradient(135deg, #23272f 0%, #2d3139 100%);
+    border: 1px solid #353a45;
+    color: #f3f4f6;
+}
+
+#kings-content.dark-mode-kings .theme-btn:hover {
+    background: linear-gradient(135deg, #2d3342 0%, #484e5c 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(20, 20, 30, 0.28) !important;
+}
+
+#kings-content.dark-mode-kings .theme-btn.active {
+    background: linear-gradient(135deg, #6B5FBF 0%, #8B7FC5 100%) !important;
+    border-color: #6B5FBF !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(107, 95, 191, 0.4) !important;
+}
+
+#prophets-content.dark-mode-prophets .theme-btn {
+    background: linear-gradient(135deg, #23272f 0%, #2d3139 100%);
+    border: 1px solid #353a45;
+    color: #f3f4f6;
+}
+
+#prophets-content.dark-mode-prophets .theme-btn:hover {
+    background: linear-gradient(135deg, #2d3342 0%, #484e5c 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(20, 20, 30, 0.28) !important;
+}
+
+#prophets-content.dark-mode-prophets .theme-btn.active {
+    background: linear-gradient(135deg, #6B5FBF 0%, #8B7FC5 100%) !important;
+    border-color: #6B5FBF !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(107, 95, 191, 0.4) !important;
+}
+
+#books-content.dark-mode-books .theme-btn {
+    background: linear-gradient(135deg, #23272f 0%, #2d3139 100%);
+    border: 1px solid #353a45;
+    color: #f3f4f6;
+}
+
+#books-content.dark-mode-books .theme-btn:hover {
+    background: linear-gradient(135deg, #2d3342 0%, #484e5c 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(20, 20, 30, 0.28) !important;
+}
+
+#books-content.dark-mode-books .theme-btn.active {
+    background: linear-gradient(135deg, #6B5FBF 0%, #8B7FC5 100%) !important;
+    border-color: #6B5FBF !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(107, 95, 191, 0.4) !important;
+}
+
+#kings-content.dark-mode-kings .card {
+    background: #232325 !important;
+    color: #f3f4f6;
+    border: 1px solid #35363a;
+    box-shadow: 0 4px 24px rgba(20, 20, 30, 0.10);
 }
 
 #kings-content.dark-mode-kings .table-container {
