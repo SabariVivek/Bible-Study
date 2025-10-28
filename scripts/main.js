@@ -3694,6 +3694,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const leftSidebar = document.getElementById('leftSidebar');
         const container = document.querySelector('.container');
         
+        // Get the theme toggle labels for animation origin
+        const darkThemeLabel = document.querySelector('label[for="dark-theme"]');
+        const lightThemeLabel = document.querySelector('label[for="light-theme"]');
+        
         // Function to apply dark theme
         function applyDarkTheme() {
             // Remove light mode hover styles if they exist
@@ -3922,14 +3926,26 @@ document.addEventListener('DOMContentLoaded', function() {
             applyDarkTheme();
         }
         
+        // Dark theme change handler with animation
         darkTheme.addEventListener('change', function() {
-            if (this.checked) {
+            if (this.checked && window.ThemeAnimation) {
+                window.ThemeAnimation.applyThemeWithAnimation(darkThemeLabel, applyDarkTheme);
+            } else if (this.checked) {
                 applyDarkTheme();
             }
         });
 
+        // Light theme change handler with animation
         lightTheme.addEventListener('change', function() {
-            if (this.checked) {
+            if (this.checked && window.ThemeAnimation) {
+                window.ThemeAnimation.applyThemeWithAnimation(lightThemeLabel, applyLightTheme);
+            } else if (this.checked) {
+                applyLightTheme();
+            }
+        });
+        
+        // Function to apply light theme (extracted for reusability)
+        function applyLightTheme() {
                 // Remove dark mode hover styles if they exist
                 const darkModeStyle = document.getElementById('dark-mode-hover');
                 if (darkModeStyle) {
@@ -4151,7 +4167,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 `;
                 document.head.appendChild(style);
-            }
-        });
+        }
     }
 });

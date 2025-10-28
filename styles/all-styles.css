@@ -18,6 +18,16 @@
     }
 }
 
+/* ============================================
+   VIEW TRANSITION API - Theme Animation
+   Smooth circular animation for theme changes
+   ============================================ */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
 /* Import Kurale font for Tamil content */
 @import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
 
