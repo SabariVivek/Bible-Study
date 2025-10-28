@@ -112,7 +112,7 @@ function simulateLogin(username, password) {
         setTimeout(() => {
             // Hardcoded credentials
             const validUsername = 'Test';
-            const validPassword = '1234';
+            const validPassword = '12345';
             
             if (username === validUsername && password === validPassword) {
                 resolve();
