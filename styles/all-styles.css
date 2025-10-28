@@ -3334,6 +3334,16 @@ html #king-page-content.dark-mode-kings .order-number {
     box-shadow: 0 4px 16px rgba(107, 95, 191, 0.4) !important;
 }
 
+#prophets-content.dark-mode-prophets .status-ancient {
+    background: #1e3a8a;
+    color: #93c5fd;
+}
+
+#prophets-content.dark-mode-prophets .status-righteous {
+    background: #854d0e;
+    color: #fef08a;
+}
+
 #books-content.dark-mode-books .theme-btn {
     background: linear-gradient(135deg, #23272f 0%, #2d3139 100%);
     border: 1px solid #353a45;
@@ -3354,13 +3364,13 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 #books-content.dark-mode-books .status-ancient {
-    background: #3730a3;
-    color: #c7d2fe;
+    background: #1e3a8a;
+    color: #93c5fd;
 }
 
 #books-content.dark-mode-books .status-righteous {
-    background: #78350f;
-    color: #fde68a;
+    background: #854d0e;
+    color: #fef08a;
 }
 
 #books-content.dark-mode-books .badge-verses {
@@ -6790,7 +6800,6 @@ body:has(.left-sidebar.collapsed) .main-content {
     width: 32px;
     height: 32px;
     background: transparent;
-    border: 1px solid #e5e7eb;
     border-radius: 8px;
     color: #ececec;
     cursor: pointer;
@@ -6801,9 +6810,36 @@ body:has(.left-sidebar.collapsed) .main-content {
     flex-shrink: 0;
 }
 
+/* Light theme styles for collapse button */
+body:not(.dark-mode) .sidebar-collapse-btn {
+    border: 1px solid #d1d5db !important;
+    color: #4b5563;
+}
+
+body:not(.dark-mode) .sidebar-collapse-btn:hover {
+    background: #f3f4f6;
+    color: #1f2937;
+}
+
+/* Dark mode styles for collapse button */
+body.dark-mode .sidebar-collapse-btn {
+    border: none !important;
+}
+
+body.dark-mode .sidebar-collapse-btn:hover {
+    border: none !important;
+}
+
+body.dark-mode .left-sidebar.collapsed .sidebar-collapse-btn {
+    border: none !important;
+}
+
+body.dark-mode .left-sidebar.collapsed:hover .sidebar-collapse-btn {
+    border: none !important;
+}
+
 .sidebar-collapse-btn:hover {
     background: #2f2f2f;
-    border-color: #ececec;
 }
 
 .chevron-icon {
@@ -7260,4 +7296,4 @@ body:has(.left-sidebar.collapsed) .main-content {
     .theme-option-text {
         font-size: 11px;
     }
-}
+}   
