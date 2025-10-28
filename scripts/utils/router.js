@@ -11,6 +11,7 @@ const routes = {
     '#/dashboard': 'dashboard',
     '#/kings': 'kings',
     '#/prophets': 'prophets',
+    '#/prophet/': 'prophetDetail', // Dynamic route for prophet details
     '#/books': 'books',
     '#/timeline': 'timeline',
     '#/genealogy': 'genealogy',
@@ -23,6 +24,7 @@ const sectionToRoute = {
     'dashboard': '#/dashboard',
     'kings': '#/kings',
     'prophets': '#/prophets',
+    'prophetDetail': '#/prophet/',
     'books': '#/books',
     'timeline': '#/timeline',
     'genealogy': '#/genealogy',
@@ -36,7 +38,14 @@ const sectionToRoute = {
  * @param {boolean} addToHistory - Whether to add this navigation to browser history
  */
 function navigateTo(path, addToHistory = true) {
-    const section = routes[path];
+    // Check for dynamic routes (prophet detail)
+    let section = routes[path];
+    let prophetName = null;
+    
+    if (!section && path.startsWith('#/prophet/')) {
+        section = 'prophetDetail';
+        prophetName = decodeURIComponent(path.substring(10)); // Extract prophet name
+    }
     
     if (!section) {
         console.warn(`Route not found: ${path}`);
@@ -66,6 +75,9 @@ function navigateTo(path, addToHistory = true) {
             break;
         case 'prophets':
             if (typeof showProphets === 'function') showProphets();
+            break;
+        case 'prophetDetail':
+            if (typeof showProphetDetail === 'function' && prophetName) showProphetDetail(prophetName);
             break;
         case 'books':
             if (typeof showBooks === 'function') showBooks();
@@ -113,8 +125,11 @@ function updateRoute(section) {
 function handleHashChange() {
     const hash = window.location.hash;
     
-    // If there's a hash and it's a valid route, navigate to it
-    if (hash && routes[hash]) {
+    // Check for dynamic routes
+    if (hash.startsWith('#/prophet/')) {
+        navigateTo(hash, false);
+    } else if (hash && routes[hash]) {
+        // If there's a hash and it's a valid route, navigate to it
         navigateTo(hash, false);
     } else if (!hash) {
         // If hash is empty (user went back to initial state), show dashboard
@@ -134,8 +149,8 @@ function handleHashChange() {
 function loadRouteFromURL() {
     const hash = window.location.hash;
     
-    // Only navigate if there's actually a hash in the URL
-    if (hash && routes[hash]) {
+    // Check for dynamic routes or standard routes
+    if (hash && (routes[hash] || hash.startsWith('#/prophet/'))) {
         navigateTo(hash, false);
     }
     // Don't auto-navigate to dashboard - let the default HTML state show

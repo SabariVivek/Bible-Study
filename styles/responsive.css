@@ -494,3 +494,17 @@
         font-size: 11px;
     }
 }
+
+/* Prophet Page Responsive Styles (Similar to King Page) */
+@media (max-width: 768px) {
+    .prophet-page-container {
+        padding: 15px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .prophet-page-container {
+        padding: 10px 15px;
+    }
+}
+

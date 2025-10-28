@@ -986,6 +986,7 @@ nav {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: left !important;
 }
 
 /* Fancy Dropdown Styles */
@@ -3936,6 +3937,42 @@ html #king-page-content.dark-mode-kings .order-number {
     background: #2f2f2f;
 }
 
+/* Dark mode for Prophet Detail Page Content */
+#prophet-detail-content.dark-mode-prophets .page-title {
+    color: #ececec !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+#prophet-detail-content.dark-mode-prophets .prophet-page-container {
+    background: rgb(33, 33, 33);
+}
+
+#prophet-detail-content.dark-mode-prophets .chapter-section-heading {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to right, #1f2f1f 0%, #2a2a2a 100%);
+    border-left-color: #6ba876;
+}
+
+#prophet-detail-content.dark-mode-prophets .chapter-section,
+#prophet-detail-content.dark-mode-prophets .chapter-section div {
+    color: #e5e7eb;
+    font-size: 1.05rem;
+    line-height: 2.2;
+    margin-bottom: 2rem;
+}
+
+#prophet-detail-content.dark-mode-prophets .chapter-section b {
+    color: #60a5fa;
+    font-weight: 600;
+}
+
 .dark-mode-books .page-title {
     color: #ececec !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
@@ -4583,11 +4620,11 @@ html #king-page-content.dark-mode-kings .order-number {
     font-size: 1.5rem;
     font-weight: 700;
     padding-left: 20px;
-    padding-bottom: 0.8rem;
+    padding-bottom: 0.6rem;
     border-left: 5px solid #4a7c59;
     background: linear-gradient(to right, rgba(74, 124, 89, 0.08), transparent);
     padding-right: 1rem;
-    padding-top: 1rem;
+    padding-top: 0.6rem;
     border-radius: 0 8px 8px 0;
     transition: all 0.3s ease;
 }

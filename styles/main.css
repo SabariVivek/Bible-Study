@@ -404,6 +404,30 @@ body.modal-open {
     background: #94a3b8;
 }
 
+/* ===== PROPHET PAGE STYLES (Similar to King Page) ===== */
+
+.prophet-page-container {
+    padding: 20px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Smooth scrolling for prophet page container on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .prophet-page-container {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+}
+
+/* Prophet navigation indicators */
+#prophet-detail-content {
+    position: relative;
+}
+
 /* ===== END NEW MODERN SIDEBAR STYLES ===== */
 
 /* Main Content Area */

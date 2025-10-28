@@ -20,6 +20,8 @@ You must convert the given Bible chapter explanation into a **JavaScript data ob
        text: "Full text explanation here..."
    }
 
+**It applies only to prophets data (If it doesn't have any verse, don't include the verse-badge at all)** 
+
 3. **Create section name accordingly matches with the given Verse numbers**
 
 4. **Also whenever you see a word starts with *, mark it as html bold block, that only for a single word**

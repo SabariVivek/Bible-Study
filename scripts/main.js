@@ -405,6 +405,7 @@ function showDashboard() {
     document.getElementById('dashboard-content').classList.remove('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
@@ -431,6 +432,7 @@ function showKings() {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.remove('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
@@ -469,6 +471,7 @@ function showKingPage(kingName, index) {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('kings-timeline-content').classList.add('hidden');
@@ -722,6 +725,7 @@ function showKingsTimeline(currentKingName = null) {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
@@ -1126,6 +1130,7 @@ function showProphets() {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.remove('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
@@ -1153,6 +1158,121 @@ function showProphets() {
     
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showProphetDetail(prophetName) {
+    // Update navigation
+    updateNavActive('prophets');
+    
+    // Show/hide content
+    document.getElementById('dashboard-content').classList.add('hidden');
+    document.getElementById('kings-content').classList.add('hidden');
+    document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.remove('hidden');
+    document.getElementById('books-content').classList.add('hidden');
+    document.getElementById('book-chapter-content').classList.add('hidden');
+    document.getElementById('king-page-content').classList.add('hidden');
+    document.getElementById('timeline-content').classList.add('hidden');
+    document.getElementById('genealogy-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
+    document.getElementById('setting-content').classList.add('hidden');
+    document.getElementById('help-content').classList.add('hidden');
+    
+    // Update the prophet detail title
+    const titleElement = document.getElementById('prophetDetailTitle');
+    if (titleElement) {
+        titleElement.textContent = `Prophet ${prophetName}`;
+    }
+    
+    // Clear the prophet page container
+    const prophetPageContainer = document.querySelector('.prophet-page-container');
+    if (prophetPageContainer) {
+        prophetPageContainer.innerHTML = '';
+        // Force a reflow to ensure the clear happens before new content
+        void prophetPageContainer.offsetHeight;
+    }
+    
+    // Load and display prophet content
+    loadProphetContent(prophetName, prophetPageContainer);
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function loadProphetContent(prophetName, container) {
+    // Find the prophet in the data
+    let prophet = null;
+    let allProphets = [
+        ...allProphetsData.majorProphets,
+        ...allProphetsData.minorProphets,
+        ...allProphetsData.otherProphets
+    ];
+    
+    prophet = allProphets.find(p => p.name === prophetName);
+    
+    if (!prophet || !container) {
+        if (container) {
+            container.innerHTML = '<div class="no-content"><p>Prophet information not available.</p></div>';
+        }
+        return;
+    }
+    
+    // Check if prophet has text content
+    if (prophet.text && Array.isArray(prophet.text) && prophet.text.length > 0) {
+        // Display text content in book chapter format (similar to king summary)
+        displayProphetSummary(container, prophet.text, prophetName);
+    } else {
+        // Show welcome message if no text content
+        container.innerHTML = `
+            <div style="text-align: center; padding: 60px 20px;">
+                <h2 style="color: #667eea; margin-bottom: 16px; font-size: 24px;">Prophet ${prophetName}</h2>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">Detailed information about this prophet is coming soon.</p>
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" style="opacity: 0.3;">
+                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 10 12 6.16-1.26 10-6.45 10-12V7l-10-5z" stroke="#667eea" stroke-width="2" fill="none"/>
+                    <path d="M12 11v6M12 8h.01" stroke="#667eea" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+        `;
+    }
+}
+
+function displayProphetSummary(container, textData, prophetName) {
+    if (!container || !textData || textData.length === 0) {
+        return;
+    }
+    
+    // Clear container first
+    container.innerHTML = '';
+    
+    // Create sections similar to book chapter format
+    textData.forEach((section, index) => {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'chapter-section';
+        sectionDiv.style.marginBottom = index < textData.length - 1 ? '2.5rem' : '0';
+        
+        // Add section heading
+        if (section.section) {
+            const sectionHeading = document.createElement('h3');
+            sectionHeading.className = 'chapter-section-heading';
+            sectionHeading.textContent = section.section;
+            sectionDiv.appendChild(sectionHeading);
+        }
+        
+        // Add section text
+        if (section.text) {
+            const sectionText = document.createElement('div');
+            sectionText.innerHTML = section.text;
+            sectionText.style.lineHeight = '2.2';
+            sectionText.style.color = 'inherit';  // This will inherit from parent dark mode styles
+            sectionText.style.fontSize = '1.05rem';
+            sectionText.style.whiteSpace = 'pre-wrap';
+            sectionText.style.marginTop = '1rem';
+            sectionText.style.textAlign = 'justify';
+            sectionDiv.appendChild(sectionText);
+        }
+        
+        container.appendChild(sectionDiv);
+    });
 }
 
 // Drawer toggle functionality
@@ -1288,7 +1408,12 @@ function initializeProphetsTable() {
         prevBtnId: 'prophetsPrevBtn',
         nextBtnId: 'prophetsNextBtn',
         paginationControlsId: 'prophetsPaginationControls',
-    itemsPerPage: 7,
+        itemsPerPage: 7,
+        onRowClick: (prophet) => {
+            // Navigate to prophet detail page
+            const encodedName = encodeURIComponent(prophet.name);
+            navigateTo(`#/prophet/${encodedName}`);
+        },
         columns: [
             {
                 header: 'Testament',
@@ -1316,11 +1441,6 @@ function initializeProphetsTable() {
                 key: 'contemporaryKings',
                 className: 'contemporary-cell',
                 render: (item) => `<td class="contemporary-cell">${item.contemporaryKings || 'Not specified'}</td>`
-            },
-            {
-                header: 'Info',
-                className: 'info-cell',
-                render: (item, index) => `<td class="info-cell"><button class="info-btn" onclick="event.stopPropagation(); openProphetByIndex(${index})" title="Major Events / Miracles">ℹ</button></td>`
             }
         ]
     };
@@ -1402,14 +1522,6 @@ function getCategoryBadge(category) {
     }
 }
 
-function openProphetByIndex(index) {
-    const currentData = prophetsTableManager.getCurrentData();
-    const prophet = currentData[index];
-    if (prophet) {
-        openProphetModal(prophet);
-    }
-}
-
 function selectProphetsCategory(category, text, icon, count) {
     currentProphetsFilter = category;
     
@@ -1487,110 +1599,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-function openProphetModal(prophet) {
-    const popup = document.getElementById('prophetPopup');
-    const nameElement = document.getElementById('popupProphetName');
-    const contentElement = document.getElementById('popupProphetContent');
-    
-    if (nameElement) nameElement.textContent = prophet.name;
-    
-    if (contentElement) {
-        let content = '';
-        
-        // Add key events section
-        if (prophet.keyEvents && prophet.keyEvents.length > 0) {
-            content += `
-                <div class="king-info-row">
-                    <span class="king-info-label">Key Events:</span>
-                    <ul class="king-info-list">
-                        ${prophet.keyEvents.map(event => `<li>${event}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-        }
-        
-        // Add major events section
-        if (prophet.majorEvents && prophet.majorEvents.length > 0) {
-            content += `
-                <div class="king-info-row">
-                    <span class="king-info-label">Major Events:</span>
-                    <ul class="king-info-list">
-                        ${prophet.majorEvents.map(event => `<li>${event}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-        }
-        
-        // Add miracles section
-        if (prophet.miracles && prophet.miracles.length > 0) {
-            content += `
-                <div class="king-info-row">
-                    <span class="king-info-label">Miracles Performed:</span>
-                    <ul class="king-info-list">
-                        ${prophet.miracles.map(miracle => `<li>${miracle}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-        }
-        
-        // Add significance section
-        if (prophet.significance) {
-            content += `
-                <div class="king-info-row biography-section">
-                    <span class="king-info-label">Significance:</span>
-                    <span class="king-info-value biography-text">${prophet.significance}</span>
-                </div>
-            `;
-        }
-        
-        contentElement.innerHTML = content;
-    }
-    
-    // Update side cards
-    document.getElementById('prophetPeriodValue').textContent = prophet.period || 'Unknown';
-    document.getElementById('prophetMinistryValue').textContent = prophet.ministry || 'Unknown';
-    document.getElementById('prophetBooksValue').textContent = prophet.books || 'Unknown';
-    document.getElementById('prophetCharacterValue').textContent = prophet.characteristics || 'Unknown';
-    document.getElementById('prophetContemporaryValue').textContent = prophet.contemporaryKings || 'Not specified';
-    
-    if (popup) {
-        popup.classList.add('show');
-        document.body.classList.add('modal-open');
-        
-        // Add click outside listener when modal opens
-        setTimeout(() => {
-            document.addEventListener('click', handleProphetOutsideClick);
-        }, 100);
-    }
-}
-
-/**
- * Handle clicks outside the prophet modal to close it
- */
-function handleProphetOutsideClick(event) {
-    const prophetPopup = document.getElementById('prophetPopup');
-    if (!prophetPopup?.classList.contains('show')) return;
-    
-    const prophetCard = prophetPopup.querySelector('.king-card');
-    const sideCards = prophetPopup.querySelector('.side-cards-container');
-    
-    // Close if clicking outside both the main card and side cards
-    if (!prophetCard?.contains(event.target) && !sideCards?.contains(event.target)) {
-        closeProphetPopup();
-    }
-}
-
-function closeProphetPopup() {
-    const popup = document.getElementById('prophetPopup');
-    if (popup) {
-        popup.classList.remove('show');
-        document.body.classList.remove('modal-open');
-        
-        // Remove the outside click listener when modal closes
-        document.removeEventListener('click', handleProphetOutsideClick);
-    }
-}
 
 // Book popup functions
 async function openBookByIndex(index) {
@@ -2706,6 +2714,7 @@ function showBooks() {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.remove('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
@@ -3130,6 +3139,7 @@ function showBookChapter(book, chapterNum) {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
@@ -3212,6 +3222,7 @@ function showBookChapter(book, chapterNum) {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
@@ -3597,6 +3608,7 @@ function showTimeline() {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
@@ -3623,6 +3635,7 @@ function showGenealogy() {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
@@ -3673,6 +3686,7 @@ function showBible() {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
@@ -3699,6 +3713,7 @@ function showSetting() {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
@@ -3719,6 +3734,7 @@ function showHelp() {
     document.getElementById('dashboard-content').classList.add('hidden');
     document.getElementById('kings-content').classList.add('hidden');
     document.getElementById('prophets-content').classList.add('hidden');
+    document.getElementById('prophet-detail-content').classList.add('hidden');
     document.getElementById('books-content').classList.add('hidden');
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('king-page-content').classList.add('hidden');
@@ -3835,10 +3851,6 @@ document.addEventListener('keydown', function(e) {
 });
 
 // Make functions globally available
-window.openProphetModal = openProphetModal;
-window.openProphetByIndex = openProphetByIndex;
-window.closeProphetPopup = closeProphetPopup;
-// window.changeProphetsPage = changeProphetsPage; // COMMENTED OUT - function doesn't exist
 window.selectProphetsCategory = selectProphetsCategory;
 window.toggleProphetsDropdown = toggleProphetsDropdown;
 window.openProphetsFilterCard = openProphetsFilterCard;
@@ -3847,6 +3859,8 @@ window.playBookAudio = playBookAudio;
 window.openBookModal = openBookModal;
 window.closeBookPopup = closeBookPopup;
 window.showBooks = showBooks;
+window.showProphets = showProphets;
+window.showProphetDetail = showProphetDetail;
 window.selectBooksCategory = selectBooksCategory;
 window.toggleBooksDropdown = toggleBooksDropdown;
 window.openBooksFilterCard = openBooksFilterCard;
@@ -4061,6 +4075,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 prophetsContent.classList.add('dark-mode-prophets');
             }
             
+            // Apply dark mode to Prophet Detail Content
+            const prophetDetailContent = document.getElementById('prophet-detail-content');
+            if (prophetDetailContent) {
+                prophetDetailContent.classList.add('dark-mode-prophets');
+            }
+            
             // Apply dark mode to Books
             const booksContent = document.getElementById('books-content');
             if (booksContent) {
@@ -4209,6 +4229,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const prophetsContent = document.getElementById('prophets-content');
                 if (prophetsContent) {
                     prophetsContent.classList.remove('dark-mode-prophets');
+                }
+                
+                // Remove dark mode from Prophet Detail Content
+                const prophetDetailContent = document.getElementById('prophet-detail-content');
+                if (prophetDetailContent) {
+                    prophetDetailContent.classList.remove('dark-mode-prophets');
                 }
                 
                 // Remove dark mode from Books

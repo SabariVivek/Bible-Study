@@ -355,6 +355,19 @@
                 </div>
             </div>
 
+            <!-- Prophet Detail Content -->
+            <div id="prophet-detail-content" class="hidden">
+                <div class="content-header content-header-centered" style="padding-top: 24px; position: relative;">
+                    <button onclick="showProphets()" class="back-btn-circle" title="Back to Prophets">
+                        <span class="back-arrow">«</span>
+                    </button>
+                    <h1 class="page-title" id="prophetDetailTitle">Prophet Name</h1>
+                </div>
+                <div class="prophet-page-container">
+                    <!-- Prophet page content will be loaded here -->
+                </div>
+            </div>
+
             <!-- Books Content -->
             <div id="books-content" class="hidden">
                 <div class="content-header">
@@ -2398,49 +2411,6 @@
         </div>
     </div>
 
-    <!-- Prophet Details Popup -->
-    <div class="king-popup-overlay" id="prophetPopup">
-        <div class="popup-container">
-            <div class="king-card">
-                <div class="king-card-header">
-                    <h2 class="king-card-title" id="popupProphetName">Prophet Details</h2>
-                    <button class="close-btn" onclick="closeProphetPopup()">×</button>
-                </div>
-                <div class="king-card-content" id="popupProphetContent">
-                    <!-- Content will be populated by JavaScript -->
-                </div>
-            </div>
-            
-            <!-- Side Info Cards -->
-            <div class="side-cards-container" id="prophetSideCardsContainer">
-                <div class="side-card order-card" id="prophetOrderCard">
-                    <div class="side-card-label">Period</div>
-                    <div class="side-card-value" id="prophetPeriodValue">9th century BC</div>
-                </div>
-                
-                <div class="side-card kingdom-card" id="prophetMinistryCard">
-                    <div class="side-card-label">Ministry</div>
-                    <div class="side-card-value" id="prophetMinistryValue">Northern Kingdom</div>
-                </div>
-                
-                <div class="side-card description-card" id="prophetBooksCard">
-                    <div class="side-card-label">Books</div>
-                    <div class="side-card-value" id="prophetBooksValue">1 Kings 17-2 Kings 2</div>
-                </div>
-                
-                <div class="side-card character-card" id="prophetCharacterCard">
-                    <div class="side-card-label">Character</div>
-                    <div class="side-card-value" id="prophetCharacterValue">Bold, Zealous</div>
-                </div>
-                
-                <div class="side-card order-card" id="prophetContemporaryCard">
-                    <div class="side-card-label">Contemporary Kings</div>
-                    <div class="side-card-value" id="prophetContemporaryValue">Ahab (Israel)</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Book Details Popup -->
     <div class="king-popup-overlay" id="bookPopup">
         <div class="popup-container">
@@ -3016,6 +2986,7 @@
     <script src="scripts/ui/life-of-christ.js"></script>
     <script src="scripts/ui/synopsis-drawer.js"></script>
     <script src="scripts/ui/swipe.js"></script>
+    <script src="scripts/ui/prophet-navigation.js"></script>
     <script src="scripts/ui/king-hover-card.js"></script>
     <script>
         // Initialize router when the page loads
