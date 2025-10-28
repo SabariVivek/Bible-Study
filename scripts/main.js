@@ -3910,6 +3910,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (kingsTimelineModal) {
                 kingsTimelineModal.classList.add('dark-mode-kings');
             }
+            
+            // Apply dark mode to king hover card via the module
+            if (window.KingHoverCard && typeof window.KingHoverCard.applyTheme === 'function') {
+                window.KingHoverCard.applyTheme();
+            }
         }
         
         // Apply dark theme on page load if it's checked
@@ -4034,6 +4039,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const kingsTimelineModal = document.getElementById('kings-timeline-modal');
                 if (kingsTimelineModal) {
                     kingsTimelineModal.classList.remove('dark-mode-kings');
+                }
+                
+                // Remove dark mode from king hover card via the module
+                if (window.KingHoverCard && typeof window.KingHoverCard.applyTheme === 'function') {
+                    window.KingHoverCard.applyTheme();
                 }
                 
                 // Light mode - using original light colors

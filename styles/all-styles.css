@@ -1708,34 +1708,233 @@ body .dark-mode-maps .page-title {
 }
 
 /* Dark mode hover card styles */
+.king-hover-card.dark-mode-kings {
+    background: #2a2a2a !important;
+    border-color: #4a4a4a !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+}
+
+.king-hover-card.dark-mode-kings .king-hover-card-header {
+    border-bottom-color: #3a3a3a !important;
+}
+
+.king-hover-card.dark-mode-kings .king-hover-card-name {
+    color: #ffffff !important;
+}
+
+.king-hover-card.dark-mode-kings .king-hover-card-title {
+    color: #ececec !important;
+}
+
+.king-hover-card.dark-mode-kings .king-hover-card-description {
+    color: #9ca3af !important;
+}
+
+.king-hover-card.dark-mode-kings .king-hover-card-body {
+    background: transparent !important;
+}
+
+.king-hover-card.dark-mode-kings .king-hover-card-row {
+    color: #e5e7eb !important;
+}
+
+.king-hover-card.dark-mode-kings .king-hover-card-label {
+    color: #9ca3af !important;
+}
+
+.king-hover-card.dark-mode-kings .king-hover-card-value {
+    color: #e5e7eb !important;
+}
+
+/* Dark mode for hover card badges */
+.king-hover-card.dark-mode-kings .status-badge {
+    opacity: 1 !important;
+}
+
+.king-hover-card.dark-mode-kings .status-united {
+    background: #78350f !important;
+    color: #fde68a !important;
+}
+
+.king-hover-card.dark-mode-kings .status-israel {
+    background: #1e3a8a !important;
+    color: #93c5fd !important;
+}
+
+.king-hover-card.dark-mode-kings .status-judah {
+    background: #065f46 !important;
+    color: #6ee7b7 !important;
+}
+
+.king-hover-card.dark-mode-kings .status-good {
+    background: #065f46 !important;
+    color: #6ee7b7 !important;
+}
+
+.king-hover-card.dark-mode-kings .status-neutral {
+    background: #374151 !important;
+    color: #9ca3af !important;
+}
+
+.king-hover-card.dark-mode-kings .status-righteous {
+    background: #78350f !important;
+    color: #fde68a !important;
+}
+
+.king-hover-card.dark-mode-kings .status-wise {
+    background: #78350f !important;
+    color: #fde68a !important;
+}
+
+.king-hover-card.dark-mode-kings .status-ancient {
+    background: #3730a3 !important;
+    color: #c7d2fe !important;
+}
+
+.king-hover-card.dark-mode-kings .status-other {
+    background: #831843 !important;
+    color: #f9a8d4 !important;
+}
+
+.king-hover-card.dark-mode-kings .status-evil,
+.king-hover-card.dark-mode-kings .status-wicked {
+    background: #7f1d1d !important;
+    color: #fca5a5 !important;
+}
+
+.king-hover-card.dark-mode-kings .reign-years {
+    background: #1e3a8a !important;
+    color: #93c5fd !important;
+}
+
+.king-hover-card.dark-mode-kings .reign-months {
+    background: #78350f !important;
+    color: #fde68a !important;
+}
+
+.king-hover-card.dark-mode-kings .reign-days {
+    background: #7f1d1d !important;
+    color: #fca5a5 !important;
+}
+
+.king-hover-card.dark-mode-kings .reign-unknown {
+    background: #374151 !important;
+    color: #9ca3af !important;
+}
+
+/* Legacy selectors for backward compatibility */
 .dark-mode-kings .king-hover-card {
-    background: #2a2a2a;
-    border-color: #4a4a4a;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6);
+    background: #2a2a2a !important;
+    border-color: #4a4a4a !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6) !important;
 }
 
 .dark-mode-kings .king-hover-card-header {
-    border-bottom-color: #3a3a3a;
+    border-bottom-color: #3a3a3a !important;
 }
 
 .dark-mode-kings .king-hover-card-name {
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 .dark-mode-kings .king-hover-card-title {
-    color: #ececec;
+    color: #ececec !important;
 }
 
 .dark-mode-kings .king-hover-card-description {
-    color: #9ca3af;
+    color: #9ca3af !important;
+}
+
+.dark-mode-kings .king-hover-card-body {
+    background: transparent !important;
+}
+
+.dark-mode-kings .king-hover-card-row {
+    color: #e5e7eb !important;
 }
 
 .dark-mode-kings .king-hover-card-label {
-    color: #9ca3af;
+    color: #9ca3af !important;
 }
 
 .dark-mode-kings .king-hover-card-value {
-    color: #e5e7eb;
+    color: #e5e7eb !important;
+}
+
+/* Dark mode for hover card badges - legacy */
+.dark-mode-kings .king-hover-card .status-badge {
+    opacity: 1 !important;
+}
+
+.dark-mode-kings .king-hover-card .status-united {
+    background: #78350f !important;
+    color: #fde68a !important;
+}
+
+.dark-mode-kings .king-hover-card .status-israel {
+    background: #1e3a8a !important;
+    color: #93c5fd !important;
+}
+
+.dark-mode-kings .king-hover-card .status-judah {
+    background: #065f46 !important;
+    color: #6ee7b7 !important;
+}
+
+.dark-mode-kings .king-hover-card .status-good {
+    background: #065f46 !important;
+    color: #6ee7b7 !important;
+}
+
+.dark-mode-kings .king-hover-card .status-neutral {
+    background: #374151 !important;
+    color: #9ca3af !important;
+}
+
+.dark-mode-kings .king-hover-card .status-righteous {
+    background: #78350f !important;
+    color: #fde68a !important;
+}
+
+.dark-mode-kings .king-hover-card .status-wise {
+    background: #78350f !important;
+    color: #fde68a !important;
+}
+
+.dark-mode-kings .king-hover-card .status-ancient {
+    background: #3730a3 !important;
+    color: #c7d2fe !important;
+}
+
+.dark-mode-kings .king-hover-card .status-other {
+    background: #831843 !important;
+    color: #f9a8d4 !important;
+}
+
+.dark-mode-kings .king-hover-card .status-evil,
+.dark-mode-kings .king-hover-card .status-wicked {
+    background: #7f1d1d !important;
+    color: #fca5a5 !important;
+}
+
+.dark-mode-kings .king-hover-card .reign-years {
+    background: #1e3a8a !important;
+    color: #93c5fd !important;
+}
+
+.dark-mode-kings .king-hover-card .reign-months {
+    background: #78350f !important;
+    color: #fde68a !important;
+}
+
+.dark-mode-kings .king-hover-card .reign-days {
+    background: #7f1d1d !important;
+    color: #fca5a5 !important;
+}
+
+.dark-mode-kings .king-hover-card .reign-unknown {
+    background: #374151 !important;
+    color: #9ca3af !important;
 }
 
 .dark-mode-kings .timeline-modal-content {

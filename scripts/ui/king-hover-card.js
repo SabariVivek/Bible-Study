@@ -21,6 +21,9 @@
             hoverCard.id = 'kingHoverCard';
             document.body.appendChild(hoverCard);
 
+            // Apply dark mode if currently enabled
+            applyCurrentThemeToHoverCard();
+
             // Prevent card from hiding when mouse is over it
             hoverCard.addEventListener('mouseenter', () => {
                 clearTimeout(hoverTimeout);
@@ -30,6 +33,31 @@
                 hideHoverCard();
             });
         }
+    }
+
+    /**
+     * Apply current theme to hover card
+     */
+    function applyCurrentThemeToHoverCard() {
+        if (!hoverCard) {
+            console.log('King Hover Card: hoverCard element not found');
+            return;
+        }
+        
+        // Check if dark mode is enabled
+        const darkThemeToggle = document.getElementById('dark-theme');
+        console.log('King Hover Card: Dark theme toggle found:', !!darkThemeToggle);
+        console.log('King Hover Card: Dark theme checked:', darkThemeToggle?.checked);
+        
+        if (darkThemeToggle && darkThemeToggle.checked) {
+            hoverCard.classList.add('dark-mode-kings');
+            console.log('King Hover Card: Added dark-mode-kings class');
+        } else {
+            hoverCard.classList.remove('dark-mode-kings');
+            console.log('King Hover Card: Removed dark-mode-kings class');
+        }
+        
+        console.log('King Hover Card: Current classes:', hoverCard.className);
     }
 
     /**
@@ -184,7 +212,7 @@
     /**
      * Show the hover card for a king
      */
-    function showHoverCard(kingName, targetElement) {
+    function  showHoverCard(kingName, targetElement) {
         clearTimeout(hoverTimeout);
 
         hoverTimeout = setTimeout(() => {
@@ -200,6 +228,9 @@
             
             // Remove any custom background - use CSS default
             hoverCard.style.background = '';
+            
+            // Apply current theme
+            applyCurrentThemeToHoverCard();
             
             positionHoverCard(targetElement);
             
@@ -616,7 +647,8 @@
         reinitialize: initializeKingTimelineHoverCards,
         reinitializeTitle: initializeKingPageTitleHoverCard,
         navigateNext: () => navigateToKing('next'),
-        navigatePrevious: () => navigateToKing('previous')
+        navigatePrevious: () => navigateToKing('previous'),
+        applyTheme: applyCurrentThemeToHoverCard
     };
 
     // Auto-initialize
