@@ -14,7 +14,7 @@ const routes = {
     '#/books': 'books',
     '#/timeline': 'timeline',
     '#/genealogy': 'genealogy',
-    '#/maps': 'maps',
+    '#/bible': 'bible',
     '#/life-of-christ': 'help'
 };
 
@@ -26,7 +26,7 @@ const sectionToRoute = {
     'books': '#/books',
     'timeline': '#/timeline',
     'genealogy': '#/genealogy',
-    'maps': '#/maps',
+    'bible': '#/bible',
     'help': '#/life-of-christ'
 };
 
@@ -76,8 +76,8 @@ function navigateTo(path, addToHistory = true) {
         case 'genealogy':
             if (typeof showGenealogy === 'function') showGenealogy();
             break;
-        case 'maps':
-            if (typeof showMaps === 'function') showMaps();
+        case 'bible':
+            if (typeof showBible === 'function') showBible();
             break;
         case 'help':
             if (typeof showHelp === 'function') showHelp();

@@ -410,7 +410,7 @@ function showDashboard() {
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -437,7 +437,7 @@ function showKings() {
     document.getElementById('kings-timeline-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -474,7 +474,7 @@ function showKingPage(kingName, index) {
     document.getElementById('kings-timeline-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -727,7 +727,7 @@ function showKingsTimeline(currentKingName = null) {
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -1131,7 +1131,7 @@ function showProphets() {
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -2711,7 +2711,7 @@ function showBooks() {
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -3134,7 +3134,7 @@ function showBookChapter(book, chapterNum) {
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -3216,7 +3216,7 @@ function showBookChapter(book, chapterNum) {
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -3602,7 +3602,7 @@ function showTimeline() {
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.remove('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -3628,9 +3628,25 @@ function showGenealogy() {
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.remove('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Clear search input and reset filters
+    const charactersSearchInput = document.getElementById('charactersSearch');
+    const charactersClearBtn = document.getElementById('charactersClearBtn');
+    const charactersSearchInfo = document.getElementById('charactersSearchInfo');
+    
+    if (charactersSearchInput) {
+        charactersSearchInput.value = '';
+    }
+    if (charactersClearBtn) {
+        charactersClearBtn.style.display = 'none';
+    }
+    if (charactersSearchInfo) {
+        charactersSearchInfo.textContent = '';
+        charactersSearchInfo.style.display = 'none';
+    }
     
     // Initialize character study
     if (typeof initializeCharacterStudy === 'function') {
@@ -3649,9 +3665,9 @@ function showGenealogy() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function showMaps() {
+function showBible() {
     // Update navigation
-    updateNavActive('maps');
+    updateNavActive('bible');
     
     // Show/hide content
     document.getElementById('dashboard-content').classList.add('hidden');
@@ -3662,13 +3678,13 @@ function showMaps() {
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.remove('hidden');
+    document.getElementById('bible-content').classList.remove('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
     // Update URL route
     if (typeof updateRoute === 'function') {
-        updateRoute('maps');
+        updateRoute('bible');
     }
     
     // Scroll to top
@@ -3687,7 +3703,7 @@ function showSetting() {
     document.getElementById('book-chapter-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.remove('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -3708,9 +3724,25 @@ function showHelp() {
     document.getElementById('king-page-content').classList.add('hidden');
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
-    document.getElementById('maps-content').classList.add('hidden');
+    document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.remove('hidden');
+    
+    // Clear search input and reset filters
+    const lifeOfChristSearchInput = document.getElementById('lifeOfChristSearch');
+    const searchClearBtn = document.getElementById('searchClearBtn');
+    const searchResultsInfo = document.getElementById('searchResultsInfo');
+    
+    if (lifeOfChristSearchInput) {
+        lifeOfChristSearchInput.value = '';
+    }
+    if (searchClearBtn) {
+        searchClearBtn.style.display = 'none';
+    }
+    if (searchResultsInfo) {
+        searchResultsInfo.textContent = '';
+        searchResultsInfo.style.display = 'none';
+    }
     
     // Initialize Life of Christ cards
     if (typeof initializeLifeOfChrist === 'function') {
@@ -3822,7 +3854,7 @@ window.closeBooksFilterCard = closeBooksFilterCard;
 window.applyBooksFilter = applyBooksFilter;
 window.showTimeline = showTimeline;
 window.showGenealogy = showGenealogy;
-window.showMaps = showMaps;
+window.showBible = showBible;
 window.showSetting = showSetting;
 window.showHelp = showHelp;
 window.showBookChapter = showBookChapter;

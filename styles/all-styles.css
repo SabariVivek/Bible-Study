@@ -1406,6 +1406,33 @@ body .dark-mode-maps .page-title {
     color: #a1a1a1;
 }
 
+.dark-mode-kings .filter-card .close-btn,
+.dark-mode-prophets .filter-card .close-btn,
+.dark-mode-books .filter-card .close-btn {
+    background: #353535;
+    color: #ffffff;
+}
+
+.dark-mode-kings .filter-card .close-btn:hover,
+.dark-mode-prophets .filter-card .close-btn:hover,
+.dark-mode-books .filter-card .close-btn:hover {
+    background: #4a4a4a;
+    color: #ffffff;
+}
+
+.dark-mode-kings .filter-btn-cancel,
+.dark-mode-prophets .filter-btn-cancel,
+.dark-mode-books .filter-btn-cancel {
+    background: #353535;
+    color: #ffffff;
+}
+
+.dark-mode-kings .filter-btn-cancel:hover,
+.dark-mode-prophets .filter-btn-cancel:hover,
+.dark-mode-books .filter-btn-cancel:hover {
+    background: #4a4a4a;
+}
+
 .king-popup-overlay.show .king-card {
     transform: scale(1) translateX(0);
 }

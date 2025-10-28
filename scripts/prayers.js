@@ -158,7 +158,7 @@ function hidePrayersSectionOnTabSwitch() {
 }
 
 // Patch tab functions to hide prayers section
-['showKings','showProphets','showBooks','showTimeline','showGenealogy','showMaps','showHelp'].forEach(fn => {
+['showKings','showProphets','showBooks','showTimeline','showGenealogy','showBible','showHelp'].forEach(fn => {
     if (window[fn]) {
         const orig = window[fn];
         window[fn] = function() {
