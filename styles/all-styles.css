@@ -1341,7 +1341,7 @@ body .dark-mode-kings .page-title,
 body .dark-mode-maps .page-title {
     color: #ececec !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .dark-mode-kings .side-card,
@@ -1485,10 +1485,18 @@ body .dark-mode-maps .page-title {
 
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
+    .king-popup-overlay {
+        align-items: flex-start;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 20px 0;
+    }
+
     .popup-container {
         flex-direction: column;
         gap: 20px;
         max-width: 95%;
+        margin: auto;
     }
 
     .king-card {
@@ -6812,7 +6820,7 @@ body:has(.left-sidebar.collapsed) .main-content {
 
 /* Light theme styles for collapse button */
 body:not(.dark-mode) .sidebar-collapse-btn {
-    border: 1px solid #d1d5db !important;
+    border: none !important;
     color: #4b5563;
 }
 
