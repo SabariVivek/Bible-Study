@@ -504,9 +504,16 @@ function showKingPage(kingName, index) {
         ? getKingSummaryData(kingName) 
         : null;
     
+    // Get the kingdom information from the current king
+    let kingdom = '';
+    if (window.currentPageKings && window.currentPageKings[index]) {
+        kingdom = window.currentPageKings[index].kingdom;
+    }
+    
     // Store the timeline data and king name globally for the table view toggle
     window.currentKingData = {
         name: kingName,
+        kingdom: kingdom, // Store kingdom to distinguish duplicate names
         data: timelineData,
         summary: summaryData,
         isTableView: false,
@@ -534,6 +541,9 @@ function showKingPage(kingName, index) {
         // Show message if no data available
         kingPageContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: #6b7280;">No timeline data available for this king yet.</p>';
     }
+    
+    // Check if audio exists for this king and show/hide audio button
+    updateKingAudioButtonVisibility(kingName, kingdom);
     
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -642,13 +652,19 @@ function displayKingTimeline(container, timelineData) {
     }
     
     // Helper function to check if verse is empty (— or -)
-    const isEmptyVerse = (verse) => verse === '—' || verse === '-';
+    const isEmptyVerse = (verse) => verse === '—' || verse === '-' || !verse || verse.trim() === '';
     
     // Detect columns dynamically from the first data item
     // Always exclude 'incident' and 'notes' as they are fixed columns
     const firstItem = timelineData[0];
     const allKeys = Object.keys(firstItem);
-    const dataColumns = allKeys.filter(key => key !== 'incident' && key !== 'notes');
+    const allDataColumns = allKeys.filter(key => key !== 'incident' && key !== 'notes');
+    
+    // Filter out columns that have no values in any row
+    const dataColumns = allDataColumns.filter(col => {
+        // Check if at least one row has a non-empty value for this column
+        return timelineData.some(item => !isEmptyVerse(item[col]));
+    });
     
     // Helper function to get badge class based on column name
     const getBadgeClass = (colName) => {
@@ -825,25 +841,181 @@ function showKingsTimelineFromKingPage() {
     openKingsTimelineModal(currentKingName);
 }
 
+// Function to check if king audio exists and update button visibility
+async function updateKingAudioButtonVisibility(kingName, kingdom) {
+    const audioBtn = document.querySelector('#king-page-content .audio-btn');
+    
+    if (!audioBtn) {
+        console.warn('King audio button not found');
+        return;
+    }
+    
+    // Hide button initially while checking
+    audioBtn.style.display = 'none';
+    
+    // Format king name for file path
+    const cleanedName = kingName.split('(')[0].trim();
+    const baseName = cleanedName.toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+    
+    // List of kings that appear in both kingdoms and need kingdom suffix
+    const duplicateKings = ['jehoram', 'joram', 'ahaziah', 'joash', 'jehoash'];
+    
+    // Determine the formatted king name
+    let formattedKingName = baseName;
+    if (duplicateKings.includes(baseName) && kingdom) {
+        const kingdomSuffix = kingdom.toLowerCase().replace(/\s+kingdom$/, '').trim();
+        formattedKingName = `${baseName}-${kingdomSuffix}`;
+    }
+    
+    // Check primary path
+    const audioPath = `resources/audio/kings-overview/${formattedKingName}-overview.mp3`;
+    
+    const checkAudio = (path) => {
+        return new Promise((resolve) => {
+            const audio = new Audio();
+            let resolved = false;
+            
+            const onCanPlay = () => {
+                if (resolved) return;
+                resolved = true;
+                cleanup();
+                resolve(true);
+            };
+            
+            const onError = () => {
+                if (resolved) return;
+                resolved = true;
+                cleanup();
+                resolve(false);
+            };
+            
+            const cleanup = () => {
+                audio.removeEventListener('canplaythrough', onCanPlay);
+                audio.removeEventListener('error', onError);
+                audio.removeEventListener('loadeddata', onCanPlay);
+                audio.src = '';
+            };
+            
+            const timeout = setTimeout(() => {
+                if (!resolved) {
+                    onError();
+                }
+            }, 2000);
+            
+            audio.addEventListener('canplaythrough', () => {
+                clearTimeout(timeout);
+                onCanPlay();
+            });
+            audio.addEventListener('loadeddata', () => {
+                clearTimeout(timeout);
+                onCanPlay();
+            });
+            audio.addEventListener('error', () => {
+                clearTimeout(timeout);
+                onError();
+            });
+            
+            audio.src = path;
+            audio.load();
+        });
+    };
+    
+    // Check primary path first
+    let audioExists = await checkAudio(audioPath);
+    
+    // If not found and this is a duplicate king, try fallback path
+    if (!audioExists && duplicateKings.includes(baseName) && kingdom) {
+        const fallbackPath = `resources/audio/kings-overview/${baseName}-overview.mp3`;
+        audioExists = await checkAudio(fallbackPath);
+    }
+    
+    // Show or hide button based on audio availability
+    if (audioExists) {
+        audioBtn.style.display = 'flex';
+    } else {
+        audioBtn.style.display = 'none';
+    }
+}
+
 function handleKingAudioClick(event) {
     event.stopPropagation();
     
-    // Get the current king name from the stored data
+    // Get the current king name and kingdom from the stored data
     const currentKingName = window.currentKingData ? window.currentKingData.name : null;
+    const currentKingdom = window.currentKingData ? window.currentKingData.kingdom : '';
     
     if (!currentKingName) {
         console.warn('No king data available for audio');
         return;
     }
     
-    // For now, show a message that audio is not yet available
-    // This can be updated later when king audio files are added
-    alert(`Audio feature for King ${currentKingName} will be available soon!`);
+    // Format king name for file path
+    // Remove parenthetical text (e.g., "Athaliah (Queen)" -> "Athaliah")
+    // Then lowercase and replace spaces with hyphens
+    const cleanedName = currentKingName.split('(')[0].trim();
+    const baseName = cleanedName.toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
     
-    // TODO: Implement actual audio playback when king audio files are added
-    // Similar to how chapter audio works:
-    // const audioPath = `resources/audio/kings/${currentKingName.toLowerCase()}.mp3`;
-    // openChapterAudioPlayer(audioPath, currentKingName, 'Kings');
+    // List of kings that appear in both kingdoms and need kingdom suffix
+    const duplicateKings = ['jehoram', 'joram', 'ahaziah', 'joash', 'jehoash'];
+    
+    // Check if this king needs kingdom distinction
+    let formattedKingName = baseName;
+    if (duplicateKings.includes(baseName) && currentKingdom) {
+        // Extract kingdom name (e.g., "United Kingdom" -> "united", "Israel" -> "israel")
+        const kingdomSuffix = currentKingdom.toLowerCase().replace(/\s+kingdom$/, '').trim();
+        formattedKingName = `${baseName}-${kingdomSuffix}`;
+    }
+    
+    // Check if audio file exists and play it
+    const audioPath = `resources/audio/kings-overview/${formattedKingName}-overview.mp3`;
+    
+    console.log('Attempting to play audio for:', currentKingName);
+    console.log('Kingdom:', currentKingdom);
+    console.log('Formatted name:', formattedKingName);
+    console.log('Audio path:', audioPath);
+    
+    // Check if audio exists
+    const audio = new Audio();
+    audio.src = audioPath;
+    
+    audio.addEventListener('canplaythrough', function() {
+        // Audio exists, load the player
+        console.log('Audio file found, loading player...');
+        loadChapterAudioPlayer(audioPath, cleanedName, '');
+    }, { once: true });
+    
+    audio.addEventListener('error', function() {
+        // If first path fails and this is a duplicate king, try without kingdom suffix
+        if (duplicateKings.includes(baseName) && currentKingdom) {
+            const fallbackPath = `resources/audio/kings-overview/${baseName}-overview.mp3`;
+            console.log('First path failed, trying fallback:', fallbackPath);
+            
+            const fallbackAudio = new Audio();
+            fallbackAudio.src = fallbackPath;
+            
+            fallbackAudio.addEventListener('canplaythrough', function() {
+                console.log('Fallback audio found, loading player...');
+                loadChapterAudioPlayer(fallbackPath, cleanedName, '');
+            }, { once: true });
+            
+            fallbackAudio.addEventListener('error', function() {
+                console.warn('Audio file not found:', fallbackPath);
+                alert(`Audio for King ${currentKingName} is not available yet.`);
+            }, { once: true });
+            
+            fallbackAudio.load();
+        } else {
+            // Audio doesn't exist, show message
+            console.warn('Audio file not found:', audioPath);
+            alert(`Audio for King ${currentKingName} is not available yet.`);
+        }
+    }, { once: true });
+    
+    audio.load();
 }
 
 function openKingsTimelineModal(currentKingName = null) {
@@ -3919,6 +4091,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (window.KingHoverCard && typeof window.KingHoverCard.applyTheme === 'function') {
                 window.KingHoverCard.applyTheme();
             }
+            
+            // Switch timeline icon to dark mode version
+            const timelineIcons = document.querySelectorAll('.timeline-icon');
+            timelineIcons.forEach(icon => {
+                if (icon.tagName === 'IMG' && icon.src.includes('timeline-icon.png')) {
+                    icon.src = 'resources/icon/timeline-icon-dark.png';
+                }
+            });
         }
         
         // Apply dark theme on page load if it's checked
@@ -4061,6 +4241,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (window.KingHoverCard && typeof window.KingHoverCard.applyTheme === 'function') {
                     window.KingHoverCard.applyTheme();
                 }
+                
+                // Switch timeline icon back to normal version
+                const timelineIcons = document.querySelectorAll('.timeline-icon');
+                timelineIcons.forEach(icon => {
+                    if (icon.tagName === 'IMG' && icon.src.includes('timeline-icon-dark.png')) {
+                        icon.src = 'resources/icon/timeline-icon.png';
+                    }
+                });
                 
                 // Light mode - using original light colors
                 if (leftSidebar) {
