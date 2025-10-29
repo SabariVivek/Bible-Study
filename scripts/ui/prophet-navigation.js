@@ -39,29 +39,28 @@
         if (currentIndex === -1) return;
         
         const allProphets = getAllProphets();
-        const nextIndex = currentIndex + 1;
+        // Wrap around to first prophet if at the end
+        const nextIndex = (currentIndex + 1) % allProphets.length;
         
-        if (nextIndex < allProphets.length) {
-            isNavigating = true;
-            const nextProphet = allProphets[nextIndex];
+        isNavigating = true;
+        const nextProphet = allProphets[nextIndex];
+        
+        // Show next prophet
+        if (typeof showProphetDetail === 'function') {
+            showProphetDetail(nextProphet.name);
             
-            // Show next prophet
-            if (typeof showProphetDetail === 'function') {
-                showProphetDetail(nextProphet.name);
-                
-                // Update URL hash
-                if (typeof updateRoute === 'function') {
-                    updateRoute('prophetDetail', nextProphet.name);
-                } else {
-                    window.location.hash = `#/prophet/${encodeURIComponent(nextProphet.name)}`;
-                }
+            // Update URL hash
+            if (typeof updateRoute === 'function') {
+                updateRoute('prophetDetail', nextProphet.name);
+            } else {
+                window.location.hash = `#/prophet/${encodeURIComponent(nextProphet.name)}`;
             }
-            
-            // Reset navigation flag quickly to allow rapid navigation
-            setTimeout(() => {
-                isNavigating = false;
-            }, 100);
         }
+        
+        // Reset navigation flag quickly to allow rapid navigation
+        setTimeout(() => {
+            isNavigating = false;
+        }, 100);
     }
 
     // Navigate to previous prophet
@@ -72,29 +71,28 @@
         if (currentIndex === -1) return;
         
         const allProphets = getAllProphets();
-        const prevIndex = currentIndex - 1;
+        // Wrap around to last prophet if at the beginning
+        const prevIndex = (currentIndex - 1 + allProphets.length) % allProphets.length;
         
-        if (prevIndex >= 0) {
-            isNavigating = true;
-            const prevProphet = allProphets[prevIndex];
+        isNavigating = true;
+        const prevProphet = allProphets[prevIndex];
+        
+        // Show previous prophet
+        if (typeof showProphetDetail === 'function') {
+            showProphetDetail(prevProphet.name);
             
-            // Show previous prophet
-            if (typeof showProphetDetail === 'function') {
-                showProphetDetail(prevProphet.name);
-                
-                // Update URL hash
-                if (typeof updateRoute === 'function') {
-                    updateRoute('prophetDetail', prevProphet.name);
-                } else {
-                    window.location.hash = `#/prophet/${encodeURIComponent(prevProphet.name)}`;
-                }
+            // Update URL hash
+            if (typeof updateRoute === 'function') {
+                updateRoute('prophetDetail', prevProphet.name);
+            } else {
+                window.location.hash = `#/prophet/${encodeURIComponent(prevProphet.name)}`;
             }
-            
-            // Reset navigation flag quickly to allow rapid navigation
-            setTimeout(() => {
-                isNavigating = false;
-            }, 100);
         }
+        
+        // Reset navigation flag quickly to allow rapid navigation
+        setTimeout(() => {
+            isNavigating = false;
+        }, 100);
     }
 
     // Handle swipe gesture
