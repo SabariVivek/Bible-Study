@@ -2,6 +2,88 @@
  * BIBLE VERSE FORM PAGE - Handle Bible verse selection inline page
  */
 
+// Global state
+let currentTestament = 'old';
+let selectedBook = '';
+let biblePageInitialized = false;
+let currentBibleBook = '';
+let currentBibleChapter = 1;
+let currentBibleLanguage = 'tamil';
+let touchStartX = 0;
+let touchEndX = 0;
+
+// Book name mapping for file names
+const BOOK_FILE_MAP = {
+    // Old Testament
+    'Genesis': 'genesis',
+    'Exodus': 'exodus',
+    'Leviticus': 'leviticus',
+    'Numbers': 'numbers',
+    'Deuteronomy': 'deuteronomy',
+    'Joshua': 'joshua',
+    'Judges': 'judges',
+    'Ruth': 'ruth',
+    '1 Samuel': 'i_samuel',
+    '2 Samuel': 'ii_samuel',
+    '1 Kings': 'i_kings',
+    '2 Kings': 'ii_kings',
+    '1 Chronicles': 'i_chronicles',
+    '2 Chronicles': 'ii_chronicles',
+    'Ezra': 'ezra',
+    'Nehemiah': 'nehemiah',
+    'Esther': 'esther',
+    'Job': 'job',
+    'Psalms': 'psalms',
+    'Proverbs': 'proverbs',
+    'Ecclesiastes': 'ecclesiastes',
+    'Song of Solomon': 'song_of_solomon',
+    'Isaiah': 'isaiah',
+    'Jeremiah': 'jeremiah',
+    'Lamentations': 'lamentations',
+    'Ezekiel': 'ezekiel',
+    'Daniel': 'daniel',
+    'Hosea': 'hosea',
+    'Joel': 'joel',
+    'Amos': 'amos',
+    'Obadiah': 'obadiah',
+    'Jonah': 'jonah',
+    'Micah': 'micah',
+    'Nahum': 'nahum',
+    'Habakkuk': 'habakkuk',
+    'Zephaniah': 'zephaniah',
+    'Haggai': 'haggai',
+    'Zechariah': 'zechariah',
+    'Malachi': 'malachi',
+    // New Testament (adjust based on your file naming)
+    'Matthew': 'matthew',
+    'Mark': 'mark',
+    'Luke': 'luke',
+    'John': 'john',
+    'Acts': 'acts',
+    'Romans': 'romans',
+    '1 Corinthians': 'i_corinthians',
+    '2 Corinthians': 'ii_corinthians',
+    'Galatians': 'galatians',
+    'Ephesians': 'ephesians',
+    'Philippians': 'philippians',
+    'Colossians': 'colossians',
+    '1 Thessalonians': 'i_thessalonians',
+    '2 Thessalonians': 'ii_thessalonians',
+    '1 Timothy': 'i_timothy',
+    '2 Timothy': 'ii_timothy',
+    'Titus': 'titus',
+    'Philemon': 'philemon',
+    'Hebrews': 'hebrews',
+    'James': 'james',
+    '1 Peter': 'i_peter',
+    '2 Peter': 'ii_peter',
+    '1 John': 'i_john',
+    '2 John': 'ii_john',
+    '3 John': 'iii_john',
+    'Jude': 'jude',
+    'Revelation': 'revelation'
+};
+
 // Old Testament Books
 const OLD_TESTAMENT_BOOKS = [
     'Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy',
@@ -113,10 +195,6 @@ const VERSE_COUNTS = {
     'Jude': [25],
     'Revelation': [20,29,22,11,14,17,17,13,21,11,19,17,18,20,8,21,18,24,21,15,27,21]
 };
-
-let currentTestament = 'old'; // 'old' or 'new'
-let biblePageInitialized = false;
-let selectedBook = null; // Track currently selected book
 
 /**
  * Initialize Bible verse page
@@ -311,37 +389,369 @@ function initializeBibleForm() {
     const newForm = form.cloneNode(true);
     form.parentNode.replaceChild(newForm, form);
     
-    newForm.addEventListener('submit', (e) => {
+    newForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const book = document.getElementById('bookInput').value;
         const chapter = document.getElementById('chapterInput').value;
         const verse = document.getElementById('verseInput').value;
         const languageRadio = document.querySelector('input[name="language"]:checked');
-        const language = languageRadio ? languageRadio.value : 'both';
+        const language = languageRadio ? languageRadio.value : 'tamil';
         
-        // Validate chapter before submission
-        if (book && chapter) {
-            if (!validateChapterInput(book, chapter)) {
-                // Validation failed - don't submit
-                return;
-            }
+        // Validate all inputs
+        if (!book) {
+            alert('Please select a book');
+            return;
         }
         
-        console.log('Bible Verse Form Submitted:', {
-            testament: currentTestament,
-            book,
-            chapter,
-            verse,
-            language
-        });
+        if (!chapter) {
+            alert('Please enter a chapter number');
+            return;
+        }
         
-        // TODO: Implement actual Bible verse loading logic
-        alert(`Loading: ${book} ${chapter}${verse ? ':' + verse : ''} (${language})`);
+        // Validate chapter before submission
+        if (!validateChapterInput(book, chapter)) {
+            return;
+        }
+        
+        // Validate verse if provided
+        if (verse && !validateVerseInput()) {
+            return;
+        }
+        
+        // Load and display verses
+        await loadBibleVerses(book, chapter, verse, language);
     });
     
     // Re-initialize dropdown after form recreation
     initializeBibleDropdown();
+}
+
+/**
+ * Load and display Bible verses
+ */
+async function loadBibleVerses(book, chapter, verse, language) {
+    try {
+        // Get display section
+        const displaySection = document.getElementById('bibleVerseDisplaySection');
+        
+        if (!displaySection) return;
+        
+        // Get file name for the book
+        const fileName = BOOK_FILE_MAP[book];
+        if (!fileName) {
+            alert('Book data not found');
+            return;
+        }
+        
+        // Determine testament folder
+        const testament = OLD_TESTAMENT_BOOKS.includes(book) ? 'old-testament' : 'new-testament';
+        
+        // Load Tamil data
+        const scriptPath = `scripts/data/bible/tamil/${testament}/${fileName}.js`;
+        
+        // Load the script
+        await loadScript(scriptPath);
+        
+        // Get data from the loaded script
+        const dataVarName = `${fileName}_data`;
+        const bibleData = window[dataVarName];
+        
+        if (!bibleData) {
+            alert('Failed to load Bible data');
+            return;
+        }
+        
+        // Get chapter data
+        const chapterKey = `chapter_${chapter}`;
+        const chapterData = bibleData[chapterKey];
+        
+        if (!chapterData) {
+            alert(`Chapter ${chapter} not found`);
+            return;
+        }
+        
+        // Display verses
+        displayBibleVerses(book, chapter, chapterData, verse, language);
+        
+        // Hide all content sections
+        document.getElementById('dashboard-content').classList.add('hidden');
+        document.getElementById('kings-content').classList.add('hidden');
+        document.getElementById('prophets-content').classList.add('hidden');
+        document.getElementById('prophet-detail-content').classList.add('hidden');
+        document.getElementById('books-content').classList.add('hidden');
+        document.getElementById('book-chapter-content').classList.add('hidden');
+        document.getElementById('king-page-content').classList.add('hidden');
+        document.getElementById('timeline-content').classList.add('hidden');
+        document.getElementById('genealogy-content').classList.add('hidden');
+        document.getElementById('bible-content').classList.add('hidden');
+        document.getElementById('setting-content').classList.add('hidden');
+        document.getElementById('help-content').classList.add('hidden');
+        
+        // Show verse display section
+        displaySection.classList.remove('hidden');
+        
+        // Scroll to top of the page
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+    } catch (error) {
+        console.error('Error loading Bible verses:', error);
+        alert('Failed to load Bible verses. Please try again.');
+    }
+}
+
+/**
+ * Load a script dynamically
+ */
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        // Check if script already loaded
+        const existing = document.querySelector(`script[src="${src}"]`);
+        if (existing) {
+            resolve();
+            return;
+        }
+        
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+/**
+ * Display Bible verses in the list
+ */
+function displayBibleVerses(book, chapter, chapterData, verseRange, language) {
+    const title = document.getElementById('bibleVerseDisplayTitle');
+    const content = document.getElementById('bibleChapterContent');
+    
+    if (!title || !content) return;
+    
+    // Store current context for navigation
+    currentBibleBook = book;
+    currentBibleChapter = parseInt(chapter);
+    currentBibleLanguage = language;
+    
+    // Set title
+    title.textContent = `${book} - ${chapter}`;
+    
+    // Clear previous content
+    content.innerHTML = '';
+    
+    // Determine which verses to display
+    let startVerse = 1;
+    let endVerse = Object.keys(chapterData).length;
+    
+    if (verseRange) {
+        if (verseRange.includes('-')) {
+            const parts = verseRange.split('-');
+            startVerse = parseInt(parts[0]) || 1;
+            endVerse = parseInt(parts[1]) || endVerse;
+        } else if (verseRange.includes(':')) {
+            const parts = verseRange.split(':');
+            startVerse = parseInt(parts[0]) || 1;
+            endVerse = parseInt(parts[1]) || endVerse;
+        } else {
+            startVerse = endVerse = parseInt(verseRange) || 1;
+        }
+    }
+    
+    // Create a section for the verses
+    const section = document.createElement('div');
+    section.className = 'bible-section';
+    
+    // Add section title if it's a verse range
+    if (verseRange) {
+        const sectionTitle = document.createElement('h2');
+        sectionTitle.className = 'bible-section-title';
+        sectionTitle.textContent = `Verses ${startVerse}${startVerse !== endVerse ? ' - ' + endVerse : ''}`;
+        section.appendChild(sectionTitle);
+    }
+    
+    // Create verse items (simple inline format)
+    for (let i = startVerse; i <= endVerse; i++) {
+        const verseKey = `verse_${i}`;
+        const verseText = chapterData[verseKey];
+        
+        if (!verseText) continue;
+        
+        const verseItem = document.createElement('p');
+        verseItem.className = 'bible-verse-item';
+        
+        if (language === 'tamil') {
+            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${verseText}</span>`;
+        } else if (language === 'english') {
+            // For now, show Tamil (English not implemented yet)
+            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${verseText}</span>`;
+        } else { // both
+            verseItem.innerHTML = `
+                <span class="bible-verse-number">${i}.</span>
+                <span class="bible-verse-tamil">${verseText}</span>
+                <span class="bible-verse-english">[English translation not available]</span>
+            `;
+        }
+        
+        section.appendChild(verseItem);
+    }
+    
+    content.appendChild(section);
+    
+    // Initialize navigation
+    initializeBibleNavigation();
+}
+
+/**
+ * Initialize keyboard and touch navigation for chapters
+ */
+function initializeBibleNavigation() {
+    // Remove existing listeners if any
+    document.removeEventListener('keydown', handleBibleKeyNavigation);
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', handleBibleKeyNavigation);
+    
+    // Add touch/swipe navigation for mobile
+    const content = document.getElementById('bibleChapterContent');
+    if (content) {
+        content.removeEventListener('touchstart', handleTouchStart);
+        content.removeEventListener('touchend', handleTouchEnd);
+        
+        content.addEventListener('touchstart', handleTouchStart);
+        content.addEventListener('touchend', handleTouchEnd);
+    }
+}
+
+function handleTouchStart(e) {
+    touchStartX = e.changedTouches[0].screenX;
+}
+
+function handleTouchEnd(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swipe left - next chapter
+            navigateToNextChapter();
+        } else {
+            // Swipe right - previous chapter
+            navigateToPreviousChapter();
+        }
+    }
+}
+
+function handleBibleKeyNavigation(e) {
+    // Only handle if we're on the bible verse display page
+    const displaySection = document.getElementById('bibleVerseDisplaySection');
+    if (!displaySection || displaySection.classList.contains('hidden')) return;
+    
+    if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        navigateToNextChapter();
+    } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        navigateToPreviousChapter();
+    }
+}
+
+/**
+ * Navigate to next chapter
+ */
+async function navigateToNextChapter() {
+    if (!currentBibleBook) return;
+    
+    const maxChapters = BOOK_CHAPTERS[currentBibleBook];
+    if (!maxChapters) return;
+    
+    let nextChapter = currentBibleChapter + 1;
+    let nextBook = currentBibleBook;
+    
+    // If exceeded max chapters, go to next book
+    if (nextChapter > maxChapters) {
+        const books = OLD_TESTAMENT_BOOKS.includes(currentBibleBook) ? OLD_TESTAMENT_BOOKS : NEW_TESTAMENT_BOOKS;
+        const currentIndex = books.indexOf(currentBibleBook);
+        
+        if (currentIndex >= 0 && currentIndex < books.length - 1) {
+            nextBook = books[currentIndex + 1];
+            nextChapter = 1;
+        } else {
+            // Last chapter of last book
+            return;
+        }
+    }
+    
+    // Load next chapter
+    await loadBibleVerses(nextBook, nextChapter.toString(), '', currentBibleLanguage);
+}
+
+/**
+ * Navigate to previous chapter
+ */
+async function navigateToPreviousChapter() {
+    if (!currentBibleBook) return;
+    
+    let prevChapter = currentBibleChapter - 1;
+    let prevBook = currentBibleBook;
+    
+    // If below chapter 1, go to previous book's last chapter
+    if (prevChapter < 1) {
+        const books = OLD_TESTAMENT_BOOKS.includes(currentBibleBook) ? OLD_TESTAMENT_BOOKS : NEW_TESTAMENT_BOOKS;
+        const currentIndex = books.indexOf(currentBibleBook);
+        
+        if (currentIndex > 0) {
+            prevBook = books[currentIndex - 1];
+            prevChapter = BOOK_CHAPTERS[prevBook];
+        } else {
+            // First chapter of first book
+            return;
+        }
+    }
+    
+    // Load previous chapter
+    await loadBibleVerses(prevBook, prevChapter.toString(), '', currentBibleLanguage);
+}
+
+/**
+ * Go back to the Bible form
+ */
+function goBackToBibleForm() {
+    const displaySection = document.getElementById('bibleVerseDisplaySection');
+    
+    if (displaySection) {
+        // Hide verse display section
+        displaySection.classList.add('hidden');
+        
+        // Hide all other content sections
+        document.getElementById('dashboard-content').classList.add('hidden');
+        document.getElementById('kings-content').classList.add('hidden');
+        document.getElementById('prophets-content').classList.add('hidden');
+        document.getElementById('prophet-detail-content').classList.add('hidden');
+        document.getElementById('books-content').classList.add('hidden');
+        document.getElementById('book-chapter-content').classList.add('hidden');
+        document.getElementById('king-page-content').classList.add('hidden');
+        document.getElementById('timeline-content').classList.add('hidden');
+        document.getElementById('genealogy-content').classList.add('hidden');
+        document.getElementById('setting-content').classList.add('hidden');
+        document.getElementById('help-content').classList.add('hidden');
+        
+        // Show bible form section
+        document.getElementById('bible-content').classList.remove('hidden');
+        
+        // Update navigation
+        if (typeof updateNavActive === 'function') {
+            updateNavActive('bible');
+        }
+        
+        // Scroll to top of the page
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
 
 /**

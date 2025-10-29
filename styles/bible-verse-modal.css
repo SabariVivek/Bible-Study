@@ -7,12 +7,15 @@
     align-items: center;
     padding: 40px 20px;
     min-height: calc(100vh - 100px);
+    position: relative;
+    z-index: 1;
 }
 
 /* Form Container */
 .bible-verse-container {
     background: #2a2a2a;
     border-radius: 20px;
+    border-top: 1px solid #8b4513;
     width: 100%;
     max-width: 500px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
@@ -23,35 +26,6 @@
 .bible-verse-container:hover {
     transform: translateY(-5px);
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
-}
-
-/* Header */
-.bible-verse-header {
-    background: linear-gradient(135deg, #8b4513 0%, #b8860b 100%);
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    font-weight: bold;
-    font-size: 18px;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    position: relative;
-}
-
-.bible-verse-header::before {
-    content: '✦';
-    position: absolute;
-    left: 20px;
-    font-size: 20px;
-    opacity: 0.7;
-}
-
-.bible-verse-header::after {
-    content: '✦';
-    position: absolute;
-    right: 20px;
-    font-size: 20px;
-    opacity: 0.7;
 }
 
 /* Form Content */
@@ -672,6 +646,161 @@
     background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+}
+
+/* ===== BIBLE CHAPTER DISPLAY - FULL PAGE STYLE ===== */
+
+.bible-chapter-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.bible-chapter-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #2d3748;
+    margin: 0;
+}
+
+.bible-chapter-content {
+    max-width: none;
+    padding-left: 0;
+}
+
+.bible-section {
+    margin-bottom: 50px;
+}
+
+.bible-section-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 40px;
+    padding-left: 15px;
+    border-left: 4px solid #4caf50;
+}
+
+.bible-verse-item {
+    margin-bottom: 50px;
+    line-height: 2;
+    display: block;
+}
+
+.bible-verse-number {
+    color: #2d3748;
+    font-weight: 900;
+    font-size: 18px;
+    margin-right: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.bible-verse-text {
+    color: #2d3748;
+    font-size: 17px;
+    line-height: 2;
+}
+
+.bible-verse-tamil {
+    color: #2d3748;
+    font-size: 17px;
+    line-height: 2;
+    display: inline;
+}
+
+.bible-verse-english {
+    color: #4a5568;
+    font-size: 15px;
+    line-height: 2;
+    font-style: italic;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Dark Mode for Chapter Display */
+.dark-mode-bible .bible-chapter-title {
+    color: #ffffff;
+}
+
+.dark-mode-bible .bible-section-title {
+    color: #ffffff;
+}
+
+.dark-mode-bible .bible-verse-number {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.dark-mode-bible .bible-verse-text,
+.dark-mode-bible .bible-verse-tamil {
+    color: #ffffff;
+}
+
+.dark-mode-bible .bible-verse-english {
+    color: #cbd5e0;
+}
+
+/* Dark mode for verse display section */
+#bibleVerseDisplaySection.dark-mode-bible .bible-chapter-title {
+    color: #ffffff;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .bible-section-title {
+    color: #ffffff;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .bible-verse-number {
+    color: #ffffff;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .bible-verse-text,
+#bibleVerseDisplaySection.dark-mode-bible .bible-verse-tamil {
+    color: #ffffff;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .bible-verse-english {
+    color: #cbd5e0;
+}
+
+/* Light Mode for Chapter Display */
+#bibleVerseDisplaySection:not(.dark-mode-bible) .bible-chapter-title {
+    color: #2d3748;
+}
+
+#bibleVerseDisplaySection:not(.dark-mode-bible) .bible-section-title {
+    color: #2d3748;
+    border-left-color: #667eea;
+}
+
+#bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-number {
+    color: #2d3748;
+    font-weight: 700;
+}
+
+#bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-text,
+#bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-tamil {
+    color: #1a202c;
+}
+
+#bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-english {
+    color: #2d3748;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bible-chapter-title {
+        font-size: 24px;
+    }
+    
+    .bible-section-title {
+        font-size: 18px;
+    }
+    
+    .bible-verse-english {
+        padding-left: 0;
+        margin-top: 8px;
+    }
 }
 
 

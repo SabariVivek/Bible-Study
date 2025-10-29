@@ -4104,6 +4104,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 bibleContent.classList.add('dark-mode-bible');
             }
             
+            // Apply dark mode to Bible Verse Display Section
+            const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+            if (bibleVerseDisplaySection) {
+                bibleVerseDisplaySection.classList.add('dark-mode-bible');
+            }
+            
             // Apply dark mode to filter overlays
             const kingsFilterOverlay = document.getElementById('filterCardOverlay');
             if (kingsFilterOverlay) {
@@ -4264,6 +4270,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const bibleContent = document.getElementById('bible-content');
                 if (bibleContent) {
                     bibleContent.classList.remove('dark-mode-bible');
+                }
+                
+                // Remove dark mode from Bible Verse Display Section
+                const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+                if (bibleVerseDisplaySection) {
+                    bibleVerseDisplaySection.classList.remove('dark-mode-bible');
                 }
                 
                 // Remove dark mode from filter overlays
