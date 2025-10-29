@@ -3703,6 +3703,11 @@ function showBible() {
     
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Initialize Bible verse form
+    if (typeof initializeBibleVersePage === 'function') {
+        initializeBibleVersePage();
+    }
 }
 
 function showSetting() {
@@ -4093,6 +4098,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 bookChapterContent.classList.add('dark-mode-books');
             }
             
+            // Apply dark mode to Bible content
+            const bibleContent = document.getElementById('bible-content');
+            if (bibleContent) {
+                bibleContent.classList.add('dark-mode-bible');
+            }
+            
             // Apply dark mode to filter overlays
             const kingsFilterOverlay = document.getElementById('filterCardOverlay');
             if (kingsFilterOverlay) {
@@ -4247,6 +4258,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const bookChapterContent = document.getElementById('book-chapter-content');
                 if (bookChapterContent) {
                     bookChapterContent.classList.remove('dark-mode-books');
+                }
+                
+                // Remove dark mode from Bible content
+                const bibleContent = document.getElementById('bible-content');
+                if (bibleContent) {
+                    bibleContent.classList.remove('dark-mode-bible');
                 }
                 
                 // Remove dark mode from filter overlays

@@ -6,6 +6,7 @@
     <title>Bible Study</title>
     <link rel="stylesheet" href="styles/all-styles.css">
     <link rel="stylesheet" href="styles/testament-nav.css">
+    <link rel="stylesheet" href="styles/bible-verse-modal.css">
     <!-- Fuse.js for smart search -->
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
     <script src="scripts/parables.js"></script>
@@ -2315,14 +2316,84 @@
                 </div>
             </div>
 
-            <!-- Maps Content -->
+            <!-- Bible Content -->
             <div id="bible-content" class="hidden">
-                <div class="content-header">
-                    <h1 class="page-title">Bible</h1>
-                </div>
-                <div style="text-align: center; padding: 50px;">
-                    <h2>Bible</h2>
-                    <p style="color: #6b7280; margin-top: 20px;">Bible reading and study features coming soon. This will include full text reading, cross-references, and study notes.</p>
+                <div class="bible-verse-page-container">
+                    <div class="bible-verse-container">
+                        <div class="bible-verse-header">
+                            <span id="testamentTitle">OLD TESTAMENT</span>
+                        </div>
+                        <div class="bible-verse-form-content">
+                            <!-- Testament Toggle -->
+                            <div class="bible-verse-testament-toggle">
+                                <button class="bible-verse-testament-btn active" onclick="switchTestament('old')">
+                                    Old Testament
+                                </button>
+                                <button class="bible-verse-testament-btn" onclick="switchTestament('new')">
+                                    New Testament
+                                </button>
+                            </div>
+
+                            <form id="bibleVerseForm">
+                                <div class="bible-verse-form-row">
+                                    <label class="bible-verse-form-label">Book</label>
+                                    <div class="bible-verse-form-input">
+                                        <div class="bible-verse-custom-dropdown">
+                                            <input 
+                                                type="text" 
+                                                class="bible-verse-dropdown-input" 
+                                                id="bookInput" 
+                                                placeholder="Type to search books..."
+                                                autocomplete="off"
+                                            >
+                                            <div class="bible-verse-dropdown-arrow"></div>
+                                            <div class="bible-verse-dropdown-list" id="bookList"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bible-verse-form-row">
+                                    <label class="bible-verse-form-label">Chapter</label>
+                                    <div class="bible-verse-form-input">
+                                        <input type="text" class="bible-verse-input" id="chapterInput" placeholder="Enter chapter number">
+                                        <span class="bible-verse-helper-text" id="chapterHelperText">Example: 3</span>
+                                    </div>
+                                </div>
+
+                                <div class="bible-verse-form-row">
+                                    <label class="bible-verse-form-label">Verse</label>
+                                    <div class="bible-verse-form-input">
+                                        <input type="text" class="bible-verse-input" id="verseInput" placeholder="Enter verse number">
+                                        <span class="bible-verse-helper-text" id="verseHelperText">Example: 4:7 or 2-9</span>
+                                    </div>
+                                </div>
+
+                                <div class="bible-verse-form-row">
+                                    <label class="bible-verse-form-label">Language</label>
+                                    <div class="bible-verse-form-input">
+                                        <div class="bible-verse-radio-group">
+                                            <div class="bible-verse-radio-option">
+                                                <input type="radio" id="tamil" name="language" value="tamil">
+                                                <label for="tamil">Tamil</label>
+                                            </div>
+                                            <div class="bible-verse-radio-option">
+                                                <input type="radio" id="english" name="language" value="english">
+                                                <label for="english">English</label>
+                                            </div>
+                                            <div class="bible-verse-radio-option">
+                                                <input type="radio" id="both" name="language" value="both" checked>
+                                                <label for="both">Both</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bible-verse-submit-container">
+                                    <button type="submit" class="bible-verse-submit-btn">Submit Request</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -2988,6 +3059,7 @@
     <script src="scripts/ui/swipe.js"></script>
     <script src="scripts/ui/prophet-navigation.js"></script>
     <script src="scripts/ui/king-hover-card.js"></script>
+    <script src="scripts/ui/bible-verse-modal.js"></script>
     <script>
         // Initialize router when the page loads
         document.addEventListener('DOMContentLoaded', function() {
