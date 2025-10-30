@@ -102,58 +102,11 @@ body.modal-open {
 }
 
 .left-sidebar.collapsed .sidebar-toggle-btn {
-    display: none;
+    display: flex;
 }
 
 .sidebar-logo {
     display: none;
-    width: 32px;
-    height: 32px;
-    background: #8B4513;
-    border-radius: 4px;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-    position: relative;
-    border: 2px solid #654321;
-    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.2);
-}
-
-.sidebar-logo::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 20px;
-    background: #D4A574;
-    border-radius: 1px;
-}
-
-.sidebar-logo::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 12px;
-    height: 1px;
-    background: #654321;
-    box-shadow: 0 -4px 0 #654321, 0 4px 0 #654321;
-}
-
-.left-sidebar.collapsed .sidebar-logo {
-    display: flex;
-}
-
-.left-sidebar.collapsed:hover .sidebar-logo {
-    display: none;
-}
-
-.left-sidebar.collapsed:hover .sidebar-toggle-btn {
-    display: flex;
 }
 
 /* Chat History */
