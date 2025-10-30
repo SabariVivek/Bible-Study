@@ -3289,6 +3289,23 @@ body .dark-mode-maps .page-title {
     color: #888;
 }
 
+.dark-mode-life-of-christ .tamil-verse {
+    color: #d1d1d1;
+}
+
+.dark-mode-life-of-christ .tamil-verse .verse-number {
+    color: #a78bfa;
+}
+
+.dark-mode-life-of-christ .tamil-verse:hover .verse-number {
+    color: #c4b5fd;
+}
+
+.dark-mode-life-of-christ .chapter-heading {
+    color: #a78bfa;
+    border-bottom-color: #6d28d9;
+}
+
 .dark-mode-life-of-christ .characters-search-input {
     background: #2a2a2a;
     border-color: #3a3a3a;
@@ -5824,6 +5841,47 @@ html #king-page-content.dark-mode-kings .order-number {
     font-size: 1.2rem;
     padding: 2rem;
 }
+
+/* Tamil verse styling */
+.tamil-verse {
+    margin-bottom: 1.7rem;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    color: #333;
+    text-align: left;
+    font-family: 'Kurale', serif;
+}
+
+.tamil-verse .verse-number {
+    color: #667eea;
+    font-weight: 600;
+    margin-right: 0.3rem;
+    font-size: 0.95em;
+}
+
+.tamil-verse:hover .verse-number {
+    color: #764ba2;
+    transition: color 0.2s ease;
+}
+
+/* Chapter heading for multi-chapter passages */
+.chapter-heading {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #667eea;
+    margin: 1.5rem 0 1rem 0;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid #667eea;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: inline-block;
+    width: auto;
+}
+
+.chapter-heading:first-child {
+    margin-top: 0;
+}
+
+/* Chapter separator line - REMOVED, not used anymore */
 
 /* Responsive for Life of Christ */
 @media (max-width: 768px) {

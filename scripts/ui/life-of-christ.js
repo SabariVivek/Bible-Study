@@ -167,7 +167,23 @@ function loadPassageData(passageKey, verseReference) {
     
     if (!badge || !content) return;
 
-    // Check if passage data exists in passages.js
+    // Try to load from Tamil Bible data first
+    const tamilContent = loadTamilVerses(verseReference);
+    
+    if (tamilContent && tamilContent.html) {
+        // Display Tamil verses
+        badge.textContent = verseReference;
+        badge.setAttribute('title', verseReference);
+        
+        // Add gospel-specific class to badge
+        addGospelClassToBadge(badge, verseReference);
+        
+        // Display the verses with proper formatting
+        content.innerHTML = tamilContent    .html;
+        return;
+    }
+
+    // Fallback: Check if passage data exists in passages.js
     const data = typeof passages !== 'undefined' ? passages[passageKey] : null;
     
     if (!data) {
@@ -196,6 +212,232 @@ function loadPassageData(passageKey, verseReference) {
     } else {
         content.innerHTML = '<p class="passage-no-data">No content available</p>';
     }
+}
+
+// Parse complex verse references
+// Handles: "Mark 8:31-9:1", "John 18:13-14, 19-24", "Matthew 27:2, 11-14", etc.
+function parseVerseReference(verseRef) {
+    const normalized = verseRef.trim();
+    
+    // Extract book name and first chapter
+    const bookMatch = normalized.match(/^([\w\s]+?)\s+(\d+):/i);
+    if (!bookMatch) return null;
+    
+    const bookName = bookMatch[1].trim().toLowerCase();
+    const firstChapter = parseInt(bookMatch[2]);
+    
+    // Parse all chapter:verse patterns and standalone verse ranges
+    const ranges = [];
+    
+    // Remove book name from the string
+    const versePart = normalized.substring(bookMatch[0].length - 1); // Keep the colon
+    
+    // Split by comma to get individual ranges
+    const parts = versePart.split(',').map(p => p.trim());
+    
+    parts.forEach(part => {
+        // Check for cross-chapter range: ":31-9:1"
+        const crossChapterMatch = part.match(/^:(\d+)(?:[a-z])?-(\d+):(\d+)(?:[a-z])?$/i);
+        if (crossChapterMatch) {
+            ranges.push({
+                startChapter: firstChapter,
+                startVerse: parseInt(crossChapterMatch[1]),
+                endChapter: parseInt(crossChapterMatch[2]),
+                endVerse: parseInt(crossChapterMatch[3]),
+                crossChapter: true
+            });
+            return;
+        }
+        
+        // Check for same-chapter range with explicit chapter: ":13-14"
+        const sameChapterMatch = part.match(/^:(\d+)(?:[a-z])?-(\d+)(?:[a-z])?$/i);
+        if (sameChapterMatch) {
+            ranges.push({
+                startChapter: firstChapter,
+                startVerse: parseInt(sameChapterMatch[1]),
+                endChapter: firstChapter,
+                endVerse: parseInt(sameChapterMatch[2]),
+                crossChapter: false
+            });
+            return;
+        }
+        
+        // Check for single verse with colon: ":5"
+        const singleVerseWithColon = part.match(/^:(\d+)(?:[a-z])?$/i);
+        if (singleVerseWithColon) {
+            const verse = parseInt(singleVerseWithColon[1]);
+            ranges.push({
+                startChapter: firstChapter,
+                startVerse: verse,
+                endChapter: firstChapter,
+                endVerse: verse,
+                crossChapter: false
+            });
+            return;
+        }
+        
+        // Check for single verse or range without colon: "19-24" or "2"
+        const noColonMatch = part.match(/^(\d+)(?:[a-z])?(?:-(\d+)(?:[a-z])?)?$/i);
+        if (noColonMatch) {
+            const startVerse = parseInt(noColonMatch[1]);
+            const endVerse = noColonMatch[2] ? parseInt(noColonMatch[2]) : startVerse;
+            ranges.push({
+                startChapter: firstChapter,
+                startVerse: startVerse,
+                endChapter: firstChapter,
+                endVerse: endVerse,
+                crossChapter: false
+            });
+            return;
+        }
+    });
+    
+    return {
+        book: bookName,
+        ranges: ranges
+    };
+}
+
+// Map English book names to Tamil data variable names
+function getBookDataVariable(bookName) {
+    const bookMap = {
+        'matthew': 'matthew_data',
+        'mark': 'mark_data',
+        'luke': 'luke_data',
+        'john': 'john_data',
+        'acts': 'acts_data',
+        'romans': 'romans_data',
+        '1 corinthians': 'i_corinthians_data',
+        '2 corinthians': 'ii_corinthians_data',
+        'galatians': 'galatians_data',
+        'ephesians': 'ephesians_data',
+        'philippians': 'philippians_data',
+        'colossians': 'colossians_data',
+        '1 thessalonians': 'i_thessalonians_data',
+        '2 thessalonians': 'ii_thessalonians_data',
+        '1 timothy': 'i_timothy_data',
+        '2 timothy': 'ii_timothy_data',
+        'titus': 'titus_data',
+        'philemon': 'philemon_data',
+        'hebrews': 'hebrews_data',
+        'james': 'james_data',
+        '1 peter': 'i_peter_data',
+        '2 peter': 'ii_peter_data',
+        '1 john': 'i_john_data',
+        '2 john': 'ii_john_data',
+        '3 john': 'iii_john_data',
+        'jude': 'jude_data',
+        'revelation': 'revelation_data'
+    };
+    
+    return bookMap[bookName] || null;
+}
+
+// Load Tamil verses from the Bible data
+function loadTamilVerses(verseReference) {
+    const parsed = parseVerseReference(verseReference);
+    
+    if (!parsed || !parsed.ranges || parsed.ranges.length === 0) return null;
+    
+    const dataVarName = getBookDataVariable(parsed.book);
+    
+    if (!dataVarName) return null;
+    
+    // Check if the data variable exists in global scope
+    if (typeof window[dataVarName] === 'undefined') {
+        console.log(`Tamil data not loaded for: ${dataVarName}`);
+        return null;
+    }
+    
+    const bookData = window[dataVarName];
+    let htmlContent = '';
+    
+    // Check if multiple chapters are involved
+    const uniqueChapters = [...new Set(parsed.ranges.flatMap(r => {
+        if (r.crossChapter) {
+            // For cross-chapter ranges, include all chapters
+            const chapters = [];
+            for (let ch = r.startChapter; ch <= r.endChapter; ch++) {
+                chapters.push(ch);
+            }
+            return chapters;
+        }
+        return [r.startChapter];
+    }))];
+    
+    const hasMultipleChapters = uniqueChapters.length > 1;
+    let currentChapter = null;
+    
+    // Process each range
+    parsed.ranges.forEach((range, rangeIndex) => {
+        if (range.crossChapter) {
+            // Handle cross-chapter ranges (e.g., Mark 8:31-9:1, John 11:55-12:1)
+            for (let chapter = range.startChapter; chapter <= range.endChapter; chapter++) {
+                const chapterKey = `chapter_${chapter}`;
+                
+                if (!bookData[chapterKey]) continue;
+                
+                const chapterData = bookData[chapterKey];
+                
+                // Add chapter heading only when chapter changes and there are multiple chapters
+                if (hasMultipleChapters && currentChapter !== chapter) {
+                    htmlContent += `<h3 class="chapter-heading">Chapter ${chapter}</h3>`;
+                    currentChapter = chapter;
+                }
+                
+                // Determine verse range for this chapter
+                let startVerse, endVerse;
+                
+                if (chapter === range.startChapter) {
+                    startVerse = range.startVerse;
+                    // Get last verse in chapter
+                    endVerse = Math.max(...Object.keys(chapterData)
+                        .filter(k => k.startsWith('verse_'))
+                        .map(k => parseInt(k.split('_')[1])));
+                } else if (chapter === range.endChapter) {
+                    startVerse = 1;
+                    endVerse = range.endVerse;
+                } else {
+                    // Middle chapters - all verses
+                    startVerse = 1;
+                    endVerse = Math.max(...Object.keys(chapterData)
+                        .filter(k => k.startsWith('verse_'))
+                        .map(k => parseInt(k.split('_')[1])));
+                }
+                
+                // Add verses
+                for (let v = startVerse; v <= endVerse; v++) {
+                    const verseKey = `verse_${v}`;
+                    if (chapterData[verseKey]) {
+                        htmlContent += `<p class="tamil-verse">${v}. ${chapterData[verseKey]}</p>`;
+                    }
+                }
+            }
+        } else {
+            // Handle same-chapter ranges and single verses
+            const chapterKey = `chapter_${range.startChapter}`;
+            
+            if (!bookData[chapterKey]) return;
+            
+            const chapterData = bookData[chapterKey];
+            
+            // Add chapter heading only when chapter changes and there are multiple chapters
+            if (hasMultipleChapters && currentChapter !== range.startChapter) {
+                htmlContent += `<h3 class="chapter-heading">Chapter ${range.startChapter}</h3>`;
+                currentChapter = range.startChapter;
+            }
+            
+            // Add verses
+            for (let v = range.startVerse; v <= range.endVerse; v++) {
+                const verseKey = `verse_${v}`;
+                if (chapterData[verseKey]) {
+                    htmlContent += `<p class="tamil-verse">${v}. ${chapterData[verseKey]}</p>`;
+                }
+            }
+        }
+    });
+    
+    return htmlContent ? { html: htmlContent } : null;
 }
 
 // Helper function to add gospel-specific class to badge
