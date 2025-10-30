@@ -29,7 +29,7 @@ var i_john_data = {
     "verse_15": "Do not live like people who do not know God. Do not love the wrong things that belong to this world. If anyone loves those things, it shows that they do not love God, their Father.",
     "verse_16": "What are the wrong things that belong to this world? People want to do bad things to make themselves happy. People want to have things that they see, even bad things. People want to show other people how rich they are. These ideas do not come from God, our Father. They are the thoughts of people who belong to the world.",
     "verse_17": "One day, those people and the things that they want will not be there any longer. But those who continue to do what God wants will live for ever.",
-    "verse_18": "My children, the world will soon end.  You have heard that the enemy of Christ will appear. You can see that many enemies of Christ have already appeared. This shows us that the world will end soon.",
+    "verse_18": "My children, the world will soon end. You have heard that the enemy of Christ will appear. You can see that many enemies of Christ have already appeared. This shows us that the world will end soon.",
     "verse_19": "These people used to be in our group of believers. But they left us. They never really belonged to our group. If they had been true believers, they would have remained with us. When they left us, it showed clearly that none of them really belonged to us.",
     "verse_20": "But Christ, the Holy One, has given you the Holy Spirit. As a result, you all know what is true.",
     "verse_21": "That is why I am writing to you. It is not because you do not yet know God's true message. I am writing to you because you do know that true message. And you can be sure that there are no lies in it.",
@@ -109,7 +109,7 @@ var i_john_data = {
     "verse_15": "Since we know that, we also know that God will give to us the things that we ask for. It is like we have already received those things from him.",
     "verse_16": "If you see that another Christian is doing something bad, this is what you should do. If it is a sin that does not cause death, pray that God will help him. Then God will help that person to live for ever with him. That is for a sin which does not cause death. But there is a sin that causes death. If another Christian does that, I am not saying that you should pray for God to help that person.",
     "verse_17": "Any wrong thing that a person does is sin. But not all sins cause death.",
-    "verse_18": "Nobody who has become a child of God continues to do wrong things. Instead, the Son of God keeps him safe.  Satan cannot do anything against a child of God.",
+    "verse_18": "Nobody who has become a child of God continues to do wrong things. Instead, the Son of God keeps him safe. Satan cannot do anything against a child of God.",
     "verse_19": "We know that we belong to God. We know that Satan rules all the people who belong to this world.",
     "verse_20": "We also know that the Son of God has come into the world. He has helped us to understand what is true. As a result, we know the only true God. We live together with this true God, because we belong to his Son, Jesus Christ. He is the true God. He is the one who gives us life with God for ever.",
     "verse_21": "My little children, be careful to keep away from idols."

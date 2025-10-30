@@ -1,6 +1,6 @@
 var i_peter_data = {
   "chapter_1": {
-    "verse_1": "This letter is from me, Peter. I am an apostle of Jesus Christ.",
+    "verse_1": "This letter is from me, Peter. I am an apostle of Jesus Christ. I am writing to you, God's own people that he has chosen. You are now living in many different places, in the regions called Pontus, Galatia, Cappadocia, Asia and Bithynia. You are living in these foreign places as strangers.",
     "verse_2": "God, the Father, already decided that you should be his people. God's Spirit has made you special people who would obey Jesus Christ. God chose you so that Jesus Christ's blood would make you really clean. I pray that God will help you and give you peace in your minds more and more.",
     "verse_3": "We praise God, who is the Father of our Lord Jesus Christ! He is very kind to us, so that he has given us new life. This is possible because God raised Jesus Christ to new life after his death. Now, as we live, we are sure that we will receive good things from God.",
     "verse_4": "We wait to receive all the good things that he has prepared for us. Nobody can ever destroy those things. Nothing can spoil them. They will never become old or less beautiful. God is keeping those things in heaven for you.",
@@ -18,7 +18,7 @@ var i_peter_data = {
     "verse_16": "In the Bible God says this: ‘You must be completely good, because I am completely good.’",
     "verse_17": "God knows what each person has done, and he judges each one for those things. He is always fair when he decides about people. He is never kinder to one person than he is to another person. When you pray to God, you call him ‘Father’. So then, always respect him, while you live as strangers here in the world.",
     "verse_18": "Your ancestors lived in a way that did not make them really happy. That is the way that you learned to live as well. But now God has saved you from that way of life. You know that he has bought you for himself. He did not buy you with things that do not continue for ever, like silver or gold.",
-    "verse_19": "Instead, he bought you with the very valuable blood of Christ, who died as a sacrifice for our sins.  He died like a lamb that is completely good and has nothing wrong with it.",
+    "verse_19": "Instead, he bought you with the very valuable blood of Christ, who died as a sacrifice for our sins. He died like a lamb that is completely good and has nothing wrong with it.",
     "verse_20": "Before the world began, God had already chosen Christ. But now, during these last days of the world, God has shown Christ to people. God did that so that he could help you.",
     "verse_21": "Yes, it is because of Christ that you now believe in God. God raised Christ, so that he became alive again after his death. He did that to show everyone that Christ is great. That is why you believe in God. You trust him that he will do good things for you.",
     "verse_22": "You have obeyed God's true message. As a result, you have become clean inside, and now you can really love other believers. So continue to love each other very well, with honest thoughts.",
@@ -50,7 +50,7 @@ var i_peter_data = {
     "verse_21": "When God chose you to be his servants, he wanted you to be brave like that. Christ had trouble and pain on your behalf. He has shown you how you should live when trouble comes.",
     "verse_22": "The Bible says this: ‘He never did anything that was wrong. He never said anything that was not true.’",
     "verse_23": "People insulted Christ, but he did not say any bad thing to answer them. People caused him to have trouble, but he never tried to hurt them in return. Instead, Christ trusted God to help him. He knew that God always judges people fairly.",
-    "verse_24": "When Christ died on the cross, he carried our sins in his own body.  He took this punishment so that sin would no longer rule over us. Instead, we can now do the right things that God wants us to do. Because people hurt Christ's body, you have now become well.",
+    "verse_24": "When Christ died on the cross, he carried our sins in his own body. He took this punishment so that sin would no longer rule over us. Instead, we can now do the right things that God wants us to do. Because people hurt Christ's body, you have now become well.",
     "verse_25": "Before, you were like sheep that were going the wrong way. But now you have turned round and come to Christ. He is your Shepherd, and he keeps you completely safe."
   },
   "chapter_3": {
@@ -110,8 +110,8 @@ var i_peter_data = {
     "verse_9": "But you must be strong to fight against him. Trust God completely. Remember this: Believers all over the world are having the same kind of trouble.",
     "verse_10": "Yes, you will have trouble like this for a short time. But after that, God will make everything right. He is completely kind and he will always help you. Because you belong to Christ, God has chosen you to live with him in heaven for ever. You will join him in that beautiful place. Then God will make you well again. He will make you strong in your spirits. You will be able to stand strongly.",
     "verse_11": "Yes, God rules with power for ever! Amen! This is true!",
-    "verse_12": "Silas has helped me to write this short letter to you. I know that he continues to trust Christ well.  I have written to you because I want you to be strong. I have told you how God is kind to us and he helps us. This is God's true message to you. So continue to believe it and be strong.",
-    "verse_13": "The believers here in Babylon say ‘hello’ to you.  God has chosen them as his people, together with you. Mark, who is like my son, also says ‘hello’ to you.",
+    "verse_12": "Silas has helped me to write this short letter to you. I know that he continues to trust Christ well. I have written to you because I want you to be strong. I have told you how God is kind to us and he helps us. This is God's true message to you. So continue to believe it and be strong.",
+    "verse_13": "The believers here in Babylon say ‘hello’ to you. God has chosen them as his people, together with you. Mark, who is like my son, also says ‘hello’ to you.",
     "verse_14": "When you meet, kiss each other as Christian brothers and sisters. I pray for all of you who belong to Christ. I pray that God will give you peace in your minds."
   }
 };

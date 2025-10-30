@@ -7,7 +7,7 @@ var obadiah_data = {
     "verse_5": "He says, ‘Men might come in the night to take away what is yours. (Oh! What a very bad thing will happen to you!) But they would not take everything. If people came to take fruit from your trees, they would leave some fruit on the tree.",
     "verse_6": "But people will take everything from Esau's people (also called Edom). They will even take the valuable things that you hide.",
     "verse_7": "People who have helped you to fight will push you out from your country. They will tell you what is not true. You will believe them. They will be stronger than you because you will believe their words. They will make a trap for you.’",
-    "verse_8": "The Lord says, ‘Some men in Edom know what is right.  But, at that time, I will kill them. Some men in the mountains know what is good. (These are the mountains where Esau's people live.) But I will kill those men.",
+    "verse_8": "The Lord says, ‘Some men in Edom know what is right. But, at that time, I will kill them. Some men in the mountains know what is good. (These are the mountains where Esau's people live.) But I will kill those men.",
     "verse_9": "There are men from Teman city that fight. But I will make them afraid. Esau's people live in the mountains. And everyone there will die.",
     "verse_10": "This will happen because you were cruel to your brother Jacob (the people in Israel). God will make you ashamed because of this and you will die.",
     "verse_11": "Men from other countries came into Jerusalem. They took away all the good things from Jerusalem. They played a game for the best things. You were as bad as they were. You did not help the Israelites.",

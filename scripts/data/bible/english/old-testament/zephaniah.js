@@ -1,6 +1,6 @@
 var zephaniah_data = {
   "chapter_1": {
-    "verse_1": "This is the Lord's message, which he gave to Zephaniah, Cushi's son.  Cushi's father was Gedaliah. Gedaliah's father was Amariah, and Amariah's father was Hezekiah. The Lord gave this message to Zephaniah when Josiah was king. Josiah was the son of Amon, who was the king of Judah.",
+    "verse_1": "This is the Lord's message, which he gave to Zephaniah, Cushi's son. Cushi's father was Gedaliah. Gedaliah's father was Amariah, and Amariah's father was Hezekiah. The Lord gave this message to Zephaniah when Josiah was king. Josiah was the son of Amon, who was the king of Judah.",
     "verse_2": "‘It is the Lord who is speaking now. I will remove everything from the ground.",
     "verse_3": "I will remove men and animals. I will remove the birds that fly in the air. I will also remove the fish that live in the sea. I will remove all the bad people. Bad people cause trouble for other people. Yes, I will remove all the people from the ground. It is the Lord who is speaking.",
     "verse_4": "I will destroy Judah. I will remove all the people who live in Jerusalem. I will remove all those who believe in the false god Baal. I will remove Baal's priests.",
@@ -21,7 +21,6 @@ var zephaniah_data = {
   },
   "chapter_2": {
     "verse_1": "Come together! Yes, you people, come together and think. You do not know how to be ashamed!",
-    "verse_3": "The wind takes away the dry parts of a plant that covered the seed. It will be like that when I punish you. Before it is the time for me to punish you, look for me. Before this time is past, look for me. Look for me, before I become very, very angry with you. There will be a day when the Lord will be angry. Look for me, before that day. Yes, look for the Lord, all you people who want to make him happy. You have done what the Lord wants. Continue to do what is good. But do not think that you are great. Perhaps you will find a safe place on the day when the Lord is angry.",
     "verse_4": "Then, the people who have lived in Gaza city and Ashkelon city will not be there. Enemies will also send away the people in Ashdod city at midday. And those enemies will destroy Ekron city.",
     "verse_5": "Terrible trouble will come to you people who came from Crete, you people who live beside the sea! The Lord has said this against you: I will kill all you Philistines who live in the land of Canaan! You will all die. So nobody will live there.",
     "verse_6": "By the sea, there will be houses for people who feed sheep. There will be safe places for their sheep.",

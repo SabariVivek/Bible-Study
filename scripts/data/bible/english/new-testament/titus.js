@@ -22,7 +22,7 @@ var titus_data = {
     "verse_2": "Tell the older men to control themselves properly. They must think carefully about how they live, so that people respect them. They must continue to believe in Christ. They must continue to love other people. They must continue to be patient and strong.",
     "verse_3": "Also, tell the older women to live in a good way. Their lives must show that they respect God. They must not say bad things about other people. They must not be drunks. They must teach what is good.",
     "verse_4": "In this way, they can teach the young women how they should live. As a result, the young women will love their husbands and their children.",
-    "verse_5": "The young women will control themselves well and be pure in how they live. They will be good housewives who are kind to other people.  They will respect their husbands. If they live in a good way like that, nobody will be able to say bad things about God's message.",
+    "verse_5": "The young women will control themselves well and be pure in how they live. They will be good housewives who are kind to other people. They will respect their husbands. If they live in a good way like that, nobody will be able to say bad things about God's message.",
     "verse_6": "As for the young men, tell them also to control themselves wisely in how they live.",
     "verse_7": "You yourself must always do good things too. In that way, you will show the young men how they should live. When you teach the believers, be honest and serious.",
     "verse_8": "Teach a message that is correct, so that nobody can say anything against it. Then our enemies will be ashamed, because they cannot say anything bad about us.",
@@ -46,8 +46,8 @@ var titus_data = {
     "verse_9": "But stay away from people who argue about silly things. They study long lists of their families' names from years ago. Refuse to quarrel with people like that. Refuse to argue about the rules in God's Law. All those kinds of things have no value and they do not help anyone.",
     "verse_10": "If someone teaches a false message that causes trouble, warn him. If you warn him twice and he still does not stop, stay away from him.",
     "verse_11": "You know that a person like that has chosen not to believe the true message. He knows that he is doing a bad thing, but he continues to do it.",
-    "verse_12": "I will send either Artemas or Tychicus to you.  After one of them has arrived, please come to meet me in Nicopolis. Come as quickly as you can. I have decided that I will stay in Nicopolis during the winter.",
-    "verse_13": "Please help Zenas, the lawyer, and Apollos as much as you can.  Make sure that they have everything that they need for their journey.",
+    "verse_12": "I will send either Artemas or Tychicus to you. After one of them has arrived, please come to meet me in Nicopolis. Come as quickly as you can. I have decided that I will stay in Nicopolis during the winter.",
+    "verse_13": "Please help Zenas, the lawyer, and Apollos as much as you can. Make sure that they have everything that they need for their journey.",
     "verse_14": "Our Christian friends there must learn to do good things. They should supply things to people who need help. That will show that their lives are really useful.",
     "verse_15": "Everyone who is here with me says ‘hello’ to you. Please say ‘hello’ on our behalf to the believers there who love us. I pray that God will continue to be very kind to all of you."
   }

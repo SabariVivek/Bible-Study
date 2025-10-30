@@ -1,12 +1,12 @@
 var malachi_data = {
   "chapter_1": {
-    "verse_1": "This is the message that the Lord told to Malachi.  Malachi knew that he must tell this message to the Israelites.",
-    "verse_2": "The Lord says, ‘I have loved you.’ But you ask, ‘How have you loved us?’",
+    "verse_1": "This is the message that the Lord told to Malachi. Malachi knew that he must tell this message to the Israelites.",
+    "verse_2": "The Lord says, ‘I have loved you.’ But you ask, ‘How have you loved us?’ The Lord says, ‘I chose to love Jacob and his descendants. Esau was Jacob's brother.",
     "verse_3": "But I have not loved Esau and his descendants. Instead, I have caused trouble for Esau. I caused Esau's mountains to become a wilderness. Nobody uses that land any longer. Now there are only jackals in the land that belongs to Esau.’",
-    "verse_4": "Esau's descendants in Edom may say, ‘They have destroyed our towns, but we will build our houses again.’",
+    "verse_4": "Esau's descendants in Edom may say, ‘They have destroyed our towns, but we will build our houses again.’ But the Lord Almighty says, ‘They may build again, but I will knock everything down. People will call Edom, “The Evil Land”. They will call them, “The Nation that the Lord is angry with for ever”.",
     "verse_5": "You will see with your own eyes what I will do to them. Then you will say, “The Lord has great power, even beyond Israel's borders.” ’",
     "verse_6": "The Lord Almighty says this to the priests: ‘A son respects his father. A servant respects his master. If I am really your father and your master, why do you not respect me? You are my priests, but you insult my name. But then you ask, “What have we done to insult your name?”",
-    "verse_7": "You insult my name when you offer unclean sacrifices to me on my altar. But you ask, “How have we offered unclean sacrifices to you?”",
+    "verse_7": "You insult my name when you offer unclean sacrifices to me on my altar. But you ask, “How have we offered unclean sacrifices to you?” You have shown that you do not respect the Lord's altar as important.",
     "verse_8": "You offer blind animals as a sacrifice to me. You know that is wrong. You offer to me animals that cannot walk or animals that are ill. That is also a wrong thing to do. You would not give gifts like that to your city's ruler. If you did, he would surely not accept them. He would not be happy with your gifts.’ That is what the Lord Almighty says.",
     "verse_9": "‘Now you ask me to be kind to you. You want me to forgive you. But when you offer unclean animals as gifts to me, I will not be happy with your gifts.’ That is what the Lord Almighty says.",
     "verse_10": "‘It would be better if one of you shut the temple doors! Then you would not be able to offer useless sacrifices on my altar. I am not happy with you. I will not accept any more gifts from you.’ That is what the Lord Almighty says.",
@@ -26,8 +26,8 @@ var malachi_data = {
     "verse_8": "But you priests do not serve me in the right way. What you teach causes many people to do wrong things. In that way, you have spoiled the covenant that I made with Levi.’ That is what the Lord Almighty says.",
     "verse_9": "‘So I have caused all the people to insult you. They no longer respect you, because you do not obey my rules. When you teach my people, you are kind to some of them but you cheat others.’",
     "verse_10": "You know that we all have one Father. It is God himself who made all of us. But now we turn against each other. We do not respect the covenant that God made with our ancestors.",
-    "verse_11": "Judah's people have turned against God. As a result, people have done disgusting things in Jerusalem and in all Israel. You have spoiled the holy place, the temple that the Lord loves.  You have turned away from the Lord and you worship foreign gods.",
-    "verse_12": "I pray that the Lord will remove all people like that from among his people. Not one of them will continue to belong to the family of Jacob.  They will no longer be able to offer gifts to the Lord Almighty.",
+    "verse_11": "Judah's people have turned against God. As a result, people have done disgusting things in Jerusalem and in all Israel. You have spoiled the holy place, the temple that the Lord loves. You have turned away from the Lord and you worship foreign gods.",
+    "verse_12": "I pray that the Lord will remove all people like that from among his people. Not one of them will continue to belong to the family of Jacob. They will no longer be able to offer gifts to the Lord Almighty.",
     "verse_13": "Also, you weep so much that your tears cover the Lord's altar! You cry because the Lord no longer accepts your gifts. He is not happy with the gifts that you offer to him.",
     "verse_14": "You ask, ‘Why is the Lord not happy with our gifts?’ The Lord knows that you men have not done the right thing with your wives. When you married as a young man, you promised to take care of your wife always. But you have sent her away, when the law says that you must stay with her as your wife.",
     "verse_15": "The Lord has joined you together, as a man with his wife. Your body and your spirit belong to him. Why did God put you together? He wanted you to have children who would belong to him. So think carefully about how you live. Do not leave the wife that you married when you were a young man.",
@@ -42,9 +42,9 @@ var malachi_data = {
     "verse_5": "At that time, I will come among you as your judge. I will speak clearly against those who have done wrong things. I will punish the magicians, the adulterers and those who tell lies against other people. I will punish those people who are cruel to their workers, or they deceive widows or children who have no family. And I will punish those who do not help foreigners who live among them. People who do those things show that they do not respect me.’ That is what the Lord Almighty says.",
     "verse_6": "‘I am the Lord and I do not change. Because of my promises to my people, I have not destroyed you, descendants of Jacob.",
     "verse_7": "I have told you my commands. But you do not listen to me any longer. You have not obeyed me, even since the time of your ancestors. Now, return to me! Then I will return to bless you.’ That is what the Lord Almighty says. ‘But you ask, “How do we return to you?”",
-    "verse_8": "I say to you, “A man should not rob God. But you are robbing me.” But you ask, “How do we rob you?”",
+    "verse_8": "I say to you, “A man should not rob God. But you are robbing me.” But you ask, “How do we rob you?” I say, “You do not give to me the tithes and the offerings that you should give.”",
     "verse_9": "Yes, all of you are robbing me. The whole nation of Israel is guilty. So you will receive the punishment of a curse.",
-    "verse_10": "Now you must bring the whole tithe that belongs to me.  Store it in my temple, so that there will be food in my house. Obey me and then see what I will do.’ That is what the Lord Almighty says.",
+    "verse_10": "Now you must bring the whole tithe that belongs to me. Store it in my temple, so that there will be food in my house. Obey me and then see what I will do.’ That is what the Lord Almighty says. ‘You will see how much I will bless you! You will not have enough room to store all the good things that I will give to you. I will pour blessings out of the sky like rain.",
     "verse_11": "I will stop insects from eating your crops. The grapes will not fall from your vines before they are ready to eat.",
     "verse_12": "You will be happy to live in your land. The people of all the other nations will see that God has blessed you.’ That is what the Lord Almighty says.",
     "verse_13": "The Lord says, ‘You have spoken bad words against me. But you ask, “What have we said against you?”",
@@ -59,7 +59,7 @@ var malachi_data = {
     "verse_2": "‘But it will be different for you who respect my name. My power to make you well again will come to you. It will be like the sun that rises to shine on you. When that happens, you will be very happy. You will jump up and down like young cows when someone lets them go free.",
     "verse_3": "Then you will walk over the wicked people. They will be like ashes under your feet. That will happen on the day when I do these things.’ That is what the Lord Almighty says.",
     "verse_4": "‘Remember the rules that I gave to my servant Moses at Sinai mountain. Those rules and laws were for all the Israelites to obey.",
-    "verse_5": "Look! I will send my prophet Elijah to you.  He will come before that great day of the Lord arrives. That will be a day that makes people afraid.",
-    "verse_6": "He will speak my message, so that fathers and their children return together to me.  Then I will not have to come and bring punishment on the land.’"
+    "verse_5": "Look! I will send my prophet Elijah to you. He will come before that great day of the Lord arrives. That will be a day that makes people afraid.",
+    "verse_6": "He will speak my message, so that fathers and their children return together to me. Then I will not have to come and bring punishment on the land.’"
   }
 };

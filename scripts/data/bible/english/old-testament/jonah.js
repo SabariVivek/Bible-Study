@@ -2,7 +2,7 @@ var jonah_data = {
   "chapter_1": {
     "verse_1": "The Lord spoke a message to Jonah, Amittai's son.",
     "verse_2": "He said, ‘Go now to the great city of Nineveh. Tell the people in the city that I know how wicked they are. Tell them that I will punish them because of their sins.’",
-    "verse_3": "But Jonah did not want to obey the Lord's command. He decided to run away to Tarshish.  He went down to Joppa.  There he found a ship that was ready to sail to Tarshish. After he had paid for the journey, he got into the ship. He wanted to go on the ship to Tarshish, to get far away from the Lord.",
+    "verse_3": "But Jonah did not want to obey the Lord's command. He decided to run away to Tarshish. He went down to Joppa. There he found a ship that was ready to sail to Tarshish. After he had paid for the journey, he got into the ship. He wanted to go on the ship to Tarshish, to get far away from the Lord.",
     "verse_4": "Then the Lord sent a strong wind on the sea. The storm was so powerful that it almost broke the ship into pieces.",
     "verse_5": "The sailors were very frightened. Each of them called out to his own god for help. They threw into the sea all the things that the ship carried. They wanted to make the ship as light as they could. Jonah had gone down into the bottom of the ship. He was lying down and he was asleep.",
     "verse_6": "The ship's captain went to Jonah. He said, ‘Why are you sleeping like that? Get up now! Call to your god for help! Maybe he will listen to us and we will not die.’",
@@ -34,8 +34,7 @@ var jonah_data = {
     "verse_1": "The Lord spoke to Jonah a second time.",
     "verse_2": "He said, ‘Now go to that great city, Nineveh. Tell the people there the message that I will give to you.’",
     "verse_3": "Jonah obeyed the Lord and he went to Nineveh. Nineveh was a very large city. Somebody would need three days to walk all through it.",
-    "verse_4": "When Jonah arrived in Nineveh, he walked for one day into the city. Then he shouted out to the people, ‘After",
-    "verse_40": "more days, God will destroy Nineveh.’",
+    "verse_4": "When Jonah arrived in Nineveh, he walked for one day into the city. Then he shouted out to the people, ‘After 40 more days, God will destroy Nineveh.’",
     "verse_5": "The people who lived in Nineveh believed God's message. They told everyone that they must not eat any food for several days. Everyone had to wear sackcloth to show that they were sorry. The most important people and the ordinary people all did that.",
     "verse_6": "The king of Nineveh heard about God's message. He got up from his throne and he removed his royal clothes. He dressed himself in sackcloth and he sat in ashes on the ground.",
     "verse_7": "Then the king sent this message to all the people in Nineveh. He said, ‘This command comes from the king and his officers. No person or any of your animals may eat any food or drink any water.",

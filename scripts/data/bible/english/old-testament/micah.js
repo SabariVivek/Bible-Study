@@ -1,6 +1,6 @@
 var micah_data = {
   "chapter_1": {
-    "verse_1": "These are the messages that the Lord gave to Micah.  Then Micah told them to the people during the times that Jotham, Ahaz and Hezekiah ruled the country called Judah. Micah was born in a small town called Moresheth. God showed Micah about what would happen to the cities called Samaria and Jerusalem.",
+    "verse_1": "These are the messages that the Lord gave to Micah. Then Micah told them to the people during the times that Jotham, Ahaz and Hezekiah ruled the country called Judah. Micah was born in a small town called Moresheth. God showed Micah about what would happen to the cities called Samaria and Jerusalem.",
     "verse_2": "Listen, all of you people everywhere! Hear this, everyone who lives on the earth! The Lord God will speak against you. You have done what is wrong. That is why he will speak against you. He will speak from his special house.",
     "verse_3": "Look! The Lord is leaving his place and he is coming down to the earth. He will come to the high places (where you worship false gods). He will destroy those places when he comes.",
     "verse_4": "The mountains will melt when he comes, like wax melts near a fire. The valleys will also break into pieces. They will move like water when it rushes down a hill.",
@@ -86,7 +86,7 @@ var micah_data = {
     "verse_5": "My people, please remember the bad things that King Balak of Moab tried to do. And remember what Balaam, Beor's son, answered him. Remember your journey from Shittim to Gilgal. Then you will remember that I, the Lord, do good things.’",
     "verse_6": "‘I come to meet with the Lord,’ you say. ‘I must know what to bring when I come. I bend down to worship him. I must know what to offer when I bend down. He is God and he is greater than everything. Perhaps he would like it if I burn young cows one year old for him.",
     "verse_7": "He might be happy with thousands of male sheep, or ten thousand rivers of olive oil. I have not obeyed God. I might even kill and burn my oldest son, because of that. I have done wrong things and I must pay God for that. Perhaps, if I give my own child to him, that will be enough to pay.’",
-    "verse_8": "But God has told us what is good.  This is what the Lord wants from us: ‘You must be fair to other people,’ God says. ‘You must want to be kind. And you must be careful to do what I show you.’",
+    "verse_8": "But God has told us what is good. This is what the Lord wants from us: ‘You must be fair to other people,’ God says. ‘You must want to be kind. And you must be careful to do what I show you.’",
     "verse_9": "The Lord shouts to the people in the city of Jerusalem. So it is good for us to listen carefully to what he says. ‘Listen to me, because I have the authority to punish you,’ God says.",
     "verse_10": "‘You bad people still hide valuable things that you have taken from other people. I will not forget this. You bad people use false weights to measure the food that you sell. I hate that.",
     "verse_11": "I will not excuse you people who use false weights. You are not being honest if you weigh things like that.",

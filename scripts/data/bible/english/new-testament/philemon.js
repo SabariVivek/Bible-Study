@@ -1,6 +1,6 @@
 var philemon_data = {
   "chapter_1": {
-    "verse_1": "This letter is from me, Paul. I am in prison because I serve Christ Jesus. Our Christian friend Timothy is here with me.",
+    "verse_1": "This letter is from me, Paul. I am in prison because I serve Christ Jesus. Our Christian friend Timothy is here with me. We are writing to you, Philemon. You are our friend, and we love you. You work on behalf of Christ, as we do.",
     "verse_2": "We say ‘hello’ also to Apphia, who is like a sister to us. And we say ‘hello’ to Archippus, who serves Christ like a soldier, as we do. We also say ‘hello’ to the group of Christians who meet in your home.",
     "verse_3": "I pray that God, our Father, and the Lord Jesus Christ will continue to help you. I pray that they will give you peace in your minds.",
     "verse_4": "When I pray for you, I always thank my God when I think about you.",

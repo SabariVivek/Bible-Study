@@ -2,11 +2,10 @@ var job_data = {
   "chapter_1": {
     "verse_1": "There was a man who lived in a place called Uz. His name was Job. He was a good and honest man. He was afraid to make God angry. He refused to do evil things.",
     "verse_2": "Job had seven sons and three daughters.",
-    "verse_3": "He had 7,000 sheep and 3,000 camels. He had",
-    "verse_500": "donkeys. He also had many servants. He was the richest person in the east part of the world.",
+    "verse_3": "He had 7,000 sheep and 3,000 camels. He had 500 pairs of oxen and 500 donkeys. He also had many servants. He was the richest person in the east part of the world.",
     "verse_4": "Each of Job's sons would give parties for each other in their homes. They sent messages to their three sisters to come and eat the feast with them.",
     "verse_5": "After each party, Job would ask his children to come and visit him. He wanted to make them clean again if they were guilty of bad things. He thought, ‘Perhaps they have done something that is bad. Perhaps they have thought bad things against God.’ So he would get up early in the morning. He would offer a burnt offering as a sacrifice for each of his children. Job always did this after each party that his children had.",
-    "verse_6": "One day, the angels came to meet with the Lord in heaven.  Satan also came and he stood there with them.",
+    "verse_6": "One day, the angels came to meet with the Lord in heaven. Satan also came and he stood there with them.",
     "verse_7": "The Lord said to Satan, ‘Where have you come from?’ Satan replied, ‘I have been travelling all over the earth. I have been watching the things that happen there.’",
     "verse_8": "Then the Lord said to Satan, ‘You have seen Job, who is my servant. What do you think about him? There is no one on earth that is like him. He is a good and honest man. He is afraid to make me angry. He refuses to do evil things.’",
     "verse_9": "Satan answered the Lord, ‘There is a very good reason why Job obeys you.",
@@ -201,8 +200,7 @@ var job_data = {
   "chapter_9": {
     "verse_1": "Then Job replied. This is what he said:",
     "verse_2": "‘The things that you have said are true. But nobody can show God that he is completely good.",
-    "verse_3": "It is not possible to argue with God.",
-    "verse_000": "questions that we cannot answer.",
+    "verse_3": "It is not possible to argue with God. God can ask 1,000 questions that we cannot answer.",
     "verse_4": "God is very wise and he is very powerful. It is impossible to argue against him and win.",
     "verse_5": "He has the power to move mountains suddenly. When he is angry he can knock them down.",
     "verse_6": "He shakes the earth, to move it from its proper place. The foundations of the earth shake!",
@@ -824,7 +822,7 @@ var job_data = {
   },
   "chapter_32": {
     "verse_1": "Job would not agree that he had done anything that was wrong. So his three friends refused to argue with him any more.",
-    "verse_2": "Another man was also there. His name was Elihu, Barakel's son. Barakel was a descendant of Buz. He belonged to Ram's clan.",
+    "verse_2": "Another man was also there. His name was Elihu, Barakel's son. Barakel was a descendant of Buz. He belonged to Ram's clan. Elihu became very angry with Job. He was angry because Job continued to say that he was not guilty. Job said that God was wrong to punish him.",
     "verse_3": "Elihu was also angry with Job's three friends. They had not been able to find an answer to Job's problem. But they still said that Job was guilty.",
     "verse_4": "Elihu had waited for Job's three friends to speak before he spoke to Job himself. He waited because he was younger than them.",
     "verse_5": "But he became angry when Job's three friends had nothing more to say. So he finally decided to speak.",
@@ -1143,7 +1141,7 @@ var job_data = {
     "verse_4": "You said to me, “Listen carefully to what I will say. I will ask you questions and you must answer them.”",
     "verse_5": "In the past, I had heard about you from other people. Now I have seen you for myself.",
     "verse_6": "So I am ashamed of the things that I said. I sit here in dirt and in ashes to show you that I am very sorry.’",
-    "verse_7": "When the Lord had spoken to Job, he said this to Eliphaz, the man from Teman:",
+    "verse_7": "When the Lord had spoken to Job, he said this to Eliphaz, the man from Teman: ‘I am very angry with you and with your two friends. The things that my servant Job has said about me are true. But the things that you said were not right.",
     "verse_8": "You three men must now go to Job. Take seven bulls and seven male sheep with you. Burn them as sacrifices for yourselves. After you have done that, my servant Job will pray for you. I will answer his prayer. Then I will not punish you as you deserve because of your foolish words. My servant Job has spoken the truth about me, but you have not.’",
     "verse_9": "So Eliphaz, the man from Teman, Bildad, the man from Shuah, and Zophar, the man from Naamah, did what the Lord had told them to do. And the Lord answered Job's prayer.",
     "verse_10": "After Job prayed for his three friends, the Lord made him a rich man again. He gave Job twice as many things as he had before.",
@@ -1152,8 +1150,7 @@ var job_data = {
     "verse_13": "He had seven sons and three daughters.",
     "verse_14": "The daughters' names were Jemimah, Keziah, and Keren-Happuch.",
     "verse_15": "They were the most beautiful women in the whole land of Uz. Job said that they should receive some of his things after he died, along with their brothers.",
-    "verse_16": "Job lived for",
-    "verse_140": "years after this. He was still alive when his grandchildren and their grandchildren were born.",
+    "verse_16": "Job lived for 140 years after this. He was still alive when his grandchildren and their grandchildren were born.",
     "verse_17": "So when Job died, he had lived for a long time."
   }
 };

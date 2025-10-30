@@ -13,7 +13,7 @@ var i_thessalonians_data = {
   },
   "chapter_2": {
     "verse_1": "Our Christian friends, you yourselves know that our visit to you had good results.",
-    "verse_2": "You know what happened to us before we came to you. The people at Philippi had done bad things to us.  They had caused us to have trouble. When we came to you, our God helped us to be brave. We were not afraid to tell you his good news. Many people tried to stop us, but we told you God's message.",
+    "verse_2": "You know what happened to us before we came to you. The people at Philippi had done bad things to us. They had caused us to have trouble. When we came to you, our God helped us to be brave. We were not afraid to tell you his good news. Many people tried to stop us, but we told you God's message.",
     "verse_3": "When we tell people to obey God's message, we are not saying anything that is not true. We do not have a wrong purpose. We are not trying to deceive anyone.",
     "verse_4": "Instead, we say what God wants us to say. He has chosen us to tell his good news to people. So we do not do it to make people happy. We do it to make God happy. He is the one who knows what we are really like.",
     "verse_5": "When we came to you, we spoke what was true. We did not just say nice things to make you feel good. You yourselves know that. We did not try to make you give things to us. We never had a secret purpose like that. God knows that this is true.",
@@ -25,7 +25,7 @@ var i_thessalonians_data = {
     "verse_11": "You know that we helped you, like a father helps his own children.",
     "verse_12": "We taught you clearly what is true. We helped you to be strong as believers. God has chosen you to be his own people. You belong to his great kingdom, where he rules. So we told you to live in a way that pleases him.",
     "verse_13": "There is another reason why we always continue to thank God for you. When we told God's message to you, you knew that it was not human ideas. You accepted it as God's own message, and that is what it certainly is. You continue to grow as believers because of God's message that you heard.",
-    "verse_14": "Our Christian friends, you have received the same kind of trouble that the people in the churches of Judea received.  People in your own country have caused you to have trouble and pain. The same thing happened to the people in Judea who believed in Christ Jesus. They received trouble from their own Jewish people.",
+    "verse_14": "Our Christian friends, you have received the same kind of trouble that the people in the churches of Judea received. People in your own country have caused you to have trouble and pain. The same thing happened to the people in Judea who believed in Christ Jesus. They received trouble from their own Jewish people.",
     "verse_15": "People like that even killed the Lord Jesus. They killed God's prophets, too. They also did bad things against us, so that we had to leave their towns. They make God become angry. They are enemies of all people,",
     "verse_16": "because they try to stop us speaking to Gentiles. They do not want God to save anyone from another nation. In this way, they continue to do more and more bad things. When their sins become too many, God has to stop them. He has become so angry that he has punished them completely.",
     "verse_17": "Our friends, we have had to go away from you for a short time. But we have not stopped thinking about you. We have wanted more and more to come to see you again.",
@@ -34,7 +34,6 @@ var i_thessalonians_data = {
     "verse_20": "You show the great results of our work. Yes, it is because of you that we are very happy."
   },
   "chapter_3": {
-    "verse_2": "After a long time, we could not be patient any longer. So we decided to send our friend Timothy to come to visit you. We ourselves would stay here in Athens. Timothy serves God with us here. He tells people the good news about Christ. We sent him to you so that he could help you to trust Christ more and more.",
     "verse_3": "You are receiving many troubles. We did not want anyone among you to turn away from Christ because of that. You already know that we who are believers must receive troubles like that.",
     "verse_4": "Even when we were there with you, we told you that troubles would come. We told you before the troubles came and now it has really happened. You know that it is true.",
     "verse_5": "That is why I had to send Timothy to come to you. I could not wait to hear news about you any longer. I wanted to know whether you still trusted Christ. I was afraid that Satan had deceived you. If he had made you turn away from Christ, our work among you would have had no results.",
@@ -60,7 +59,7 @@ var i_thessalonians_data = {
     "verse_10": "Certainly, you love all the believers in all the region of Macedonia. And now we ask you, as our Christian friends, ‘Please love each other more and more.’",
     "verse_11": "Try very much to live at peace with other people. Work hard at your own job. We have already told you that you must do these things.",
     "verse_12": "If you live in this way, other people who are not believers will respect you. Also, you will not have to ask anyone else to give you the things that you need.",
-    "verse_13": "Our Christian friends, we want you to understand properly about your friends who have died.  Then you will not continue to be sad about them. People who do not hope for any life after death are sad when their friends die. But you should not be upset like those other people.",
+    "verse_13": "Our Christian friends, we want you to understand properly about your friends who have died. Then you will not continue to be sad about them. People who do not hope for any life after death are sad when their friends die. But you should not be upset like those other people.",
     "verse_14": "We believe that Jesus died and he rose again after death. So we also believe that people who have died as Christians will rise again. When God brings Jesus back, he will take the Christians to go with Jesus.",
     "verse_15": "We are telling you the message that the Lord has given to us. This is what will happen when the Lord returns. Those of us who are still alive will not go to meet the Lord first. We will not go before those people who have already died.",
     "verse_16": "On that day, the Lord himself will come down from heaven. He will shout with authority. People will hear the voice of the leader of God's angels. They will hear the sound of God's trumpet. Then those people who have died as Christians will become alive again. They will be the first people to rise up.",
@@ -81,7 +80,7 @@ var i_thessalonians_data = {
     "verse_11": "Because of that, you should help each other to become stronger as believers. I know that you are already doing that.",
     "verse_12": "Our friends, we ask you to respect your leaders who work hard among you. They lead you and they teach you what is right on the Lord's behalf.",
     "verse_13": "Show them how valuable they are to you. And love them very much because of the work that they do. Live at peace among yourselves.",
-    "verse_14": "Friends, you must warn lazy people that they should work.  If people are afraid, help them to be brave. If people are weak, take care of them. Be patient with everyone.",
+    "verse_14": "Friends, you must warn lazy people that they should work. If people are afraid, help them to be brave. If people are weak, take care of them. Be patient with everyone.",
     "verse_15": "If someone does something bad against you, do not do anything bad against them in return. Never do that. Instead, always try to do good things that will help one other and help everyone else.",
     "verse_16": "Always be happy.",
     "verse_17": "Pray at all times.",

@@ -1,7 +1,5 @@
 var haggai_data = {
   "chapter_1": {
-    "verse_2": "The Lord spoke his message to Haggai, his prophet.  At that time, Darius was king of Persia.  He had been king for",
-    "verse_1": "year and five months. On the first day of the next month, the Lord told Haggai to speak to Zerubbabel, Judah's ruler, and to Joshua, the leader of God's priests. Zerubbabel was the son of Shealtiel. Joshua was the son of Jehozadak. This was the Almighty Lord's message: ‘Judah's people say that this is not the right time to build a temple for me.’",
     "verse_3": "The Lord told his prophet Haggai to say this to the people:",
     "verse_4": "‘You people are living in beautiful houses. But my temple is still just a heap of stones! It is time for you to do something about it!",
     "verse_5": "I, the Almighty Lord, tell you this: Think carefully about what is happening to you.",
@@ -32,12 +30,11 @@ var haggai_data = {
     "verse_13": "Haggai asked the priests another question: ‘If anyone touches a dead body, you know that you become unclean. If an unclean person touches any of these foods, would they also become unclean?’ The priests replied, ‘Yes, those things would be unclean.’",
     "verse_14": "So Haggai told them, ‘This is what the Lord says: This nation and its people are just like that. They are unclean. So everything that they do is also unclean. All the gifts that they offer to me are unclean. I could not accept them.",
     "verse_15": "Think carefully what life was like before you started again to build the Lord's temple. Do not forget that.",
-    "verse_16": "In those days, you hoped to get",
-    "verse_20": "On the same day, the Lord spoke to Haggai again. He said:",
-    "verse_50": "jars of wine from your grapes. But you only got",
+    "verse_16": "In those days, you hoped to get 20 bags of grain from your fields. But you only got ten bags. You hoped to get 50 jars of wine from your grapes. But you only got 20 jars.",
     "verse_17": "I sent bad weather and other problems to destroy all your crops. All your hard work came to nothing. But you still did not return to worship me, your Lord.",
     "verse_18": "Remember today, the 24th day of the ninth month. You have started again to build my temple. Now you have built its foundation, think about what will happen from today.",
     "verse_19": "You have already eaten the crops that you stored. The grapes, figs, pomegranates and olives are not yet ready for you to pick. But after today, I will bless you. You will have many good things.’",
+    "verse_20": "On the same day, the Lord spoke to Haggai again. He said:",
     "verse_21": "‘Speak to Zerubbabel, the ruler of Judah. Tell him that I will cause the sky and the whole earth to shake.",
     "verse_22": "Tell him that I will destroy the power of foreign kings. I will destroy their armies. Their horses and chariots will fall down. Their soldiers will fight against each other. They will kill each other with their swords.",
     "verse_23": "But I, the Almighty Lord say this to you, Zerubbabel, son of Shealtiel. You are my servant and I have chosen you. On that special day, I will give to you the authority to rule on my behalf. That is the message of the Almighty Lord.’"

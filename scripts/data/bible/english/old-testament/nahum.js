@@ -1,8 +1,8 @@
 var nahum_data = {
   "chapter_1": {
     "verse_1": "Nahum lives in Elkosh and this is his prophecy about the people in Nineveh.",
-    "verse_2": "God is angry with the people in Nineveh. The Lord loves his people.  But he is very angry with his enemies. He is so angry with them that he must punish them. He will be angry until he has killed his enemies.",
-    "verse_3": "The Lord will punish those who do wrong things. But he does not get angry quickly. He is a powerful God. The Lord does not get angry quickly. But he gets angry when people do wrong things. Then he punishes those people.",
+    "verse_2": "God is angry with the people in Nineveh. The Lord loves his people. But he is very angry with his enemies. He is so angry with them that he must punish them. He will be angry until he has killed his enemies.",
+    "verse_3": "The Lord will punish those who do wrong things. But he does not get angry quickly. He is a powerful God. The Lord does not get angry quickly. But he gets angry when people do wrong things. Then he punishes those people. He is very powerful. You can see his power in the wind and the storms. The clouds are like dust that his feet shake.",
     "verse_4": "He can cause the sea and the rivers to become dry by one word. The fertile places of Bashan and Carmel become dry and the green forests of Lebanon die too.",
     "verse_5": "He causes the mountains to shake and he causes the hills to become flat. The earth and all the people in the world are afraid of God.",
     "verse_6": "Nobody can fight God when he is very angry. The Lord pours his anger out like fire and he breaks the rocks in his path.",

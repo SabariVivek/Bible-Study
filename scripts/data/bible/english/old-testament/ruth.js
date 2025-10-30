@@ -1,10 +1,9 @@
 var ruth_data = {
   "chapter_1": {
-    "verse_2": "There was a time when judges ruled Israel. During that time there was a famine in Judah. A man who lived in Bethlehem, in Judah, had a wife and two sons. His name was Elimelech. Elimelech's wife was called Naomi, and his sons were called Mahlon and Kilion. They were from Ephrathah's clan. Because there was not enough food in Judah, Elimelech and his family left Bethlehem. They went to live as strangers in Moab.",
     "verse_3": "Elimelech died while they were living in Moab. Naomi and her two sons remained there alone.",
     "verse_4": "Then Naomi's sons married women from Moab. Mahlon married a woman called Ruth. Kilion married a woman called Orpah.",
     "verse_5": "After they had all lived in Moab for about ten years, both Mahlon and Kilion died. Now Naomi was completely alone, without her husband or her sons.",
-    "verse_6": "Naomi received news from Judah that the Lord had helped his people.  There was now enough food in Judah again. So Naomi decided to leave Moab and return to Judah with Ruth and Orpah.",
+    "verse_6": "Naomi received news from Judah that the Lord had helped his people. There was now enough food in Judah again. So Naomi decided to leave Moab and return to Judah with Ruth and Orpah.",
     "verse_7": "Naomi and her sons' wives left their home in Moab. They began to travel together on the way back to Judah.",
     "verse_8": "On the way, Naomi said to Ruth and Orpah, ‘Listen! You should return to your mothers' homes in Moab and stay there. Your husbands are dead now. You have been kind to them and to me. I pray that the Lord will be as kind to you.",
     "verse_9": "I also pray that God will give to each of you another husband and a new home.’ Naomi kissed them and said ‘goodbye’. Ruth and Orpah began to weep loudly.",
@@ -18,14 +17,14 @@ var ruth_data = {
     "verse_17": "I will die in the same place that you die. That is where people will bury me. I will stay beside you until death makes us separate. If I ever leave you, the Lord should punish me.’",
     "verse_18": "Then Naomi understood that Ruth would not agree to return to her own country. So she stopped saying that Ruth should leave her.",
     "verse_19": "Naomi and Ruth travelled together to Bethlehem. When they arrived there, the people were very surprised. The women from the town said, ‘Is this really Naomi?’",
-    "verse_20": "Naomi said to them, ‘Do not call me Naomi. Call me Mara, instead.  The Almighty God has made my life very sad.",
+    "verse_20": "Naomi said to them, ‘Do not call me Naomi. Call me Mara, instead. The Almighty God has made my life very sad.",
     "verse_21": "I left here with everything that I needed. Now the Lord has brought me back here with nothing. The Almighty Lord has turned against me, so that I have suffered. It is not right for you to call me Naomi.’",
     "verse_22": "That is how Naomi returned from Moab with Ruth. Ruth was from Moab. She was the wife of Naomi's son Mahlon. Naomi and Ruth arrived in Bethlehem when the harvest of barley was beginning."
   },
   "chapter_2": {
     "verse_1": "Boaz was a rich and important man who lived in Bethlehem. He was from the family of Naomi's husband, Elimelech.",
     "verse_2": "One day, Ruth, the woman from Moab, said to Naomi, ‘Let me go to the fields to pick up some grain from the harvest. I will walk behind anyone who lets me do that.’ Naomi said, ‘Yes, my daughter, go and do that.’",
-    "verse_3": "So Ruth went to the fields. She began to pick up the grains of barley that the men dropped on the ground.  It happened that she was in part of a field that belonged to Boaz. Boaz was from Elimelech's clan.",
+    "verse_3": "So Ruth went to the fields. She began to pick up the grains of barley that the men dropped on the ground. It happened that she was in part of a field that belonged to Boaz. Boaz was from Elimelech's clan.",
     "verse_4": "Just then, Boaz arrived from Bethlehem town. He said ‘hello’ to the workers. ‘I pray that the Lord will help you,’ he said. The men replied, ‘We pray that the Lord will bless you!’",
     "verse_5": "Boaz asked the leader of his workers, ‘Who is that young woman? Which family does she belong to?’",
     "verse_6": "The man said, ‘She is that young woman from Moab, who returned from Moab with Naomi.",
@@ -68,7 +67,7 @@ var ruth_data = {
     "verse_18": "Naomi said, ‘My daughter, you must be patient. We must wait to see what will happen. Boaz will surely do what he needs to do today.’"
   },
   "chapter_4": {
-    "verse_1": "In the morning, Boaz went to the gate of the town and he sat down there.  Later, the family-redeemer that Boaz had talked about to Ruth came there. Boaz said to him, ‘Come here, my friend, and sit down.’ So the man went to sit with Boaz.",
+    "verse_1": "In the morning, Boaz went to the gate of the town and he sat down there. Later, the family-redeemer that Boaz had talked about to Ruth came there. Boaz said to him, ‘Come here, my friend, and sit down.’ So the man went to sit with Boaz.",
     "verse_2": "Boaz chose ten of the town's leaders and he said to them, ‘Come and sit here.’ So they sat down.",
     "verse_3": "Then Boaz said to the family-redeemer, ‘Naomi has returned from Moab. She wants to sell the piece of land that belonged to our relative, Elimelech.",
     "verse_4": "I thought that I must tell you about this, in front of the leaders of our town. Tell us if you will buy this land from Naomi, so that all the people who sit here know what you decide. If you want to buy it, then you should buy it. If you do not want to buy it, then you must tell me. Then I will know what to do. You are the person who must decide. If you do not choose to buy the land, then I can buy it.’ The relative said, ‘I will buy it.’",
@@ -78,13 +77,17 @@ var ruth_data = {
     "verse_8": "So the relative said to Boaz, ‘You may buy the land.’ When he said that, he removed his shoe.",
     "verse_9": "Boaz said to the town's leaders and to all the people there, ‘You have all seen today that I have bought the land from Naomi. I have bought all the land that belonged to Elimelech, Kilion and Mahlon.",
     "verse_10": "I will also marry Ruth, who came here from Moab. She was Mahlon's wife. In that way, the land will still belong to his family. Ruth's descendants will still have his family's name. His family will continue to belong to this town where he lived. Today you have seen that this is what we have agreed together.’",
-    "verse_11": "Then all the leaders and the other people at the gate said, ‘We have seen that this is true. We pray that the Lord will bless the woman who is coming into your home as your wife. We pray that he will bless her as he blessed Rachel and Leah.  They gave birth to many children for the family of Israel. We pray that you will become a rich man in Ephrathah's clan. And we pray that you will become famous in Bethlehem town.",
+    "verse_11": "Then all the leaders and the other people at the gate said, ‘We have seen that this is true. We pray that the Lord will bless the woman who is coming into your home as your wife. We pray that he will bless her as he blessed Rachel and Leah. They gave birth to many children for the family of Israel. We pray that you will become a rich man in Ephrathah's clan. And we pray that you will become famous in Bethlehem town.",
     "verse_12": "We pray that this woman will give birth to many children for you. Then the Lord will give you many descendants, so that you have a large family. We pray that your family will be like the family of Perez, who was the son of Judah and his wife, Tamar.’",
     "verse_13": "So Boaz married Ruth. He lived with her as his wife. The Lord blessed her so that she became pregnant. She gave birth to a son.",
     "verse_14": "The women of Bethlehem said to Naomi, ‘We praise the Lord! Today, he has given to you a relative to take care of you! We pray that the child will become famous everywhere in Israel!",
     "verse_15": "He will help you to feel young again. He will take care of you when you are old. Your son's wife, Ruth, has given birth to this boy. She loves you and she has helped you more than seven sons could ever do.’",
     "verse_16": "Naomi took the child and she held him near to her. She took care of him as if he was her own son.",
     "verse_17": "The women who lived there said, ‘Now Naomi has a son again!’ They called the boy Obed. He became the father of Jesse, who became the father of David.",
-    "verse_18": "These are the descendants of Perez:"
+    "verse_18": "These are the descendants of Perez: Perez was the father of Hezron.",
+    "verse_19": "Hezron was the father of Ram. Ram was the father of Amminadab.",
+    "verse_20": "Amminadab was the father of Nahshon. Nahshon was the father of Salmon.",
+    "verse_21": "Salmon was the father of Boaz. Boaz was the father of Obed.",
+    "verse_22": "Obed was the father of Jesse. Jesse was the father of David."
   }
 };
