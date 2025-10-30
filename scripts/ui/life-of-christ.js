@@ -3,6 +3,10 @@
  * Handles dynamic card generation and passage display
  */
 
+// Track current language for Life of Christ passages
+let currentLifeOfChristLanguage = 'english'; // Default to English
+let currentVerseReference = ''; // Store current verse reference for translation
+
 // Get all events from all sections
 function getAllLifeOfJesusEvents() {
     const allEvents = [];
@@ -167,11 +171,18 @@ function loadPassageData(passageKey, verseReference) {
     
     if (!badge || !content) return;
 
-    // Try to load from Tamil Bible data first
-    const tamilContent = loadTamilVerses(verseReference);
+    // Store verse reference for translation
+    currentVerseReference = verseReference;
     
-    if (tamilContent && tamilContent.html) {
-        // Display Tamil verses
+    // Reset language to English when opening new passage
+    currentLifeOfChristLanguage = 'english';
+    updateTranslateButton();
+
+    // Try to load from English Bible data first
+    const englishContent = loadEnglishVerses(verseReference);
+    
+    if (englishContent && englishContent.html) {
+        // Display English verses
         badge.textContent = verseReference;
         badge.setAttribute('title', verseReference);
         
@@ -179,7 +190,13 @@ function loadPassageData(passageKey, verseReference) {
         addGospelClassToBadge(badge, verseReference);
         
         // Display the verses with proper formatting
-        content.innerHTML = tamilContent    .html;
+        content.innerHTML = englishContent.html;
+        
+        // Scroll content to top
+        setTimeout(() => {
+            content.scrollTop = 0;
+        }, 100);
+        
         return;
     }
 
@@ -212,6 +229,11 @@ function loadPassageData(passageKey, verseReference) {
     } else {
         content.innerHTML = '<p class="passage-no-data">No content available</p>';
     }
+    
+    // Scroll content to top
+    setTimeout(() => {
+        content.scrollTop = 0;
+    }, 100);
 }
 
 // Parse complex verse references
@@ -438,6 +460,237 @@ function loadTamilVerses(verseReference) {
     });
     
     return htmlContent ? { html: htmlContent } : null;
+}
+
+// Load English verses from the Bible data
+function loadEnglishVerses(verseReference) {
+    const parsed = parseVerseReference(verseReference);
+    
+    if (!parsed || !parsed.ranges || parsed.ranges.length === 0) return null;
+    
+    const dataVarName = getBookDataVariable(parsed.book);
+    
+    if (!dataVarName) return null;
+    
+    // Check if the data variable exists in global scope
+    if (typeof window[dataVarName] === 'undefined') {
+        console.log(`English data not loaded for: ${dataVarName}`);
+        return null;
+    }
+    
+    const bookData = window[dataVarName];
+    let htmlContent = '';
+    
+    // Check if multiple chapters are involved
+    const uniqueChapters = [...new Set(parsed.ranges.flatMap(r => {
+        if (r.crossChapter) {
+            // For cross-chapter ranges, include all chapters
+            const chapters = [];
+            for (let ch = r.startChapter; ch <= r.endChapter; ch++) {
+                chapters.push(ch);
+            }
+            return chapters;
+        }
+        return [r.startChapter];
+    }))];
+    
+    const hasMultipleChapters = uniqueChapters.length > 1;
+    let currentChapter = null;
+    
+    // Process each range
+    parsed.ranges.forEach((range, rangeIndex) => {
+        if (range.crossChapter) {
+            // Handle cross-chapter ranges (e.g., Mark 8:31-9:1, John 11:55-12:1)
+            for (let chapter = range.startChapter; chapter <= range.endChapter; chapter++) {
+                const chapterKey = `chapter_${chapter}`;
+                
+                if (!bookData[chapterKey]) continue;
+                
+                const chapterData = bookData[chapterKey];
+                
+                // Add chapter heading only when chapter changes and there are multiple chapters
+                if (hasMultipleChapters && currentChapter !== chapter) {
+                    htmlContent += `<h3 class="chapter-heading">Chapter ${chapter}</h3>`;
+                    currentChapter = chapter;
+                }
+                
+                // Determine verse range for this chapter
+                let startVerse, endVerse;
+                
+                if (chapter === range.startChapter) {
+                    startVerse = range.startVerse;
+                    // Get last verse in chapter
+                    endVerse = Math.max(...Object.keys(chapterData)
+                        .filter(k => k.startsWith('verse_'))
+                        .map(k => parseInt(k.split('_')[1])));
+                } else if (chapter === range.endChapter) {
+                    startVerse = 1;
+                    endVerse = range.endVerse;
+                } else {
+                    // Middle chapters - all verses
+                    startVerse = 1;
+                    endVerse = Math.max(...Object.keys(chapterData)
+                        .filter(k => k.startsWith('verse_'))
+                        .map(k => parseInt(k.split('_')[1])));
+                }
+                
+                // Add verses
+                for (let v = startVerse; v <= endVerse; v++) {
+                    const verseKey = `verse_${v}`;
+                    if (chapterData[verseKey]) {
+                        htmlContent += `<p class="tamil-verse">${v}. ${chapterData[verseKey]}</p>`;
+                    }
+                }
+            }
+        } else {
+            // Handle same-chapter ranges and single verses
+            const chapterKey = `chapter_${range.startChapter}`;
+            
+            if (!bookData[chapterKey]) return;
+            
+            const chapterData = bookData[chapterKey];
+            
+            // Add chapter heading only when chapter changes and there are multiple chapters
+            if (hasMultipleChapters && currentChapter !== range.startChapter) {
+                htmlContent += `<h3 class="chapter-heading">Chapter ${range.startChapter}</h3>`;
+                currentChapter = range.startChapter;
+            }
+            
+            // Add verses
+            for (let v = range.startVerse; v <= range.endVerse; v++) {
+                const verseKey = `verse_${v}`;
+                if (chapterData[verseKey]) {
+                    htmlContent += `<p class="tamil-verse">${v}. ${chapterData[verseKey]}</p>`;
+                }
+            }
+        }
+    });
+    
+    return htmlContent ? { html: htmlContent } : null;
+}
+
+// Toggle between English and Tamil translations
+function toggleTranslation() {
+    if (!currentVerseReference) return;
+    
+    // Get content element
+    const content = document.getElementById('passageContent');
+    if (!content) return;
+    
+    // Add fade-out animation
+    content.style.opacity = '0';
+    content.style.transform = 'translateY(10px)';
+    
+    // Wait for fade-out animation to complete
+    setTimeout(() => {
+        // Toggle language
+        currentLifeOfChristLanguage = currentLifeOfChristLanguage === 'english' ? 'tamil' : 'english';
+        
+        // Update button text
+        updateTranslateButton();
+        
+        // Show loading state
+        content.innerHTML = '<p>Loading...</p>';
+        
+        // Parse verse reference to get book info
+        const parsed = parseVerseReference(currentVerseReference);
+        if (!parsed) return;
+        
+        const dataVarName = getBookDataVariable(parsed.book);
+        if (!dataVarName) return;
+        
+        // Determine testament folder
+        const testament = ['matthew', 'mark', 'luke', 'john', 'acts', 'romans', '1 corinthians', '2 corinthians', 
+                           'galatians', 'ephesians', 'philippians', 'colossians', '1 thessalonians', '2 thessalonians',
+                           '1 timothy', '2 timothy', 'titus', 'philemon', 'hebrews', 'james', '1 peter', '2 peter',
+                           '1 john', '2 john', '3 john', 'jude', 'revelation'].includes(parsed.book) 
+                           ? 'new-testament' : 'old-testament';
+        
+        // Determine file name from dataVarName
+        const fileName = dataVarName.replace('_data', '');
+        
+        if (currentLifeOfChristLanguage === 'tamil') {
+            // Load Tamil script dynamically
+            const tamilScriptPath = `scripts/data/bible/tamil/${testament}/${fileName}.js`;
+            
+            // Remove existing script to force reload
+            const existingScript = document.querySelector(`script[src*="${fileName}.js"]`);
+            if (existingScript) {
+                existingScript.remove();
+            }
+            
+            // Load Tamil script
+            const script = document.createElement('script');
+            script.src = tamilScriptPath;
+            script.onload = function() {
+                const tamilContent = loadTamilVerses(currentVerseReference);
+                if (tamilContent && tamilContent.html) {
+                    content.innerHTML = tamilContent.html;
+                    // Scroll content to top
+                    content.scrollTop = 0;
+                    // Fade in with animation
+                    setTimeout(() => {
+                        content.style.opacity = '1';
+                        content.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    content.innerHTML = '<p class="passage-no-data">Tamil translation not available</p>';
+                    content.style.opacity = '1';
+                    content.style.transform = 'translateY(0)';
+                }
+            };
+            script.onerror = function() {
+                content.innerHTML = '<p class="passage-no-data">Failed to load Tamil translation</p>';
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            };
+            document.head.appendChild(script);
+        } else {
+            // Load English script dynamically
+            const englishScriptPath = `scripts/data/bible/english/${testament}/${fileName}.js`;
+            
+            // Remove existing script to force reload
+            const existingScript = document.querySelector(`script[src*="${fileName}.js"]`);
+            if (existingScript) {
+                existingScript.remove();
+            }
+            
+            // Load English script
+            const script = document.createElement('script');
+            script.src = englishScriptPath;
+            script.onload = function() {
+                const englishContent = loadEnglishVerses(currentVerseReference);
+                if (englishContent && englishContent.html) {
+                    content.innerHTML = englishContent.html;
+                    // Scroll content to top
+                    content.scrollTop = 0;
+                    // Fade in with animation
+                    setTimeout(() => {
+                        content.style.opacity = '1';
+                        content.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    content.innerHTML = '<p class="passage-no-data">English translation not available</p>';
+                    content.style.opacity = '1';
+                    content.style.transform = 'translateY(0)';
+                }
+            };
+            script.onerror = function() {
+                content.innerHTML = '<p class="passage-no-data">Failed to load English translation</p>';
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            };
+            document.head.appendChild(script);
+        }
+    }, 300); // Wait for fade-out animation (300ms)
+}
+
+// Update translate button text
+function updateTranslateButton() {
+    const translateIcon = document.getElementById('translateIconBtn');
+    if (translateIcon) {
+        translateIcon.title = currentLifeOfChristLanguage === 'english' ? 'Translate to Tamil' : 'Translate to English';
+    }
 }
 
 // Helper function to add gospel-specific class to badge
@@ -1139,3 +1392,4 @@ window.closePassagePopup = closePassagePopup;
 window.initializeLifeOfChrist = initializeLifeOfChrist;
 window.generateLifeOfJesusCards = generateLifeOfJesusCards;
 window.initializeLifeOfChristSearch = initializeLifeOfChristSearch;
+window.toggleTranslation = toggleTranslation;

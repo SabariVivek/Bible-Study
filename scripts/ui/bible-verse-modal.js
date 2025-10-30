@@ -446,33 +446,59 @@ async function loadBibleVerses(book, chapter, verse, language) {
         
         // Determine testament folder
         const testament = OLD_TESTAMENT_BOOKS.includes(book) ? 'old-testament' : 'new-testament';
-        
-        // Load Tamil data
-        const scriptPath = `scripts/data/bible/tamil/${testament}/${fileName}.js`;
-        
-        // Load the script
-        await loadScript(scriptPath);
-        
-        // Get data from the loaded script
         const dataVarName = `${fileName}_data`;
-        const bibleData = window[dataVarName];
         
-        if (!bibleData) {
-            alert('Failed to load Bible data');
-            return;
+        let tamilData = null;
+        let englishData = null;
+        
+        // Load Tamil data if needed
+        if (language === 'tamil' || language === 'both') {
+            const tamilScriptPath = `scripts/data/bible/tamil/${testament}/${fileName}.js`;
+            // Remove existing script to force reload
+            removeScript(tamilScriptPath);
+            await loadScript(tamilScriptPath);
+            
+            // Store Tamil data immediately after loading
+            if (window[dataVarName]) {
+                tamilData = JSON.parse(JSON.stringify(window[dataVarName]));
+            }
+            
+            if (!tamilData) {
+                alert('Failed to load Tamil Bible data');
+                return;
+            }
+        }
+        
+        // Load English data if needed
+        if (language === 'english' || language === 'both') {
+            const englishScriptPath = `scripts/data/bible/english/${testament}/${fileName}.js`;
+            // Remove existing script to force reload
+            removeScript(englishScriptPath);
+            await loadScript(englishScriptPath);
+            
+            // Store English data immediately after loading
+            if (window[dataVarName]) {
+                englishData = JSON.parse(JSON.stringify(window[dataVarName]));
+            }
+            
+            if (!englishData) {
+                alert('Failed to load English Bible data');
+                return;
+            }
         }
         
         // Get chapter data
         const chapterKey = `chapter_${chapter}`;
-        const chapterData = bibleData[chapterKey];
+        const tamilChapterData = tamilData ? tamilData[chapterKey] : null;
+        const englishChapterData = englishData ? englishData[chapterKey] : null;
         
-        if (!chapterData) {
+        if (!tamilChapterData && !englishChapterData) {
             alert(`Chapter ${chapter} not found`);
             return;
         }
         
         // Display verses
-        displayBibleVerses(book, chapter, chapterData, verse, language);
+        displayBibleVerses(book, chapter, tamilChapterData, englishChapterData, verse, language);
         
         // Hide all content sections
         document.getElementById('dashboard-content').classList.add('hidden');
@@ -521,9 +547,19 @@ function loadScript(src) {
 }
 
 /**
+ * Remove a script from DOM
+ */
+function removeScript(src) {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) {
+        existing.remove();
+    }
+}
+
+/**
  * Display Bible verses in the list
  */
-function displayBibleVerses(book, chapter, chapterData, verseRange, language) {
+function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData, verseRange, language) {
     const title = document.getElementById('bibleVerseDisplayTitle');
     const content = document.getElementById('bibleChapterContent');
     
@@ -539,6 +575,9 @@ function displayBibleVerses(book, chapter, chapterData, verseRange, language) {
     
     // Clear previous content
     content.innerHTML = '';
+    
+    // Use whichever data is available to determine verse count
+    const chapterData = tamilChapterData || englishChapterData;
     
     // Determine which verses to display
     let startVerse = 1;
@@ -570,27 +609,23 @@ function displayBibleVerses(book, chapter, chapterData, verseRange, language) {
         section.appendChild(sectionTitle);
     }
     
-    // Create verse items (simple inline format)
+    // Create verse items
     for (let i = startVerse; i <= endVerse; i++) {
         const verseKey = `verse_${i}`;
-        const verseText = chapterData[verseKey];
+        const tamilVerseText = tamilChapterData ? tamilChapterData[verseKey] : null;
+        const englishVerseText = englishChapterData ? englishChapterData[verseKey] : null;
         
-        if (!verseText) continue;
+        if (!tamilVerseText && !englishVerseText) continue;
         
         const verseItem = document.createElement('p');
         verseItem.className = 'bible-verse-item';
         
         if (language === 'tamil') {
-            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${verseText}</span>`;
+            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${tamilVerseText || ''}</span>`;
         } else if (language === 'english') {
-            // For now, show Tamil (English not implemented yet)
-            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${verseText}</span>`;
+            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${englishVerseText || ''}</span>`;
         } else { // both
-            verseItem.innerHTML = `
-                <span class="bible-verse-number">${i}.</span>
-                <span class="bible-verse-tamil">${verseText}</span>
-                <span class="bible-verse-english">[English translation not available]</span>
-            `;
+            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-tamil">${tamilVerseText || ''}</span><br><span class="bible-verse-english">${englishVerseText || ''}</span>`;
         }
         
         section.appendChild(verseItem);

@@ -415,6 +415,12 @@ function showDashboard() {
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
+    // Hide Bible verse display section as well
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
+    
     // Update URL route
     if (typeof updateRoute === 'function') {
         updateRoute('dashboard');
@@ -442,6 +448,12 @@ function showKings() {
     document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Hide Bible verse display section as well
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
     
     // Initialize with all kingdoms if not already loaded
     if (currentKingdoms.length === 0) {
@@ -480,6 +492,12 @@ function showKingPage(kingName, index) {
     document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Hide Bible verse display section as well
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
     
     // Show king page content
     document.getElementById('king-page-content').classList.remove('hidden');
@@ -1145,6 +1163,12 @@ function showProphets() {
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
+    // Hide Bible verse display section as well
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
+    
     // Initialize prophets table if not already done
     if (!prophetsTableManager) {
         initializeProphetsTable();
@@ -1180,6 +1204,12 @@ function showProphetDetail(prophetName) {
     document.getElementById('timeline-content').classList.add('hidden');
     document.getElementById('genealogy-content').classList.add('hidden');
     document.getElementById('bible-content').classList.add('hidden');
+    
+    // Hide Bible verse display section as well
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
@@ -2734,6 +2764,12 @@ function showBooks() {
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
+    // Hide Bible verse display section as well
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
+    
     // Initialize table manager if not already done
     if (!booksTableManager) {
         initializeBooksTable();
@@ -3157,6 +3193,12 @@ function showBookChapter(book, chapterNum) {
     document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Hide Bible verse display section as well - book chapters have their own display
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
     
     // Show book chapter content
     document.getElementById('book-chapter-content').classList.remove('hidden');
@@ -3633,6 +3675,12 @@ function showTimeline() {
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
     
+    // Hide Bible verse display section as well
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
+    
     // Update URL route
     if (typeof updateRoute === 'function') {
         updateRoute('timeline');
@@ -3659,6 +3707,12 @@ function showGenealogy() {
     document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Hide Bible verse display section as well
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
     
     // Clear search input and reset filters
     const charactersSearchInput = document.getElementById('charactersSearch');
@@ -3710,6 +3764,18 @@ function showBible() {
     document.getElementById('bible-content').classList.remove('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Hide Bible verse display section - it should only show after form submission
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
+    
+    // Show the Bible verse form section
+    const bibleVerseFormSection = document.getElementById('bibleVerseFormSection');
+    if (bibleVerseFormSection) {
+        bibleVerseFormSection.classList.remove('hidden');
+    }
     
     // Update URL route
     if (typeof updateRoute === 'function') {
@@ -3763,6 +3829,12 @@ function showHelp() {
     document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.remove('hidden');
+    
+    // Hide Bible verse display section as well
+    const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
+    if (bibleVerseDisplaySection) {
+        bibleVerseDisplaySection.classList.add('hidden');
+    }
     
     // Clear search input and reset filters
     const lifeOfChristSearchInput = document.getElementById('lifeOfChristSearch');
