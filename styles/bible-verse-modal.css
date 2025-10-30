@@ -15,17 +15,23 @@
 .bible-verse-container {
     background: #2a2a2a;
     border-radius: 20px;
-    border-top: 1px solid #8b4513;
     width: 100%;
     max-width: 500px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                0 2px 8px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(102, 126, 234, 0.2),
+                inset 0 1px 0 rgba(102, 126, 234, 0.15);
+    border: 1px solid rgba(102, 126, 234, 0.3);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .bible-verse-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5),
+                0 4px 12px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(102, 126, 234, 0.4),
+                inset 0 1px 0 rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.5);
 }
 
 /* Form Content */
@@ -44,7 +50,7 @@
 .bible-verse-form-label {
     width: 110px;
     font-size: 13px;
-    color: #b8860b;
+    color: #667eea;
     font-weight: 600;
     letter-spacing: 1px;
     padding-top: 10px;
@@ -61,7 +67,7 @@
     padding: 12px 15px;
     font-size: 14px;
     background: rgba(15, 15, 30, 0.6);
-    border: 2px solid rgba(184, 134, 11, 0.3);
+    border: 2px solid rgba(102, 126, 234, 0.3);
     border-radius: 10px;
     color: #e0e0e0;
     outline: none;
@@ -69,13 +75,13 @@
 }
 
 .bible-verse-input:focus {
-    border-color: #b8860b;
+    border-color: #667eea;
     background: rgba(15, 15, 30, 0.8);
-    box-shadow: 0 0 15px rgba(184, 134, 11, 0.3);
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
 }
 
 .bible-verse-input:hover {
-    border-color: rgba(184, 134, 11, 0.5);
+    border-color: rgba(102, 126, 234, 0.5);
 }
 
 .bible-verse-input::placeholder {
@@ -93,7 +99,7 @@
     padding: 12px 40px 12px 15px;
     font-size: 14px;
     background: rgba(15, 15, 30, 0.6);
-    border: 2px solid rgba(184, 134, 11, 0.3);
+    border: 2px solid rgba(102, 126, 234, 0.3);
     border-radius: 10px;
     color: #e0e0e0;
     outline: none;
@@ -102,14 +108,14 @@
 }
 
 .bible-verse-dropdown-input:focus {
-    border-color: #b8860b;
+    border-color: #667eea;
     background: rgba(15, 15, 30, 0.8);
-    box-shadow: 0 0 15px rgba(184, 134, 11, 0.3);
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
     cursor: text;
 }
 
 .bible-verse-dropdown-input:hover {
-    border-color: rgba(184, 134, 11, 0.5);
+    border-color: rgba(102, 126, 234, 0.5);
 }
 
 .bible-verse-dropdown-arrow {
@@ -121,7 +127,7 @@
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid #b8860b;
+    border-top: 6px solid #667eea;
     pointer-events: none;
     transition: transform 0.3s ease;
 }
@@ -138,7 +144,7 @@
     max-height: 250px;
     overflow-y: auto;
     background: rgba(15, 15, 30, 0.95);
-    border: 2px solid rgba(184, 134, 11, 0.5);
+    border: 2px solid rgba(102, 126, 234, 0.5);
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     z-index: 1000;
@@ -171,12 +177,12 @@
 }
 
 .bible-verse-dropdown-list::-webkit-scrollbar-thumb {
-    background: rgba(184, 134, 11, 0.5);
+    background: rgba(102, 126, 234, 0.5);
     border-radius: 10px;
 }
 
 .bible-verse-dropdown-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(184, 134, 11, 0.7);
+    background: rgba(102, 126, 234, 0.7);
 }
 
 .bible-verse-dropdown-item {
@@ -184,7 +190,7 @@
     color: #e0e0e0;
     cursor: pointer;
     transition: all 0.2s ease;
-    border-bottom: 1px solid rgba(184, 134, 11, 0.1);
+    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
 }
 
 .bible-verse-dropdown-item:last-child {
@@ -192,7 +198,7 @@
 }
 
 .bible-verse-dropdown-item:hover {
-    background: rgba(184, 134, 11, 0.2);
+    background: rgba(102, 126, 234, 0.2);
     color: #fff;
     padding-left: 20px;
 }
@@ -246,14 +252,14 @@
 
 .bible-verse-radio-option:hover {
     background: rgba(15, 15, 30, 0.6);
-    border-color: rgba(184, 134, 11, 0.3);
+    border-color: rgba(102, 126, 234, 0.3);
 }
 
 .bible-verse-radio-option input[type="radio"] {
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid rgba(184, 134, 11, 0.5);
+    border: 2px solid rgba(102, 126, 234, 0.5);
     border-radius: 50%;
     margin-right: 12px;
     position: relative;
@@ -262,8 +268,8 @@
 }
 
 .bible-verse-radio-option input[type="radio"]:checked {
-    border-color: #b8860b;
-    background: rgba(184, 134, 11, 0.2);
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.2);
 }
 
 .bible-verse-radio-option input[type="radio"]:checked::after {
@@ -271,12 +277,12 @@
     position: absolute;
     width: 10px;
     height: 10px;
-    background: #b8860b;
+    background: #667eea;
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px rgba(184, 134, 11, 0.8);
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.8);
 }
 
 .bible-verse-radio-option label {
@@ -298,12 +304,12 @@
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #8b4513 0%, #b8860b 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    box-shadow: 0 5px 20px rgba(184, 134, 11, 0.3);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -326,12 +332,12 @@
 
 .bible-verse-submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(184, 134, 11, 0.5);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
 }
 
 .bible-verse-submit-btn:active {
     transform: translateY(0px);
-    box-shadow: 0 3px 15px rgba(184, 134, 11, 0.4);
+    box-shadow: 0 3px 15px rgba(102, 126, 234, 0.4);
 }
 
 /* Testament Toggle */
@@ -358,9 +364,9 @@
 }
 
 .bible-verse-testament-btn.active {
-    background: linear-gradient(135deg, #8b4513 0%, #b8860b 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    box-shadow: 0 2px 10px rgba(184, 134, 11, 0.3);
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
 }
 
 /* ===== DARK MODE STYLES ===== */
@@ -370,11 +376,19 @@
 
 .dark-mode-bible .bible-verse-container {
     background: #1e1e1e;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+                0 2px 8px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(102, 126, 234, 0.25),
+                inset 0 1px 0 rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
 }
 
 .dark-mode-bible .bible-verse-container:hover {
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7),
+                0 4px 12px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(102, 126, 234, 0.4),
+                inset 0 1px 0 rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.5);
 }
 
 .dark-mode-bible .bible-verse-form-content {
@@ -383,13 +397,13 @@
 
 .dark-mode-bible .bible-verse-input {
     background: rgba(15, 15, 30, 0.6);
-    border-color: rgba(184, 134, 11, 0.3);
+    border-color: rgba(102, 126, 234, 0.3);
     color: #e0e0e0;
 }
 
 .dark-mode-bible .bible-verse-input:focus {
     background: rgba(15, 15, 30, 0.8);
-    border-color: #b8860b;
+    border-color: #667eea;
 }
 
 .dark-mode-bible .bible-verse-input::placeholder {
@@ -398,18 +412,18 @@
 
 .dark-mode-bible .bible-verse-dropdown-input {
     background: rgba(15, 15, 30, 0.6);
-    border-color: rgba(184, 134, 11, 0.3);
+    border-color: rgba(102, 126, 234, 0.3);
     color: #e0e0e0;
 }
 
 .dark-mode-bible .bible-verse-dropdown-input:focus {
     background: rgba(15, 15, 30, 0.8);
-    border-color: #b8860b;
+    border-color: #667eea;
 }
 
 .dark-mode-bible .bible-verse-dropdown-list {
     background: rgba(15, 15, 30, 0.95);
-    border-color: rgba(184, 134, 11, 0.5);
+    border-color: rgba(102, 126, 234, 0.5);
 }
 
 .dark-mode-bible .bible-verse-dropdown-list::-webkit-scrollbar-track {
@@ -421,7 +435,7 @@
 }
 
 .dark-mode-bible .bible-verse-dropdown-item:hover {
-    background: rgba(184, 134, 11, 0.2);
+    background: rgba(102, 126, 234, 0.2);
     color: #fff;
 }
 
@@ -431,7 +445,7 @@
 
 .dark-mode-bible .bible-verse-radio-option:hover {
     background: rgba(15, 15, 30, 0.6);
-    border-color: rgba(184, 134, 11, 0.3);
+    border-color: rgba(102, 126, 234, 0.3);
 }
 
 .dark-mode-bible .bible-verse-radio-option label {
@@ -496,11 +510,19 @@
 
 #bible-content:not(.dark-mode-bible) .bible-verse-container {
     background: #ffffff;
-    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.15);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.12),
+                0 2px 8px rgba(102, 126, 234, 0.08),
+                0 0 0 1px rgba(102, 126, 234, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(102, 126, 234, 0.2);
 }
 
 #bible-content:not(.dark-mode-bible) .bible-verse-container:hover {
-    box-shadow: 0 25px 70px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 12px 48px rgba(102, 126, 234, 0.18),
+                0 4px 12px rgba(102, 126, 234, 0.12),
+                0 0 0 1px rgba(102, 126, 234, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border-color: rgba(102, 126, 234, 0.35);
 }
 
 #bible-content:not(.dark-mode-bible) .bible-verse-form-content {

@@ -379,12 +379,6 @@ body.modal-open {
     flex-shrink: 0;
 }
 
-.sidebar-footer-item .icon-sm {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-}
-
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;

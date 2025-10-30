@@ -7248,6 +7248,10 @@ body.dark-mode .left-sidebar.collapsed:hover .sidebar-collapse-btn {
     display: flex;
 }
 
+.left-sidebar.collapsed .sidebar-header {
+    position: relative;
+}
+
 .sidebar-title {
     font-size: 18px;
     font-weight: 600;
