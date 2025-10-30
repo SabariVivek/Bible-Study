@@ -29,17 +29,29 @@
         // Prevent navigation if already navigating
         if (isNavigating) return;
         
-        // Only trigger if we're on the chapter detail page
+        // Check if we're on the book chapter detail page
         const chapterContent = document.getElementById('book-chapter-content');
+        const prophetContent = document.getElementById('prophet-detail-content');
+        
         if (chapterContent && !chapterContent.classList.contains('hidden')) {
-            // Navigate to next chapter
+            // We're on a book chapter page - navigate to next chapter
             if (typeof navigateToNextChapter === 'function') {
                 isNavigating = true;
                 navigateToNextChapter();
                 // Reset the flag after navigation completes
                 setTimeout(() => {
                     isNavigating = false;
-                }, 500); // Increased timeout to prevent rapid swipes
+                }, 500);
+            }
+        } else if (prophetContent && !prophetContent.classList.contains('hidden')) {
+            // We're on a prophet detail page - navigate to next prophet
+            if (typeof navigateToNextProphet === 'function') {
+                isNavigating = true;
+                navigateToNextProphet();
+                // Reset the flag after navigation completes
+                setTimeout(() => {
+                    isNavigating = false;
+                }, 500);
             }
         }
     }
@@ -48,17 +60,29 @@
         // Prevent navigation if already navigating
         if (isNavigating) return;
         
-        // Only trigger if we're on the chapter detail page
+        // Check if we're on the book chapter detail page
         const chapterContent = document.getElementById('book-chapter-content');
+        const prophetContent = document.getElementById('prophet-detail-content');
+        
         if (chapterContent && !chapterContent.classList.contains('hidden')) {
-            // Navigate to previous chapter
+            // We're on a book chapter page - navigate to previous chapter
             if (typeof navigateToPreviousChapter === 'function') {
                 isNavigating = true;
                 navigateToPreviousChapter();
                 // Reset the flag after navigation completes
                 setTimeout(() => {
                     isNavigating = false;
-                }, 500); // Increased timeout to prevent rapid swipes
+                }, 500);
+            }
+        } else if (prophetContent && !prophetContent.classList.contains('hidden')) {
+            // We're on a prophet detail page - navigate to previous prophet
+            if (typeof navigateToPreviousProphet === 'function') {
+                isNavigating = true;
+                navigateToPreviousProphet();
+                // Reset the flag after navigation completes
+                setTimeout(() => {
+                    isNavigating = false;
+                }, 500);
             }
         }
     }
@@ -66,8 +90,15 @@
     // Prevent browser back/forward navigation on horizontal swipes
     function preventBrowserNavigation() {
         const chapterContent = document.getElementById('book-chapter-content');
+        const prophetContent = document.getElementById('prophet-detail-content');
         
-        if (chapterContent && !chapterContent.classList.contains('hidden')) {
+        // Check if we're on either chapter or prophet detail page
+        const isDetailPage = () => {
+            return (chapterContent && !chapterContent.classList.contains('hidden')) ||
+                   (prophetContent && !prophetContent.classList.contains('hidden'));
+        };
+        
+        if (isDetailPage()) {
             // Prevent horizontal swipe navigation
             let touchStartXNav = 0;
             let touchStartYNav = 0;
@@ -78,7 +109,7 @@
             }, { passive: false });
             
             document.addEventListener('touchmove', function(e) {
-                if (!chapterContent.classList.contains('hidden')) {
+                if (isDetailPage()) {
                     const touchMoveX = e.touches[0].clientX;
                     const touchMoveY = e.touches[0].clientY;
                     const diffX = touchMoveX - touchStartXNav;
@@ -93,7 +124,7 @@
 
             // Prevent wheel/trackpad horizontal scroll navigation
             document.addEventListener('wheel', function(e) {
-                if (!chapterContent.classList.contains('hidden') && !isNavigating) {
+                if (isDetailPage() && !isNavigating) {
                     // Detect horizontal scroll (two-finger swipe on trackpad)
                     if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
                         e.preventDefault();

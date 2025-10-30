@@ -484,6 +484,11 @@ function showKingPage(kingName, index) {
     // Show king page content
     document.getElementById('king-page-content').classList.remove('hidden');
     
+    // Update URL with king name
+    if (typeof updateRoute === 'function') {
+        updateRoute('kingDetail', kingName);
+    }
+    
     // Update the title with the king name
     const kingPageTitle = document.getElementById('kingPageTitle');
     if (kingPageTitle) {
@@ -1177,6 +1182,11 @@ function showProphetDetail(prophetName) {
     document.getElementById('bible-content').classList.add('hidden');
     document.getElementById('setting-content').classList.add('hidden');
     document.getElementById('help-content').classList.add('hidden');
+    
+    // Update URL with prophet name
+    if (typeof updateRoute === 'function') {
+        updateRoute('prophetDetail', prophetName);
+    }
     
     // Update the prophet detail title
     const titleElement = document.getElementById('prophetDetailTitle');
@@ -3248,6 +3258,11 @@ function showBookChapter(book, chapterNum) {
     
     // Ensure chapterNum is treated as a number
     const chapterNumber = parseInt(chapterNum) || 1;
+    
+    // Update URL with book and chapter
+    if (typeof updateRoute === 'function') {
+        updateRoute('bookChapter', bookName, chapterNumber);
+    }
     
     if (bookChapterTitle && book) {
         if (chapterNumber) {

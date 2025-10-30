@@ -292,6 +292,15 @@
         padding: 6px 12px;
         font-size: 12px;
     }
+    
+    /* Hide text in navigation items when collapsed */
+    .left-sidebar.collapsed .history-item span:not(.nav-icon) {
+        display: none !important;
+    }
+    
+    .left-sidebar.collapsed .sidebar-footer-item span {
+        display: none !important;
+    }
 }
 
 /* iPad and Tablet Landscape Styles (769px to 1024px) */
@@ -340,6 +349,15 @@
     /* Ensure proper spacing on iPad */
     .main-content {
         padding: 24px 32px;
+    }
+    
+    /* Hide text in navigation items when collapsed */
+    .left-sidebar.collapsed .history-item span:not(.nav-icon) {
+        display: none !important;
+    }
+    
+    .left-sidebar.collapsed .sidebar-footer-item span {
+        display: none !important;
     }
 }
 
@@ -448,6 +466,15 @@
         font-size: 12px;
         display: inline-block !important;
     }
+    
+    /* Hide text in navigation items when collapsed */
+    .left-sidebar.collapsed .history-item span:not(.nav-icon) {
+        display: none !important;
+    }
+    
+    .left-sidebar.collapsed .sidebar-footer-item span {
+        display: none !important;
+    }
 }
 
 /* Tablet specific (768px and below) */
@@ -471,6 +498,15 @@
         padding: 0;
         justify-content: center;
     }
+    
+    /* Hide text in navigation items when collapsed */
+    .left-sidebar.collapsed .history-item span:not(.nav-icon) {
+        display: none !important;
+    }
+    
+    .left-sidebar.collapsed .sidebar-footer-item span {
+        display: none !important;
+    }
 }
 
 /* Small tablets and large phones */
@@ -492,6 +528,15 @@
     
     .theme-option-text {
         font-size: 11px;
+    }
+    
+    /* Hide text in navigation items when collapsed */
+    .left-sidebar.collapsed .history-item span:not(.nav-icon) {
+        display: none !important;
+    }
+    
+    .left-sidebar.collapsed .sidebar-footer-item span {
+        display: none !important;
     }
 }
 
