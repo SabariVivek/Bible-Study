@@ -363,6 +363,10 @@ var genesis_data = {
     "verse_18": "So Abram moved his tents. He went to live near the special oak trees of Mamre. That place is at Hebron. Abram built an altar to worship the Lord there."
   },
   "chapter_14": {
+    "verse_1": "Now there were many kings living in that land, at that time. They fought against each other.",
+    "verse_2": "One fight was when Kedorlaomer had ruled over the other kings for 12 years. And in the next year, five kings made one group like that and fought against him.",
+    "verse_3": "Kedorlaomer joined with three other kings. So it was four kings against five other kings.",
+    "verse_4": "The four kings were Amraphel king of Shinar, Arioch king of Ellasar, Kedorlaomer king of Elam and Tidal king of Goiim. Those kings fought a war against Bera king of Sodom, Birsha king of Gomorrah, Shinab king of Admah, Shemeber king of Zeboiim and the king of Bela. (Bela is another name for the town of Zoar.) They fought in the Valley of Siddim. (That is the Salt Sea.)",
     "verse_5": "In the 14th year, Kedorlaomer and the kings with him won against the Rephaites. This was in Ashteroth Karnaim. They won against the Zuzites in Ham. They won against the Emites in Shaveh Kiriathaim.",
     "verse_6": "And they won against the Horites in the country of Seir. This was as far as El Paran near the desert.",
     "verse_7": "They then went back. They went to En Mishpat. (That is Kadesh.) They took the whole land of the Amalekites. They also took the land of the Amorites who were living in Hazezon Tamar.",

@@ -680,6 +680,72 @@ function displayKingTimeline(container, timelineData) {
     // Helper function to check if verse is empty (— or -)
     const isEmptyVerse = (verse) => verse === '—' || verse === '-' || !verse || verse.trim() === '';
     
+    // Helper function to check if verse is a non-clickable note (like "Linked, not in narrative")
+    const isNonClickableNote = (verse) => {
+        if (!verse) return false;
+        const lowerVerse = verse.toLowerCase();
+        return lowerVerse.includes('linked') || 
+               lowerVerse.includes('not in narrative') || 
+               lowerVerse.includes('thematically');
+    };
+    
+    // Helper function to normalize verse references for parsing
+    const normalizeVerseReference = (verse) => {
+        if (!verse) return verse;
+        
+        // Book name abbreviations map
+        const bookAbbreviations = {
+            '1 Sam': '1 Samuel',
+            '2 Sam': '2 Samuel',
+            '1 Kgs': '1 Kings',
+            '2 Kgs': '2 Kings',
+            '1 Chr': '1 Chronicles',
+            '2 Chr': '2 Chronicles',
+            'Matt': 'Matthew',
+            'Mark': 'Mark',
+            'Luke': 'Luke',
+            'John': 'John',
+            'Acts': 'Acts',
+            'Rom': 'Romans',
+            '1 Cor': '1 Corinthians',
+            '2 Cor': '2 Corinthians',
+            'Gal': 'Galatians',
+            'Eph': 'Ephesians',
+            'Phil': 'Philippians',
+            'Col': 'Colossians',
+            '1 Thess': '1 Thessalonians',
+            '2 Thess': '2 Thessalonians',
+            '1 Tim': '1 Timothy',
+            '2 Tim': '2 Timothy',
+            'Titus': 'Titus',
+            'Philem': 'Philemon',
+            'Heb': 'Hebrews',
+            'Jas': 'James',
+            '1 Pet': '1 Peter',
+            '2 Pet': '2 Peter',
+            '1 John': '1 John',
+            '2 John': '2 John',
+            '3 John': '3 John',
+            'Jude': 'Jude',
+            'Rev': 'Revelation'
+        };
+        
+        let normalized = verse;
+        
+        // Replace en-dash and em-dash with regular hyphen
+        normalized = normalized.replace(/[–—]/g, '-');
+        
+        // Replace book abbreviations with full names
+        for (const [abbr, full] of Object.entries(bookAbbreviations)) {
+            if (normalized.startsWith(abbr + ' ')) {
+                normalized = normalized.replace(abbr, full);
+                break;
+            }
+        }
+        
+        return normalized;
+    };
+    
     // Detect columns dynamically from the first data item
     // Always exclude 'incident' and 'notes' as they are fixed columns
     const firstItem = timelineData[0];
@@ -723,14 +789,15 @@ function displayKingTimeline(container, timelineData) {
                     </tr>
                 </thead>
                 <tbody id="king-timeline-tbody">
-                    ${timelineData.map(item => `
+                    ${timelineData.map((item, rowIndex) => `
                         <tr>
                             <td style="text-align: left;">${item.incident || ''}</td>
-                            ${dataColumns.map(col => {
+                            ${dataColumns.map((col, colIndex) => {
                                 const value = item[col] || '—';
                                 const badgeClass = getBadgeClass(col);
                                 const emptyClass = isEmptyVerse(value) ? 'verse-empty' : '';
-                                return `<td><span class="verse-badge ${badgeClass} ${emptyClass}">${value}</span></td>`;
+                                const dataAttr = `data-verse="${value}" data-row="${rowIndex}" data-col="${colIndex}"`;
+                                return `<td><span class="verse-badge ${badgeClass} ${emptyClass}" ${dataAttr}>${value}</span></td>`;
                             }).join('')}
                             <td style="text-align: left;">${item.notes || ''}</td>
                         </tr>
@@ -741,6 +808,34 @@ function displayKingTimeline(container, timelineData) {
     `;
     
     container.innerHTML = tableHTML;
+    
+    // Add click event listeners to verse badges
+    const badges = container.querySelectorAll('.verse-badge');
+    badges.forEach(badge => {
+        const verseText = badge.getAttribute('data-verse');
+        
+        // Check if badge should be clickable
+        const isClickable = !isEmptyVerse(verseText) && !isNonClickableNote(verseText);
+        
+        if (isClickable) {
+            // Add cursor pointer style
+            badge.style.cursor = 'pointer';
+            
+            // Add click event listener
+            badge.addEventListener('click', function(e) {
+                e.stopPropagation();
+                // Normalize the verse reference before passing to openPassagePopup
+                const normalizedVerse = normalizeVerseReference(verseText);
+                
+                // Check if openPassagePopup function exists (from life-of-christ.js)
+                if (typeof openPassagePopup === 'function') {
+                    openPassagePopup(normalizedVerse);
+                } else {
+                    console.warn('openPassagePopup function not found. Make sure life-of-christ.js is loaded.');
+                }
+            });
+        }
+    });
 }
 
 function showKingsTimeline(currentKingName = null) {

@@ -25,8 +25,8 @@ var davidLifeData = [
         incident: "David and Goliath",
         samuel: "1 Sam 17",
         kings: "—",
-        chronicles: "1 Chr 20:5 (Goliath’s brother)",
-        notes: "Chronicles omits the story, lists battle results later."
+        chronicles: "1 Chr 20:5",
+        notes: "Explains about Goliath’s brother, Chronicles omits the story, lists battle results later."
     },
     {
         incident: "David’s Friendship with Jonathan",
