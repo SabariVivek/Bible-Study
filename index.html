@@ -2659,7 +2659,11 @@
     <!-- Passage Details Popup -->
     <div class="passage-popup-overlay" id="passagePopup">
         <div class="passage-modal-card">
-            <img src="resources/icon/translate-icon.png" alt="Tamil" class="tamil-icon" title="Translate to Tamil" id="translateIconBtn" onclick="toggleTranslation()">
+            <div class="passage-language-toggle">
+                <button class="passage-lang-btn active" data-lang="english" onclick="switchPassageLanguage('english')">English</button>
+                <button class="passage-lang-btn" data-lang="tamil" onclick="switchPassageLanguage('tamil')">தமிழ்</button>
+                <button class="passage-lang-btn" data-lang="dual" onclick="switchPassageLanguage('dual')">Both</button>
+            </div>
             <button class="close-btn" onclick="closePassagePopup()">×</button>
             <div class="passage-modal-header">
                 <h2 class="passage-modal-title">

@@ -180,7 +180,16 @@ function loadPassageData(passageKey, verseReference) {
     
     // Reset language to English when opening new passage
     currentLifeOfChristLanguage = 'english';
-    updateTranslateButton();
+    
+    // Set active button to English
+    const buttons = document.querySelectorAll('.passage-lang-btn');
+    buttons.forEach(btn => {
+        if (btn.dataset.lang === 'english') {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
 
     // Parse verse reference to check if Bible data needs to be loaded
     const parsed = parseVerseReference(verseReference);
@@ -785,8 +794,19 @@ function loadEnglishVerses(verseReference) {
 }
 
 // Toggle between English and Tamil translations
-function toggleTranslation() {
+// Switch passage language (English, Tamil, or Dual)
+function switchPassageLanguage(language) {
     if (!currentVerseReference) return;
+    
+    // Update active button
+    const buttons = document.querySelectorAll('.passage-lang-btn');
+    buttons.forEach(btn => {
+        if (btn.dataset.lang === language) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
     
     // Get content element
     const content = document.getElementById('passageContent');
@@ -798,11 +818,8 @@ function toggleTranslation() {
     
     // Wait for fade-out animation to complete
     setTimeout(() => {
-        // Toggle language
-        currentLifeOfChristLanguage = currentLifeOfChristLanguage === 'english' ? 'tamil' : 'english';
-        
-        // Update button text
-        updateTranslateButton();
+        // Update current language
+        currentLifeOfChristLanguage = language;
         
         // Show elegant loader
         content.innerHTML = '<div class="passage-loader"><div class="passage-loader-spinner"></div></div>';
@@ -826,88 +843,206 @@ function toggleTranslation() {
         // Determine file name from dataVarName
         const fileName = dataVarName.replace('_data', '');
         
-        if (currentLifeOfChristLanguage === 'tamil') {
-            // Load Tamil script dynamically
-            const tamilScriptPath = `scripts/data/bible/tamil/${testament}/${fileName}.js`;
-            
-            // Remove existing script to force reload
-            const existingScript = document.querySelector(`script[src*="${fileName}.js"]`);
-            if (existingScript) {
-                existingScript.remove();
-            }
-            
-            // Load Tamil script
-            const script = document.createElement('script');
-            script.src = tamilScriptPath;
-            script.onload = function() {
-                const tamilContent = loadTamilVerses(currentVerseReference);
-                if (tamilContent && tamilContent.html) {
-                    content.innerHTML = tamilContent.html;
-                    // Scroll content to top
-                    content.scrollTop = 0;
-                    // Fade in with animation
-                    setTimeout(() => {
-                        content.style.opacity = '1';
-                        content.style.transform = 'translateY(0)';
-                    }, 50);
-                } else {
-                    content.innerHTML = '<p class="passage-no-data">Tamil translation not available</p>';
-                    content.style.opacity = '1';
-                    content.style.transform = 'translateY(0)';
-                }
-            };
-            script.onerror = function() {
-                content.innerHTML = '<p class="passage-no-data">Failed to load Tamil translation</p>';
-                content.style.opacity = '1';
-                content.style.transform = 'translateY(0)';
-            };
-            document.head.appendChild(script);
+        if (language === 'dual') {
+            // Load both English and Tamil
+            loadDualLanguageContent(testament, fileName, currentVerseReference, content);
+        } else if (language === 'tamil') {
+            // Load Tamil only
+            loadSingleLanguageContent('tamil', testament, fileName, currentVerseReference, content);
         } else {
-            // Load English script dynamically
-            const englishScriptPath = `scripts/data/bible/english/${testament}/${fileName}.js`;
-            
-            // Remove existing script to force reload
-            const existingScript = document.querySelector(`script[src*="${fileName}.js"]`);
-            if (existingScript) {
-                existingScript.remove();
-            }
-            
-            // Load English script
-            const script = document.createElement('script');
-            script.src = englishScriptPath;
-            script.onload = function() {
-                const englishContent = loadEnglishVerses(currentVerseReference);
-                if (englishContent && englishContent.html) {
-                    content.innerHTML = englishContent.html;
-                    // Scroll content to top
-                    content.scrollTop = 0;
-                    // Fade in with animation
-                    setTimeout(() => {
-                        content.style.opacity = '1';
-                        content.style.transform = 'translateY(0)';
-                    }, 50);
-                } else {
-                    content.innerHTML = '<p class="passage-no-data">English translation not available</p>';
-                    content.style.opacity = '1';
-                    content.style.transform = 'translateY(0)';
-                }
-            };
-            script.onerror = function() {
-                content.innerHTML = '<p class="passage-no-data">Failed to load English translation</p>';
-                content.style.opacity = '1';
-                content.style.transform = 'translateY(0)';
-            };
-            document.head.appendChild(script);
+            // Load English only
+            loadSingleLanguageContent('english', testament, fileName, currentVerseReference, content);
         }
-    }, 300); // Wait for fade-out animation (300ms)
+    }, 300);
 }
 
-// Update translate button text
-function updateTranslateButton() {
-    const translateIcon = document.getElementById('translateIconBtn');
-    if (translateIcon) {
-        translateIcon.title = currentLifeOfChristLanguage === 'english' ? 'Translate to Tamil' : 'Translate to English';
+// Load single language content
+function loadSingleLanguageContent(language, testament, fileName, verseReference, content) {
+    const scriptPath = `scripts/data/bible/${language}/${testament}/${fileName}.js`;
+    
+    // Remove existing script to force reload
+    const existingScript = document.querySelector(`script[src*="${fileName}.js"]`);
+    if (existingScript) {
+        existingScript.remove();
     }
+    
+    // Load script
+    const script = document.createElement('script');
+    script.src = scriptPath;
+    script.onload = function() {
+        const verses = language === 'tamil' ? loadTamilVerses(verseReference) : loadEnglishVerses(verseReference);
+        if (verses && verses.html) {
+            content.innerHTML = verses.html;
+            content.scrollTop = 0;
+            setTimeout(() => {
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            }, 50);
+        } else {
+            content.innerHTML = `<p class="passage-no-data">${language === 'tamil' ? 'Tamil' : 'English'} translation not available</p>`;
+            content.style.opacity = '1';
+            content.style.transform = 'translateY(0)';
+        }
+    };
+    script.onerror = function() {
+        content.innerHTML = `<p class="passage-no-data">Failed to load ${language === 'tamil' ? 'Tamil' : 'English'} translation</p>`;
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
+    };
+    document.head.appendChild(script);
+}
+
+// Load dual language content (both English and Tamil)
+function loadDualLanguageContent(testament, fileName, verseReference, content) {
+    const englishScriptPath = `scripts/data/bible/english/${testament}/${fileName}.js`;
+    const tamilScriptPath = `scripts/data/bible/tamil/${testament}/${fileName}.js`;
+    
+    // Remove existing scripts
+    const existingScripts = document.querySelectorAll(`script[src*="${fileName}.js"]`);
+    existingScripts.forEach(script => script.remove());
+    
+    let englishLoaded = false;
+    let tamilLoaded = false;
+    let englishContent = null;
+    let tamilContent = null;
+    
+    function checkBothLoaded() {
+        if (englishLoaded && tamilLoaded) {
+            const dualHtml = createDualLanguageHTML(englishContent, tamilContent, verseReference);
+            content.innerHTML = dualHtml;
+            content.scrollTop = 0;
+            setTimeout(() => {
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            }, 50);
+        }
+    }
+    
+    // Load English
+    const englishScript = document.createElement('script');
+    englishScript.src = englishScriptPath;
+    englishScript.onload = function() {
+        englishContent = loadEnglishVerses(verseReference);
+        englishLoaded = true;
+        checkBothLoaded();
+    };
+    englishScript.onerror = function() {
+        englishLoaded = true;
+        checkBothLoaded();
+    };
+    document.head.appendChild(englishScript);
+    
+    // Load Tamil
+    const tamilScript = document.createElement('script');
+    tamilScript.src = tamilScriptPath;
+    tamilScript.onload = function() {
+        tamilContent = loadTamilVerses(verseReference);
+        tamilLoaded = true;
+        checkBothLoaded();
+    };
+    tamilScript.onerror = function() {
+        tamilLoaded = true;
+        checkBothLoaded();
+    };
+    document.head.appendChild(tamilScript);
+}
+
+// Create dual language HTML
+function createDualLanguageHTML(englishContent, tamilContent, verseReference) {
+    if (!englishContent && !tamilContent) {
+        return '<p class="passage-no-data">Translations not available</p>';
+    }
+    
+    const parsed = parseVerseReference(verseReference);
+    if (!parsed || !parsed.ranges || parsed.ranges.length === 0) {
+        return '<p class="passage-no-data">Invalid verse reference</p>';
+    }
+    
+    let dualHtml = '';
+    
+    // Parse English content into verse numbers and text
+    const englishVerses = parseVersesFromHTML(englishContent?.html || '');
+    const tamilVerses = parseVersesFromHTML(tamilContent?.html || '');
+    
+    // Combine verses
+    parsed.ranges.forEach(range => {
+        if (range.fullChapters) {
+            for (let chapter = range.startChapter; chapter <= range.endChapter; chapter++) {
+                dualHtml += `<h3 class="chapter-heading">Chapter ${chapter}</h3>`;
+                const versesInChapter = getVersesInRange(englishVerses, tamilVerses, chapter, 1, 999);
+                dualHtml += versesInChapter;
+            }
+        } else if (range.crossChapter) {
+            for (let chapter = range.startChapter; chapter <= range.endChapter; chapter++) {
+                dualHtml += `<h3 class="chapter-heading">Chapter ${chapter}</h3>`;
+                let startVerse = chapter === range.startChapter ? range.startVerse : 1;
+                let endVerse = chapter === range.endChapter ? range.endVerse : 999;
+                const versesInChapter = getVersesInRange(englishVerses, tamilVerses, chapter, startVerse, endVerse);
+                dualHtml += versesInChapter;
+            }
+        } else {
+            const versesInChapter = getVersesInRange(englishVerses, tamilVerses, range.startChapter, range.startVerse, range.endVerse);
+            dualHtml += versesInChapter;
+        }
+    });
+    
+    return dualHtml || '<p class="passage-no-data">Content not available</p>';
+}
+
+// Parse verses from HTML string
+function parseVersesFromHTML(html) {
+    const verses = {};
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    
+    const paragraphs = tempDiv.querySelectorAll('p');
+    paragraphs.forEach(p => {
+        const text = p.textContent || '';
+        const match = text.match(/^(\d+)\.\s*(.+)$/);
+        if (match) {
+            const verseNum = parseInt(match[1]);
+            const verseText = match[2];
+            verses[verseNum] = verseText;
+        }
+    });
+    
+    return verses;
+}
+
+// Get verses in range for dual display
+function getVersesInRange(englishVerses, tamilVerses, chapter, startVerse, endVerse) {
+    let html = '';
+    
+    for (let v = startVerse; v <= endVerse; v++) {
+        const englishText = englishVerses[v];
+        const tamilText = tamilVerses[v];
+        
+        if (englishText || tamilText) {
+            html += `<div class="dual-verse-container">`;
+            if (englishText) {
+                html += `<p class="bible-verse">${v}. ${englishText}</p>`;
+            }
+            if (tamilText) {
+                html += `<p class="tamil-verse">${v}. ${tamilText}</p>`;
+            }
+            html += `</div>`;
+        }
+    }
+    
+    return html;
+}
+
+// Legacy function for compatibility
+function toggleTranslation() {
+    // For backward compatibility - toggle between English and Tamil only
+    const currentLang = currentLifeOfChristLanguage;
+    const newLang = currentLang === 'english' ? 'tamil' : 'english';
+    switchPassageLanguage(newLang);
+}
+
+// Update translate button text (no longer used but kept for compatibility)
+function updateTranslateButton() {
+    // No longer needed with segmented control
 }
 
 // Helper function to add gospel-specific class to badge
