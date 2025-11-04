@@ -637,6 +637,9 @@ function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData,
     // Show verse count tag
     showBibleVerseCountTag(Object.keys(chapterData).length);
     
+    // Initialize language toggle buttons
+    initializeLanguageToggle();
+    
     // Initialize navigation
     initializeBibleNavigation();
 }
@@ -1181,5 +1184,48 @@ function showNumericError(fieldType) {
 // Export functions to global scope
 window.initializeBibleVersePage = initializeBibleVersePage;
 window.switchTestament = switchTestament;
+
+/**
+ * Switch language in Bible verse display
+ * @param {string} language - Language to switch to ('tamil', 'english', 'both')
+ */
+function switchBibleLanguage(language) {
+    // Update current language
+    currentBibleLanguage = language;
+    
+    // Update active button state
+    const buttons = document.querySelectorAll('.bible-language-toggle .language-btn');
+    buttons.forEach(btn => {
+        if (btn.getAttribute('data-lang') === language) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+    
+    // Reload current chapter with new language
+    if (currentBibleBook && currentBibleChapter) {
+        loadBibleVerses(currentBibleBook, currentBibleChapter.toString(), '', language);
+    }
+}
+
+/**
+ * Initialize language toggle buttons
+ */
+function initializeLanguageToggle() {
+    const buttons = document.querySelectorAll('.bible-language-toggle .language-btn');
+    buttons.forEach(btn => {
+        const lang = btn.getAttribute('data-lang');
+        if (lang === currentBibleLanguage) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
+// Make language switch function globally available
+window.switchBibleLanguage = switchBibleLanguage;
+
 
 

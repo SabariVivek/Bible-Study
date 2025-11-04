@@ -684,6 +684,67 @@
     font-weight: bold;
     color: #2d3748;
     margin: 0;
+    flex: 1;
+}
+
+/* Language Toggle Buttons - Segmented Control Style */
+.bible-language-toggle {
+    display: inline-flex;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 12px;
+    padding: 4px;
+    gap: 0;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.language-btn {
+    padding: 8px 20px;
+    border: none;
+    background: transparent;
+    color: #667eea;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 70px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.language-btn:hover:not(.active) {
+    background: rgba(102, 126, 234, 0.15);
+}
+
+.language-btn.active {
+    background: #667eea;
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3),
+                0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.language-btn:active {
+    transform: scale(0.98);
+}
+
+/* Responsive adjustments for language toggle */
+@media (max-width: 768px) {
+    .bible-chapter-header {
+        flex-wrap: wrap;
+    }
+    
+    .bible-language-toggle {
+        width: 100%;
+        justify-content: center;
+        padding: 3px;
+    }
+    
+    .language-btn {
+        padding: 6px 14px;
+        font-size: 13px;
+        min-width: 65px;
+    }
 }
 
 .bible-chapter-content {
@@ -806,6 +867,48 @@
 
 #bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-english {
     color: #2d3748;
+}
+
+/* Dark mode styles for language toggle - Segmented Control */
+#bibleVerseDisplaySection.dark-mode-bible .bible-language-toggle {
+    background: rgba(167, 139, 250, 0.15);
+    border-color: rgba(167, 139, 250, 0.25);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .language-btn {
+    color: #c4b5fd;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .language-btn:hover:not(.active) {
+    background: rgba(167, 139, 250, 0.2);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .language-btn.active {
+    background: #a78bfa;
+    color: #1a202c;
+    box-shadow: 0 2px 8px rgba(167, 139, 250, 0.4),
+                0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Light mode styles for language toggle - Segmented Control */
+#bibleVerseDisplaySection:not(.dark-mode-bible) .bible-language-toggle {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+#bibleVerseDisplaySection:not(.dark-mode-bible) .language-btn {
+    color: #667eea;
+}
+
+#bibleVerseDisplaySection:not(.dark-mode-bible) .language-btn:hover:not(.active) {
+    background: rgba(102, 126, 234, 0.15);
+}
+
+#bibleVerseDisplaySection:not(.dark-mode-bible) .language-btn.active {
+    background: #667eea;
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3),
+                0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive Design */
