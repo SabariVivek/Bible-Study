@@ -275,3 +275,19 @@
     color: #667eea;
 }
 
+/* Dark Mode Variant 2 Styles */
+.dark-mode-books-variant2 .testament-mega-menu {
+    background: #1a2332;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+}
+
+.dark-mode-books-variant2 .testament-tabs {
+    border-bottom: 1px solid #365069;
+    background: #0f1a22;
+}
+
+.dark-mode-books-variant2 .testament-content {
+    background: #1a2332;
+}
+
+

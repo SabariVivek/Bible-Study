@@ -51,9 +51,27 @@
         
         if (darkThemeToggle && darkThemeToggle.checked) {
             hoverCard.classList.add('dark-mode-kings');
+            
+            // Check for dark variant
+            let darkVariant = 1;
+            try {
+                const stored = localStorage.getItem('darkVariant');
+                if (stored) darkVariant = parseInt(stored, 10) || 1;
+            } catch (e) {
+                darkVariant = 1;
+            }
+            
+            if (darkVariant === 2) {
+                hoverCard.classList.add('dark-mode-kings-variant2');
+                console.log('King Hover Card: Added dark-mode-kings-variant2 class');
+            } else {
+                hoverCard.classList.remove('dark-mode-kings-variant2');
+            }
+            
             console.log('King Hover Card: Added dark-mode-kings class');
         } else {
             hoverCard.classList.remove('dark-mode-kings');
+            hoverCard.classList.remove('dark-mode-kings-variant2');
             console.log('King Hover Card: Removed dark-mode-kings class');
         }
         

@@ -393,13 +393,23 @@ nav {
     gap: 15px;
 }
 
+/* Light mode styles for cards inside content-actions */
+.content-actions .card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 20px;
+    max-width: fit-content;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* Dark mode for content-actions on kings, prophets, and books pages */
 .dark-mode-kings .content-actions,
 .dark-mode-prophets .content-actions,
 .dark-mode-books .content-actions {
-    background: rgb(33, 33, 33);
+    background: transparent;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.25);
+    box-shadow: none;
 }
 
 .dark-mode-kings .content-actions .showing-text,
@@ -1434,6 +1444,32 @@ body .dark-mode-maps .page-title {
     background: #4a4a4a;
 }
 
+/* Dark Mode Variant 1 - Filter Card Scrollbar Styles */
+.dark-mode-kings .filter-card::-webkit-scrollbar,
+.dark-mode-prophets .filter-card::-webkit-scrollbar,
+.dark-mode-books .filter-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dark-mode-kings .filter-card::-webkit-scrollbar-track,
+.dark-mode-prophets .filter-card::-webkit-scrollbar-track,
+.dark-mode-books .filter-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dark-mode-kings .filter-card::-webkit-scrollbar-thumb,
+.dark-mode-prophets .filter-card::-webkit-scrollbar-thumb,
+.dark-mode-books .filter-card::-webkit-scrollbar-thumb {
+    background: #4d4d4d;
+    border-radius: 4px;
+}
+
+.dark-mode-kings .filter-card::-webkit-scrollbar-thumb:hover,
+.dark-mode-prophets .filter-card::-webkit-scrollbar-thumb:hover,
+.dark-mode-books .filter-card::-webkit-scrollbar-thumb:hover {
+    background: #5a5a5a;
+}
+
 .king-popup-overlay.show .king-card {
     transform: scale(1) translateX(0);
 }
@@ -2059,6 +2095,100 @@ body .dark-mode-maps .page-title {
     background: #212121;
     color: white;
     border-color: #666666;
+}
+
+/* Kings Timeline Content - Dark Mode */
+#kings-timeline-content.dark-mode-kings .kings-timeline-container {
+    background: #2a2a2a;
+}
+
+#kings-timeline-content.dark-mode-kings .subtitle {
+    color: #d1d1d1;
+}
+
+#kings-timeline-content.dark-mode-kings .section-header h2 {
+    background: #212121;
+    color: white;
+    border-color: #3a3a3a;
+}
+
+#kings-timeline-content.dark-mode-kings .timeline-card {
+    background: #555555;
+    color: white;
+    border-color: #666666;
+}
+
+#kings-timeline-content.dark-mode-kings .timeline-card.judah-card {
+    background: #555555;
+    color: white;
+    border-color: #666666;
+}
+
+#kings-timeline-content.dark-mode-kings .timeline-card.israel-card {
+    background: #555555;
+    color: white;
+    border-color: #666666;
+}
+
+#kings-timeline-content.dark-mode-kings .timeline-card:hover {
+    box-shadow: 0 12px 30px rgba(85, 85, 85, 0.4);
+    border-color: #777777;
+}
+
+#kings-timeline-content.dark-mode-kings .split-indicator {
+    color: #d1d1d1;
+}
+
+#kings-timeline-content.dark-mode-kings .split-text {
+    background: #2a2a2a;
+    color: #d1d1d1;
+}
+
+/* Kings Timeline Content - Dark Mode Variant 2 */
+#kings-timeline-content.dark-mode-kings-variant2 .kings-timeline-container {
+    background: #0f1a22;
+}
+
+#kings-timeline-content.dark-mode-kings-variant2 .subtitle {
+    color: #d1d1d1;
+}
+
+#kings-timeline-content.dark-mode-kings-variant2 .section-header h2 {
+    background: #1a2332;
+    color: white;
+    border-color: #294052;
+}
+
+#kings-timeline-content.dark-mode-kings-variant2 .timeline-card {
+    background: #1a2332;
+    color: white;
+    border-color: #294052;
+}
+
+#kings-timeline-content.dark-mode-kings-variant2 .timeline-card.judah-card {
+    background: #1a2332;
+    color: white;
+    border-color: #294052;
+}
+
+#kings-timeline-content.dark-mode-kings-variant2 .timeline-card.israel-card {
+    background: #1a2332;
+    color: white;
+    border-color: #294052;
+}
+
+#kings-timeline-content.dark-mode-kings-variant2 .timeline-card:hover {
+    box-shadow: 0 12px 30px rgba(41, 64, 82, 0.4);
+    border-color: #365069;
+}
+
+#kings-timeline-content.dark-mode-kings-variant2 .split-indicator {
+    color: #d1d1d1;
+}
+
+#kings-timeline-content.dark-mode-kings-variant2 .split-text {
+    background: #0f1a22;
+    color: #d1d1d1;
 }
 
 /* Make king names hoverable in timeline table */
@@ -2946,20 +3076,25 @@ body .dark-mode-maps .page-title {
    DARK MODE - DASHBOARD CARDS ONLY
    ============================================ */
 .dark-mode-cards .era-card {
-    background: #2a2a2a;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background: #232325;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border-right: 1px solid #35363a;
+    border-top: 1px solid #35363a;
+    border-bottom: 1px solid #35363a;
 }
 
 .dark-mode-cards .era-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    background: #2a2a2c;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px);
 }
 
 .dark-mode-cards .era-title {
-    color: #ececec;
+    color: #f3f4f6;
 }
 
 .dark-mode-cards .era-subtitle {
-    color: #a1a1a1;
+    color: #9ca3af;
 }
 
 /* Dark mode for dashboard page title */
@@ -2976,13 +3111,17 @@ body .dark-mode-maps .page-title {
 }
 
 .dark-mode-dashboard .era-card {
-    background: #2a2a2a;
-    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.25);
+    background: #232325;
+    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.3);
+    border-right: 1px solid #35363a;
+    border-top: 1px solid #35363a;
+    border-bottom: 1px solid #35363a;
 }
 
 .dark-mode-dashboard .era-card:hover {
-    background: #2d2d2d;
-    box-shadow: 0 4px 16px rgba(20, 20, 30, 0.35);
+    background: #2a2a2c;
+    box-shadow: 0 4px 16px rgba(20, 20, 30, 0.4);
+    transform: translateY(-4px);
 }
 
 .dark-mode-dashboard .era-card-content {
@@ -2990,11 +3129,11 @@ body .dark-mode-maps .page-title {
 }
 
 .dark-mode-dashboard .era-title {
-    color: #ececec;
+    color: #f3f4f6;
 }
 
 .dark-mode-dashboard .era-subtitle {
-    color: #a1a1a1;
+    color: #9ca3af;
 }
 
 .dark-mode-dashboard .seed-content-container {
@@ -3649,9 +3788,9 @@ html #king-page-content.dark-mode-kings .order-number {
 
 
 #kings-content.dark-mode-kings .content-actions {
-    background: rgb(33, 33, 33);
+    background: transparent;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(20, 20, 30, 0.25);
+    box-shadow: none;
 }
 
 #kings-content.dark-mode-kings .content-actions .showing-text {
@@ -7592,6 +7731,7 @@ body.dark-mode .left-sidebar.collapsed:hover .sidebar-collapse-btn {
 
 .theme-toggle {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 6px;
     background: #2f2f2f;
@@ -7628,6 +7768,8 @@ body.dark-mode .left-sidebar.collapsed:hover .sidebar-collapse-btn {
     padding: 0 12px;
     font-size: 13px;
     white-space: nowrap;
+    width: auto;
+    min-width: fit-content;
 }
 
 .left-sidebar.collapsed .theme-option {
@@ -7636,6 +7778,7 @@ body.dark-mode .left-sidebar.collapsed:hover .sidebar-collapse-btn {
     border-radius: 50%;
     padding: 0;
     flex: none;
+    min-width: 32px;
 }
 
 .theme-option svg {
@@ -7648,10 +7791,17 @@ body.dark-mode .left-sidebar.collapsed:hover .sidebar-collapse-btn {
 
 .theme-option-text {
     font-weight: 500;
+    display: block;
 }
 
 .left-sidebar.collapsed .theme-option-text {
-    display: none;
+    display: none !important;
+}
+
+/* Additional rule: When sidebar width is 72px (collapsed state), ensure text is hidden */
+.left-sidebar[style*="width: 72px"] .theme-option-text,
+.left-sidebar[style*="width:72px"] .theme-option-text {
+    display: none !important;
 }
 
 .theme-toggle input[type="radio"]:checked+.theme-option {
@@ -7784,6 +7934,25 @@ body.dark-mode .left-sidebar.collapsed:hover .sidebar-collapse-btn {
         font-size: 12px;
         display: inline-block !important;
     }
+    
+    /* Hide text when sidebar is collapsed or narrow */
+    .left-sidebar.collapsed .theme-option-text {
+        display: none !important;
+    }
+    
+    .left-sidebar.collapsed .theme-toggle {
+        flex-direction: column;
+    }
+    
+    .left-sidebar.collapsed .theme-option {
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 50%;
+        min-width: 44px;
+        flex: none;
+    }
 }
 
 /* Tablet specific (768px and below) */
@@ -7802,10 +7971,13 @@ body.dark-mode .left-sidebar.collapsed:hover .sidebar-collapse-btn {
     }
 
     .left-sidebar.collapsed .theme-option {
-        width: 44px;
-        height: 44px;
-        padding: 0;
+        width: 44px !important;
+        height: 44px !important;
+        padding: 0 !important;
         justify-content: center;
+        border-radius: 50% !important;
+        min-width: 44px !important;
+        flex: none !important;
     }
 }
 
@@ -7829,4 +8001,861 @@ body.dark-mode .left-sidebar.collapsed:hover .sidebar-collapse-btn {
     .theme-option-text {
         font-size: 11px;
     }
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Alternate Dark Theme (#1d2a3b base)
+   ============================================ */
+.dark-mode-cards-variant2 .era-card {
+    background: #1a2332;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    border-right: 1px solid #294052;
+    border-top: 1px solid #294052;
+    border-bottom: 1px solid #294052;
+}
+
+.dark-mode-cards-variant2 .era-card:hover {
+    background: #1e2839;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+    transform: translateY(-4px);
+}
+
+.dark-mode-dashboard-variant2 .era-card {
+    background: #1a2332;
+    box-shadow: 0 2px 8px rgba(10, 15, 25, 0.4);
+    border-right: 1px solid #294052;
+    border-top: 1px solid #294052;
+    border-bottom: 1px solid #294052;
+}
+
+.dark-mode-dashboard-variant2 .era-card:hover {
+    background: #1e2839;
+    box-shadow: 0 4px 16px rgba(10, 15, 25, 0.5);
+    transform: translateY(-4px);
+}
+
+.dark-mode-dashboard-variant2 .seed-card {
+    background: #1a2332;
+    box-shadow: 0 2px 8px rgba(10, 15, 25, 0.35);
+}
+
+.dark-mode-dashboard-variant2 .seed-card:hover {
+    background: #1e2839;
+}
+
+.dark-mode-dashboard-variant2 .seed-section-header {
+    background: linear-gradient(to right, #1a2f2a 0%, #1a2332 100%);
+}
+
+.dark-mode-dashboard-variant2 .seed-section-header .verse-badge {
+    background: #2d2840;
+    color: #b794f6;
+}
+
+.dark-mode-dashboard-variant2 .prayer-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.13) 0%, rgba(118, 75, 162, 0.08) 100%);
+    box-shadow: 0 2px 8px rgba(10, 15, 25, 0.35);
+}
+
+.dark-mode-dashboard-variant2 .prayer-card:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.16) 0%, rgba(118, 75, 162, 0.1) 100%);
+    box-shadow: 0 4px 16px rgba(10, 15, 25, 0.45);
+}
+
+.dark-mode-dashboard-variant2 .prayer-verse-ref {
+    background: #1a2332;
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.25);
+}
+
+.dark-mode-dashboard-variant2 .prayer-verse {
+    background: #1a2332;
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.25);
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Timeline
+   ============================================ */
+.dark-mode-timeline-variant2 .timeline-container {
+    background-color: #1d2a3b;
+}
+
+.dark-mode-timeline-variant2 .timeline ul li {
+    background-color: #1a2332;
+    border: 1px solid #294052;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Life of Christ
+   ============================================ */
+.dark-mode-life-of-christ-variant2 .life-of-jesus-container {
+    background-color: #1d2a3b;
+}
+
+.dark-mode-life-of-christ-variant2 .chapter-section-heading {
+    background: linear-gradient(to right, #1a2f2a 0%, #1a2332 100%);
+}
+
+.dark-mode-life-of-christ-variant2 .life-of-jesus-card {
+    background: #1a2332;
+    border: 1px solid #294052;
+}
+
+.dark-mode-life-of-christ-variant2 .life-of-jesus-card:hover {
+    border-color: #365069;
+}
+
+.dark-mode-life-of-christ-variant2 .verse-badge {
+    background-color: #2d3342;
+}
+
+.dark-mode-life-of-christ-variant2 .verse-badge:hover {
+    background-color: #3a4050;
+}
+
+.dark-mode-life-of-christ-variant2 .passage-modal-card {
+    background: #1a2332;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+}
+
+.dark-mode-life-of-christ-variant2 .passage-modal-card .close-btn {
+    background: #0f1a22;
+}
+
+.dark-mode-life-of-christ-variant2 .passage-modal-card .close-btn:hover {
+    background: #294052;
+}
+
+.dark-mode-life-of-christ-variant2 .characters-search-input {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+.dark-mode-life-of-christ-variant2 .characters-search-input:focus {
+    background: #1a2332;
+}
+
+.dark-mode-life-of-christ-variant2 .search-clear-btn {
+    background: #294052;
+}
+
+.dark-mode-life-of-christ-variant2 .search-clear-btn:hover {
+    background: #365069;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Characters
+   ============================================ */
+.dark-mode-characters-variant2 .characters-container {
+    background-color: #1d2a3b;
+}
+
+.dark-mode-characters-variant2 .character-card {
+    background: #1a2332;
+    border: 1px solid #294052;
+}
+
+.dark-mode-characters-variant2 .character-card:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5), 0px 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.dark-mode-characters-variant2 .character-card-lesson {
+    background: linear-gradient(135deg, #294052 0%, #1e3040 100%);
+}
+
+.dark-mode-characters-variant2 .characters-search-input {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+.dark-mode-characters-variant2 .characters-search-input:focus {
+    background: #1a2332;
+}
+
+.dark-mode-characters-variant2 .search-clear-btn {
+    background: #294052;
+}
+
+.dark-mode-characters-variant2 .search-clear-btn:hover {
+    background: #365069;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Kings
+   ============================================ */
+#king-page-content.dark-mode-kings-variant2 .table-container {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+#king-page-content.dark-mode-kings-variant2 .table {
+    background: #1a2332;
+}
+
+#king-page-content.dark-mode-kings-variant2 .chapter-section-heading {
+    background: linear-gradient(to right, #1a2f2a 0%, #1a2332 100%);
+}
+
+#king-page-content.dark-mode-kings-variant2 .table th {
+    background: #0f1a22;
+    border-bottom-color: #294052;
+}
+
+#king-page-content.dark-mode-kings-variant2 .table td {
+    border-bottom-color: #294052;
+    background: #1a2332 !important;
+}
+
+#king-page-content.dark-mode-kings-variant2 .table tbody tr {
+    background: #1a2332 !important;
+}
+
+#king-page-content.dark-mode-kings-variant2 .table tbody tr:hover,
+html #king-page-content.dark-mode-kings-variant2 .table tbody tr:hover {
+    background: #1e2839 !important;
+}
+
+#king-page-content.dark-mode-kings-variant2 .table tbody tr:hover td {
+    background: #1e2839 !important;
+}
+
+#kings-content.dark-mode-kings-variant2 .content-actions {
+    background: transparent;
+    box-shadow: none;
+}
+
+#kings-content.dark-mode-kings-variant2 .content-actions .card {
+    background: #0f1a22;
+    border: 1px solid #294052 !important;
+}
+
+#kings-content.dark-mode-kings-variant2 .filter-btn,
+#kings-content.dark-mode-kings-variant2 .export-btn,
+#kings-content.dark-mode-kings-variant2 .add-btn {
+    background: linear-gradient(135deg, #1a2332 0%, #294052 100%);
+    border: 1px solid #294052;
+    box-shadow: 0 2px 8px rgba(10, 15, 25, 0.25);
+}
+
+#kings-content.dark-mode-kings-variant2 .filter-btn:hover,
+#kings-content.dark-mode-kings-variant2 .export-btn:hover,
+#kings-content.dark-mode-kings-variant2 .add-btn:hover {
+    background: linear-gradient(135deg, #1e2839 0%, #365069 100%);
+    box-shadow: 0 4px 12px rgba(10, 15, 25, 0.35);
+}
+
+#kings-content.dark-mode-kings-variant2 .theme-btn {
+    background: linear-gradient(135deg, #1a2332 0%, #1e2839 100%);
+    border: 1px solid #294052;
+}
+
+#kings-content.dark-mode-kings-variant2 .theme-btn:hover {
+    background: linear-gradient(135deg, #1e2839 0%, #365069 100%) !important;
+    box-shadow: 0 4px 12px rgba(10, 15, 25, 0.35) !important;
+}
+
+/* Kings Content - Table View Variant 2 */
+#kings-content.dark-mode-kings-variant2 .table-container {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+#kings-content.dark-mode-kings-variant2 .table {
+    background: #1a2332;
+}
+
+#kings-content.dark-mode-kings-variant2 .table th {
+    background: #0f1a22;
+    color: #ececec;
+    border-bottom-color: #294052;
+}
+
+#kings-content.dark-mode-kings-variant2 .table td {
+    color: #d1d1d1 !important;
+    border-bottom-color: #294052 !important;
+    background: #1a2332 !important;
+}
+
+#kings-content.dark-mode-kings-variant2 .table tbody tr {
+    background: #1a2332 !important;
+}
+
+#kings-content.dark-mode-kings-variant2 .table tbody tr:hover {
+    background: #294052 !important;
+}
+
+#kings-content.dark-mode-kings-variant2 .table tbody tr:hover td {
+    background: #294052 !important;
+}
+
+#kings-content.dark-mode-kings-variant2 .king-name {
+    color: #d1d1d1 !important;
+}
+
+#kings-content.dark-mode-kings-variant2 .king-kingdom {
+    color: #a1a1a1 !important;
+}
+
+#kings-content.dark-mode-kings-variant2 .order-number {
+    color: #d1d1d1 !important;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Prophets
+   ============================================ */
+#prophets-content.dark-mode-prophets-variant2 .content-actions .card {
+    background: #1d2a3b;
+    border: 1px solid #294052 !important;
+}
+
+#prophets-content.dark-mode-prophets-variant2 .theme-btn {
+    background: linear-gradient(135deg, #1a2332 0%, #1e2839 100%);
+    border: 1px solid #294052;
+}
+
+#prophets-content.dark-mode-prophets-variant2 .theme-btn:hover {
+    background: linear-gradient(135deg, #1e2839 0%, #365069 100%) !important;
+    box-shadow: 0 4px 12px rgba(10, 15, 25, 0.35) !important;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Books
+   ============================================ */
+#books-content.dark-mode-books-variant2 .content-actions .card {
+    background: #1d2a3b;
+    border: 1px solid #294052 !important;
+}
+
+#books-content.dark-mode-books-variant2 .theme-btn {
+    background: linear-gradient(135deg, #1a2332 0%, #1e2839 100%);
+    border: 1px solid #294052;
+}
+
+#books-content.dark-mode-books-variant2 .theme-btn:hover {
+    background: linear-gradient(135deg, #1e2839 0%, #365069 100%) !important;
+    box-shadow: 0 4px 12px rgba(10, 15, 25, 0.35) !important;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Filter Cards & Modals
+   ============================================ */
+.dark-mode-kings-variant2 .side-card,
+.dark-mode-prophets-variant2 .side-card,
+.dark-mode-books-variant2 .side-card {
+    background: #1a2332 !important;
+    border: 1px solid #294052;
+    box-shadow: 0 2px 12px rgba(10, 15, 25, 0.15);
+}
+
+.dark-mode-kings-variant2 .filter-card,
+.dark-mode-prophets-variant2 .filter-card,
+.dark-mode-books-variant2 .filter-card {
+    background: #1a2332 !important;
+    border: 1px solid #294052;
+    box-shadow: 0 4px 24px rgba(10, 15, 25, 0.20);
+}
+
+.dark-mode-kings-variant2 .filter-option,
+.dark-mode-prophets-variant2 .filter-option,
+.dark-mode-books-variant2 .filter-option {
+    background: #1e2839;
+    border-color: #294052;
+}
+
+.dark-mode-kings-variant2 .filter-option:hover,
+.dark-mode-prophets-variant2 .filter-option:hover,
+.dark-mode-books-variant2 .filter-option:hover {
+    background: #22303f;
+}
+
+.dark-mode-kings-variant2 .filter-card .close-btn,
+.dark-mode-prophets-variant2 .filter-card .close-btn,
+.dark-mode-books-variant2 .filter-card .close-btn {
+    background: #294052;
+}
+
+.dark-mode-kings-variant2 .filter-card .close-btn:hover,
+.dark-mode-prophets-variant2 .filter-card .close-btn:hover,
+.dark-mode-books-variant2 .filter-card .close-btn:hover {
+    background: #365069;
+}
+
+.dark-mode-kings-variant2 .filter-btn-cancel,
+.dark-mode-prophets-variant2 .filter-btn-cancel,
+.dark-mode-books-variant2 .filter-btn-cancel {
+    background: #294052;
+}
+
+.dark-mode-kings-variant2 .filter-btn-cancel:hover,
+.dark-mode-prophets-variant2 .filter-btn-cancel:hover,
+.dark-mode-books-variant2 .filter-btn-cancel:hover {
+    background: #365069;
+}
+
+/* Dark Mode Variant 2 - Filter Card Scrollbar Styles */
+.dark-mode-kings-variant2 .filter-card::-webkit-scrollbar,
+.dark-mode-prophets-variant2 .filter-card::-webkit-scrollbar,
+.dark-mode-books-variant2 .filter-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dark-mode-kings-variant2 .filter-card::-webkit-scrollbar-track,
+.dark-mode-prophets-variant2 .filter-card::-webkit-scrollbar-track,
+.dark-mode-books-variant2 .filter-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dark-mode-kings-variant2 .filter-card::-webkit-scrollbar-thumb,
+.dark-mode-prophets-variant2 .filter-card::-webkit-scrollbar-thumb,
+.dark-mode-books-variant2 .filter-card::-webkit-scrollbar-thumb {
+    background: #294052;
+    border-radius: 4px;
+}
+
+.dark-mode-kings-variant2 .filter-card::-webkit-scrollbar-thumb:hover,
+.dark-mode-prophets-variant2 .filter-card::-webkit-scrollbar-thumb:hover,
+.dark-mode-books-variant2 .filter-card::-webkit-scrollbar-thumb:hover {
+    background: #365069;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - King Hover Card
+   ============================================ */
+.king-hover-card.dark-mode-kings-variant2,
+.dark-mode-kings-variant2 .king-hover-card {
+    background: #1a2332 !important;
+    border-color: #294052 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+}
+
+.king-hover-card.dark-mode-kings-variant2 .king-hover-card-header,
+.dark-mode-kings-variant2 .king-hover-card-header {
+    background: #1a2332 !important;
+}
+
+.king-hover-card.dark-mode-kings-variant2 .king-hover-card-body,
+.dark-mode-kings-variant2 .king-hover-card-body {
+    background: #1a2332 !important;
+}
+
+.king-hover-card.dark-mode-kings-variant2 .king-hover-card-name,
+.dark-mode-kings-variant2 .king-hover-card-name {
+    color: #e5e7eb !important;
+}
+
+.king-hover-card.dark-mode-kings-variant2 .king-hover-card-description,
+.dark-mode-kings-variant2 .king-hover-card-description {
+    color: #d1d5db !important;
+}
+
+.king-hover-card.dark-mode-kings-variant2 .king-hover-card-label,
+.dark-mode-kings-variant2 .king-hover-card-label {
+    color: #9ca3af !important;
+}
+
+.king-hover-card.dark-mode-kings-variant2 .king-hover-card-value,
+.dark-mode-kings-variant2 .king-hover-card-value {
+    color: #e5e7eb !important;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Prophets Table
+   ============================================ */
+.dark-mode-prophets-variant2 .table-container {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+.dark-mode-prophets-variant2 .table th {
+    background: #0f1a22;
+    border-bottom-color: #294052;
+}
+
+.dark-mode-prophets-variant2 .table th.sortable:hover {
+    background: #1e2839;
+}
+
+.dark-mode-prophets-variant2 .table td {
+    border-bottom-color: #294052;
+}
+
+.dark-mode-prophets-variant2 .table tr:hover {
+    background: #1e2839;
+}
+
+#prophet-detail-content.dark-mode-prophets-variant2 .prophet-page-container {
+    background: #0f1a22;
+}
+
+#prophet-detail-content.dark-mode-prophets-variant2 .chapter-section-heading {
+    background: linear-gradient(to right, #1a2f2a 0%, #1a2332 100%);
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Books Table & Content
+   ============================================ */
+.dark-mode-books-variant2 .content-header {
+    background: #0f1a22;
+}
+
+.dark-mode-books-variant2 .book-chapter-container {
+    background-color: #0f1a22;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading {
+    background: linear-gradient(to right, #1a2f2a 0%, #1a2332 100%);
+}
+
+.dark-mode-books-variant2 .table-container {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+.dark-mode-books-variant2 .table th {
+    background: #0f1a22;
+    border-bottom-color: #294052;
+}
+
+.dark-mode-books-variant2 .table th.sortable:hover {
+    background: #1e2839;
+}
+
+.dark-mode-books-variant2 .table td {
+    border-bottom-color: #294052;
+}
+
+.dark-mode-books-variant2 .table tr:hover {
+    background: #1e2839;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Additional Card & Content Styles
+   ============================================ */
+.dark-mode-kings-variant2 .card,
+.dark-mode-prophets-variant2 .card,
+.dark-mode-books-variant2 .card,
+.dark-mode-kings-variant2 .king-card,
+.dark-mode-prophets-variant2 .king-card,
+.dark-mode-books-variant2 .king-card {
+    background: #1a2332;
+    border: 1px solid #294052;
+    box-shadow: 0 2px 8px rgba(10, 15, 25, 0.3);
+}
+
+.dark-mode-kings-variant2 .king-info-row {
+    border-bottom: 1px solid #294052;
+}
+
+.dark-mode-kings-variant2 .biblical-refs-container .biblical-ref {
+    background: #1e2839;
+    border-color: #294052;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Content Actions & Buttons
+   ============================================ */
+.dark-mode-kings-variant2 .content-actions,
+.dark-mode-prophets-variant2 .content-actions,
+.dark-mode-books-variant2 .content-actions {
+    background: transparent;
+    box-shadow: none;
+}
+
+.dark-mode-kings-variant2 .filter-btn,
+.dark-mode-kings-variant2 .export-btn,
+.dark-mode-prophets-variant2 .filter-btn,
+.dark-mode-prophets-variant2 .export-btn,
+.dark-mode-books-variant2 .filter-btn,
+.dark-mode-books-variant2 .export-btn {
+    background: linear-gradient(135deg, #1a2332 0%, #294052 100%);
+    border: 1px solid #294052;
+}
+
+.dark-mode-kings-variant2 .filter-btn:hover,
+.dark-mode-kings-variant2 .export-btn:hover,
+.dark-mode-prophets-variant2 .filter-btn:hover,
+.dark-mode-prophets-variant2 .export-btn:hover,
+.dark-mode-books-variant2 .filter-btn:hover,
+.dark-mode-books-variant2 .export-btn:hover {
+    background: linear-gradient(135deg, #1e2839 0%, #365069 100%);
+}
+
+.dark-mode-kings-variant2 .add-btn,
+.dark-mode-prophets-variant2 .add-btn,
+.dark-mode-books-variant2 .add-btn {
+    background: linear-gradient(135deg, #1a2332 0%, #294052 100%);
+    border: 1px solid #294052;
+}
+
+.dark-mode-kings-variant2 .add-btn:hover,
+.dark-mode-prophets-variant2 .add-btn:hover,
+.dark-mode-books-variant2 .add-btn:hover {
+    background: linear-gradient(135deg, #1e2839 0%, #365069 100%);
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Chapters Popup & Modals
+   ============================================ */
+.dark-mode-books-variant2 #chaptersPopup {
+    background: rgba(15, 26, 34, 0.95);
+}
+
+.dark-mode-books-variant2 #chaptersPopup .modal-card {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+.dark-mode-books-variant2 #synopsisSideDrawer {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+.dark-mode-books-variant2 #synopsisSideDrawer .synopsis-content {
+    background: #1a2332;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Chapters Popup Detailed Styles
+   ============================================ */
+.dark-mode-books-variant2 .chapters-popup {
+    background: #1a2332;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+.dark-mode-books-variant2 .chapters-popup .popup-header {
+    border-bottom-color: #294052;
+    background: #0f1a22 !important;
+}
+
+.dark-mode-books-variant2 .chapters-popup .close-btn {
+    background: #294052;
+    color: #e5e7eb;
+}
+
+.dark-mode-books-variant2 .chapters-popup .close-btn:hover {
+    background: #365069;
+    color: #ffffff;
+}
+
+.dark-mode-books-variant2.chapters-popup.show .close-btn {
+    background: #294052 !important;
+    color: #e5e7eb !important;
+    border-color: #294052 !important;
+}
+
+.dark-mode-books-variant2.chapters-popup.show .close-btn:hover {
+    background: #365069 !important;
+    color: #ffffff !important;
+    border-color: #365069 !important;
+}
+
+.dark-mode-books-variant2 .chapter-card {
+    background: #294052;
+    border-color: #365069;
+}
+
+.dark-mode-books-variant2 .chapter-card:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+}
+
+.dark-mode-books-variant2.chapters-popup.show {
+    background: #1a2332 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border-radius: 20px !important;
+}
+
+.dark-mode-books-variant2 .chapters::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dark-mode-books-variant2 .chapters::-webkit-scrollbar-thumb {
+    background: #294052;
+}
+
+.dark-mode-books-variant2 .chapters::-webkit-scrollbar-thumb:hover {
+    background: #365069;
+}
+
+.dark-mode-books-variant2.chapters-popup .popup-header .book-title {
+    color: #e5e7eb !important;
+}
+
+.dark-mode-books-variant2.chapters-popup .popup-header .chapter-count {
+    color: #d1d5db !important;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Synopsis & Additional Modals
+   ============================================ */
+.dark-mode-books-variant2 .synopsis-drawer {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+.dark-mode-books-variant2 .synopsis-header {
+    background: #0f1a22;
+    border-bottom-color: #294052;
+}
+
+.dark-mode-books-variant2 .synopsis-content {
+    background: #1a2332;
+    color: #e5e7eb;
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - Bible Verse Display Additional Styles
+   ============================================ */
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-chapter-title {
+    color: #e5e7eb;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-section-title {
+    color: #d1d5db;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-number {
+    color: #a78bfa;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-text,
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-tamil {
+    color: #e5e7eb;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-english {
+    color: #d1d5db;
+}
+
+.dark-mode-bible-variant2 .bible-verse-submit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.dark-mode-bible-variant2 .bible-verse-submit-btn:hover {
+    background: linear-gradient(135deg, #7c8ff0 0%, #8a5ab0 100%);
+}
+
+/* ============================================
+   DARK MODE VARIANT 2 - COMPLETE REMAINING ELEMENTS
+   ============================================ */
+
+/* Search Inputs for all sections */
+.dark-mode-life-of-christ-variant2 .characters-search-input,
+.dark-mode-characters-variant2 .characters-search-input,
+.dark-mode-life-of-christ-variant2 .life-of-christ-search-input {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+.dark-mode-life-of-christ-variant2 .characters-search-input:focus,
+.dark-mode-characters-variant2 .characters-search-input:focus,
+.dark-mode-life-of-christ-variant2 .life-of-christ-search-input:focus {
+    background: #1a2332;
+    border-color: #5D9CEC;
+}
+
+.dark-mode-life-of-christ-variant2 .search-clear-btn,
+.dark-mode-characters-variant2 .search-clear-btn {
+    background: #294052;
+}
+
+.dark-mode-life-of-christ-variant2 .search-clear-btn:hover,
+.dark-mode-characters-variant2 .search-clear-btn:hover {
+    background: #365069;
+}
+
+/* Pagination for all sections */
+.dark-mode-kings-variant2 .pagination,
+.dark-mode-prophets-variant2 .pagination,
+.dark-mode-books-variant2 .pagination {
+    background: #1a2332;
+}
+
+.dark-mode-kings-variant2 .pagination-btn,
+.dark-mode-prophets-variant2 .pagination-btn,
+.dark-mode-books-variant2 .pagination-btn {
+    background: #294052;
+    border-color: #365069;
+}
+
+.dark-mode-kings-variant2 .pagination-btn:hover,
+.dark-mode-prophets-variant2 .pagination-btn:hover,
+.dark-mode-books-variant2 .pagination-btn:hover {
+    background: #365069;
+}
+
+.dark-mode-kings-variant2 .pagination-btn.active,
+.dark-mode-prophets-variant2 .pagination-btn.active,
+.dark-mode-books-variant2 .pagination-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Modal overlays */
+.dark-mode-kings-variant2 .modal-overlay,
+.dark-mode-prophets-variant2 .modal-overlay,
+.dark-mode-books-variant2 .modal-overlay,
+.dark-mode-life-of-christ-variant2 .modal-overlay {
+    background: rgba(15, 26, 34, 0.85);
+}
+
+.dark-mode-kings-variant2 .modal-card,
+.dark-mode-prophets-variant2 .modal-card,
+.dark-mode-books-variant2 .modal-card,
+.dark-mode-life-of-christ-variant2 .modal-card {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+/* Tooltips and popovers */
+.dark-mode-kings-variant2 .tooltip,
+.dark-mode-prophets-variant2 .tooltip,
+.dark-mode-books-variant2 .tooltip {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+/* Dropdown menus */
+.dark-mode-kings-variant2 .dropdown-menu,
+.dark-mode-prophets-variant2 .dropdown-menu,
+.dark-mode-books-variant2 .dropdown-menu {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+.dark-mode-kings-variant2 .dropdown-item,
+.dark-mode-prophets-variant2 .dropdown-item,
+.dark-mode-books-variant2 .dropdown-item {
+    color: #e5e7eb;
+}
+
+.dark-mode-kings-variant2 .dropdown-item:hover,
+.dark-mode-prophets-variant2 .dropdown-item:hover,
+.dark-mode-books-variant2 .dropdown-item:hover {
+    background: #294052;
+}
+
+/* Timeline modal for Kings */
+.dark-mode-kings-variant2 #kings-timeline-modal .modal-content {
+    background: #1a2332;
+    border-color: #294052;
+}
+
+.dark-mode-kings-variant2 #kings-timeline-modal .timeline-container {
+    background: #0f1a22;
+}
+
+/* All content areas */
+.dark-mode-kings-variant2 #kings-content,
+.dark-mode-prophets-variant2 #prophets-content,
+.dark-mode-books-variant2 #books-content,
+.dark-mode-kings-variant2 #king-page-content,
+.dark-mode-prophets-variant2 #prophet-detail-content,
+.dark-mode-books-variant2 #book-chapter-content {
+    background: #0f1a22;
+}
+
+/* Content headers for all sections */
+.dark-mode-kings-variant2 .content-header,
+.dark-mode-prophets-variant2 .content-header,
+.dark-mode-books-variant2 .content-header {
+    background: #0f1a22;
 }   

@@ -634,6 +634,9 @@ function openKingTableView() {
         displayKingTimeline(kingPageContainer, window.currentKingData.data);
         window.currentKingData.isTableView = true;
         
+        // Apply dark mode styles if in dark mode
+        setTimeout(() => applyDarkModeToKingTable(), 0);
+        
         // Highlight the button
         if (tableViewBtn) {
             tableViewBtn.classList.add('active');
@@ -835,6 +838,121 @@ function displayKingTimeline(container, timelineData) {
                 }
             });
         }
+    });
+}
+
+// Helper function to apply dark mode styles to dynamically created king timeline tables
+function applyDarkModeToKingTable() {
+    const darkTheme = document.getElementById('dark-theme');
+    if (!darkTheme || !darkTheme.checked) {
+        return; // Not in dark mode
+    }
+    
+    // Get current dark variant (1 or 2)
+    let darkVariant = 1;
+    try {
+        darkVariant = parseInt(localStorage.getItem('darkVariant')) || 1;
+    } catch (err) {
+        darkVariant = 1;
+    }
+    
+    const kingPageContent = document.getElementById('king-page-content');
+    if (!kingPageContent) return;
+    
+    const tableContainer = kingPageContent.querySelector('.table-container');
+    if (!tableContainer) return;
+    
+    const tableBg = darkVariant === 2 ? '#1a2332' : '#2a2a2a';
+    const tableBorder = darkVariant === 2 ? '#294052' : '#3a3a3a';
+    const tableHeaderBg = darkVariant === 2 ? '#0f1a22' : '#1f1f1f';
+    const tableHoverBg = darkVariant === 2 ? '#294052' : '#2f2f2f';
+    
+    tableContainer.style.setProperty('background', tableBg, 'important');
+    tableContainer.style.setProperty('border-color', tableBorder, 'important');
+    
+    const table = tableContainer.querySelector('.table');
+    if (!table) return;
+    
+    table.style.setProperty('background', tableBg, 'important');
+    
+    // Update table headers
+    table.querySelectorAll('th').forEach(th => {
+        th.style.setProperty('background', tableHeaderBg, 'important');
+        th.style.setProperty('color', '#ececec', 'important');
+        th.style.setProperty('border-bottom-color', tableBorder, 'important');
+    });
+    
+    // Update table cells
+    table.querySelectorAll('td').forEach(td => {
+        td.style.setProperty('color', '#d1d1d1', 'important');
+        td.style.setProperty('border-bottom-color', tableBorder, 'important');
+        td.style.setProperty('background', tableBg, 'important');
+    });
+    
+    // Update table rows with hover effects
+    table.querySelectorAll('tbody tr').forEach(tr => {
+        tr.style.setProperty('background', tableBg, 'important');
+        
+        // Remove existing listeners to avoid duplicates
+        const newTr = tr.cloneNode(true);
+        tr.parentNode.replaceChild(newTr, tr);
+        
+        newTr.style.setProperty('background', tableBg, 'important');
+        
+        newTr.addEventListener('mouseenter', function() {
+            this.style.setProperty('background', tableHoverBg, 'important');
+            this.querySelectorAll('td').forEach(td => {
+                td.style.setProperty('background', tableHoverBg, 'important');
+            });
+        });
+        
+        newTr.addEventListener('mouseleave', function() {
+            this.style.setProperty('background', tableBg, 'important');
+            this.querySelectorAll('td').forEach(td => {
+                td.style.setProperty('background', tableBg, 'important');
+            });
+        });
+        
+        // Re-attach click handlers for verse badges
+        newTr.querySelectorAll('.verse-badge').forEach(badge => {
+            const verseText = badge.getAttribute('data-verse');
+            const isEmptyVerse = (verse) => verse === '—' || verse === '-' || !verse || verse.trim() === '';
+            const isNonClickableNote = (verse) => {
+                if (!verse) return false;
+                const lowerVerse = verse.toLowerCase();
+                return lowerVerse.includes('linked') || 
+                       lowerVerse.includes('not in narrative') || 
+                       lowerVerse.includes('thematically');
+            };
+            
+            const isClickable = !isEmptyVerse(verseText) && !isNonClickableNote(verseText);
+            
+            if (isClickable) {
+                badge.style.cursor = 'pointer';
+                badge.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const normalizeVerseReference = (verse) => {
+                        if (!verse) return verse;
+                        const bookAbbreviations = {
+                            '1 Sam': '1 Samuel', '2 Sam': '2 Samuel', '1 Kgs': '1 Kings', '2 Kgs': '2 Kings',
+                            '1 Chr': '1 Chronicles', '2 Chr': '2 Chronicles'
+                        };
+                        let normalized = verse.replace(/[–—]/g, '-');
+                        for (const [abbr, full] of Object.entries(bookAbbreviations)) {
+                            if (normalized.startsWith(abbr + ' ')) {
+                                normalized = normalized.replace(abbr, full);
+                                break;
+                            }
+                        }
+                        return normalized;
+                    };
+                    const normalizedVerse = normalizeVerseReference(verseText);
+                    if (typeof openPassagePopup === 'function') {
+                        openPassagePopup(normalizedVerse);
+                    }
+                });
+            }
+        });
     });
 }
 
@@ -4094,6 +4212,14 @@ window.closeChaptersPopup = closeChaptersPopup;
 document.addEventListener('DOMContentLoaded', function() {
     const darkTheme = document.getElementById('dark-theme');
     const lightTheme = document.getElementById('light-theme');
+    // Track which dark variant is active: 1 = original, 2 = alternate (#1d2a3b)
+    let darkVariant = 1;
+    try {
+        const stored = localStorage.getItem('darkVariant');
+        if (stored) darkVariant = parseInt(stored, 10) || 1;
+    } catch (e) {
+        // ignore storage errors
+    }
     
     if (darkTheme && lightTheme) {
         const leftSidebar = document.getElementById('leftSidebar');
@@ -4103,7 +4229,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const darkThemeLabel = document.querySelector('label[for="dark-theme"]');
         const lightThemeLabel = document.querySelector('label[for="light-theme"]');
         
-        // Function to apply dark theme
+        // Function to apply dark theme (supports two variants via darkVariant)
         function applyDarkTheme() {
             // Remove light mode hover styles if they exist
             const lightModeStyle = document.getElementById('light-mode-hover');
@@ -4112,24 +4238,41 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Dark mode - using dark colors
-            if (leftSidebar) {
-                leftSidebar.style.background = '#171717';
-                leftSidebar.style.borderRight = '1px solid #2f2f2f';
-            }
-            
-            if (container) {
-                container.style.background = '#212121';
+            // Variant specific colors
+            if (darkVariant === 1) {
+                if (leftSidebar) {
+                    leftSidebar.style.background = '#171717';
+                    leftSidebar.style.borderRight = '1px solid #2f2f2f';
+                }
+
+                if (container) {
+                    container.style.background = '#212121';
+                }
+            } else {
+                // Variant 2: swap colors - left pane gets container color, main content gets sidebar color
+                if (leftSidebar) {
+                    leftSidebar.style.background = '#0f1a22';
+                    leftSidebar.style.borderRight = '1px solid #294052';
+                }
+
+                if (container) {
+                    container.style.background = '#1d2a3b';
+                }
             }
             
             // Update main content background for dark mode
             const mainContent = document.querySelector('.main-content');
             if (mainContent) {
-                mainContent.style.background = '#212121';
+                if (darkVariant === 1) {
+                    mainContent.style.background = '#212121';
+                } else {
+                    mainContent.style.background = '#1d2a3b';
+                }
             }
             
             // Update all sidebar items colors
             document.querySelectorAll('.sidebar-header, .history-item, .sidebar-footer-item, .sidebar-footer, .theme-toggle-container').forEach(el => {
-                el.style.borderColor = '#2f2f2f';
+                el.style.borderColor = darkVariant === 2 ? '#294052' : '#2f2f2f';
             });
             
             document.querySelectorAll('.history-item, .sidebar-footer-item, .sidebar-title').forEach(el => {
@@ -4137,14 +4280,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             document.querySelectorAll('.theme-toggle').forEach(el => {
-                el.style.background = '#2f2f2f';
+                el.style.background = darkVariant === 2 ? '#294052' : '#2f2f2f';
             });
             
             // Update toggle button
             const toggleBtn = document.querySelector('.sidebar-collapse-btn');
             if (toggleBtn) {
-                toggleBtn.style.background = '#2f2f2f';
-                toggleBtn.style.borderColor = '#4d4d4d';
+                toggleBtn.style.background = darkVariant === 2 ? '#1a2332' : '#2f2f2f';
+                toggleBtn.style.borderColor = darkVariant === 2 ? '#365069' : '#4d4d4d';
                 toggleBtn.style.color = '#ececec';
             }
             
@@ -4157,11 +4300,21 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.theme-option').forEach(option => {
                 const radio = option.previousElementSibling;
                 if (radio && radio.checked) {
-                    option.style.background = '#4d4d4d';
-                    option.style.color = '#ececec';
+                    // When dark is selected, show different background for variant 2
+                    if (radio.id === 'dark-theme' && darkVariant === 2) {
+                        option.style.setProperty('background', '#365069', 'important');
+                        option.style.setProperty('color', '#ffffff', 'important');
+                    } else if (radio.id === 'dark-theme') {
+                        option.style.setProperty('background', '#4d4d4d', 'important');
+                        option.style.setProperty('color', '#ececec', 'important');
+                    } else {
+                        // Light mode - keep default CSS styling
+                        option.style.removeProperty('background');
+                        option.style.removeProperty('color');
+                    }
                 } else {
-                    option.style.background = 'transparent';
-                    option.style.color = '#a1a1a1';
+                    option.style.setProperty('background', 'transparent', 'important');
+                    option.style.setProperty('color', '#a1a1a1', 'important');
                 }
             });
             
@@ -4170,19 +4323,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 const option = svg.closest('.theme-option');
                 const radio = option.previousElementSibling;
                 if (radio && radio.checked) {
-                    svg.style.fill = '#ececec';
+                    // Use a different icon color when the alternate dark variant is active
+                    if (radio.id === 'dark-theme' && darkVariant === 2) {
+                        svg.style.setProperty('fill', '#ffffff', 'important');
+                    } else if (radio.id === 'dark-theme') {
+                        svg.style.setProperty('fill', '#ececec', 'important');
+                    } else {
+                        // Light mode
+                        svg.style.removeProperty('fill');
+                    }
                 } else {
-                    svg.style.fill = '#a1a1a1';
+                    svg.style.setProperty('fill', '#a1a1a1', 'important');
                 }
             });
             
             // Add dark mode hover styles
             const darkModeStyle = document.createElement('style');
             darkModeStyle.id = 'dark-mode-hover';
+            const hoverBg = darkVariant === 2 ? '#294052' : '#2f2f2f';
+            const hoverBgActive = darkVariant === 2 ? '#365069' : '#4d4d4d';
+            const collapseBtnBg = darkVariant === 2 ? '#1a2332' : '#2f2f2f';
+            const collapseBtnHover = darkVariant === 2 ? '#294052' : '#2f2f2f';
             darkModeStyle.innerHTML = `
                 .history-item:hover:not(.active),
                 .sidebar-footer-item:hover {
-                    background: #2f2f2f !important;
+                    background: ${hoverBg} !important;
                     color: #ececec !important;
                 }
                 .sidebar-footer-item:last-child:hover {
@@ -4193,14 +4358,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     fill: #ffffff !important;
                 }
                 .sidebar-toggle-btn:hover {
-                    background: #2f2f2f !important;
+                    background: ${hoverBg} !important;
                 }
                 .sidebar-collapse-btn {
-                    border-color: #e5e7eb !important;
+                    border-color: ${hoverBgActive} !important;
                     color: #ececec !important;
+                    background: ${collapseBtnBg} !important;
                 }
                 .sidebar-collapse-btn:hover {
-                    background: #2f2f2f !important;
+                    background: ${collapseBtnHover} !important;
                     border-color: #ececec !important;
                 }
                 .history-item.active {
@@ -4212,6 +4378,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 .left-sidebar.collapsed .history-item.active {
                     margin: 0 auto 12px auto !important;
                 }
+                .theme-option:hover:not(:has(input:checked)) {
+                    background: ${hoverBg} !important;
+                }
             `;
             document.head.appendChild(darkModeStyle);
             
@@ -4219,123 +4388,298 @@ document.addEventListener('DOMContentLoaded', function() {
             const dashboardCardsContainer = document.querySelector('.dashboard-cards-container');
             if (dashboardCardsContainer) {
                 dashboardCardsContainer.classList.add('dark-mode-cards');
+                // add variant class for dashboards to allow variant-specific styling if needed
+                if (darkVariant === 2) dashboardCardsContainer.classList.add('dark-mode-cards-variant2');
+                else dashboardCardsContainer.classList.remove('dark-mode-cards-variant2');
             }
             
             const dashboardContent = document.getElementById('dashboard-content');
             if (dashboardContent) {
                 dashboardContent.classList.add('dark-mode-dashboard');
+                if (darkVariant === 2) dashboardContent.classList.add('dark-mode-dashboard-variant2');
+                else dashboardContent.classList.remove('dark-mode-dashboard-variant2');
             }
             
             // Apply dark mode to timeline
             const timelineContent = document.getElementById('timeline-content');
             if (timelineContent) {
                 timelineContent.classList.add('dark-mode-timeline');
+                if (darkVariant === 2) timelineContent.classList.add('dark-mode-timeline-variant2');
+                else timelineContent.classList.remove('dark-mode-timeline-variant2');
             }
             
             // Apply dark mode to Life of Christ
             const lifeOfChristContent = document.getElementById('help-content');
             if (lifeOfChristContent) {
                 lifeOfChristContent.classList.add('dark-mode-life-of-christ');
+                if (darkVariant === 2) lifeOfChristContent.classList.add('dark-mode-life-of-christ-variant2');
+                else lifeOfChristContent.classList.remove('dark-mode-life-of-christ-variant2');
             }
             
             // Apply dark mode to Characters
             const charactersContent = document.getElementById('genealogy-content');
             if (charactersContent) {
                 charactersContent.classList.add('dark-mode-characters');
+                if (darkVariant === 2) charactersContent.classList.add('dark-mode-characters-variant2');
+                else charactersContent.classList.remove('dark-mode-characters-variant2');
             }
             
             // Apply dark mode to Kings
             const kingsContent = document.getElementById('king-page-content');
             if (kingsContent) {
                 kingsContent.classList.add('dark-mode-kings');
+                if (darkVariant === 2) kingsContent.classList.add('dark-mode-kings-variant2');
+                else kingsContent.classList.remove('dark-mode-kings-variant2');
             }
             
             // Apply dark mode to Kings Table
             const kingsTableContent = document.getElementById('kings-content');
             if (kingsTableContent) {
                 kingsTableContent.classList.add('dark-mode-kings');
+                if (darkVariant === 2) kingsTableContent.classList.add('dark-mode-kings-variant2');
+                else kingsTableContent.classList.remove('dark-mode-kings-variant2');
             }
             
             // Apply dark mode to Prophets
             const prophetsContent = document.getElementById('prophets-content');
             if (prophetsContent) {
                 prophetsContent.classList.add('dark-mode-prophets');
+                if (darkVariant === 2) prophetsContent.classList.add('dark-mode-prophets-variant2');
+                else prophetsContent.classList.remove('dark-mode-prophets-variant2');
             }
             
             // Apply dark mode to Prophet Detail Content
             const prophetDetailContent = document.getElementById('prophet-detail-content');
             if (prophetDetailContent) {
                 prophetDetailContent.classList.add('dark-mode-prophets');
+                if (darkVariant === 2) prophetDetailContent.classList.add('dark-mode-prophets-variant2');
+                else prophetDetailContent.classList.remove('dark-mode-prophets-variant2');
             }
             
             // Apply dark mode to Books
             const booksContent = document.getElementById('books-content');
             if (booksContent) {
                 booksContent.classList.add('dark-mode-books');
+                if (darkVariant === 2) booksContent.classList.add('dark-mode-books-variant2');
+                else booksContent.classList.remove('dark-mode-books-variant2');
             }
             
             // Apply dark mode to Book Chapter Content
             const bookChapterContent = document.getElementById('book-chapter-content');
             if (bookChapterContent) {
                 bookChapterContent.classList.add('dark-mode-books');
+                if (darkVariant === 2) bookChapterContent.classList.add('dark-mode-books-variant2');
+                else bookChapterContent.classList.remove('dark-mode-books-variant2');
             }
             
             // Apply dark mode to Bible content
             const bibleContent = document.getElementById('bible-content');
             if (bibleContent) {
                 bibleContent.classList.add('dark-mode-bible');
+                if (darkVariant === 2) bibleContent.classList.add('dark-mode-bible-variant2');
+                else bibleContent.classList.remove('dark-mode-bible-variant2');
             }
             
             // Apply dark mode to Bible Verse Display Section
             const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
             if (bibleVerseDisplaySection) {
                 bibleVerseDisplaySection.classList.add('dark-mode-bible');
+                if (darkVariant === 2) bibleVerseDisplaySection.classList.add('dark-mode-bible-variant2');
+                else bibleVerseDisplaySection.classList.remove('dark-mode-bible-variant2');
             }
             
             // Apply dark mode to filter overlays
             const kingsFilterOverlay = document.getElementById('filterCardOverlay');
             if (kingsFilterOverlay) {
                 kingsFilterOverlay.classList.add('dark-mode-kings');
+                if (darkVariant === 2) kingsFilterOverlay.classList.add('dark-mode-kings-variant2');
+                else kingsFilterOverlay.classList.remove('dark-mode-kings-variant2');
             }
             
             const prophetsFilterOverlay = document.getElementById('prophetsFilterCardOverlay');
             if (prophetsFilterOverlay) {
                 prophetsFilterOverlay.classList.add('dark-mode-prophets');
+                if (darkVariant === 2) prophetsFilterOverlay.classList.add('dark-mode-prophets-variant2');
+                else prophetsFilterOverlay.classList.remove('dark-mode-prophets-variant2');
             }
             
             const booksFilterOverlay = document.getElementById('booksFilterCardOverlay');
             if (booksFilterOverlay) {
                 booksFilterOverlay.classList.add('dark-mode-books');
+                if (darkVariant === 2) booksFilterOverlay.classList.add('dark-mode-books-variant2');
+                else booksFilterOverlay.classList.remove('dark-mode-books-variant2');
             }
             
             // Apply dark mode to chapters popup
             const chaptersPopup = document.getElementById('chaptersPopup');
             if (chaptersPopup) {
                 chaptersPopup.classList.add('dark-mode-books');
+                if (darkVariant === 2) chaptersPopup.classList.add('dark-mode-books-variant2');
+                else chaptersPopup.classList.remove('dark-mode-books-variant2');
+            }
+            
+            // Apply dark mode to kings timeline content
+            const kingsTimelineContent = document.getElementById('kings-timeline-content');
+            if (kingsTimelineContent) {
+                kingsTimelineContent.classList.add('dark-mode-kings');
+                if (darkVariant === 2) kingsTimelineContent.classList.add('dark-mode-kings-variant2');
+                else kingsTimelineContent.classList.remove('dark-mode-kings-variant2');
             }
             
             // Apply dark mode to synopsis side drawer
             const synopsisSideDrawer = document.getElementById('synopsisSideDrawer');
             if (synopsisSideDrawer) {
                 synopsisSideDrawer.classList.add('dark-mode-books');
+                if (darkVariant === 2) synopsisSideDrawer.classList.add('dark-mode-books-variant2');
+                else synopsisSideDrawer.classList.remove('dark-mode-books-variant2');
+            }
+            
+            // Update content-actions and content-header elements with variant-specific colors
+            const contentActionsBg = darkVariant === 2 ? '#1d2a3b' : '#212121';
+            const contentHeaderBg = darkVariant === 2 ? '#1d2a3b' : '#212121';
+            const cardBg = darkVariant === 2 ? '#1a2332' : '#2a2a2a';
+            const cardBorder = darkVariant === 2 ? '#294052' : '#3a3a3a';
+            
+            document.querySelectorAll('.content-actions').forEach(el => {
+                el.style.setProperty('background-color', contentActionsBg, 'important');
+                
+                // Update card elements inside content-actions
+                el.querySelectorAll('.card').forEach(card => {
+                    card.style.setProperty('background-color', cardBg, 'important');
+                    card.style.setProperty('border-color', cardBorder, 'important');
+                });
+            });
+            
+            document.querySelectorAll('.content-header').forEach(el => {
+                el.style.setProperty('background-color', contentHeaderBg, 'important');
+            });
+            
+            // Update specific container backgrounds with swapped variant 2 color
+            const containerBg = darkVariant === 2 ? '#1d2a3b' : '#212121';
+            
+            // Timeline container
+            const timelineContainer = document.querySelector('.timeline-container');
+            if (timelineContainer) {
+                timelineContainer.style.setProperty('background', containerBg, 'important');
+            }
+            
+            // Characters container
+            const charactersContainer = document.querySelector('.characters-container');
+            if (charactersContainer) {
+                charactersContainer.style.setProperty('background', containerBg, 'important');
+            }
+            
+            // Life of Jesus container
+            const lifeOfJesusContainer = document.querySelector('.life-of-jesus-container');
+            if (lifeOfJesusContainer) {
+                lifeOfJesusContainer.style.setProperty('background', containerBg, 'important');
+            }
+            
+            // Prophet page container
+            const prophetPageContainer = document.querySelector('.prophet-page-container');
+            if (prophetPageContainer) {
+                prophetPageContainer.style.setProperty('background', containerBg, 'important');
+            }
+            
+            // Book chapter container
+            const bookChapterContainer = document.querySelector('.book-chapter-container');
+            if (bookChapterContainer) {
+                bookChapterContainer.style.setProperty('background', containerBg, 'important');
+            }
+            
+            // King page container
+            const kingPageContainer = document.querySelector('.king-page-container');
+            if (kingPageContainer) {
+                kingPageContainer.style.setProperty('background', containerBg, 'important');
+            }
+            
+            // Seed image and text containers
+            const seedImageContainer = document.querySelector('.seed-image-container');
+            if (seedImageContainer) {
+                seedImageContainer.style.setProperty('background', containerBg, 'important');
+            }
+            
+            const seedTextContent = document.querySelector('.seed-text-content');
+            if (seedTextContent) {
+                seedTextContent.style.setProperty('background', containerBg, 'important');
+            }
+            
+            // Update dynamically created tables in king-page-content
+            const kingPageContent = document.getElementById('king-page-content');
+            if (kingPageContent) {
+                const tableContainer = kingPageContent.querySelector('.table-container');
+                if (tableContainer) {
+                    const tableBg = darkVariant === 2 ? '#1a2332' : '#2a2a2a';
+                    const tableBorder = darkVariant === 2 ? '#294052' : '#3a3a3a';
+                    const tableHeaderBg = darkVariant === 2 ? '#0f1a22' : '#1f1f1f';
+                    const tableHoverBg = darkVariant === 2 ? '#294052' : '#2f2f2f';
+                    
+                    tableContainer.style.setProperty('background', tableBg, 'important');
+                    tableContainer.style.setProperty('border-color', tableBorder, 'important');
+                    
+                    const table = tableContainer.querySelector('.table');
+                    if (table) {
+                        table.style.setProperty('background', tableBg, 'important');
+                        
+                        // Update table headers
+                        table.querySelectorAll('th').forEach(th => {
+                            th.style.setProperty('background', tableHeaderBg, 'important');
+                            th.style.setProperty('color', '#ececec', 'important');
+                            th.style.setProperty('border-bottom-color', tableBorder, 'important');
+                        });
+                        
+                        // Update table cells
+                        table.querySelectorAll('td').forEach(td => {
+                            td.style.setProperty('color', '#d1d1d1', 'important');
+                            td.style.setProperty('border-bottom-color', tableBorder, 'important');
+                            td.style.setProperty('background', tableBg, 'important');
+                        });
+                        
+                        // Update table rows
+                        table.querySelectorAll('tbody tr').forEach(tr => {
+                            tr.style.setProperty('background', tableBg, 'important');
+                            
+                            // Add hover effect
+                            tr.addEventListener('mouseenter', function() {
+                                this.style.setProperty('background', tableHoverBg, 'important');
+                                this.querySelectorAll('td').forEach(td => {
+                                    td.style.setProperty('background', tableHoverBg, 'important');
+                                });
+                            });
+                            
+                            tr.addEventListener('mouseleave', function() {
+                                this.style.setProperty('background', tableBg, 'important');
+                                this.querySelectorAll('td').forEach(td => {
+                                    td.style.setProperty('background', tableBg, 'important');
+                                });
+                            });
+                        });
+                    }
+                }
             }
             
             // Apply dark mode to passage popup
             const passagePopup = document.getElementById('passagePopup');
             if (passagePopup) {
                 passagePopup.classList.add('dark-mode-life-of-christ');
+                if (darkVariant === 2) passagePopup.classList.add('dark-mode-life-of-christ-variant2');
+                else passagePopup.classList.remove('dark-mode-life-of-christ-variant2');
             }
             
             // Apply dark mode to king hover card
             const kingHoverCard = document.getElementById('kingHoverCard');
             if (kingHoverCard) {
                 kingHoverCard.classList.add('dark-mode-kings');
+                if (darkVariant === 2) kingHoverCard.classList.add('dark-mode-kings-variant2');
+                else kingHoverCard.classList.remove('dark-mode-kings-variant2');
             }
             
             // Apply dark mode to kings timeline modal
             const kingsTimelineModal = document.getElementById('kings-timeline-modal');
             if (kingsTimelineModal) {
                 kingsTimelineModal.classList.add('dark-mode-kings');
+                if (darkVariant === 2) kingsTimelineModal.classList.add('dark-mode-kings-variant2');
+                else kingsTimelineModal.classList.remove('dark-mode-kings-variant2');
             }
             
             // Apply dark mode to king hover card via the module
@@ -4359,12 +4703,36 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Dark theme change handler with animation
         darkTheme.addEventListener('change', function() {
-            if (this.checked && window.ThemeAnimation) {
-                window.ThemeAnimation.applyThemeWithAnimation(darkThemeLabel, applyDarkTheme);
-            } else if (this.checked) {
-                applyDarkTheme();
+            if (this.checked) {
+                // Reset to variant 1 when dark mode is first enabled
+                darkVariant = 1;
+                try { localStorage.setItem('darkVariant', darkVariant); } catch (err) {}
+                
+                if (window.ThemeAnimation) {
+                    window.ThemeAnimation.applyThemeWithAnimation(darkThemeLabel, applyDarkTheme);
+                } else {
+                    applyDarkTheme();
+                }
             }
         });
+
+        // When dark theme is already selected, clicking the dark label toggles the dark variant
+        if (darkThemeLabel) {
+            darkThemeLabel.addEventListener('click', function(e) {
+                // if radio is already checked, toggle variant
+                if (darkTheme.checked) {
+                    darkVariant = darkVariant === 1 ? 2 : 1;
+                    try { localStorage.setItem('darkVariant', darkVariant); } catch (err) {}
+                    if (window.ThemeAnimation) {
+                        window.ThemeAnimation.applyThemeWithAnimation(darkThemeLabel, applyDarkTheme);
+                    } else {
+                        applyDarkTheme();
+                    }
+                    // prevent default to avoid any unexpected behaviour
+                    e.preventDefault();
+                }
+            });
+        }
 
         // Light theme change handler with animation
         lightTheme.addEventListener('change', function() {
@@ -4386,124 +4754,130 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Remove dark mode from dashboard cards
                 const dashboardCardsContainer = document.querySelector('.dashboard-cards-container');
                 if (dashboardCardsContainer) {
-                    dashboardCardsContainer.classList.remove('dark-mode-cards');
+                    dashboardCardsContainer.classList.remove('dark-mode-cards', 'dark-mode-cards-variant2');
                 }
                 
                 const dashboardContent = document.getElementById('dashboard-content');
                 if (dashboardContent) {
-                    dashboardContent.classList.remove('dark-mode-dashboard');
+                    dashboardContent.classList.remove('dark-mode-dashboard', 'dark-mode-dashboard-variant2');
                 }
                 
                 // Remove dark mode from timeline
                 const timelineContent = document.getElementById('timeline-content');
                 if (timelineContent) {
-                    timelineContent.classList.remove('dark-mode-timeline');
+                    timelineContent.classList.remove('dark-mode-timeline', 'dark-mode-timeline-variant2');
                 }
                 
                 // Remove dark mode from Life of Christ
                 const lifeOfChristContent = document.getElementById('help-content');
                 if (lifeOfChristContent) {
-                    lifeOfChristContent.classList.remove('dark-mode-life-of-christ');
+                    lifeOfChristContent.classList.remove('dark-mode-life-of-christ', 'dark-mode-life-of-christ-variant2');
                 }
                 
                 // Remove dark mode from Characters
                 const charactersContent = document.getElementById('genealogy-content');
                 if (charactersContent) {
-                    charactersContent.classList.remove('dark-mode-characters');
+                    charactersContent.classList.remove('dark-mode-characters', 'dark-mode-characters-variant2');
                 }
                 
                 // Remove dark mode from Kings
                 const kingsContent = document.getElementById('king-page-content');
                 if (kingsContent) {
-                    kingsContent.classList.remove('dark-mode-kings');
+                    kingsContent.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
                 }
                 
                 // Remove dark mode from Kings Table
                 const kingsTableContent = document.getElementById('kings-content');
                 if (kingsTableContent) {
-                    kingsTableContent.classList.remove('dark-mode-kings');
+                    kingsTableContent.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
                 }
                 
                 // Remove dark mode from Prophets
                 const prophetsContent = document.getElementById('prophets-content');
                 if (prophetsContent) {
-                    prophetsContent.classList.remove('dark-mode-prophets');
+                    prophetsContent.classList.remove('dark-mode-prophets', 'dark-mode-prophets-variant2');
                 }
                 
                 // Remove dark mode from Prophet Detail Content
                 const prophetDetailContent = document.getElementById('prophet-detail-content');
                 if (prophetDetailContent) {
-                    prophetDetailContent.classList.remove('dark-mode-prophets');
+                    prophetDetailContent.classList.remove('dark-mode-prophets', 'dark-mode-prophets-variant2');
                 }
                 
                 // Remove dark mode from Books
                 const booksContent = document.getElementById('books-content');
                 if (booksContent) {
-                    booksContent.classList.remove('dark-mode-books');
+                    booksContent.classList.remove('dark-mode-books', 'dark-mode-books-variant2');
                 }
                 
                 // Remove dark mode from Book Chapter Content
                 const bookChapterContent = document.getElementById('book-chapter-content');
                 if (bookChapterContent) {
-                    bookChapterContent.classList.remove('dark-mode-books');
+                    bookChapterContent.classList.remove('dark-mode-books', 'dark-mode-books-variant2');
                 }
                 
                 // Remove dark mode from Bible content
                 const bibleContent = document.getElementById('bible-content');
                 if (bibleContent) {
-                    bibleContent.classList.remove('dark-mode-bible');
+                    bibleContent.classList.remove('dark-mode-bible', 'dark-mode-bible-variant2');
                 }
                 
                 // Remove dark mode from Bible Verse Display Section
                 const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
                 if (bibleVerseDisplaySection) {
-                    bibleVerseDisplaySection.classList.remove('dark-mode-bible');
+                    bibleVerseDisplaySection.classList.remove('dark-mode-bible', 'dark-mode-bible-variant2');
                 }
                 
                 // Remove dark mode from filter overlays
                 const kingsFilterOverlay = document.getElementById('filterCardOverlay');
                 if (kingsFilterOverlay) {
-                    kingsFilterOverlay.classList.remove('dark-mode-kings');
+                    kingsFilterOverlay.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
                 }
                 
                 const prophetsFilterOverlay = document.getElementById('prophetsFilterCardOverlay');
                 if (prophetsFilterOverlay) {
-                    prophetsFilterOverlay.classList.remove('dark-mode-prophets');
+                    prophetsFilterOverlay.classList.remove('dark-mode-prophets', 'dark-mode-prophets-variant2');
                 }
                 
                 const booksFilterOverlay = document.getElementById('booksFilterCardOverlay');
                 if (booksFilterOverlay) {
-                    booksFilterOverlay.classList.remove('dark-mode-books');
+                    booksFilterOverlay.classList.remove('dark-mode-books', 'dark-mode-books-variant2');
                 }
                 
                 // Remove dark mode from chapters popup
                 const chaptersPopup = document.getElementById('chaptersPopup');
                 if (chaptersPopup) {
-                    chaptersPopup.classList.remove('dark-mode-books');
+                    chaptersPopup.classList.remove('dark-mode-books', 'dark-mode-books-variant2');
                 }
                 
                 // Remove dark mode from synopsis side drawer
                 const synopsisSideDrawer = document.getElementById('synopsisSideDrawer');
                 if (synopsisSideDrawer) {
-                    synopsisSideDrawer.classList.remove('dark-mode-books');
+                    synopsisSideDrawer.classList.remove('dark-mode-books', 'dark-mode-books-variant2');
+                }
+                
+                // Remove dark mode from kings timeline content
+                const kingsTimelineContent = document.getElementById('kings-timeline-content');
+                if (kingsTimelineContent) {
+                    kingsTimelineContent.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
                 }
                 
                 // Remove dark mode from passage popup
                 const passagePopup = document.getElementById('passagePopup');
                 if (passagePopup) {
-                    passagePopup.classList.remove('dark-mode-life-of-christ');
+                    passagePopup.classList.remove('dark-mode-life-of-christ', 'dark-mode-life-of-christ-variant2');
                 }
                 
                 // Remove dark mode from king hover card
                 const kingHoverCard = document.getElementById('kingHoverCard');
                 if (kingHoverCard) {
-                    kingHoverCard.classList.remove('dark-mode-kings');
+                    kingHoverCard.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
                 }
                 
                 // Remove dark mode from kings timeline modal
                 const kingsTimelineModal = document.getElementById('kings-timeline-modal');
                 if (kingsTimelineModal) {
-                    kingsTimelineModal.classList.remove('dark-mode-kings');
+                    kingsTimelineModal.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
                 }
                 
                 // Remove dark mode from king hover card via the module
@@ -4551,9 +4925,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Update toggle button
                 const toggleBtn = document.querySelector('.sidebar-collapse-btn');
                 if (toggleBtn) {
-                    toggleBtn.style.background = 'white';
-                    toggleBtn.style.borderColor = '#e5e7eb';
-                    toggleBtn.style.color = '#374151';
+                    toggleBtn.style.setProperty('background', 'white', 'important');
+                    toggleBtn.style.setProperty('border-color', '#e5e7eb', 'important');
+                    toggleBtn.style.setProperty('color', '#374151', 'important');
                 }
                 
                 // Update SVG icons to dark color
@@ -4583,6 +4957,75 @@ document.addEventListener('DOMContentLoaded', function() {
                         svg.style.fill = '#6b7280';
                     }
                 });
+                
+                // Remove inline styles that were applied by dark mode
+                // Reset content-actions and content-header backgrounds
+                document.querySelectorAll('.content-actions').forEach(el => {
+                    el.style.removeProperty('background-color');
+                    
+                    // Reset card elements inside content-actions
+                    el.querySelectorAll('.card').forEach(card => {
+                        card.style.removeProperty('background-color');
+                        card.style.removeProperty('border-color');
+                    });
+                });
+                
+                document.querySelectorAll('.content-header').forEach(el => {
+                    el.style.removeProperty('background-color');
+                });
+                
+                // Reset container backgrounds
+                const containersToReset = [
+                    '.timeline-container',
+                    '.characters-container',
+                    '.life-of-jesus-container',
+                    '.prophet-page-container',
+                    '.book-chapter-container',
+                    '.king-page-container',
+                    '.seed-image-container',
+                    '.seed-text-content'
+                ];
+                
+                containersToReset.forEach(selector => {
+                    const element = document.querySelector(selector);
+                    if (element) {
+                        element.style.removeProperty('background');
+                    }
+                });
+                
+                // Reset table styles in king-page-content
+                const kingPageContent = document.getElementById('king-page-content');
+                if (kingPageContent) {
+                    const tableContainer = kingPageContent.querySelector('.table-container');
+                    if (tableContainer) {
+                        tableContainer.style.removeProperty('background');
+                        tableContainer.style.removeProperty('border-color');
+                        
+                        const table = tableContainer.querySelector('.table');
+                        if (table) {
+                            table.style.removeProperty('background');
+                            
+                            // Reset table headers
+                            table.querySelectorAll('th').forEach(th => {
+                                th.style.removeProperty('background');
+                                th.style.removeProperty('color');
+                                th.style.removeProperty('border-bottom-color');
+                            });
+                            
+                            // Reset table cells
+                            table.querySelectorAll('td').forEach(td => {
+                                td.style.removeProperty('color');
+                                td.style.removeProperty('border-bottom-color');
+                                td.style.removeProperty('background');
+                            });
+                            
+                            // Reset table rows
+                            table.querySelectorAll('tbody tr').forEach(tr => {
+                                tr.style.removeProperty('background');
+                            });
+                        }
+                    }
+                }
                 
                 // Update hover states for light mode
                 const style = document.createElement('style');
