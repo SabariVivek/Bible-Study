@@ -4241,6 +4241,65 @@ document.addEventListener('DOMContentLoaded', function() {
                 lightModeStyle.remove();
             }
             
+            // Remove all light mode variant classes before applying dark mode
+            document.querySelector('.dashboard-cards-container')?.classList.remove('light-mode-cards-variant2');
+            document.getElementById('dashboard-content')?.classList.remove('light-mode-dashboard-variant2');
+            document.getElementById('timeline-content')?.classList.remove('light-mode-timeline-variant2');
+            document.getElementById('help-content')?.classList.remove('light-mode-life-of-christ-variant2');
+            document.getElementById('genealogy-content')?.classList.remove('light-mode-characters-variant2');
+            document.getElementById('king-page-content')?.classList.remove('light-mode-kings-variant2');
+            document.getElementById('kings-content')?.classList.remove('light-mode-kings-variant2');
+            document.getElementById('prophets-content')?.classList.remove('light-mode-prophets-variant2');
+            document.getElementById('prophet-detail-content')?.classList.remove('light-mode-prophets-variant2');
+            document.getElementById('books-content')?.classList.remove('light-mode-books-variant2');
+            document.getElementById('book-chapter-content')?.classList.remove('light-mode-books-variant2');
+            document.getElementById('bible-content')?.classList.remove('light-mode-bible-variant2');
+            document.getElementById('bibleVerseDisplaySection')?.classList.remove('light-mode-bible-variant2');
+            document.getElementById('filterCardOverlay')?.classList.remove('light-mode-kings-variant2');
+            document.getElementById('prophetsFilterCardOverlay')?.classList.remove('light-mode-prophets-variant2');
+            document.getElementById('booksFilterCardOverlay')?.classList.remove('light-mode-books-variant2');
+            document.getElementById('chaptersPopup')?.classList.remove('light-mode-books-variant2');
+            document.getElementById('synopsisSideDrawer')?.classList.remove('light-mode-books-variant2');
+            document.getElementById('kings-timeline-content')?.classList.remove('light-mode-kings-variant2');
+            document.getElementById('passagePopup')?.classList.remove('light-mode-life-of-christ-variant2');
+            document.getElementById('kingHoverCard')?.classList.remove('light-mode-kings-variant2');
+            document.getElementById('kings-timeline-modal')?.classList.remove('light-mode-kings-variant2');
+            
+            // Remove inline styles that were applied by light mode
+            // Reset content-actions and content-header backgrounds
+            document.querySelectorAll('.content-actions').forEach(el => {
+                el.style.removeProperty('background-color');
+                
+                // Reset card elements inside content-actions
+                el.querySelectorAll('.card').forEach(card => {
+                    card.style.removeProperty('background-color');
+                    card.style.removeProperty('border-color');
+                });
+            });
+            
+            document.querySelectorAll('.content-header').forEach(el => {
+                el.style.removeProperty('background-color');
+            });
+            
+            // Reset container backgrounds
+            const containersToReset = [
+                '.timeline-container',
+                '.characters-container',
+                '.life-of-jesus-container',
+                '.prophet-page-container',
+                '.book-chapter-container',
+                '.king-page-container',
+                '.seed-image-container',
+                '.seed-text-content'
+            ];
+            
+            containersToReset.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    element.style.removeProperty('background');
+                }
+            });
+            
             // Dark mode - using dark colors
             // Variant specific colors
             if (darkVariant === 1) {
@@ -4290,14 +4349,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update toggle button
             const toggleBtn = document.querySelector('.sidebar-collapse-btn');
             if (toggleBtn) {
-                toggleBtn.style.background = darkVariant === 2 ? '#1a2332' : '#2f2f2f';
-                toggleBtn.style.borderColor = darkVariant === 2 ? '#365069' : '#4d4d4d';
-                toggleBtn.style.color = '#ececec';
+                const btnBg = darkVariant === 2 ? '#1a2332' : '#2f2f2f';
+                const btnBorder = darkVariant === 2 ? '#365069' : '#4d4d4d';
+                toggleBtn.style.setProperty('background', btnBg, 'important');
+                toggleBtn.style.setProperty('border-color', btnBorder, 'important');
+                toggleBtn.style.setProperty('color', '#ececec', 'important');
             }
             
-            // Reset SVG icons to light color
+            // Reset SVG icons to light color for dark mode
             document.querySelectorAll('.history-item svg, .sidebar-footer-item svg, .sidebar-collapse-btn svg').forEach(svg => {
+                svg.style.removeProperty('fill'); // Remove any inline fill styles first
                 svg.setAttribute('fill', '#ececec');
+                svg.style.setProperty('fill', '#ececec', 'important'); // Force the fill color
             });
             
             // Update theme toggle options
@@ -5042,9 +5105,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     toggleBtn.style.setProperty('color', '#374151', 'important');
                 }
                 
-                // Update SVG icons to dark color
+                // Update SVG icons to dark color for light mode
                 document.querySelectorAll('.history-item svg, .sidebar-footer-item svg, .sidebar-collapse-btn svg').forEach(svg => {
+                    svg.style.removeProperty('fill'); // Remove any inline fill styles first
                     svg.setAttribute('fill', '#374151');
+                    svg.style.setProperty('fill', '#374151', 'important'); // Force the fill color
                 });
                 
                 // Update theme toggle options
