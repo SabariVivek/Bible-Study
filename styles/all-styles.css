@@ -9924,4 +9924,89 @@ html #king-page-content.light-mode-kings-variant2 .table tbody tr:hover {
 .light-mode-books-variant2 .synopsis-drawer-close:hover {
     background: #d4c3a8;
     color: #2c2c2c;
+}
+
+/* ============================================
+   VERSE COUNT TAG - Animated slide-in notification
+   Shows total verses when chapter loads
+   ============================================ */
+.verse-count-tag {
+    background-color: #9acd32;
+    color: white;
+    font-weight: bold;
+    padding: 10px 25px 10px 35px;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: -200px; /* start off-screen */
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    opacity: 0;
+    z-index: 9999;
+    font-size: 0.95rem;
+}
+
+.verse-count-tag.show {
+    animation: verseTagSlideInOut 6s ease-in-out forwards;
+}
+
+.verse-count-tag::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 20px;
+    height: 20px;
+    background-color: #9acd32;
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.verse-count-tag::after {
+    content: "•";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+/* Animation for slide + fade */
+@keyframes verseTagSlideInOut {
+    0% {
+        right: -200px;
+        opacity: 0;
+    }
+    15% {
+        right: 30px;
+        opacity: 1;
+    }
+    70% {
+        right: 30px;
+        opacity: 1;
+    }
+    100% {
+        right: -200px;
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .verse-count-tag {
+        bottom: 20px;
+        font-size: 0.85rem;
+        padding: 8px 20px 8px 30px;
+    }
+    
+    .verse-count-tag::before {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .verse-count-tag::after {
+        left: 8px;
+        font-size: 16px;
+    }
 }   

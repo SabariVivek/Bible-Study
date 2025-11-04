@@ -634,8 +634,58 @@ function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData,
     
     content.appendChild(section);
     
+    // Show verse count tag
+    showBibleVerseCountTag(Object.keys(chapterData).length);
+    
     // Initialize navigation
     initializeBibleNavigation();
+}
+
+/**
+ * Show animated verse count tag for Bible verses
+ * @param {number} verseCount - Total number of verses
+ */
+function showBibleVerseCountTag(verseCount) {
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+        const tag = document.getElementById('bibleVerseCountTag');
+        
+        if (!tag) {
+            console.warn('Verse count tag element not found');
+            return;
+        }
+        
+        if (verseCount <= 0) {
+            console.warn('Invalid verse count:', verseCount);
+            return;
+        }
+        
+        // Set the text
+        tag.textContent = `${verseCount} Verse${verseCount !== 1 ? 's' : ''}`;
+        
+        // Clear any existing timeout
+        if (tag._hideTimeout) {
+            clearTimeout(tag._hideTimeout);
+        }
+        
+        // Remove any existing animation class
+        tag.classList.remove('show');
+        
+        // Force a small delay to ensure the animation resets
+        setTimeout(() => {
+            // Trigger reflow to restart animation
+            void tag.offsetWidth;
+            
+            // Add animation class
+            tag.classList.add('show');
+            
+            // Store timeout reference so we can clear it if needed
+            tag._hideTimeout = setTimeout(() => {
+                tag.classList.remove('show');
+                tag._hideTimeout = null;
+            }, 6000); // 6 seconds to match animation duration
+        }, 100); // Increased delay for better reliability
+    });
 }
 
 /**
@@ -654,8 +704,8 @@ function initializeBibleNavigation() {
         content.removeEventListener('touchstart', handleTouchStart);
         content.removeEventListener('touchend', handleTouchEnd);
         
-        content.addEventListener('touchstart', handleTouchStart);
-        content.addEventListener('touchend', handleTouchEnd);
+        content.addEventListener('touchstart', handleTouchStart, { passive: true });
+        content.addEventListener('touchend', handleTouchEnd, { passive: true });
     }
 }
 
