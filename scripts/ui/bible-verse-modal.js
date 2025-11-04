@@ -393,7 +393,7 @@ function initializeBibleForm() {
         e.preventDefault();
         
         const book = document.getElementById('bookInput').value;
-        const chapter = document.getElementById('chapterInput').value;
+        let chapter = document.getElementById('chapterInput').value;
         const verse = document.getElementById('verseInput').value;
         const languageRadio = document.querySelector('input[name="language"]:checked');
         const language = languageRadio ? languageRadio.value : 'tamil';
@@ -404,9 +404,10 @@ function initializeBibleForm() {
             return;
         }
         
+        // Default to chapter 1 if no chapter is entered
         if (!chapter) {
-            alert('Please enter a chapter number');
-            return;
+            chapter = '1';
+            document.getElementById('chapterInput').value = '1';
         }
         
         // Validate chapter before submission
