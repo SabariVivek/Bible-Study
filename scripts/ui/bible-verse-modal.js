@@ -11,6 +11,7 @@ let currentBibleChapter = 1;
 let currentBibleLanguage = 'tamil';
 let touchStartX = 0;
 let touchEndX = 0;
+let isLanguageSwitching = false; // Flag to prevent verse count on language change
 
 // Book name mapping for file names
 const BOOK_FILE_MAP = {
@@ -202,6 +203,14 @@ const VERSE_COUNTS = {
 function initializeBibleVersePage() {
     if (biblePageInitialized) return;
     
+    // Set default book (Genesis for Old Testament)
+    const bookInput = document.getElementById('bookInput');
+    if (bookInput && !bookInput.value) {
+        bookInput.value = 'Genesis';
+        selectedBook = 'Genesis';
+        updateChapterHelperText('Genesis');
+    }
+    
     // Initialize dropdown
     initializeBibleDropdown();
     
@@ -237,14 +246,21 @@ function switchTestament(testament) {
         header.textContent = testament === 'old' ? 'OLD TESTAMENT' : 'NEW TESTAMENT';
     }
     
-    // Clear all input fields
+    // Set default book based on testament
     const bookInput = document.getElementById('bookInput');
+    const defaultBook = testament === 'old' ? 'Genesis' : 'Matthew';
+    
+    if (bookInput) {
+        bookInput.value = defaultBook;
+    }
+    
+    // Update selected book
+    selectedBook = defaultBook;
+    
+    // Clear chapter and verse inputs
     const chapterInput = document.getElementById('chapterInput');
     const verseInput = document.getElementById('verseInput');
     
-    if (bookInput) {
-        bookInput.value = '';
-    }
     if (chapterInput) {
         chapterInput.value = '';
     }
@@ -252,8 +268,8 @@ function switchTestament(testament) {
         verseInput.value = '';
     }
     
-    // Reset selected book
-    selectedBook = '';
+    // Update chapter helper text for default book
+    updateChapterHelperText(defaultBook);
     
     // Clear helper texts and reset to default
     const chapterHelperText = document.getElementById('chapterHelperText');
@@ -649,6 +665,12 @@ function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData,
  * @param {number} verseCount - Total number of verses
  */
 function showBibleVerseCountTag(verseCount) {
+    // Don't show tag if language is being switched
+    if (isLanguageSwitching) {
+        isLanguageSwitching = false; // Reset flag
+        return;
+    }
+    
     // Use requestAnimationFrame to ensure DOM is ready
     requestAnimationFrame(() => {
         const tag = document.getElementById('bibleVerseCountTag');
@@ -728,10 +750,10 @@ function handleSwipe() {
     if (Math.abs(diff) > swipeThreshold) {
         if (diff > 0) {
             // Swipe left - next chapter
-            navigateToNextChapter();
+            navigateToBibleNextChapter();
         } else {
             // Swipe right - previous chapter
-            navigateToPreviousChapter();
+            navigateToBiblePreviousChapter();
         }
     }
 }
@@ -741,19 +763,26 @@ function handleBibleKeyNavigation(e) {
     const displaySection = document.getElementById('bibleVerseDisplaySection');
     if (!displaySection || displaySection.classList.contains('hidden')) return;
     
+    // Also check that book chapter content is hidden (not in Books section)
+    const bookChapterContent = document.getElementById('book-chapter-content');
+    if (bookChapterContent && !bookChapterContent.classList.contains('hidden')) return;
+    
+    // Don't handle if user is typing in an input/textarea
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
     if (e.key === 'ArrowRight') {
         e.preventDefault();
-        navigateToNextChapter();
+        navigateToBibleNextChapter();
     } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        navigateToPreviousChapter();
+        navigateToBiblePreviousChapter();
     }
 }
 
 /**
  * Navigate to next chapter
  */
-async function navigateToNextChapter() {
+async function navigateToBibleNextChapter() {
     if (!currentBibleBook) return;
     
     const maxChapters = BOOK_CHAPTERS[currentBibleBook];
@@ -778,12 +807,32 @@ async function navigateToNextChapter() {
     
     // Load next chapter
     await loadBibleVerses(nextBook, nextChapter.toString(), '', currentBibleLanguage);
+    
+    // Scroll to top after content loads with smooth animation
+    setTimeout(() => {
+        // Scroll window
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        
+        // Also scroll the main content container
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) {
+            mainContent.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Scroll the bible display section
+        const displaySection = document.getElementById('bibleVerseDisplaySection');
+        if (displaySection) {
+            displaySection.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, 50);
 }
 
 /**
  * Navigate to previous chapter
  */
-async function navigateToPreviousChapter() {
+async function navigateToBiblePreviousChapter() {
     if (!currentBibleBook) return;
     
     let prevChapter = currentBibleChapter - 1;
@@ -805,6 +854,26 @@ async function navigateToPreviousChapter() {
     
     // Load previous chapter
     await loadBibleVerses(prevBook, prevChapter.toString(), '', currentBibleLanguage);
+    
+    // Scroll to top after content loads with smooth animation
+    setTimeout(() => {
+        // Scroll window
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        
+        // Also scroll the main content container
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) {
+            mainContent.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Scroll the bible display section
+        const displaySection = document.getElementById('bibleVerseDisplaySection');
+        if (displaySection) {
+            displaySection.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, 50);
 }
 
 /**
@@ -1203,6 +1272,9 @@ function switchBibleLanguage(language) {
         }
     });
     
+    // Set flag to prevent verse count tag on language change
+    isLanguageSwitching = true;
+    
     // Reload current chapter with new language
     if (currentBibleBook && currentBibleChapter) {
         loadBibleVerses(currentBibleBook, currentBibleChapter.toString(), '', language);
@@ -1226,6 +1298,10 @@ function initializeLanguageToggle() {
 
 // Make language switch function globally available
 window.switchBibleLanguage = switchBibleLanguage;
+
+// Make Bible chapter navigation functions globally available with unique names
+window.navigateToBibleNextChapter = navigateToBibleNextChapter;
+window.navigateToBiblePreviousChapter = navigateToBiblePreviousChapter;
 
 
 
