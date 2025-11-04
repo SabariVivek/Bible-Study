@@ -8858,4 +8858,1067 @@ html #king-page-content.dark-mode-kings-variant2 .table tbody tr:hover {
 .dark-mode-prophets-variant2 .content-header,
 .dark-mode-books-variant2 .content-header {
     background: #0f1a22;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Warm Beige Theme (#fef6eb base)
+   ============================================ */
+.light-mode-cards-variant2 .era-card {
+    background: #fef6eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-right: 1px solid #e8d5b7;
+    border-top: 1px solid #e8d5b7;
+    border-bottom: 1px solid #e8d5b7;
+}
+
+.light-mode-cards-variant2 .era-card:hover {
+    background: #f9f0df;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.light-mode-dashboard-variant2 .era-card {
+    background: #fef6eb;
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.1);
+    border-right: 1px solid #e8d5b7;
+    border-top: 1px solid #e8d5b7;
+    border-bottom: 1px solid #e8d5b7;
+}
+
+.light-mode-dashboard-variant2 .era-card:hover {
+    background: #f9f0df;
+    box-shadow: 0 4px 16px rgba(139, 115, 85, 0.15);
+    transform: translateY(-4px);
+}
+
+.light-mode-dashboard-variant2 .seed-card {
+    background: #fef6eb;
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.12);
+}
+
+.light-mode-dashboard-variant2 .seed-card:hover {
+    background: #f9f0df;
+}
+
+.light-mode-dashboard-variant2 .seed-section-header {
+    background: linear-gradient(to right, #f4ebe0 0%, #fef6eb 100%);
+}
+
+.light-mode-dashboard-variant2 .prayer-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.05) 100%);
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.12);
+}
+
+.light-mode-dashboard-variant2 .prayer-card:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.08) 100%);
+    box-shadow: 0 4px 16px rgba(139, 115, 85, 0.18);
+}
+
+.light-mode-dashboard-variant2 .prayer-verse-ref {
+    background: #fef6eb;
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.15);
+}
+
+.light-mode-dashboard-variant2 .prayer-verse {
+    background: #fef6eb;
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.15);
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Timeline
+   ============================================ */
+.light-mode-timeline-variant2 .timeline-container {
+    background-color: #fef6eb;
+}
+
+.light-mode-timeline-variant2 .timeline ul li {
+    background-color: #f9f0df;
+    border: 1px solid #e8d5b7;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Life of Christ
+   ============================================ */
+.light-mode-life-of-christ-variant2 .life-of-jesus-container {
+    background-color: #fef6eb;
+}
+
+.light-mode-life-of-christ-variant2 .chapter-section-heading {
+    background: linear-gradient(to right, #f4ebe0 0%, #fef6eb 100%);
+}
+
+.light-mode-life-of-christ-variant2 .life-of-jesus-card {
+    background: #f9f0df;
+    border: 1px solid #e8d5b7;
+}
+
+.light-mode-life-of-christ-variant2 .life-of-jesus-card:hover {
+    border-color: #d4c3a8;
+}
+
+.light-mode-life-of-christ-variant2 .passage-modal-card {
+    background: #fef6eb;
+    box-shadow: 0 20px 40px rgba(139, 115, 85, 0.25);
+}
+
+.light-mode-life-of-christ-variant2 .passage-modal-card .close-btn {
+    background: #f0e6d8;
+}
+
+.light-mode-life-of-christ-variant2 .passage-modal-card .close-btn:hover {
+    background: #e8d5b7;
+}
+
+.light-mode-life-of-christ-variant2 .characters-search-input {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+.light-mode-life-of-christ-variant2 .characters-search-input:focus {
+    background: #fef6eb;
+}
+
+.light-mode-life-of-christ-variant2 .search-clear-btn {
+    background: #e8d5b7;
+}
+
+.light-mode-life-of-christ-variant2 .search-clear-btn:hover {
+    background: #d4c3a8;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Characters
+   ============================================ */
+.light-mode-characters-variant2 .characters-container {
+    background-color: #fef6eb;
+}
+
+.light-mode-characters-variant2 .character-card {
+    background: #f9f0df;
+    border: 1px solid #e8d5b7;
+}
+
+.light-mode-characters-variant2 .character-card:hover {
+    box-shadow: 0px 8px 16px rgba(139, 115, 85, 0.15), 0px 4px 12px rgba(139, 115, 85, 0.12);
+}
+
+.light-mode-characters-variant2 .character-card-lesson {
+    background: linear-gradient(135deg, #f4ebe0 0%, #ecdfc9 100%);
+}
+
+.light-mode-characters-variant2 .characters-search-input {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+.light-mode-characters-variant2 .characters-search-input:focus {
+    background: #fef6eb;
+}
+
+.light-mode-characters-variant2 .search-clear-btn {
+    background: #e8d5b7;
+}
+
+.light-mode-characters-variant2 .search-clear-btn:hover {
+    background: #d4c3a8;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Kings
+   ============================================ */
+#king-page-content.light-mode-kings-variant2 .table-container {
+    background: #f9f0df;
+    border-color: #e8d5b7;
+}
+
+#king-page-content.light-mode-kings-variant2 .table {
+    background: #f9f0df;
+}
+
+#king-page-content.light-mode-kings-variant2 .chapter-section-heading {
+    background: linear-gradient(to right, #f4ebe0 0%, #fef6eb 100%);
+}
+
+#king-page-content.light-mode-kings-variant2 .table th {
+    background: #fef6eb;
+    border-bottom-color: #e8d5b7;
+}
+
+#king-page-content.light-mode-kings-variant2 .table td {
+    border-bottom-color: #e8d5b7;
+    background: #f9f0df !important;
+}
+
+#king-page-content.light-mode-kings-variant2 .table tbody tr {
+    background: #f9f0df !important;
+}
+
+#king-page-content.light-mode-kings-variant2 .table tbody tr:hover,
+html #king-page-content.light-mode-kings-variant2 .table tbody tr:hover {
+    background: #f4ebe0 !important;
+}
+
+#king-page-content.light-mode-kings-variant2 .table tbody tr:hover td {
+    background: #f4ebe0 !important;
+}
+
+#kings-content.light-mode-kings-variant2 .content-actions {
+    background: transparent;
+    box-shadow: none;
+}
+
+#kings-content.light-mode-kings-variant2 .content-actions .card {
+    background: #fef6eb;
+    border: 1px solid #e8d5b7 !important;
+}
+
+#kings-content.light-mode-kings-variant2 .filter-btn,
+#kings-content.light-mode-kings-variant2 .export-btn,
+#kings-content.light-mode-kings-variant2 .add-btn {
+    background: linear-gradient(135deg, #fef6eb 0%, #f4ebe0 100%);
+    border: 1px solid #e8d5b7;
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.12);
+}
+
+#kings-content.light-mode-kings-variant2 .filter-btn:hover,
+#kings-content.light-mode-kings-variant2 .export-btn:hover,
+#kings-content.light-mode-kings-variant2 .add-btn:hover {
+    background: linear-gradient(135deg, #f9f0df 0%, #ecdfc9 100%);
+    box-shadow: 0 4px 12px rgba(139, 115, 85, 0.18);
+}
+
+#kings-content.light-mode-kings-variant2 .theme-btn {
+    background: linear-gradient(135deg, #fef6eb 0%, #f9f0df 100%);
+    border: 1px solid #e8d5b7;
+}
+
+#kings-content.light-mode-kings-variant2 .theme-btn:hover {
+    background: linear-gradient(135deg, #f9f0df 0%, #ecdfc9 100%) !important;
+    box-shadow: 0 4px 12px rgba(139, 115, 85, 0.18) !important;
+}
+
+/* Kings Content - Table View Variant 2 */
+#kings-content.light-mode-kings-variant2 .table-container {
+    background: #f9f0df;
+    border-color: #e8d5b7;
+}
+
+#kings-content.light-mode-kings-variant2 .table {
+    background: #f9f0df;
+}
+
+#kings-content.light-mode-kings-variant2 .table th {
+    background: #fef6eb;
+    color: #3d3d3d;
+    border-bottom-color: #e8d5b7;
+}
+
+#kings-content.light-mode-kings-variant2 .table td {
+    color: #4a4a4a !important;
+    border-bottom-color: #e8d5b7 !important;
+    background: #f9f0df !important;
+}
+
+#kings-content.light-mode-kings-variant2 .table tbody tr {
+    background: #f9f0df !important;
+}
+
+#kings-content.light-mode-kings-variant2 .table tbody tr:hover {
+    background: #f4ebe0 !important;
+}
+
+#kings-content.light-mode-kings-variant2 .table tbody tr:hover td {
+    background: #f4ebe0 !important;
+}
+
+#kings-content.light-mode-kings-variant2 .king-name {
+    color: #3d3d3d !important;
+}
+
+#kings-content.light-mode-kings-variant2 .king-kingdom {
+    color: #5a5a5a !important;
+}
+
+#kings-content.light-mode-kings-variant2 .order-number {
+    color: #4a4a4a !important;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Prophets
+   ============================================ */
+#prophets-content.light-mode-prophets-variant2 .content-actions .card {
+    background: #fef6eb;
+    border: 1px solid #e8d5b7 !important;
+}
+
+#prophets-content.light-mode-prophets-variant2 .theme-btn {
+    background: linear-gradient(135deg, #fef6eb 0%, #f9f0df 100%);
+    border: 1px solid #e8d5b7;
+}
+
+#prophets-content.light-mode-prophets-variant2 .theme-btn:hover {
+    background: linear-gradient(135deg, #f9f0df 0%, #ecdfc9 100%) !important;
+    box-shadow: 0 4px 12px rgba(139, 115, 85, 0.18) !important;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Books
+   ============================================ */
+#books-content.light-mode-books-variant2 .content-actions .card {
+    background: #fef6eb;
+    border: 1px solid #e8d5b7 !important;
+}
+
+#books-content.light-mode-books-variant2 .theme-btn {
+    background: linear-gradient(135deg, #fef6eb 0%, #f9f0df 100%);
+    border: 1px solid #e8d5b7;
+}
+
+#books-content.light-mode-books-variant2 .theme-btn:hover {
+    background: linear-gradient(135deg, #f9f0df 0%, #ecdfc9 100%) !important;
+    box-shadow: 0 4px 12px rgba(139, 115, 85, 0.18) !important;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Filter Cards & Modals
+   ============================================ */
+.light-mode-kings-variant2 .side-card,
+.light-mode-prophets-variant2 .side-card,
+.light-mode-books-variant2 .side-card {
+    background: #fef6eb !important;
+    border: 1px solid #e8d5b7;
+    box-shadow: 0 2px 12px rgba(139, 115, 85, 0.15);
+}
+
+.light-mode-kings-variant2 .filter-card,
+.light-mode-prophets-variant2 .filter-card,
+.light-mode-books-variant2 .filter-card {
+    background: #fef6eb !important;
+    border: 1px solid #e8d5b7;
+    box-shadow: 0 4px 24px rgba(139, 115, 85, 0.20);
+}
+
+.light-mode-kings-variant2 .filter-option,
+.light-mode-prophets-variant2 .filter-option,
+.light-mode-books-variant2 .filter-option {
+    background: #f9f0df;
+    border-color: #e8d5b7;
+}
+
+.light-mode-kings-variant2 .filter-option:hover,
+.light-mode-prophets-variant2 .filter-option:hover,
+.light-mode-books-variant2 .filter-option:hover {
+    background: #f4ebe0;
+}
+
+.light-mode-kings-variant2 .filter-card .close-btn,
+.light-mode-prophets-variant2 .filter-card .close-btn,
+.light-mode-books-variant2 .filter-card .close-btn {
+    background: #e8d5b7;
+}
+
+.light-mode-kings-variant2 .filter-card .close-btn:hover,
+.light-mode-prophets-variant2 .filter-card .close-btn:hover,
+.light-mode-books-variant2 .filter-card .close-btn:hover {
+    background: #d4c3a8;
+}
+
+.light-mode-kings-variant2 .filter-btn-cancel,
+.light-mode-prophets-variant2 .filter-btn-cancel,
+.light-mode-books-variant2 .filter-btn-cancel {
+    background: #e8d5b7;
+}
+
+.light-mode-kings-variant2 .filter-btn-cancel:hover,
+.light-mode-prophets-variant2 .filter-btn-cancel:hover,
+.light-mode-books-variant2 .filter-btn-cancel:hover {
+    background: #d4c3a8;
+}
+
+/* Light Mode Variant 2 - Filter Card Scrollbar Styles */
+.light-mode-kings-variant2 .filter-card::-webkit-scrollbar,
+.light-mode-prophets-variant2 .filter-card::-webkit-scrollbar,
+.light-mode-books-variant2 .filter-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.light-mode-kings-variant2 .filter-card::-webkit-scrollbar-track,
+.light-mode-prophets-variant2 .filter-card::-webkit-scrollbar-track,
+.light-mode-books-variant2 .filter-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.light-mode-kings-variant2 .filter-card::-webkit-scrollbar-thumb,
+.light-mode-prophets-variant2 .filter-card::-webkit-scrollbar-thumb,
+.light-mode-books-variant2 .filter-card::-webkit-scrollbar-thumb {
+    background: #e8d5b7;
+    border-radius: 4px;
+}
+
+.light-mode-kings-variant2 .filter-card::-webkit-scrollbar-thumb:hover,
+.light-mode-prophets-variant2 .filter-card::-webkit-scrollbar-thumb:hover,
+.light-mode-books-variant2 .filter-card::-webkit-scrollbar-thumb:hover {
+    background: #d4c3a8;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - King Hover Card
+   ============================================ */
+.king-hover-card.light-mode-kings-variant2,
+.light-mode-kings-variant2 .king-hover-card {
+    background: #fef6eb !important;
+    border-color: #e8d5b7 !important;
+    box-shadow: 0 8px 24px rgba(139, 115, 85, 0.25) !important;
+}
+
+.king-hover-card.light-mode-kings-variant2 .king-hover-card-header,
+.light-mode-kings-variant2 .king-hover-card-header {
+    background: #fef6eb !important;
+}
+
+.king-hover-card.light-mode-kings-variant2 .king-hover-card-body,
+.light-mode-kings-variant2 .king-hover-card-body {
+    background: #fef6eb !important;
+}
+
+.king-hover-card.light-mode-kings-variant2 .king-hover-card-name,
+.light-mode-kings-variant2 .king-hover-card-name {
+    color: #2c2c2c !important;
+}
+
+.king-hover-card.light-mode-kings-variant2 .king-hover-card-description,
+.light-mode-kings-variant2 .king-hover-card-description {
+    color: #3d3d3d !important;
+}
+
+.king-hover-card.light-mode-kings-variant2 .king-hover-card-label,
+.light-mode-kings-variant2 .king-hover-card-label {
+    color: #5a5a5a !important;
+}
+
+.king-hover-card.light-mode-kings-variant2 .king-hover-card-value,
+.light-mode-kings-variant2 .king-hover-card-value {
+    color: #2c2c2c !important;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Prophets Table
+   ============================================ */
+.light-mode-prophets-variant2 .table-container {
+    background: #f9f0df;
+    border-color: #e8d5b7;
+}
+
+.light-mode-prophets-variant2 .table th {
+    background: #fef6eb;
+    border-bottom-color: #e8d5b7;
+}
+
+.light-mode-prophets-variant2 .table th.sortable:hover {
+    background: #f4ebe0;
+}
+
+.light-mode-prophets-variant2 .table td {
+    border-bottom-color: #e8d5b7;
+}
+
+.light-mode-prophets-variant2 .table tr:hover {
+    background: #f4ebe0;
+}
+
+#prophet-detail-content.light-mode-prophets-variant2 .prophet-page-container {
+    background: #fef6eb;
+}
+
+#prophet-detail-content.light-mode-prophets-variant2 .chapter-section-heading {
+    background: linear-gradient(to right, #f4ebe0 0%, #fef6eb 100%);
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Books Table & Content
+   ============================================ */
+.light-mode-books-variant2 .content-header {
+    background: #fef6eb;
+}
+
+.light-mode-books-variant2 .book-chapter-container {
+    background-color: #fef6eb;
+}
+
+.light-mode-books-variant2 .chapter-section-heading {
+    background: linear-gradient(to right, #f4ebe0 0%, #fef6eb 100%);
+}
+
+.light-mode-books-variant2 .table-container {
+    background: #f9f0df;
+    border-color: #e8d5b7;
+}
+
+.light-mode-books-variant2 .table th {
+    background: #fef6eb;
+    border-bottom-color: #e8d5b7;
+}
+
+.light-mode-books-variant2 .table th.sortable:hover {
+    background: #f4ebe0;
+}
+
+.light-mode-books-variant2 .table td {
+    border-bottom-color: #e8d5b7;
+}
+
+.light-mode-books-variant2 .table tr:hover {
+    background: #f4ebe0;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Additional Card & Content Styles
+   ============================================ */
+.light-mode-kings-variant2 .card,
+.light-mode-prophets-variant2 .card,
+.light-mode-books-variant2 .card,
+.light-mode-kings-variant2 .king-card,
+.light-mode-prophets-variant2 .king-card,
+.light-mode-books-variant2 .king-card {
+    background: #fef6eb;
+    border: 1px solid #e8d5b7;
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.12);
+}
+
+.light-mode-kings-variant2 .king-info-row {
+    border-bottom: 1px solid #e8d5b7;
+}
+
+.light-mode-kings-variant2 .biblical-refs-container .biblical-ref {
+    background: #f9f0df;
+    border-color: #e8d5b7;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Content Actions & Buttons
+   ============================================ */
+.light-mode-kings-variant2 .content-actions,
+.light-mode-prophets-variant2 .content-actions,
+.light-mode-books-variant2 .content-actions {
+    background: transparent;
+    box-shadow: none;
+}
+
+.light-mode-kings-variant2 .filter-btn,
+.light-mode-kings-variant2 .export-btn,
+.light-mode-prophets-variant2 .filter-btn,
+.light-mode-prophets-variant2 .export-btn,
+.light-mode-books-variant2 .filter-btn,
+.light-mode-books-variant2 .export-btn {
+    background: linear-gradient(135deg, #fef6eb 0%, #f4ebe0 100%);
+    border: 1px solid #e8d5b7;
+}
+
+.light-mode-kings-variant2 .filter-btn:hover,
+.light-mode-kings-variant2 .export-btn:hover,
+.light-mode-prophets-variant2 .filter-btn:hover,
+.light-mode-prophets-variant2 .export-btn:hover,
+.light-mode-books-variant2 .filter-btn:hover,
+.light-mode-books-variant2 .export-btn:hover {
+    background: linear-gradient(135deg, #f9f0df 0%, #ecdfc9 100%);
+}
+
+.light-mode-kings-variant2 .add-btn,
+.light-mode-prophets-variant2 .add-btn,
+.light-mode-books-variant2 .add-btn {
+    background: linear-gradient(135deg, #fef6eb 0%, #f4ebe0 100%);
+    border: 1px solid #e8d5b7;
+}
+
+.light-mode-kings-variant2 .add-btn:hover,
+.light-mode-prophets-variant2 .add-btn:hover,
+.light-mode-books-variant2 .add-btn:hover {
+    background: linear-gradient(135deg, #f9f0df 0%, #ecdfc9 100%);
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Chapters Popup & Modals
+   ============================================ */
+.light-mode-books-variant2 #chaptersPopup {
+    background: rgba(254, 246, 235, 0.95);
+}
+
+.light-mode-books-variant2 #chaptersPopup .modal-card {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+.light-mode-books-variant2 #synopsisSideDrawer {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+.light-mode-books-variant2 #synopsisSideDrawer .synopsis-content {
+    background: #fef6eb;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Chapters Popup Detailed Styles
+   ============================================ */
+.light-mode-books-variant2 .chapters-popup {
+    background: #fef6eb;
+    box-shadow: 0 10px 30px rgba(139, 115, 85, 0.25);
+}
+
+.light-mode-books-variant2 .chapters-popup .popup-header {
+    border-bottom-color: #e8d5b7;
+    background: #f9f0df !important;
+}
+
+.light-mode-books-variant2 .chapters-popup .close-btn {
+    background: #e8d5b7;
+    color: #3d3d3d;
+}
+
+.light-mode-books-variant2 .chapters-popup .close-btn:hover {
+    background: #d4c3a8;
+    color: #2c2c2c;
+}
+
+.light-mode-books-variant2.chapters-popup.show .close-btn {
+    background: #e8d5b7 !important;
+    color: #3d3d3d !important;
+    border-color: #e8d5b7 !important;
+}
+
+.light-mode-books-variant2.chapters-popup.show .close-btn:hover {
+    background: #d4c3a8 !important;
+    color: #2c2c2c !important;
+    border-color: #d4c3a8 !important;
+}
+
+.light-mode-books-variant2 .chapter-card {
+    background: #f4ebe0;
+    border-color: #d4c3a8;
+}
+
+.light-mode-books-variant2 .chapter-card:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+}
+
+.light-mode-books-variant2.chapters-popup.show {
+    background: #fef6eb !important;
+    box-shadow: 0 10px 30px rgba(139, 115, 85, 0.3);
+    border-radius: 20px !important;
+}
+
+.light-mode-books-variant2 .chapters::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.light-mode-books-variant2 .chapters::-webkit-scrollbar-thumb {
+    background: #e8d5b7;
+}
+
+.light-mode-books-variant2 .chapters::-webkit-scrollbar-thumb:hover {
+    background: #d4c3a8;
+}
+
+.light-mode-books-variant2.chapters-popup .popup-header .book-title {
+    color: #2c2c2c !important;
+}
+
+.light-mode-books-variant2.chapters-popup .popup-header .chapter-count {
+    color: #3d3d3d !important;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Synopsis & Additional Modals
+   ============================================ */
+.light-mode-books-variant2 .synopsis-drawer {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+.light-mode-books-variant2 .synopsis-header {
+    background: #f9f0df;
+    border-bottom-color: #e8d5b7;
+}
+
+.light-mode-books-variant2 .synopsis-content {
+    background: #fef6eb;
+    color: #2c2c2c;
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - Bible Verse Display Additional Styles
+   ============================================ */
+#bibleVerseDisplaySection.light-mode-bible-variant2 .bible-chapter-title {
+    color: #2c2c2c;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .bible-section-title {
+    color: #3d3d3d;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-number {
+    color: #764ba2;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-text,
+#bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-tamil {
+    color: #2c2c2c;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-english {
+    color: #3d3d3d;
+}
+
+.light-mode-bible-variant2 .bible-verse-submit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.light-mode-bible-variant2 .bible-verse-submit-btn:hover {
+    background: linear-gradient(135deg, #7c8ff0 0%, #8a5ab0 100%);
+}
+
+/* ============================================
+   LIGHT MODE VARIANT 2 - COMPLETE REMAINING ELEMENTS
+   ============================================ */
+
+/* Search Inputs for all sections */
+.light-mode-life-of-christ-variant2 .characters-search-input,
+.light-mode-characters-variant2 .characters-search-input,
+.light-mode-life-of-christ-variant2 .life-of-christ-search-input {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+.light-mode-life-of-christ-variant2 .characters-search-input:focus,
+.light-mode-characters-variant2 .characters-search-input:focus,
+.light-mode-life-of-christ-variant2 .life-of-christ-search-input:focus {
+    background: #fef6eb;
+    border-color: #5D9CEC;
+}
+
+.light-mode-life-of-christ-variant2 .search-clear-btn,
+.light-mode-characters-variant2 .search-clear-btn {
+    background: #e8d5b7;
+}
+
+.light-mode-life-of-christ-variant2 .search-clear-btn:hover,
+.light-mode-characters-variant2 .search-clear-btn:hover {
+    background: #d4c3a8;
+}
+
+/* Pagination for all sections */
+.light-mode-kings-variant2 .pagination,
+.light-mode-prophets-variant2 .pagination,
+.light-mode-books-variant2 .pagination {
+    background: #fef6eb;
+}
+
+.light-mode-kings-variant2 .pagination-btn,
+.light-mode-prophets-variant2 .pagination-btn,
+.light-mode-books-variant2 .pagination-btn {
+    background: #f4ebe0;
+    border-color: #d4c3a8;
+}
+
+.light-mode-kings-variant2 .pagination-btn:hover,
+.light-mode-prophets-variant2 .pagination-btn:hover,
+.light-mode-books-variant2 .pagination-btn:hover {
+    background: #ecdfc9;
+}
+
+.light-mode-kings-variant2 .pagination-btn.active,
+.light-mode-prophets-variant2 .pagination-btn.active,
+.light-mode-books-variant2 .pagination-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Modal overlays */
+.light-mode-kings-variant2 .modal-overlay,
+.light-mode-prophets-variant2 .modal-overlay,
+.light-mode-books-variant2 .modal-overlay,
+.light-mode-life-of-christ-variant2 .modal-overlay {
+    background: rgba(254, 246, 235, 0.85);
+}
+
+.light-mode-kings-variant2 .modal-card,
+.light-mode-prophets-variant2 .modal-card,
+.light-mode-books-variant2 .modal-card,
+.light-mode-life-of-christ-variant2 .modal-card {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+/* Tooltips and popovers */
+.light-mode-kings-variant2 .tooltip,
+.light-mode-prophets-variant2 .tooltip,
+.light-mode-books-variant2 .tooltip {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+/* Dropdown menus */
+.light-mode-kings-variant2 .dropdown-menu,
+.light-mode-prophets-variant2 .dropdown-menu,
+.light-mode-books-variant2 .dropdown-menu {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+.light-mode-kings-variant2 .dropdown-item,
+.light-mode-prophets-variant2 .dropdown-item,
+.light-mode-books-variant2 .dropdown-item {
+    color: #2c2c2c;
+}
+
+.light-mode-kings-variant2 .dropdown-item:hover,
+.light-mode-prophets-variant2 .dropdown-item:hover,
+.light-mode-books-variant2 .dropdown-item:hover {
+    background: #f4ebe0;
+}
+
+/* Timeline modal for Kings */
+.light-mode-kings-variant2 #kings-timeline-modal .modal-content {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+.light-mode-kings-variant2 #kings-timeline-modal .timeline-container {
+    background: #f9f0df;
+}
+
+/* All content areas */
+.light-mode-kings-variant2 #kings-content,
+.light-mode-prophets-variant2 #prophets-content,
+.light-mode-books-variant2 #books-content,
+.light-mode-kings-variant2 #king-page-content,
+.light-mode-prophets-variant2 #prophet-detail-content,
+.light-mode-books-variant2 #book-chapter-content {
+    background: #fef6eb;
+}
+
+/* Content headers for all sections */
+.light-mode-kings-variant2 .content-header,
+.light-mode-prophets-variant2 .content-header,
+.light-mode-books-variant2 .content-header {
+    background: #fef6eb;
+}
+
+/* Timeline content header */
+.light-mode-timeline-variant2 .content-header {
+    background: #fef6eb;
+}
+
+/* Bible verse form content */
+#bibleVerseFormSection.light-mode-bible-variant2 .bible-verse-form-content {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+}
+
+.light-mode-bible-variant2 .bible-verse-form-content {
+    background: #fef6eb !important;
+    border-color: #e8d5b7;
+}
+
+.light-mode-bible-variant2 .bible-verse-page-container {
+    background: #fef6eb;
+}
+
+.light-mode-bible-variant2 .bible-verse-container {
+    background: #f9f0df;
+    border-color: #e8d5b7;
+}
+
+#bible-content.light-mode-bible-variant2 {
+    background: #fef6eb;
+}
+
+#bibleVerseFormSection.light-mode-bible-variant2 {
+    background: #fef6eb;
+}
+
+.light-mode-bible-variant2 #bibleVerseFormSection {
+    background: #fef6eb;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 {
+    background: #fef6eb;
+}
+
+.light-mode-bible-variant2 #bibleVerseDisplaySection {
+    background: #fef6eb;
+}
+
+.light-mode-bible-variant2 .bible-form-card {
+    background: #f9f0df;
+    border-color: #e8d5b7;
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.12);
+}
+
+.light-mode-bible-variant2 .bible-form-input,
+.light-mode-bible-variant2 .bible-form-select,
+.light-mode-bible-variant2 input[type="text"],
+.light-mode-bible-variant2 input[type="number"],
+.light-mode-bible-variant2 select,
+.light-mode-bible-variant2 .form-control {
+    background: #f4ebe0 !important;
+    border-color: #d4c3a8 !important;
+    color: #2c2c2c !important;
+}
+
+.light-mode-bible-variant2 .bible-form-input:focus,
+.light-mode-bible-variant2 .bible-form-select:focus,
+.light-mode-bible-variant2 input[type="text"]:focus,
+.light-mode-bible-variant2 input[type="number"]:focus,
+.light-mode-bible-variant2 select:focus,
+.light-mode-bible-variant2 .form-control:focus {
+    background: #fef6eb !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+.light-mode-bible-variant2 .bible-form-label,
+.light-mode-bible-variant2 label {
+    color: #2c2c2c !important;
+}
+
+.light-mode-bible-variant2 .bible-form-group {
+    background: transparent;
+}
+
+/* Bible verse radio group */
+.light-mode-bible-variant2 .bible-verse-radio-group {
+    background: transparent;
+}
+
+.light-mode-bible-variant2 .bible-verse-radio-option {
+    background: #f4ebe0 !important;
+    border-color: #d4c3a8 !important;
+    color: #2c2c2c !important;
+}
+
+.light-mode-bible-variant2 .bible-verse-radio-option:hover {
+    background: #ecdfc9 !important;
+    color: #2c2c2c !important;
+}
+
+.light-mode-bible-variant2 .bible-verse-radio-option label {
+    color: inherit !important;
+}
+
+/* Bible verse testament toggle */
+.light-mode-bible-variant2 .bible-verse-testament-toggle {
+    background: transparent;
+}
+
+.light-mode-bible-variant2 .bible-verse-testament-btn {
+    background: #f4ebe0 !important;
+    border-color: #d4c3a8 !important;
+    color: #2c2c2c !important;
+}
+
+.light-mode-bible-variant2 .bible-verse-testament-btn:hover {
+    background: #ecdfc9 !important;
+    color: #2c2c2c !important;
+}
+
+.light-mode-bible-variant2 .bible-verse-testament-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border-color: #667eea !important;
+}
+
+/* Bible verse form inputs */
+.light-mode-bible-variant2 .bible-verse-input,
+.light-mode-bible-variant2 .bible-verse-dropdown-input {
+    background: #f4ebe0 !important;
+    border-color: #d4c3a8 !important;
+    color: #2c2c2c !important;
+}
+
+.light-mode-bible-variant2 .bible-verse-input:focus,
+.light-mode-bible-variant2 .bible-verse-dropdown-input:focus {
+    background: #fef6eb !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+.light-mode-bible-variant2 .bible-verse-dropdown-list {
+    background: #fef6eb !important;
+    border-color: #d4c3a8 !important;
+}
+
+.light-mode-bible-variant2 .bible-verse-dropdown-item {
+    color: #2c2c2c !important;
+}
+
+.light-mode-bible-variant2 .bible-verse-dropdown-item:hover {
+    background: #f4ebe0 !important;
+}
+
+.light-mode-bible-variant2 .bible-verse-helper-text {
+    color: #5a5a5a !important;
+}
+
+/* Testament mega menu */
+.light-mode-books-variant2 .testament-mega-menu {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+    box-shadow: 0 4px 20px rgba(139, 115, 85, 0.2);
+}
+
+.light-mode-books-variant2 .testament-column h3 {
+    color: #2c2c2c;
+    border-bottom-color: #e8d5b7;
+}
+
+.light-mode-books-variant2 .testament-book-item {
+    color: #3d3d3d;
+}
+
+.light-mode-books-variant2 .testament-book-item:hover {
+    background: #f4ebe0;
+    color: #667eea;
+}
+
+/* Testament navigation headings */
+.light-mode-books-variant2 .testament-nav-button {
+    background: #f9f0df;
+    border-color: #e8d5b7;
+    color: #5a5a5a;
+}
+
+.light-mode-books-variant2 .testament-nav-button:hover {
+    background: #f4ebe0;
+    color: #2c2c2c;
+}
+
+.light-mode-books-variant2 .testament-nav-button.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+}
+
+/* Synopsis drawer additional styles */
+.light-mode-books-variant2 .synopsis-drawer-overlay {
+    background: rgba(254, 246, 235, 0.75);
+}
+
+.light-mode-books-variant2 .synopsis-drawer-header {
+    background: #f9f0df;
+    border-bottom-color: #e8d5b7;
+}
+
+.light-mode-books-variant2 .synopsis-drawer-title {
+    color: #2c2c2c;
+}
+
+.light-mode-books-variant2 .synopsis-drawer-close {
+    background: #e8d5b7;
+    color: #3d3d3d;
+}
+
+.light-mode-books-variant2 .synopsis-drawer-close:hover {
+    background: #d4c3a8;
+    color: #2c2c2c;
 }   

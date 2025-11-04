@@ -4214,9 +4214,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightTheme = document.getElementById('light-theme');
     // Track which dark variant is active: 1 = original, 2 = alternate (#1d2a3b)
     let darkVariant = 1;
+    // Track which light variant is active: 1 = original, 2 = warm beige (#fef6eb)
+    let lightVariant = 1;
     try {
         const stored = localStorage.getItem('darkVariant');
         if (stored) darkVariant = parseInt(stored, 10) || 1;
+        const storedLight = localStorage.getItem('lightVariant');
+        if (storedLight) lightVariant = parseInt(storedLight, 10) || 1;
     } catch (e) {
         // ignore storage errors
     }
@@ -4736,12 +4740,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Light theme change handler with animation
         lightTheme.addEventListener('change', function() {
-            if (this.checked && window.ThemeAnimation) {
-                window.ThemeAnimation.applyThemeWithAnimation(lightThemeLabel, applyLightTheme);
-            } else if (this.checked) {
-                applyLightTheme();
+            if (this.checked) {
+                // Reset to variant 1 when light mode is first enabled
+                lightVariant = 1;
+                try { localStorage.setItem('lightVariant', lightVariant); } catch (err) {}
+                
+                if (window.ThemeAnimation) {
+                    window.ThemeAnimation.applyThemeWithAnimation(lightThemeLabel, applyLightTheme);
+                } else {
+                    applyLightTheme();
+                }
             }
         });
+
+        // When light theme is already selected, clicking the light label toggles the light variant
+        if (lightThemeLabel) {
+            lightThemeLabel.addEventListener('click', function(e) {
+                // if radio is already checked, toggle variant
+                if (lightTheme.checked) {
+                    lightVariant = lightVariant === 1 ? 2 : 1;
+                    try { localStorage.setItem('lightVariant', lightVariant); } catch (err) {}
+                    if (window.ThemeAnimation) {
+                        window.ThemeAnimation.applyThemeWithAnimation(lightThemeLabel, applyLightTheme);
+                    } else {
+                        applyLightTheme();
+                    }
+                    // prevent default to avoid any unexpected behaviour
+                    e.preventDefault();
+                }
+            });
+        }
         
         // Function to apply light theme (extracted for reusability)
         function applyLightTheme() {
@@ -4755,129 +4783,195 @@ document.addEventListener('DOMContentLoaded', function() {
                 const dashboardCardsContainer = document.querySelector('.dashboard-cards-container');
                 if (dashboardCardsContainer) {
                     dashboardCardsContainer.classList.remove('dark-mode-cards', 'dark-mode-cards-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) dashboardCardsContainer.classList.add('light-mode-cards-variant2');
+                    else dashboardCardsContainer.classList.remove('light-mode-cards-variant2');
                 }
                 
                 const dashboardContent = document.getElementById('dashboard-content');
                 if (dashboardContent) {
                     dashboardContent.classList.remove('dark-mode-dashboard', 'dark-mode-dashboard-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) dashboardContent.classList.add('light-mode-dashboard-variant2');
+                    else dashboardContent.classList.remove('light-mode-dashboard-variant2');
                 }
                 
                 // Remove dark mode from timeline
                 const timelineContent = document.getElementById('timeline-content');
                 if (timelineContent) {
                     timelineContent.classList.remove('dark-mode-timeline', 'dark-mode-timeline-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) timelineContent.classList.add('light-mode-timeline-variant2');
+                    else timelineContent.classList.remove('light-mode-timeline-variant2');
                 }
                 
                 // Remove dark mode from Life of Christ
                 const lifeOfChristContent = document.getElementById('help-content');
                 if (lifeOfChristContent) {
                     lifeOfChristContent.classList.remove('dark-mode-life-of-christ', 'dark-mode-life-of-christ-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) lifeOfChristContent.classList.add('light-mode-life-of-christ-variant2');
+                    else lifeOfChristContent.classList.remove('light-mode-life-of-christ-variant2');
                 }
                 
                 // Remove dark mode from Characters
                 const charactersContent = document.getElementById('genealogy-content');
                 if (charactersContent) {
                     charactersContent.classList.remove('dark-mode-characters', 'dark-mode-characters-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) charactersContent.classList.add('light-mode-characters-variant2');
+                    else charactersContent.classList.remove('light-mode-characters-variant2');
                 }
                 
                 // Remove dark mode from Kings
                 const kingsContent = document.getElementById('king-page-content');
                 if (kingsContent) {
                     kingsContent.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) kingsContent.classList.add('light-mode-kings-variant2');
+                    else kingsContent.classList.remove('light-mode-kings-variant2');
                 }
                 
                 // Remove dark mode from Kings Table
                 const kingsTableContent = document.getElementById('kings-content');
                 if (kingsTableContent) {
                     kingsTableContent.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) kingsTableContent.classList.add('light-mode-kings-variant2');
+                    else kingsTableContent.classList.remove('light-mode-kings-variant2');
                 }
                 
                 // Remove dark mode from Prophets
                 const prophetsContent = document.getElementById('prophets-content');
                 if (prophetsContent) {
                     prophetsContent.classList.remove('dark-mode-prophets', 'dark-mode-prophets-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) prophetsContent.classList.add('light-mode-prophets-variant2');
+                    else prophetsContent.classList.remove('light-mode-prophets-variant2');
                 }
                 
                 // Remove dark mode from Prophet Detail Content
                 const prophetDetailContent = document.getElementById('prophet-detail-content');
                 if (prophetDetailContent) {
                     prophetDetailContent.classList.remove('dark-mode-prophets', 'dark-mode-prophets-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) prophetDetailContent.classList.add('light-mode-prophets-variant2');
+                    else prophetDetailContent.classList.remove('light-mode-prophets-variant2');
                 }
                 
                 // Remove dark mode from Books
                 const booksContent = document.getElementById('books-content');
                 if (booksContent) {
                     booksContent.classList.remove('dark-mode-books', 'dark-mode-books-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) booksContent.classList.add('light-mode-books-variant2');
+                    else booksContent.classList.remove('light-mode-books-variant2');
                 }
                 
                 // Remove dark mode from Book Chapter Content
                 const bookChapterContent = document.getElementById('book-chapter-content');
                 if (bookChapterContent) {
                     bookChapterContent.classList.remove('dark-mode-books', 'dark-mode-books-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) bookChapterContent.classList.add('light-mode-books-variant2');
+                    else bookChapterContent.classList.remove('light-mode-books-variant2');
                 }
                 
                 // Remove dark mode from Bible content
                 const bibleContent = document.getElementById('bible-content');
                 if (bibleContent) {
                     bibleContent.classList.remove('dark-mode-bible', 'dark-mode-bible-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) bibleContent.classList.add('light-mode-bible-variant2');
+                    else bibleContent.classList.remove('light-mode-bible-variant2');
                 }
                 
                 // Remove dark mode from Bible Verse Display Section
                 const bibleVerseDisplaySection = document.getElementById('bibleVerseDisplaySection');
                 if (bibleVerseDisplaySection) {
                     bibleVerseDisplaySection.classList.remove('dark-mode-bible', 'dark-mode-bible-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) bibleVerseDisplaySection.classList.add('light-mode-bible-variant2');
+                    else bibleVerseDisplaySection.classList.remove('light-mode-bible-variant2');
                 }
                 
                 // Remove dark mode from filter overlays
                 const kingsFilterOverlay = document.getElementById('filterCardOverlay');
                 if (kingsFilterOverlay) {
                     kingsFilterOverlay.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) kingsFilterOverlay.classList.add('light-mode-kings-variant2');
+                    else kingsFilterOverlay.classList.remove('light-mode-kings-variant2');
                 }
                 
                 const prophetsFilterOverlay = document.getElementById('prophetsFilterCardOverlay');
                 if (prophetsFilterOverlay) {
                     prophetsFilterOverlay.classList.remove('dark-mode-prophets', 'dark-mode-prophets-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) prophetsFilterOverlay.classList.add('light-mode-prophets-variant2');
+                    else prophetsFilterOverlay.classList.remove('light-mode-prophets-variant2');
                 }
                 
                 const booksFilterOverlay = document.getElementById('booksFilterCardOverlay');
                 if (booksFilterOverlay) {
                     booksFilterOverlay.classList.remove('dark-mode-books', 'dark-mode-books-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) booksFilterOverlay.classList.add('light-mode-books-variant2');
+                    else booksFilterOverlay.classList.remove('light-mode-books-variant2');
                 }
                 
                 // Remove dark mode from chapters popup
                 const chaptersPopup = document.getElementById('chaptersPopup');
                 if (chaptersPopup) {
                     chaptersPopup.classList.remove('dark-mode-books', 'dark-mode-books-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) chaptersPopup.classList.add('light-mode-books-variant2');
+                    else chaptersPopup.classList.remove('light-mode-books-variant2');
                 }
                 
                 // Remove dark mode from synopsis side drawer
                 const synopsisSideDrawer = document.getElementById('synopsisSideDrawer');
                 if (synopsisSideDrawer) {
                     synopsisSideDrawer.classList.remove('dark-mode-books', 'dark-mode-books-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) synopsisSideDrawer.classList.add('light-mode-books-variant2');
+                    else synopsisSideDrawer.classList.remove('light-mode-books-variant2');
                 }
                 
                 // Remove dark mode from kings timeline content
                 const kingsTimelineContent = document.getElementById('kings-timeline-content');
                 if (kingsTimelineContent) {
                     kingsTimelineContent.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) kingsTimelineContent.classList.add('light-mode-kings-variant2');
+                    else kingsTimelineContent.classList.remove('light-mode-kings-variant2');
                 }
                 
                 // Remove dark mode from passage popup
                 const passagePopup = document.getElementById('passagePopup');
                 if (passagePopup) {
                     passagePopup.classList.remove('dark-mode-life-of-christ', 'dark-mode-life-of-christ-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) passagePopup.classList.add('light-mode-life-of-christ-variant2');
+                    else passagePopup.classList.remove('light-mode-life-of-christ-variant2');
                 }
                 
                 // Remove dark mode from king hover card
                 const kingHoverCard = document.getElementById('kingHoverCard');
                 if (kingHoverCard) {
                     kingHoverCard.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) kingHoverCard.classList.add('light-mode-kings-variant2');
+                    else kingHoverCard.classList.remove('light-mode-kings-variant2');
                 }
                 
                 // Remove dark mode from kings timeline modal
                 const kingsTimelineModal = document.getElementById('kings-timeline-modal');
                 if (kingsTimelineModal) {
                     kingsTimelineModal.classList.remove('dark-mode-kings', 'dark-mode-kings-variant2');
+                    // Add light mode variant classes
+                    if (lightVariant === 2) kingsTimelineModal.classList.add('light-mode-kings-variant2');
+                    else kingsTimelineModal.classList.remove('light-mode-kings-variant2');
                 }
                 
                 // Remove dark mode from king hover card via the module
@@ -4893,25 +4987,41 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
                 
-                // Light mode - using original light colors
-                if (leftSidebar) {
-                    leftSidebar.style.background = '#f8f9fb';
-                    leftSidebar.style.borderRight = '1px solid #e5e7eb';
-                }
-                
-                if (container) {
-                    container.style.background = 'white';
+                // Light mode - using original light colors or variant 2 colors
+                if (lightVariant === 1) {
+                    if (leftSidebar) {
+                        leftSidebar.style.background = '#f8f9fb';
+                        leftSidebar.style.borderRight = '1px solid #e5e7eb';
+                    }
+                    
+                    if (container) {
+                        container.style.background = 'white';
+                    }
+                } else {
+                    // Variant 2: warm beige theme
+                    if (leftSidebar) {
+                        leftSidebar.style.background = '#f9f0df';
+                        leftSidebar.style.borderRight = '1px solid #e8d5b7';
+                    }
+                    
+                    if (container) {
+                        container.style.background = '#fef6eb';
+                    }
                 }
                 
                 // Update main content background for light mode
                 const mainContent = document.querySelector('.main-content');
                 if (mainContent) {
-                    mainContent.style.background = 'white';
+                    if (lightVariant === 1) {
+                        mainContent.style.background = 'white';
+                    } else {
+                        mainContent.style.background = '#fef6eb';
+                    }
                 }
                 
                 // Update all sidebar items colors
                 document.querySelectorAll('.sidebar-header, .history-item, .sidebar-footer-item, .sidebar-footer, .theme-toggle-container').forEach(el => {
-                    el.style.borderColor = '#e5e7eb';
+                    el.style.borderColor = lightVariant === 2 ? '#e8d5b7' : '#e5e7eb';
                 });
                 
                 document.querySelectorAll('.history-item, .sidebar-footer-item, .sidebar-title').forEach(el => {
@@ -4919,14 +5029,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 document.querySelectorAll('.theme-toggle').forEach(el => {
-                    el.style.background = '#e5e7eb';
+                    el.style.background = lightVariant === 2 ? '#e8d5b7' : '#e5e7eb';
                 });
                 
                 // Update toggle button
                 const toggleBtn = document.querySelector('.sidebar-collapse-btn');
                 if (toggleBtn) {
-                    toggleBtn.style.setProperty('background', 'white', 'important');
-                    toggleBtn.style.setProperty('border-color', '#e5e7eb', 'important');
+                    const btnBg = lightVariant === 2 ? '#fef6eb' : 'white';
+                    const btnBorder = lightVariant === 2 ? '#e8d5b7' : '#e5e7eb';
+                    toggleBtn.style.setProperty('background', btnBg, 'important');
+                    toggleBtn.style.setProperty('border-color', btnBorder, 'important');
                     toggleBtn.style.setProperty('color', '#374151', 'important');
                 }
                 
@@ -4939,11 +5051,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelectorAll('.theme-option').forEach(option => {
                     const radio = option.previousElementSibling;
                     if (radio && radio.checked) {
-                        option.style.background = '#cbd5e1';
-                        option.style.color = '#1f2937';
+                        // When light is selected, show different background for variant 2
+                        if (radio.id === 'light-theme' && lightVariant === 2) {
+                            option.style.setProperty('background', '#d9b787', 'important');
+                            option.style.setProperty('color', '#2c2c2c', 'important');
+                        } else if (radio.id === 'light-theme') {
+                            option.style.setProperty('background', '#cbd5e1', 'important');
+                            option.style.setProperty('color', '#1f2937', 'important');
+                        } else {
+                            // Dark mode - keep default CSS styling
+                            option.style.removeProperty('background');
+                            option.style.removeProperty('color');
+                        }
                     } else {
-                        option.style.background = 'transparent';
-                        option.style.color = '#6b7280';
+                        option.style.setProperty('background', 'transparent', 'important');
+                        option.style.setProperty('color', '#6b7280', 'important');
                     }
                 });
                 
@@ -4952,11 +5074,66 @@ document.addEventListener('DOMContentLoaded', function() {
                     const option = svg.closest('.theme-option');
                     const radio = option.previousElementSibling;
                     if (radio && radio.checked) {
-                        svg.style.fill = '#1f2937';
+                        // Use a different icon color when the alternate light variant is active
+                        if (radio.id === 'light-theme' && lightVariant === 2) {
+                            svg.style.setProperty('fill', '#2c2c2c', 'important');
+                        } else if (radio.id === 'light-theme') {
+                            svg.style.setProperty('fill', '#1f2937', 'important');
+                        } else {
+                            // Dark mode
+                            svg.style.removeProperty('fill');
+                        }
                     } else {
-                        svg.style.fill = '#6b7280';
+                        svg.style.setProperty('fill', '#6b7280', 'important');
                     }
                 });
+                
+                // Add light mode hover styles
+                const lightModeStyle = document.createElement('style');
+                lightModeStyle.id = 'light-mode-hover';
+                const hoverBg = lightVariant === 2 ? '#e8d5b7' : '#e5e7eb';
+                const hoverBgActive = lightVariant === 2 ? '#d4c3a8' : '#d1d5db';
+                const collapseBtnBg = lightVariant === 2 ? '#fef6eb' : 'white';
+                const collapseBtnHover = lightVariant === 2 ? '#f4ebe0' : '#f9fafb';
+                lightModeStyle.innerHTML = `
+                    .history-item:hover:not(.active),
+                    .sidebar-footer-item:hover {
+                        background: ${hoverBg} !important;
+                        color: #374151 !important;
+                    }
+                    .sidebar-footer-item:last-child:hover {
+                        background: #dc3545 !important;
+                        color: #ffffff !important;
+                    }
+                    .sidebar-footer-item:last-child:hover svg {
+                        fill: #ffffff !important;
+                    }
+                    .sidebar-toggle-btn:hover {
+                        background: ${hoverBg} !important;
+                    }
+                    .sidebar-collapse-btn {
+                        border-color: ${hoverBgActive} !important;
+                        color: #374151 !important;
+                        background: ${collapseBtnBg} !important;
+                    }
+                    .sidebar-collapse-btn:hover {
+                        background: ${collapseBtnHover} !important;
+                        border-color: #374151 !important;
+                    }
+                    .history-item.active {
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+                        color: white !important;
+                        border-radius: 10px !important;
+                        margin: 0 8px 12px 8px !important;
+                    }
+                    .left-sidebar.collapsed .history-item.active {
+                        margin: 0 auto 12px auto !important;
+                    }
+                    .theme-option:hover:not(:has(input:checked)) {
+                        background: ${hoverBg} !important;
+                    }
+                `;
+                document.head.appendChild(lightModeStyle);
                 
                 // Remove inline styles that were applied by dark mode
                 // Reset content-actions and content-header backgrounds

@@ -46,11 +46,13 @@
         
         // Check if dark mode is enabled
         const darkThemeToggle = document.getElementById('dark-theme');
+        const lightThemeToggle = document.getElementById('light-theme');
         console.log('King Hover Card: Dark theme toggle found:', !!darkThemeToggle);
         console.log('King Hover Card: Dark theme checked:', darkThemeToggle?.checked);
         
         if (darkThemeToggle && darkThemeToggle.checked) {
             hoverCard.classList.add('dark-mode-kings');
+            hoverCard.classList.remove('light-mode-kings-variant2');
             
             // Check for dark variant
             let darkVariant = 1;
@@ -72,6 +74,23 @@
         } else {
             hoverCard.classList.remove('dark-mode-kings');
             hoverCard.classList.remove('dark-mode-kings-variant2');
+            
+            // Check for light variant
+            let lightVariant = 1;
+            try {
+                const stored = localStorage.getItem('lightVariant');
+                if (stored) lightVariant = parseInt(stored, 10) || 1;
+            } catch (e) {
+                lightVariant = 1;
+            }
+            
+            if (lightVariant === 2) {
+                hoverCard.classList.add('light-mode-kings-variant2');
+                console.log('King Hover Card: Added light-mode-kings-variant2 class');
+            } else {
+                hoverCard.classList.remove('light-mode-kings-variant2');
+            }
+            
             console.log('King Hover Card: Removed dark-mode-kings class');
         }
         
