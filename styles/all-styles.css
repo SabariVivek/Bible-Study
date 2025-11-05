@@ -3437,15 +3437,33 @@ body .dark-mode-maps .page-title {
 }
 
 .dark-mode-life-of-christ .passage-modal-content::-webkit-scrollbar-track {
-    background: #353535;
+    background: #353535 !important;
 }
 
 .dark-mode-life-of-christ .passage-modal-content::-webkit-scrollbar-thumb {
-    background: #4a4a4a;
+    background: #4a4a4a !important;
 }
 
 .dark-mode-life-of-christ .passage-modal-content::-webkit-scrollbar-thumb:hover {
-    background: #5a5a5a;
+    background: #5a5a5a !important;
+}
+
+/* Dark mode scrollbar for passage modal card */
+.dark-mode-life-of-christ .passage-modal-card::-webkit-scrollbar {
+    width: 4px !important;
+}
+
+.dark-mode-life-of-christ .passage-modal-card::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.dark-mode-life-of-christ .passage-modal-card::-webkit-scrollbar-thumb {
+    background: #4a4a4a !important;
+    border-radius: 4px !important;
+}
+
+.dark-mode-life-of-christ .passage-modal-card::-webkit-scrollbar-thumb:hover {
+    background: #5a5a5a !important;
 }
 
 .dark-mode-life-of-christ .passage-no-data {
@@ -5893,6 +5911,24 @@ html #king-page-content.dark-mode-kings .order-number {
     flex-direction: column;
 }
 
+/* Scrollbar styling for passage modal card */
+.passage-modal-card::-webkit-scrollbar {
+    width: 4px !important;
+}
+
+.passage-modal-card::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.passage-modal-card::-webkit-scrollbar-thumb {
+    background: #cbd5e1 !important;
+    border-radius: 4px !important;
+}
+
+.passage-modal-card::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8 !important;
+}
+
 /* Position close button on top-right of modal card */
 .passage-modal-card .close-btn {
     position: absolute;
@@ -6043,21 +6079,21 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .passage-modal-content::-webkit-scrollbar {
-    width: 3px;
+    width: 3px !important;
 }
 
 .passage-modal-content::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+    background: #f1f1f1 !important;
+    border-radius: 10px !important;
 }
 
 .passage-modal-content::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 10px;
+    background: #c1c1c1 !important;
+    border-radius: 10px !important;
 }
 
 .passage-modal-content::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+    background: #a8a8a8 !important;
 }
 
 .passage-no-data {
@@ -6359,21 +6395,21 @@ html #king-page-content.dark-mode-kings .order-number {
 
 /* Custom scrollbar for chapters popup */
 .chapters::-webkit-scrollbar {
-    width: 4px;
+    width: 4px !important;
 }
 
 .chapters::-webkit-scrollbar-track {
-    background: #f1f5f9;
-    border-radius: 3px;
+    background: #f1f5f9 !important;
+    border-radius: 3px !important;
 }
 
 .chapters::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
+    background: #cbd5e1 !important;
+    border-radius: 3px !important;
 }
 
 .chapters::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: #94a3b8 !important;
 }
 
 .chapter-card {
@@ -6522,19 +6558,20 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .dark-mode-books.chapters-popup .chapters::-webkit-scrollbar {
-    width: auto;
+    width: 4px !important;
 }
 
 .dark-mode-books .chapters::-webkit-scrollbar-track {
-    background: transparent;
+    background: #2a2a2a !important;
 }
 
 .dark-mode-books .chapters::-webkit-scrollbar-thumb {
-    background: transparent;
+    background: #4a4a4a !important;
+    border-radius: 3px !important;
 }
 
 .dark-mode-books .chapters::-webkit-scrollbar-thumb:hover {
-    background: transparent;
+    background: #5a5a5a !important;
 }
 
 .dark-mode-books .chapter-card {
@@ -8668,15 +8705,16 @@ html #king-page-content.dark-mode-kings-variant2 .table tbody tr:hover {
 }
 
 .dark-mode-books-variant2 .chapters::-webkit-scrollbar-track {
-    background: transparent;
+    background: transparent !important;
 }
 
 .dark-mode-books-variant2 .chapters::-webkit-scrollbar-thumb {
-    background: #294052;
+    background: #294052 !important;
+    border-radius: 3px !important;
 }
 
 .dark-mode-books-variant2 .chapters::-webkit-scrollbar-thumb:hover {
-    background: #365069;
+    background: #365069 !important;
 }
 
 .dark-mode-books-variant2.chapters-popup .popup-header .book-title {
@@ -9512,15 +9550,16 @@ html #king-page-content.light-mode-kings-variant2 .table tbody tr:hover {
 }
 
 .light-mode-books-variant2 .chapters::-webkit-scrollbar-track {
-    background: transparent;
+    background: transparent !important;
 }
 
 .light-mode-books-variant2 .chapters::-webkit-scrollbar-thumb {
-    background: #e8d5b7;
+    background: #e8d5b7 !important;
+    border-radius: 3px !important;
 }
 
 .light-mode-books-variant2 .chapters::-webkit-scrollbar-thumb:hover {
-    background: #d4c3a8;
+    background: #d4c3a8 !important;
 }
 
 .light-mode-books-variant2.chapters-popup .popup-header .book-title {
