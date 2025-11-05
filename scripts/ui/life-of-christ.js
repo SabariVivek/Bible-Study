@@ -467,6 +467,7 @@ function getBookDataVariable(bookName) {
         'nehemiah': 'nehemiah_data',
         'esther': 'esther_data',
         'job': 'job_data',
+        'psalm': 'psalms_data',
         'psalms': 'psalms_data',
         'proverbs': 'proverbs_data',
         'ecclesiastes': 'ecclesiastes_data',

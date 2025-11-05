@@ -561,15 +561,6 @@
     transform: translateY(-2px);
 }
 
-/* Verse badges in headings should not be clickable */
-.chapter-section-heading .verse-badge {
-    cursor: default;
-}
-
-.chapter-section-heading .verse-badge:hover {
-    transform: none;
-}
-
 
 /* ===== BOOK CHAPTER CONTENT STYLES ===== */
 .book-chapter-container {

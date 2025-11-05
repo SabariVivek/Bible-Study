@@ -3887,29 +3887,53 @@ function displayChapterContent(bookName, chapterNum, container) {
 function makeVerseBadgesClickable(container) {
     if (!container) return;
     
-    // Find all verse badges that are NOT inside chapter-section-heading
+    // Get book and chapter from page title for context
+    const bookChapterTitle = document.getElementById('bookChapterTitle');
+    let currentBook = '';
+    let currentChapter = '';
+    
+    if (bookChapterTitle) {
+        const titleText = bookChapterTitle.textContent.trim();
+        // Parse "Book Name - Chapter" format
+        const titleMatch = titleText.match(/^(.+?)\s*-\s*(\d+)$/);
+        if (titleMatch) {
+            currentBook = titleMatch[1].trim();
+            currentChapter = titleMatch[2].trim();
+        }
+    }
+    
+    // Find all verse badges
     const allBadges = container.querySelectorAll('.verse-badge');
     
     allBadges.forEach(badge => {
-        // Skip if badge is inside a heading
-        const isInHeading = badge.closest('.chapter-section-heading');
-        if (isInHeading) return;
-        
         // Get the verse text and clean it up
         let verseText = badge.textContent.trim();
         if (!verseText) return;
         
+        // Check if badge is inside a heading
+        const isInHeading = badge.closest('.chapter-section-heading');
+        
         // Remove common prefixes (See, In, etc.) - case-insensitive
         verseText = verseText.replace(/^(see|in|cf\.?|compare|read)\s+/i, '');
         
-        // Extract just the Bible reference pattern: Book Chapter:Verse or Book Chapter:Verse-Verse
-        // This regex matches patterns like "Genesis 1:1", "1 Kings 2:3-5", "2 Corinthians 5:17"
-        const versePattern = /(\d?\s*[A-Za-z]+(?:\s+[A-Za-z]+)?)\s+(\d+)\s*:\s*(\d+(?:\s*-\s*\d+)?)/;
-        const match = verseText.match(versePattern);
+        // Check if the verse reference is incomplete (e.g., "Verses 1-3" or "Verse 5")
+        const incompleteVersePattern = /^verses?\s+(\d+(?:\s*-\s*\d+)?)/i;
+        const incompleteMatch = verseText.match(incompleteVersePattern);
         
-        if (match) {
-            // Use the matched Bible reference only
-            verseText = match[0].trim();
+        if (incompleteMatch && currentBook && currentChapter) {
+            // Complete the reference with book and chapter from page title
+            const verseNumbers = incompleteMatch[1];
+            verseText = `${currentBook} ${currentChapter}:${verseNumbers.replace(/\s*-\s*/, '-')}`;
+        } else {
+            // Extract just the Bible reference pattern: Book Chapter:Verse or Book Chapter:Verse-Verse
+            // This regex matches patterns like "Genesis 1:1", "1 Kings 2:3-5", "2 Corinthians 5:17"
+            const versePattern = /(\d?\s*[A-Za-z]+(?:\s+[A-Za-z]+)?)\s+(\d+)\s*:\s*(\d+(?:\s*-\s*\d+)?)/;
+            const match = verseText.match(versePattern);
+            
+            if (match) {
+                // Use the matched Bible reference only
+                verseText = match[0].trim();
+            }
         }
         
         // Remove any trailing punctuation or words after the verse reference
@@ -3920,7 +3944,7 @@ function makeVerseBadgesClickable(container) {
             badge.textContent = verseText;
         }
         
-        // Add cursor pointer style
+        // Add cursor pointer style (for ALL badges now, including headings)
         badge.style.cursor = 'pointer';
         
         // Add click event listener

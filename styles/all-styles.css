@@ -4297,15 +4297,6 @@ html #king-page-content.dark-mode-kings .order-number {
     transform: translateY(-2px);
 }
 
-/* Verse badges in headings should not be clickable */
-.dark-mode-books .chapter-section-heading .verse-badge {
-    cursor: default;
-}
-
-.dark-mode-books .chapter-section-heading .verse-badge:hover {
-    transform: none;
-}
-
 /* Specific book badge colors for dark mode in body text */
 .dark-mode-books .verse-badge.matthew {
     background: #065f46;
