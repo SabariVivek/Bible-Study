@@ -22,6 +22,7 @@ const routes = {
     '#/timeline': 'timeline',
     '#/genealogy': 'genealogy',
     '#/bible': 'bible',
+    '#/bible/': 'bibleVerse', // Dynamic route for bible verses (e.g., #/bible/Exodus/1)
     '#/life-of-christ': 'help'
 };
 
@@ -41,6 +42,7 @@ const sectionToRoute = {
     'timeline': '#/timeline',
     'genealogy': '#/genealogy',
     'bible': '#/bible',
+    'bibleVerse': '#/bible/',
     'help': '#/life-of-christ'
 };
 
@@ -56,6 +58,9 @@ function navigateTo(path, addToHistory = true) {
     let kingName = null;
     let bookName = null;
     let chapterNum = null;
+    let bibleBook = null;
+    let bibleChapter = null;
+    let bibleVerse = null;
     
     if (!section && path.startsWith('#/prophet/')) {
         section = 'prophetDetail';
@@ -69,6 +74,13 @@ function navigateTo(path, addToHistory = true) {
         const parts = path.substring(7).split('/');
         bookName = decodeURIComponent(parts[0]);
         chapterNum = parts[1] ? parseInt(parts[1]) : 1;
+    } else if (!section && path.startsWith('#/bible/') && path !== '#/bible') {
+        section = 'bibleVerse';
+        // Extract book, chapter, and optional verse from URL like #/bible/Exodus/1 or #/bible/Exodus/1/10-15
+        const parts = path.substring(8).split('/');
+        bibleBook = decodeURIComponent(parts[0]);
+        bibleChapter = parts[1] ? parts[1] : '1';
+        bibleVerse = parts[2] ? decodeURIComponent(parts[2]) : '';
     }
     
     if (!section) {
@@ -135,6 +147,11 @@ function navigateTo(path, addToHistory = true) {
         case 'bible':
             if (typeof showBible === 'function') showBible();
             break;
+        case 'bibleVerse':
+            if (typeof loadBibleVersesFromURL === 'function' && bibleBook && bibleChapter) {
+                loadBibleVersesFromURL(bibleBook, bibleChapter, bibleVerse || '');
+            }
+            break;
         case 'help':
             if (typeof showHelp === 'function') showHelp();
             break;
@@ -149,10 +166,11 @@ function navigateTo(path, addToHistory = true) {
 /**
  * Update the URL hash when a section is shown (called from show functions)
  * @param {string} section - The section name (e.g., 'books', 'kings')
- * @param {string} param1 - Optional parameter (prophet name, king name, or book name)
- * @param {number} param2 - Optional parameter (chapter number for books)
+ * @param {string} param1 - Optional parameter (prophet name, king name, book name, or bible book)
+ * @param {number|string} param2 - Optional parameter (chapter number for books or bible)
+ * @param {string} param3 - Optional parameter (verse range for bible)
  */
-function updateRoute(section, param1, param2) {
+function updateRoute(section, param1, param2, param3) {
     // Don't update if we're already navigating (prevents double history entries)
     if (isNavigating) {
         return;
@@ -167,6 +185,11 @@ function updateRoute(section, param1, param2) {
         path = `#/king/${encodeURIComponent(param1)}`;
     } else if (section === 'bookChapter' && param1) {
         path = `#/book/${encodeURIComponent(param1)}/${param2 || 1}`;
+    } else if (section === 'bibleVerse' && param1 && param2) {
+        path = `#/bible/${encodeURIComponent(param1)}/${param2}`;
+        if (param3) {
+            path += `/${encodeURIComponent(param3)}`;
+        }
     }
     
     if (path && window.location.hash !== path) {
@@ -186,6 +209,8 @@ function handleHashChange() {
     } else if (hash.startsWith('#/king/')) {
         navigateTo(hash, false);
     } else if (hash.startsWith('#/book/')) {
+        navigateTo(hash, false);
+    } else if (hash.startsWith('#/bible/') && hash !== '#/bible') {
         navigateTo(hash, false);
     } else if (hash && routes[hash]) {
         // If there's a hash and it's a valid route, navigate to it
@@ -209,7 +234,7 @@ function loadRouteFromURL() {
     const hash = window.location.hash;
     
     // Check for dynamic routes or standard routes
-    if (hash && (routes[hash] || hash.startsWith('#/prophet/') || hash.startsWith('#/king/') || hash.startsWith('#/book/'))) {
+    if (hash && (routes[hash] || hash.startsWith('#/prophet/') || hash.startsWith('#/king/') || hash.startsWith('#/book/') || hash.startsWith('#/bible/'))) {
         navigateTo(hash, false);
     }
     // Don't auto-navigate to dashboard - let the default HTML state show

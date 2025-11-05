@@ -517,6 +517,11 @@ async function loadBibleVerses(book, chapter, verse, language) {
         // Display verses
         displayBibleVerses(book, chapter, tamilChapterData, englishChapterData, verse, language);
         
+        // Update URL route
+        if (typeof updateRoute === 'function') {
+            updateRoute('bibleVerse', book, chapter, verse || '');
+        }
+        
         // Hide all content sections
         document.getElementById('dashboard-content').classList.add('hidden');
         document.getElementById('kings-content').classList.add('hidden');
@@ -905,6 +910,11 @@ function goBackToBibleForm() {
         // Update navigation
         if (typeof updateNavActive === 'function') {
             updateNavActive('bible');
+        }
+        
+        // Update URL route back to bible
+        if (typeof updateRoute === 'function') {
+            updateRoute('bible');
         }
         
         // Scroll to top of the page
@@ -1302,6 +1312,26 @@ window.switchBibleLanguage = switchBibleLanguage;
 // Make Bible chapter navigation functions globally available with unique names
 window.navigateToBibleNextChapter = navigateToBibleNextChapter;
 window.navigateToBiblePreviousChapter = navigateToBiblePreviousChapter;
+
+/**
+ * Load Bible verses from URL parameters (called by router)
+ * @param {string} book - Book name from URL
+ * @param {string} chapter - Chapter number from URL
+ * @param {string} verse - Optional verse range from URL
+ */
+async function loadBibleVersesFromURL(book, chapter, verse = '') {
+    // Normalize book name (capitalize first letter)
+    const normalizedBook = book.charAt(0).toUpperCase() + book.slice(1).toLowerCase();
+    
+    // Determine default language (could be from localStorage or default to 'both')
+    const language = currentBibleLanguage || 'both';
+    
+    // Call the main loadBibleVerses function
+    await loadBibleVerses(normalizedBook, chapter, verse, language);
+}
+
+// Export the URL loading function
+window.loadBibleVersesFromURL = loadBibleVersesFromURL;
 
 
 
