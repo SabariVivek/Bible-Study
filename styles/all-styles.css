@@ -4215,6 +4215,73 @@ html #king-page-content.dark-mode-kings .order-number {
     border-color: #d97706;
 }
 
+/* Specific book badge colors for dark mode - matching Life of Christ styles */
+.dark-mode-books .chapter-section-heading .verse-badge.matthew {
+    background: #065f46;
+    color: #a7f3d0 !important;
+    border-color: #047857;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.matthew:hover {
+    background: #047857;
+    border-color: #059669;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.mark {
+    background: #7f1d1d;
+    color: #fca5a5 !important;
+    border-color: #991b1b;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.mark:hover {
+    background: #991b1b;
+    border-color: #b91c1c;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.luke {
+    background: #4c1d95;
+    color: #c4b5fd !important;
+    border-color: #5b21b6;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.luke:hover {
+    background: #5b21b6;
+    border-color: #6d28d9;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.john {
+    background: #9a3412;
+    color: #fdba74 !important;
+    border-color: #c2410c;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.john:hover {
+    background: #c2410c;
+    border-color: #ea580c;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.acts {
+    background: #1e3a8a;
+    color: #93c5fd !important;
+    border-color: #1e40af;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.acts:hover {
+    background: #1e40af;
+    border-color: #1d4ed8;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.corinthians {
+    background: #854d0e;
+    color: #fef08a !important;
+    border-color: #a16207;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge.corinthians:hover {
+    background: #a16207;
+    border-color: #ca8a04;
+}
+
 .dark-mode-books .verse-badge {
     background-color: rgba(251, 191, 36, 0.15);
     color: #fbbf24;
@@ -4224,6 +4291,73 @@ html #king-page-content.dark-mode-kings .order-number {
 .dark-mode-books .verse-badge:hover {
     background-color: rgba(251, 191, 36, 0.25);
     border-color: #f59e0b;
+}
+
+/* Specific book badge colors for dark mode in body text */
+.dark-mode-books .verse-badge.matthew {
+    background: #065f46;
+    color: #a7f3d0;
+    border-color: #047857;
+}
+
+.dark-mode-books .verse-badge.matthew:hover {
+    background: #047857;
+    border-color: #059669;
+}
+
+.dark-mode-books .verse-badge.mark {
+    background: #7f1d1d;
+    color: #fca5a5;
+    border-color: #991b1b;
+}
+
+.dark-mode-books .verse-badge.mark:hover {
+    background: #991b1b;
+    border-color: #b91c1c;
+}
+
+.dark-mode-books .verse-badge.luke {
+    background: #4c1d95;
+    color: #c4b5fd;
+    border-color: #5b21b6;
+}
+
+.dark-mode-books .verse-badge.luke:hover {
+    background: #5b21b6;
+    border-color: #6d28d9;
+}
+
+.dark-mode-books .verse-badge.john {
+    background: #9a3412;
+    color: #fdba74;
+    border-color: #c2410c;
+}
+
+.dark-mode-books .verse-badge.john:hover {
+    background: #c2410c;
+    border-color: #ea580c;
+}
+
+.dark-mode-books .verse-badge.acts {
+    background: #1e3a8a;
+    color: #93c5fd;
+    border-color: #1e40af;
+}
+
+.dark-mode-books .verse-badge.acts:hover {
+    background: #1e40af;
+    border-color: #1d4ed8;
+}
+
+.dark-mode-books .verse-badge.corinthians {
+    background: #854d0e;
+    color: #fef08a;
+    border-color: #a16207;
+}
+
+.dark-mode-books .verse-badge.corinthians:hover {
+    background: #a16207;
+    border-color: #ca8a04;
 }
 
 .dark-mode-books .table-container {
@@ -8543,6 +8677,140 @@ html #king-page-content.dark-mode-kings-variant2 .table tbody tr:hover {
 
 .dark-mode-books-variant2 .chapter-section-heading {
     background: linear-gradient(to right, #1a2f2a 0%, #1a2332 100%);
+}
+
+/* Specific book badge colors for dark mode variant2 - matching Life of Christ styles */
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.matthew {
+    background: #065f46;
+    color: #a7f3d0 !important;
+    border-color: #047857;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.matthew:hover {
+    background: #047857;
+    border-color: #059669;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.mark {
+    background: #7f1d1d;
+    color: #fca5a5 !important;
+    border-color: #991b1b;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.mark:hover {
+    background: #991b1b;
+    border-color: #b91c1c;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.luke {
+    background: #4c1d95;
+    color: #c4b5fd !important;
+    border-color: #5b21b6;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.luke:hover {
+    background: #5b21b6;
+    border-color: #6d28d9;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.john {
+    background: #9a3412;
+    color: #fdba74 !important;
+    border-color: #c2410c;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.john:hover {
+    background: #c2410c;
+    border-color: #ea580c;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.acts {
+    background: #1e3a8a;
+    color: #93c5fd !important;
+    border-color: #1e40af;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.acts:hover {
+    background: #1e40af;
+    border-color: #1d4ed8;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.corinthians {
+    background: #854d0e;
+    color: #fef08a !important;
+    border-color: #a16207;
+}
+
+.dark-mode-books-variant2 .chapter-section-heading .verse-badge.corinthians:hover {
+    background: #a16207;
+    border-color: #ca8a04;
+}
+
+/* Verse badges in body text for variant2 */
+.dark-mode-books-variant2 .verse-badge.matthew {
+    background: #065f46;
+    color: #a7f3d0;
+    border-color: #047857;
+}
+
+.dark-mode-books-variant2 .verse-badge.matthew:hover {
+    background: #047857;
+    border-color: #059669;
+}
+
+.dark-mode-books-variant2 .verse-badge.mark {
+    background: #7f1d1d;
+    color: #fca5a5;
+    border-color: #991b1b;
+}
+
+.dark-mode-books-variant2 .verse-badge.mark:hover {
+    background: #991b1b;
+    border-color: #b91c1c;
+}
+
+.dark-mode-books-variant2 .verse-badge.luke {
+    background: #4c1d95;
+    color: #c4b5fd;
+    border-color: #5b21b6;
+}
+
+.dark-mode-books-variant2 .verse-badge.luke:hover {
+    background: #5b21b6;
+    border-color: #6d28d9;
+}
+
+.dark-mode-books-variant2 .verse-badge.john {
+    background: #9a3412;
+    color: #fdba74;
+    border-color: #c2410c;
+}
+
+.dark-mode-books-variant2 .verse-badge.john:hover {
+    background: #c2410c;
+    border-color: #ea580c;
+}
+
+.dark-mode-books-variant2 .verse-badge.acts {
+    background: #1e3a8a;
+    color: #93c5fd;
+    border-color: #1e40af;
+}
+
+.dark-mode-books-variant2 .verse-badge.acts:hover {
+    background: #1e40af;
+    border-color: #1d4ed8;
+}
+
+.dark-mode-books-variant2 .verse-badge.corinthians {
+    background: #854d0e;
+    color: #fef08a;
+    border-color: #a16207;
+}
+
+.dark-mode-books-variant2 .verse-badge.corinthians:hover {
+    background: #a16207;
+    border-color: #ca8a04;
 }
 
 .dark-mode-books-variant2 .table-container {

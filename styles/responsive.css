@@ -351,6 +351,47 @@
         padding: 24px 32px;
     }
     
+    /* Fix sidebar footer visibility on iPad landscape */
+    .left-sidebar {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    
+    .sidebar-footer {
+        margin-top: auto;
+        flex-shrink: 0;
+    }
+    
+    .theme-toggle-container {
+        padding: 10px;
+        flex-shrink: 0;
+    }
+    
+    .theme-toggle {
+        width: 100%;
+        gap: 5px;
+    }
+    
+    .theme-option {
+        min-height: 36px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+    
+    .theme-option svg {
+        width: 15px !important;
+        height: 15px !important;
+    }
+    
+    .theme-option-text {
+        font-size: 12px;
+    }
+    
+    .sidebar-footer-item {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
     /* Hide text in navigation items when collapsed */
     .left-sidebar.collapsed .history-item span:not(.nav-icon) {
         display: none !important;
@@ -467,6 +508,18 @@
         display: inline-block !important;
     }
     
+    /* Ensure sidebar footer is visible */
+    .sidebar-footer {
+        display: flex !important;
+        flex-direction: column;
+        margin-top: auto;
+    }
+    
+    .sidebar-footer-item {
+        display: flex !important;
+        visibility: visible !important;
+    }
+    
     /* Hide text in navigation items when collapsed */
     .left-sidebar.collapsed .history-item span:not(.nav-icon) {
         display: none !important;
@@ -474,6 +527,84 @@
     
     .left-sidebar.collapsed .sidebar-footer-item span {
         display: none !important;
+    }
+}
+
+/* Specific iPad landscape orientation fix */
+@media only screen 
+    and (min-device-width: 768px) 
+    and (max-device-width: 1024px) 
+    and (orientation: landscape) {
+    
+    .left-sidebar {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    
+    .sidebar-nav {
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0;
+    }
+    
+    .sidebar-footer {
+        margin-top: auto;
+        flex-shrink: 0;
+        display: flex !important;
+        flex-direction: column;
+        border-top: 1px solid #e5e7eb;
+    }
+    
+    .theme-toggle-container {
+        display: flex !important;
+        padding: 8px;
+        border-top: 1px solid #e5e7eb;
+        flex-shrink: 0;
+    }
+    
+    .theme-toggle {
+        width: 100%;
+        display: flex !important;
+        gap: 4px;
+    }
+    
+    .theme-option {
+        flex: 1;
+        min-height: 34px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        padding: 0 8px;
+    }
+    
+    .theme-option svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+    
+    .theme-option-text {
+        font-size: 11px;
+    }
+    
+    .sidebar-footer-item {
+        display: flex !important;
+        align-items: center;
+        padding: 10px 12px;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .sidebar-footer-item svg {
+        width: 16px !important;
+        height: 16px !important;
+        display: block !important;
+    }
+    
+    .sidebar-footer-item span {
+        display: inline-block !important;
+        font-size: 13px;
     }
 }
 
