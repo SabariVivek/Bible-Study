@@ -82,6 +82,9 @@ function loadSeedContent() {
     
     container.innerHTML = contentHTML;
     
+    // Add click handlers to verse badges
+    attachVerseBadgeHandlers();
+    
     // Update counter
     const counter = document.getElementById('seedCounter');
     if (counter) {
@@ -90,6 +93,35 @@ function loadSeedContent() {
     
     // Update navigation buttons
     updateSeedNavigationButtons();
+}
+
+// Attach click handlers to verse badges in seed section
+function attachVerseBadgeHandlers() {
+    const seedSection = document.getElementById('seed-of-woman-section');
+    if (!seedSection) return;
+    
+    const verseBadges = seedSection.querySelectorAll('.verse-badge');
+    verseBadges.forEach(badge => {
+        badge.style.cursor = 'pointer';
+        badge.addEventListener('click', function(e) {
+            e.stopPropagation();
+            let verseText = badge.textContent.trim();
+            
+            // Normalize verse reference by removing extra spaces around colons and hyphens
+            // Convert "Genesis 4 : 1 - 16" to "Genesis 4:1-16"
+            verseText = verseText
+                .replace(/\s*:\s*/g, ':')    // Remove spaces around colons
+                .replace(/\s*-\s*/g, '-')    // Remove spaces around hyphens
+                .replace(/\s+/g, ' ');       // Normalize multiple spaces to single space
+            
+            // Check if openPassagePopup function exists (from life-of-christ.js)
+            if (typeof openPassagePopup === 'function') {
+                openPassagePopup(verseText);
+            } else {
+                console.warn('openPassagePopup function not found');
+            }
+        });
+    });
 }
 
 function navigateToNextSeed() {

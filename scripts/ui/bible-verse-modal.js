@@ -714,22 +714,23 @@ function showBibleVerseCountTag(verseCount) {
             return;
         }
         
-        // Set the text
-        tag.textContent = `${verseCount} Verse${verseCount !== 1 ? 's' : ''}`;
-        
         // Clear any existing timeout
         if (tag._hideTimeout) {
             clearTimeout(tag._hideTimeout);
+            tag._hideTimeout = null;
         }
         
-        // Remove any existing animation class
+        // Remove existing animation class immediately
         tag.classList.remove('show');
         
-        // Force a small delay to ensure the animation resets
-        setTimeout(() => {
-            // Trigger reflow to restart animation
-            void tag.offsetWidth;
-            
+        // Set the text
+        tag.textContent = `${verseCount} Verse${verseCount !== 1 ? 's' : ''}`;
+        
+        // Force a reflow to ensure the animation restarts
+        void tag.offsetWidth;
+        
+        // Use a short delay to ensure clean animation restart
+        requestAnimationFrame(() => {
             // Add animation class
             tag.classList.add('show');
             
@@ -738,7 +739,7 @@ function showBibleVerseCountTag(verseCount) {
                 tag.classList.remove('show');
                 tag._hideTimeout = null;
             }, 6000); // 6 seconds to match animation duration
-        }, 100); // Increased delay for better reliability
+        });
     });
 }
 
