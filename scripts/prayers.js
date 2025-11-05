@@ -39,6 +39,11 @@ function showPrayersForForgiveness() {
     // Hide dashboard title
     var dashTitle = document.getElementById('dashboard-title-header');
     if (dashTitle) dashTitle.style.display = 'none';
+    
+    // Update URL
+    if (typeof updateRoute === 'function') {
+        updateRoute('prayers');
+    }
 }
 
 function loadPrayerContent() {
@@ -142,6 +147,11 @@ function hidePrayersForForgiveness() {
     // Show dashboard title
     var dashTitle = document.getElementById('dashboard-title-header');
     if (dashTitle) dashTitle.style.display = '';
+    
+    // Update URL back to dashboard
+    if (typeof updateRoute === 'function') {
+        updateRoute('dashboard');
+    }
 }
 
 // Hide prayers section when switching tabs

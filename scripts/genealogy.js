@@ -27,6 +27,11 @@ function showGenealogySection() {
     // Hide dashboard title
     var dashTitle = document.getElementById('dashboard-title-header');
     if (dashTitle) dashTitle.style.display = 'none';
+    
+    // Update URL
+    if (typeof updateRoute === 'function') {
+        updateRoute('genealogy-view');
+    }
 }
 
 function hideGenealogySection() {
@@ -36,6 +41,11 @@ function hideGenealogySection() {
     if (cardsWrapper) cardsWrapper.classList.remove('hidden');
     var dashTitle = document.getElementById('dashboard-title-header');
     if (dashTitle) dashTitle.style.display = '';
+    
+    // Update URL back to dashboard
+    if (typeof updateRoute === 'function') {
+        updateRoute('dashboard');
+    }
 }
 
 // Hide genealogy section when switching tabs

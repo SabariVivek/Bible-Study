@@ -37,6 +37,11 @@ function showParablesCards() {
     // Hide dashboard title
     var dashTitle = document.getElementById('dashboard-title-header');
     if (dashTitle) dashTitle.style.display = 'none';
+    
+    // Update URL
+    if (typeof updateRoute === 'function') {
+        updateRoute('parables');
+    }
 }
 
 function hideParablesCards() {
@@ -47,6 +52,12 @@ function hideParablesCards() {
     // Show dashboard title
     var dashTitle = document.getElementById('dashboard-title-header');
     if (dashTitle) dashTitle.style.display = '';
+    
+    // Update URL back to dashboard
+    if (typeof updateRoute === 'function') {
+        updateRoute('dashboard');
+    }
+}
 // Hide parables section when switching tabs
 function hideParablesSectionOnTabSwitch() {
     const parablesSection = document.getElementById('parables-pdf-section');
@@ -73,7 +84,6 @@ window.showDashboard = function() {
         };
     }
 });
-}
 
 function attachParablesCardHandler() {
     const parablesCard = document.querySelector('.era-card.parables-jesus');

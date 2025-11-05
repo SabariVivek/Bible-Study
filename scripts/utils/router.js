@@ -9,6 +9,10 @@ let isNavigating = false;
 // Define routes for each section
 const routes = {
     '#/dashboard': 'dashboard',
+    '#/dashboard/parables': 'parables',
+    '#/dashboard/prayers': 'prayers',
+    '#/dashboard/seed-of-woman': 'seedOfWoman',
+    '#/dashboard/genealogy': 'genealogy-view',
     '#/kings': 'kings',
     '#/king/': 'kingDetail', // Dynamic route for king details
     '#/prophets': 'prophets',
@@ -24,6 +28,10 @@ const routes = {
 // Reverse mapping for easier lookup
 const sectionToRoute = {
     'dashboard': '#/dashboard',
+    'parables': '#/dashboard/parables',
+    'prayers': '#/dashboard/prayers',
+    'seedOfWoman': '#/dashboard/seed-of-woman',
+    'genealogy-view': '#/dashboard/genealogy',
     'kings': '#/kings',
     'kingDetail': '#/king/',
     'prophets': '#/prophets',
@@ -85,6 +93,18 @@ function navigateTo(path, addToHistory = true) {
     switch(section) {
         case 'dashboard':
             if (typeof showDashboard === 'function') showDashboard();
+            break;
+        case 'parables':
+            if (typeof showParablesCards === 'function') showParablesCards();
+            break;
+        case 'prayers':
+            if (typeof showPrayersForForgiveness === 'function') showPrayersForForgiveness();
+            break;
+        case 'seedOfWoman':
+            if (typeof showSeedOfWoman === 'function') showSeedOfWoman();
+            break;
+        case 'genealogy-view':
+            if (typeof showGenealogyCards === 'function') showGenealogyCards();
             break;
         case 'kings':
             if (typeof showKings === 'function') showKings();
