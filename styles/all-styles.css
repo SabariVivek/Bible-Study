@@ -3297,11 +3297,13 @@ body .dark-mode-maps .page-title {
     background-color: #3a3a2a;
     color: #fbbf24;
     border-color: #d97706;
+    cursor: pointer;
 }
 
 .dark-mode-life-of-christ .verse-badge:hover {
     background-color: #4a4a3a;
     border-color: #f59e0b;
+    transform: translateY(-2px);
 }
 
 .dark-mode-life-of-christ .verse-badge.matthew {
@@ -4286,11 +4288,22 @@ html #king-page-content.dark-mode-kings .order-number {
     background-color: rgba(251, 191, 36, 0.15);
     color: #fbbf24;
     border-color: #d97706;
+    cursor: pointer;
 }
 
 .dark-mode-books .verse-badge:hover {
     background-color: rgba(251, 191, 36, 0.25);
     border-color: #f59e0b;
+    transform: translateY(-2px);
+}
+
+/* Verse badges in headings should not be clickable */
+.dark-mode-books .chapter-section-heading .verse-badge {
+    cursor: default;
+}
+
+.dark-mode-books .chapter-section-heading .verse-badge:hover {
+    transform: none;
 }
 
 /* Specific book badge colors for dark mode in body text */

@@ -612,6 +612,9 @@ function displayKingSummary(container, summaryData, kingName) {
         
         container.appendChild(sectionDiv);
     });
+    
+    // Make verse badges in section text clickable (not in headings)
+    makeVerseBadgesClickable(container);
 }
 
 function openKingTableView() {
@@ -1526,6 +1529,9 @@ function displayProphetSummary(container, textData, prophetName) {
         
         container.appendChild(sectionDiv);
     });
+    
+    // Make verse badges in section text clickable (not in headings)
+    makeVerseBadgesClickable(container);
 }
 
 // Drawer toggle functionality
@@ -3866,6 +3872,78 @@ function displayChapterContent(bookName, chapterNum, container) {
             `;
             container.appendChild(noDataDiv);
         }
+        
+        // Make verse badges in section text clickable (not in headings)
+        makeVerseBadgesClickable(container);
+    });
+}
+
+/**
+ * Make verse badges clickable to open Bible passage popup
+ * This function finds all verse badges within a container (excluding those in headings)
+ * and adds click event listeners to open the passage popup
+ * @param {HTMLElement} container - The container element to search for verse badges
+ */
+function makeVerseBadgesClickable(container) {
+    if (!container) return;
+    
+    // Find all verse badges that are NOT inside chapter-section-heading
+    const allBadges = container.querySelectorAll('.verse-badge');
+    
+    allBadges.forEach(badge => {
+        // Skip if badge is inside a heading
+        const isInHeading = badge.closest('.chapter-section-heading');
+        if (isInHeading) return;
+        
+        // Get the verse text and clean it up
+        let verseText = badge.textContent.trim();
+        if (!verseText) return;
+        
+        // Remove common prefixes (See, In, etc.) - case-insensitive
+        verseText = verseText.replace(/^(see|in|cf\.?|compare|read)\s+/i, '');
+        
+        // Extract just the Bible reference pattern: Book Chapter:Verse or Book Chapter:Verse-Verse
+        // This regex matches patterns like "Genesis 1:1", "1 Kings 2:3-5", "2 Corinthians 5:17"
+        const versePattern = /(\d?\s*[A-Za-z]+(?:\s+[A-Za-z]+)?)\s+(\d+)\s*:\s*(\d+(?:\s*-\s*\d+)?)/;
+        const match = verseText.match(versePattern);
+        
+        if (match) {
+            // Use the matched Bible reference only
+            verseText = match[0].trim();
+        }
+        
+        // Remove any trailing punctuation or words after the verse reference
+        verseText = verseText.replace(/[,;.]\s*.*$/, '');
+        
+        // Update badge text to show cleaned version
+        if (badge.textContent.trim() !== verseText) {
+            badge.textContent = verseText;
+        }
+        
+        // Add cursor pointer style
+        badge.style.cursor = 'pointer';
+        
+        // Add click event listener
+        badge.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Check if openPassagePopup function exists (from life-of-christ.js)
+            if (typeof openPassagePopup === 'function') {
+                openPassagePopup(verseText);
+            } else {
+                console.warn('openPassagePopup function not found. Make sure life-of-christ.js is loaded.');
+            }
+        });
+        
+        // Add hover effect
+        badge.addEventListener('mouseenter', function() {
+            badge.style.transform = 'translateY(-2px)';
+            badge.style.transition = 'transform 0.2s ease';
+        });
+        
+        badge.addEventListener('mouseleave', function() {
+            badge.style.transform = 'translateY(0)';
+        });
     });
 }
 
