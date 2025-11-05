@@ -975,6 +975,253 @@
                 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* ===== TESTAMENT MEGA MENU STYLES - BIBLE DISPLAY ===== */
+
+/* Light Mode - Testament Navigation in Bible Display (Base Styles) */
+#bibleVerseDisplaySection .testament-mega-menu {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#bibleVerseDisplaySection .testament-tabs {
+    border-bottom: 1px solid #e5e5e5;
+    background: #f9f9f9;
+}
+
+#bibleVerseDisplaySection .testament-tab-button {
+    color: #666;
+}
+
+#bibleVerseDisplaySection .testament-tab-button:hover {
+    color: #000;
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+}
+
+#bibleVerseDisplaySection .testament-tab-button:last-child:hover {
+    background: linear-gradient(270deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+}
+
+#bibleVerseDisplaySection .testament-tab-button.active {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+    color: #667eea;
+    font-weight: 700;
+}
+
+#bibleVerseDisplaySection .testament-tab-button:last-child.active {
+    background: linear-gradient(270deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+}
+
+#bibleVerseDisplaySection .testament-content {
+    background: white;
+}
+
+#bibleVerseDisplaySection .testament-column-title {
+    color: #000;
+}
+
+#bibleVerseDisplaySection .testament-menu-item a {
+    color: #666;
+}
+
+#bibleVerseDisplaySection .testament-menu-item a:hover {
+    color: #000;
+}
+
+#bibleVerseDisplaySection .testament-menu-item a::before {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+#bibleVerseDisplaySection .testament-menu-item a.selected {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+    color: #667eea;
+    font-weight: 700;
+}
+
+/* Light Mode Variant 2 - Testament Navigation in Bible Display */
+#bibleVerseDisplaySection.light-mode-bible-variant2 .testament-mega-menu {
+    background: #fef6eb;
+    border-color: #e8d5b7;
+    box-shadow: 0 4px 20px rgba(139, 115, 85, 0.2);
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .testament-tabs {
+    border-bottom: 1px solid #e8d5b7;
+    background: #f9f0df;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .testament-content {
+    background: #fef6eb;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .testament-column-title {
+    color: #2c2c2c;
+    border-bottom-color: #e8d5b7;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .testament-menu-item a {
+    color: #3d3d3d;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .testament-menu-item a:hover {
+    background: #f4ebe0;
+    color: #667eea;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .testament-tab-button {
+    background: #f9f0df;
+    border-color: #e8d5b7;
+    color: #5a5a5a;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .testament-tab-button:hover {
+    background: #f4ebe0;
+    color: #2c2c2c;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .testament-tab-button.active {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+    color: #667eea;
+    font-weight: 700;
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .testament-tab-button:last-child.active {
+    background: linear-gradient(270deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+}
+
+/* ===== TESTAMENT MEGA MENU DARK MODE - BIBLE DISPLAY ===== */
+
+/* Dark Mode - Testament Navigation in Bible Display */
+#bibleVerseDisplaySection.dark-mode-bible .testament-nav-trigger {
+    color: #ececec !important;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-nav-trigger:hover {
+    color: #667eea !important;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-mega-menu {
+    background: #2a2a2a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-tabs {
+    border-bottom: 1px solid #4a4a4a;
+    background: #1f1f1f;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-tab-button {
+    color: #9ca3af;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-tab-button:hover {
+    color: #ececec;
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-tab-button:last-child:hover {
+    background: linear-gradient(270deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-tab-button.active {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+    color: #667eea;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-tab-button:last-child.active {
+    background: linear-gradient(270deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-content {
+    background: #2a2a2a;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-column-title {
+    color: #ffffff;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-menu-item a {
+    color: #9ca3af;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-menu-item a:hover {
+    color: #ececec;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-menu-item a::before {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .testament-menu-item a.selected {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+    color: #667eea;
+}
+
+/* Dark Mode Variant 2 - Testament Navigation in Bible Display */
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-nav-trigger {
+    color: #ececec !important;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-nav-trigger:hover {
+    color: #667eea !important;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-mega-menu {
+    background: #1a2332;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-tabs {
+    border-bottom: 1px solid #365069;
+    background: #0f1a22;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-tab-button {
+    color: #9ca3af;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-tab-button:hover {
+    color: #ececec;
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-tab-button:last-child:hover {
+    background: linear-gradient(270deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-tab-button.active {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+    color: #667eea;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-tab-button:last-child.active {
+    background: linear-gradient(270deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-content {
+    background: #1a2332;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-column-title {
+    color: #ffffff;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-menu-item a {
+    color: #9ca3af;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-menu-item a:hover {
+    color: #ececec;
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-menu-item a::before {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .testament-menu-item a.selected {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0) 100%);
+    color: #667eea;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .bible-chapter-title {

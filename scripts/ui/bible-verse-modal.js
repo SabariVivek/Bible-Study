@@ -1355,6 +1355,11 @@ async function loadBibleVersesFromURL(book, chapter, verse = '') {
     // Determine default language (could be from localStorage or default to 'both')
     const language = currentBibleLanguage || 'both';
     
+    // Update navigation to show Bible as active
+    if (typeof updateNavActive === 'function') {
+        updateNavActive('bible');
+    }
+    
     // Call the main loadBibleVerses function
     await loadBibleVerses(normalizedBook, chapter, verse, language);
 }
