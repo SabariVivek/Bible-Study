@@ -38,6 +38,7 @@ const BOOK_FILE_MAP = {
     'Proverbs': 'proverbs',
     'Ecclesiastes': 'ecclesiastes',
     'Song of Solomon': 'song_of_solomon',
+    'Song of Songs': 'song_of_solomon', // Alternate name
     'Isaiah': 'isaiah',
     'Jeremiah': 'jeremiah',
     'Lamentations': 'lamentations',
@@ -91,7 +92,7 @@ const OLD_TESTAMENT_BOOKS = [
     'Joshua', 'Judges', 'Ruth', '1 Samuel', '2 Samuel',
     '1 Kings', '2 Kings', '1 Chronicles', '2 Chronicles',
     'Ezra', 'Nehemiah', 'Esther', 'Job', 'Psalms', 'Proverbs',
-    'Ecclesiastes', 'Song of Solomon', 'Isaiah', 'Jeremiah',
+    'Ecclesiastes', 'Song of Solomon', 'Song of Songs', 'Isaiah', 'Jeremiah',
     'Lamentations', 'Ezekiel', 'Daniel', 'Hosea', 'Joel',
     'Amos', 'Obadiah', 'Jonah', 'Micah', 'Nahum', 'Habakkuk',
     'Zephaniah', 'Haggai', 'Zechariah', 'Malachi'
@@ -454,16 +455,30 @@ async function loadBibleVerses(book, chapter, verse, language) {
         
         if (!displaySection) return;
         
-        // Get file name for the book
-        const fileName = BOOK_FILE_MAP[book];
+        // Normalize book name - try exact match first, then case-insensitive
+        let fileName = BOOK_FILE_MAP[book];
         if (!fileName) {
-            alert('Book data not found');
+            // Try case-insensitive match
+            const bookKey = Object.keys(BOOK_FILE_MAP).find(
+                key => key.toLowerCase() === book.toLowerCase()
+            );
+            if (bookKey) {
+                fileName = BOOK_FILE_MAP[bookKey];
+                book = bookKey; // Update book to the correct case
+            }
+        }
+        
+        if (!fileName) {
+            console.error(`Book not found in BOOK_FILE_MAP: "${book}"`);
+            alert(`Book data not found for: ${book}`);
             return;
         }
         
         // Determine testament folder
         const testament = OLD_TESTAMENT_BOOKS.includes(book) ? 'old-testament' : 'new-testament';
         const dataVarName = `${fileName}_data`;
+        
+        console.log(`Loading ${book} (${fileName}) from ${testament}`);
         
         let tamilData = null;
         let englishData = null;
@@ -544,7 +559,8 @@ async function loadBibleVerses(book, chapter, verse, language) {
         
     } catch (error) {
         console.error('Error loading Bible verses:', error);
-        alert('Failed to load Bible verses. Please try again.');
+        console.error('Book:', book, 'Chapter:', chapter, 'Language:', language);
+        alert(`Failed to load Bible verses for ${book} - ${chapter}. Please try again.`);
     }
 }
 
@@ -594,6 +610,14 @@ function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData,
     
     // Set title
     title.textContent = `${book} - ${chapter}`;
+    
+    // Initialize testament navigation for Bible display if not already done
+    initializeBibleTestamentNav();
+    
+    // Update testament nav selection
+    if (typeof updateTestamentNavSelection === 'function') {
+        updateTestamentNavSelection(book);
+    }
     
     // Clear previous content
     content.innerHTML = '';
@@ -890,6 +914,11 @@ function goBackToBibleForm() {
     if (displaySection) {
         // Hide verse display section
         displaySection.classList.add('hidden');
+        
+        // Restore original loadBookFromTestamentNav function if it exists
+        if (originalLoadBookFunction) {
+            window.loadBookFromTestamentNav = originalLoadBookFunction;
+        }
         
         // Hide all other content sections
         document.getElementById('dashboard-content').classList.add('hidden');
@@ -1328,6 +1357,50 @@ async function loadBibleVersesFromURL(book, chapter, verse = '') {
     
     // Call the main loadBibleVerses function
     await loadBibleVerses(normalizedBook, chapter, verse, language);
+}
+
+/**
+ * Initialize testament navigation for Bible display section
+ */
+let bibleTestamentNavInitialized = false;
+let originalLoadBookFunction = null;
+
+function initializeBibleTestamentNav() {
+    if (bibleTestamentNavInitialized) return;
+    
+    const wrapper = document.getElementById('bibleTestamentNavWrapper');
+    if (!wrapper || typeof initializeTestamentNav !== 'function') return;
+    
+    // Store the original function if it exists
+    if (window.loadBookFromTestamentNav && !originalLoadBookFunction) {
+        originalLoadBookFunction = window.loadBookFromTestamentNav;
+    }
+    
+    // Set the callback function for book selection in Bible display
+    window.loadBookFromTestamentNav = handleBibleBookSelection;
+    
+    // Initialize the testament navigation
+    initializeTestamentNav('bibleVerseDisplayTitle', currentBibleBook);
+    bibleTestamentNavInitialized = true;
+}
+
+/**
+ * Handle book selection from testament menu in Bible display
+ * @param {string} bookName - The selected book name
+ */
+async function handleBibleBookSelection(bookName) {
+    console.log('Bible book selected from menu:', bookName);
+    
+    try {
+        // Always navigate to chapter 1 of the selected book
+        await loadBibleVerses(bookName, '1', '', currentBibleLanguage || 'both');
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+        console.error('Error in handleBibleBookSelection:', error);
+        alert(`Failed to load ${bookName}. Please try again.`);
+    }
 }
 
 // Export the URL loading function

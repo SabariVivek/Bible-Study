@@ -60,18 +60,43 @@ function initializeTestamentNav(triggerElementId, currentBook = null) {
     // Check if already initialized - remove old initialization if exists
     const existingWrapper = triggerElement.closest('.testament-nav-wrapper');
     if (existingWrapper) {
-        // If menu is currently closing, wait for it to finish before updating
-        if (isMenuClosing) {
-            setTimeout(() => {
+        // Check if mega menu already exists
+        const existingMenu = existingWrapper.querySelector('.testament-mega-menu');
+        if (existingMenu) {
+            // Already fully initialized, just update selection
+            if (isMenuClosing) {
+                setTimeout(() => {
+                    if (selectedTestamentBook) {
+                        markSelectedBook(selectedTestamentBook);
+                    }
+                }, 450);
+            } else {
                 if (selectedTestamentBook) {
                     markSelectedBook(selectedTestamentBook);
                 }
-            }, 450);
-        } else {
+            }
+            return;
+        }
+        
+        // Wrapper exists but menu doesn't - add menu to existing wrapper
+        triggerElement.classList.add('testament-nav-trigger');
+        
+        const menuContainer = document.createElement('div');
+        menuContainer.innerHTML = createTestamentNavHTML();
+        
+        const megaMenuElement = menuContainer.firstElementChild;
+        existingWrapper.appendChild(megaMenuElement);
+        
+        // Initialize event listeners
+        setTimeout(() => {
+            initializeTestamentNavEvents();
+            
+            // Mark the selected book if any
             if (selectedTestamentBook) {
                 markSelectedBook(selectedTestamentBook);
             }
-        }
+        }, 50);
+        
         return;
     }
 
