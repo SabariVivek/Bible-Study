@@ -3612,7 +3612,7 @@ body .dark-mode-maps .page-title {
    DARK MODE - KINGS, PROPHETS, BOOKS
    ============================================ */
 body .dark-mode-kings .page-title {
-    color: #ececec !important;
+    color: var(--heading-color) !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -3731,7 +3731,7 @@ body .dark-mode-kings .page-title {
 
 #king-page-content.dark-mode-kings .table th {
     background: #1f1f1f;
-    color: #EBEBFF;
+    color: var(--heading-color);
     border-bottom-color: #3a3a3a;
 }
 
@@ -3798,7 +3798,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 /* Dark mode for Kings Table Content */
 #kings-content.dark-mode-kings .page-title {
-    color: #ececec !important;
+    color: var(--heading-color) !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -3991,7 +3991,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 #kings-content.dark-mode-kings .table th {
     background: #1f1f1f;
-    color: #EBEBFF;
+    color: var(--heading-color);
     border-bottom-color: #3a3a3a;
 }
 
@@ -4101,7 +4101,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .dark-mode-prophets .page-title {
-    color: var(--secondary-text-color) !important;
+    color: var(--heading-color) !important;
 }
 
 .dark-mode-prophets .content-header {
@@ -4115,7 +4115,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 .dark-mode-prophets .table th {
     background: #1f1f1f;
-    color: var(--secondary-text-color);
+    color: var(--heading-color);
     border-bottom-color: #3a3a3a;
 }
 
@@ -4141,7 +4141,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 /* Dark mode for Prophet Detail Page Content */
 #prophet-detail-content.dark-mode-prophets .page-title {
-    color: var(--secondary-text-color) !important;
+    color: var(--heading-color) !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -9036,7 +9036,12 @@ html #king-page-content.dark-mode-kings-variant2 .table tbody tr:hover {
 }
 
 #bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-english {
-    color: var(--main-text-color) !important;
+    color: var(--secondary-text-color) !important;
+}
+
+/* Dark mode variant2: When both languages shown */
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
+    color: #b8c5d6 !important;
 }
 
 .dark-mode-bible-variant2 .bible-verse-submit-btn {
@@ -9881,7 +9886,12 @@ html #king-page-content.light-mode-kings-variant2 .table tbody tr:hover {
 }
 
 #bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-english {
-    color: #3d3d3d;
+    color: var(--secondary-text-color) !important;
+}
+
+/* Light mode variant2: When both languages shown */
+#bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
+    color: #7a8ca0 !important;
 }
 
 .light-mode-bible-variant2 .bible-verse-submit-btn {

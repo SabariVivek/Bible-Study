@@ -857,11 +857,16 @@
 }
 
 .bible-verse-english {
-    color: var(--secondary-text-color);
+    color: var(--secondary-text-color) !important;
     font-size: 16px;
     line-height: 2;
     display: block;
     margin-top: 10px;
+}
+
+/* When both Tamil and English are shown, differentiate English text */
+.bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
+    color: #D1D5DB !important; /* Softer blue-gray for light mode - easier on eyes */
 }
 
 /* Dark Mode for Chapter Display */
@@ -884,7 +889,12 @@
 }
 
 .dark-mode-bible .bible-verse-english {
-    color: var(--main-text-color);
+    color: var(--secondary-text-color) !important;
+}
+
+/* Dark mode: When both Tamil and English are shown, differentiate English text */
+.dark-mode-bible .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
+    color: #b8c5d6 !important; /* Softer, warmer light blue for dark mode - comfortable for night reading */
 }
 
 /* Dark mode for verse display section */
@@ -906,7 +916,12 @@
 }
 
 #bibleVerseDisplaySection.dark-mode-bible .bible-verse-english {
-    color: var(--main-text-color);
+    color: var(--secondary-text-color) !important;
+}
+
+/* Display section dark mode: When both languages shown */
+#bibleVerseDisplaySection.dark-mode-bible .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
+    color: #b8c5d6 !important;
 }
 
 /* Light Mode for Chapter Display */
@@ -930,7 +945,12 @@
 }
 
 #bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-english {
-    color: var(--secondary-text-color);
+    color: var(--secondary-text-color) !important;
+}
+
+/* Light mode: When both languages shown */
+#bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
+    color: #7a8ca0 !important;
 }
 
 /* Dark mode styles for language toggle - Segmented Control */

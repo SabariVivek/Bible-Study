@@ -81,7 +81,8 @@ body.dark-mode-bible-variant2,
 .dark-mode-kings,
 .dark-mode-prophets,
 .dark-mode-books,
-.dark-mode-maps {
+.dark-mode-maps,
+.dark-mode-dashboard {
     --bg-color: var(--dark-bg);
     --main-text-color: var(--dark-main-text);
     --secondary-text-color: var(--dark-secondary-text);
