@@ -16,8 +16,8 @@ function renderCharacterCards(searchTerm = '') {
     if (typeof charactersData === 'undefined' || !charactersData || charactersData.length === 0) {
         console.error('charactersData is not available or empty');
         container.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #dc2626;">
-                <h3 style="font-size: 1.25rem; margin-bottom: 10px;">Error loading character data</h3>
+            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                <h3 style="font-size: 1.25rem; margin-bottom: 10px; color: #dc2626;">Error loading character data</h3>
                 <p>Please refresh the page</p>
             </div>
         `;
@@ -72,7 +72,7 @@ function renderCharacterCards(searchTerm = '') {
     // Show no results message if needed
     if (filteredCharacters.length === 0) {
         container.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #6b7280;">
+            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
                 <svg style="width: 80px; height: 80px; margin: 0 auto 20px; opacity: 0.3;" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <circle cx="12" cy="12" r="10" stroke-width="2"/>
                     <line x1="12" y1="8" x2="12" y2="12" stroke-width="2" stroke-linecap="round"/>

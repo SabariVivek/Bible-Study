@@ -20,7 +20,7 @@ function showPrayersForForgiveness() {
                     <button id="prevPrayerBtn" class="nav-chapter-btn" onclick="navigateToPreviousPrayer()" title="Previous Prayer">
                         <span class="nav-arrow">←</span>
                     </button>
-                    <span id="prayerCounter" style="font-size: 14px; color: #6b7280; font-weight: 600; min-width: 60px; text-align: center;">1 / 5</span>
+                    <span id="prayerCounter" style="font-size: 14px; font-weight: 600; min-width: 60px; text-align: center;">1 / 5</span>
                     <button id="nextPrayerBtn" class="nav-chapter-btn" onclick="navigateToNextPrayer()" title="Next Prayer">
                         <span class="nav-arrow">→</span>
                     </button>

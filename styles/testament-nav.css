@@ -229,7 +229,7 @@
 }
 
 .dark-mode-books .testament-tab-button {
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-books .testament-tab-button:hover {
@@ -259,7 +259,7 @@
 }
 
 .dark-mode-books .testament-menu-item a {
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-books .testament-menu-item a:hover {

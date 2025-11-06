@@ -68,12 +68,12 @@
 
 html {
     min-height: 100vh;
-    background: white;
+    background: #EBEBFF;
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: white !important;
+    background: #EBEBFF !important;
     min-height: 100vh;
     display: flex;
 }
@@ -89,7 +89,7 @@ body.modal-open {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    background: white;
+    background: #EBEBFF;
     border-radius: 0;
     box-shadow: none;
     overflow: hidden;
@@ -98,7 +98,7 @@ body.modal-open {
 
 .sidebar {
     width: 250px;
-    background: linear-gradient(135deg, #fafbff 0%, #f8f9fe 100%);
+    background: linear-gradient(135deg, #EBEBFF 0%, #d8d8ff 100%);
     padding: 30px 0 0 0;
     border-right: 1px solid #e5e7eb;
     transition: all 0.3s ease;
@@ -168,7 +168,7 @@ body.sidebar-collapsed .main-content {
     background: white;
     border: 2px solid #e5e7eb;
     border-radius: 50%;
-    color: #374151;
+    color: var(--heading-color);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -240,7 +240,7 @@ nav {
 
 .nav-item:hover {
     background: #e5e7eb;
-    color: #374151;
+    color: var(--heading-color);
 }
 
 .nav-item.active {
@@ -284,7 +284,7 @@ nav {
 .main-content {
     flex: 1;
     padding: 30px 40px;
-    background: white;
+    background: #EBEBFF;
     margin-left: 260px;
     transition: margin-left 0.3s ease;
     overflow-y: auto;
@@ -315,7 +315,7 @@ nav {
 }
 
 .search-input::placeholder {
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .search-icon {
@@ -323,7 +323,7 @@ nav {
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .header-right {
@@ -395,7 +395,7 @@ nav {
 
 /* Light mode styles for cards inside content-actions */
 .content-actions .card {
-    background-color: #ffffff;
+    background-color: #EBEBFF;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
     padding: 20px;
@@ -415,7 +415,7 @@ nav {
 .dark-mode-kings .content-actions .showing-text,
 .dark-mode-prophets .content-actions .showing-text,
 .dark-mode-books .content-actions .showing-text {
-    color: #bfc7d5;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-kings .filter-btn,
@@ -425,7 +425,7 @@ nav {
 .dark-mode-books .filter-btn,
 .dark-mode-books .export-btn {
     background: linear-gradient(135deg, #232a3a 0%, #3a3f4b 100%);
-    color: #f3f4f6;
+    color: var(--secondary-text-color);
     border: 1px solid #353a45;
     box-shadow: 0 2px 8px rgba(20, 20, 30, 0.18);
 }
@@ -445,7 +445,7 @@ nav {
 .dark-mode-prophets .add-btn,
 .dark-mode-books .add-btn {
     background: linear-gradient(135deg, #232a3a 0%, #3a3f4b 100%);
-    color: #f3f4f6;
+    color: var(--heading-color);
     border: 1px solid #353a45;
     box-shadow: 0 2px 8px rgba(20, 20, 30, 0.18);
 }
@@ -510,7 +510,7 @@ nav {
 }
 
 .table-container {
-    background: white;
+    background: #EBEBFF;
     border-radius: 12px;
     border: 1px solid #e5e7eb;
     overflow: hidden;
@@ -526,7 +526,7 @@ nav {
     padding: 16px;
     text-align: left;
     font-weight: 600;
-    color: #374151;
+    color: var(--heading-color);
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -552,7 +552,7 @@ nav {
     justify-content: center;
     margin-left: 6px;
     vertical-align: middle;
-    color: #9ca3af;
+    color: var(--secondary-text-color);
     transition: all 0.2s ease;
 }
 
@@ -568,8 +568,8 @@ nav {
 
 .table th.sortable.sort-asc,
 .table th.sortable.sort-desc {
-    background: #eef2ff;
-    color: #667eea;
+    background: #EBEBFF;
+    color: #4a4a9f;
 }
 
 .table th.sortable.sort-asc .sort-icon,
@@ -645,8 +645,8 @@ nav {
 }
 
 .status-israel {
-    background: #dbeafe;
-    color: #1d4ed8;
+    background: #EBEBFF;
+    color: #4a4a9f;
 }
 
 .status-judah {
@@ -675,8 +675,8 @@ nav {
 }
 
 .status-ancient {
-    background: #e0e7ff;
-    color: #3730a3;
+    background: #EBEBFF;
+    color: #4a4a9f;
 }
 
 .status-other {
@@ -686,8 +686,8 @@ nav {
 
 /* Reign Badge Styles */
 .reign-years {
-    background: #dbeafe;
-    color: #1e40af;
+    background: #EBEBFF;
+    color: #4a4a9f;
 }
 
 .reign-months {
@@ -732,13 +732,13 @@ nav {
 }
 
 .category-gospel {
-    background: #bfdbfe;
-    color: #1e40af;
+    background: #EBEBFF;
+    color: #4a4a9f;
 }
 
 .category-acts {
-    background: #c7d2fe;
-    color: #3730a3;
+    background: #EBEBFF;
+    color: #4a4a9f;
 }
 
 .category-letters {
@@ -753,8 +753,8 @@ nav {
 
 /* Verses Badge Style */
 .badge-verses {
-    background: #e0e7ff;
-    color: #3730a3;
+    background: #EBEBFF;
+    color: #4a4a9f;
 }
 
 .action-btn {
@@ -792,8 +792,8 @@ nav {
 .pagination-btn {
     padding: 8px 12px;
     border: 1px solid #e5e7eb;
-    background: white;
-    color: #374151;
+    background: #f8fafb;
+    color: var(--heading-color);
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
@@ -991,7 +991,7 @@ nav {
 /* Contemporary Kings cell styling */
 .contemporary-cell {
     font-size: 13px;
-    color: #4b5563;
+    color: var(--heading-color);
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1195,7 +1195,7 @@ nav {
     flex: 1;
     padding: 12px 20px;
     background: #f3f4f6;
-    color: #374151;
+    color: var(--heading-color);
     border: none;
     border-radius: 8px;
     font-size: 14px;
@@ -1306,7 +1306,7 @@ nav {
 .dark-mode-prophets .king-card,
 .dark-mode-books .king-card {
     background: #232325 !important;
-    color: #f3f4f6;
+    color: var(--secondary-text-color);
     border: 1px solid #35363a;
     box-shadow: 0 4px 24px rgba(20, 20, 30, 0.10);
 }
@@ -1317,20 +1317,20 @@ nav {
 }
 
 .dark-mode-kings .king-info-label {
-    color: #a1a1a1;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-kings .king-info-value {
-    color: #ececec;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-kings .biography-text {
-    color: #d1d1d1;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-kings .biblical-refs-container .biblical-ref {
     background: #2f2f2f;
-    color: #5D9CEC;
+    color: var(--secondary-text-color);
     border-color: #3a3a3a;
 }
 
@@ -1338,13 +1338,13 @@ nav {
 .dark-mode-kings .filter-card-title,
 .dark-mode-kings .king-card-title,
 .dark-mode-kings .side-card-label {
-    color: #f3f4f6 !important;
+    color: var(--secondary-text-color) !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .dark-mode-prophets .filter-card-title,
 .dark-mode-books .filter-card-title {
-    color: #ffffff !important;
+    color: var(--secondary-text-color) !important;
     font-weight: 700 !important;
     opacity: 1 !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -1354,13 +1354,13 @@ nav {
 body .dark-mode-maps .page-title,
 body .dark-mode-maps .section-title,
 body .dark-mode-maps .location-title {
-    color: #ececec !important;
+    color: var(--secondary-text-color) !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 body .dark-mode-kings .page-title,
 body .dark-mode-maps .page-title {
-    color: #ececec !important;
+    color: var(--secondary-text-color) !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     font-weight: bold;
 }
@@ -1369,7 +1369,7 @@ body .dark-mode-maps .page-title {
 .dark-mode-prophets .side-card,
 .dark-mode-books .side-card {
     background: #232325 !important;
-    color: #f3f4f6;
+    color: var(--secondary-text-color);
     border: 1px solid #35363a;
     box-shadow: 0 2px 12px rgba(20, 20, 30, 0.08);
 }
@@ -1378,7 +1378,7 @@ body .dark-mode-maps .page-title {
 .dark-mode-prophets .filter-card,
 .dark-mode-books .filter-card {
     background: #232325 !important;
-    color: #f3f4f6;
+    color: var(--heading-color);
     border: 1px solid #35363a;
     box-shadow: 0 4px 24px rgba(20, 20, 30, 0.10);
 }
@@ -1408,20 +1408,20 @@ body .dark-mode-maps .page-title {
 .dark-mode-kings .filter-option-name,
 .dark-mode-prophets .filter-option-name,
 .dark-mode-books .filter-option-name {
-    color: #ececec;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-kings .filter-option-description,
 .dark-mode-prophets .filter-option-description,
 .dark-mode-books .filter-option-description {
-    color: #a1a1a1;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-kings .filter-card .close-btn,
 .dark-mode-prophets .filter-card .close-btn,
 .dark-mode-books .filter-card .close-btn {
     background: #353535;
-    color: #ffffff;
+    color: #EBEBFF;
 }
 
 .dark-mode-kings .filter-card .close-btn:hover,
@@ -1676,7 +1676,7 @@ body .dark-mode-maps .page-title {
 
 .close-btn:hover {
     background: #e5e7eb;
-    color: #374151;
+    color: var(--heading-color);
 }
 
 .king-card-content {
@@ -1793,15 +1793,15 @@ body .dark-mode-maps .page-title {
 }
 
 .king-hover-card.dark-mode-kings .king-hover-card-name {
-    color: #ffffff !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .king-hover-card.dark-mode-kings .king-hover-card-title {
-    color: #ececec !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .king-hover-card.dark-mode-kings .king-hover-card-description {
-    color: #9ca3af !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .king-hover-card.dark-mode-kings .king-hover-card-body {
@@ -1809,15 +1809,15 @@ body .dark-mode-maps .page-title {
 }
 
 .king-hover-card.dark-mode-kings .king-hover-card-row {
-    color: #e5e7eb !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .king-hover-card.dark-mode-kings .king-hover-card-label {
-    color: #9ca3af !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .king-hover-card.dark-mode-kings .king-hover-card-value {
-    color: #e5e7eb !important;
+    color: var(--secondary-text-color) !important;
 }
 
 /* Dark mode for hover card badges */
@@ -1847,7 +1847,7 @@ body .dark-mode-maps .page-title {
 
 .king-hover-card.dark-mode-kings .status-neutral {
     background: #374151 !important;
-    color: #9ca3af !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .king-hover-card.dark-mode-kings .status-righteous {
@@ -1893,7 +1893,7 @@ body .dark-mode-maps .page-title {
 
 .king-hover-card.dark-mode-kings .reign-unknown {
     background: #374151 !important;
-    color: #9ca3af !important;
+    color: var(--secondary-text-color) !important;
 }
 
 /* Legacy selectors for backward compatibility */
@@ -1908,15 +1908,15 @@ body .dark-mode-maps .page-title {
 }
 
 .dark-mode-kings .king-hover-card-name {
-    color: #ffffff !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .dark-mode-kings .king-hover-card-title {
-    color: #ececec !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .dark-mode-kings .king-hover-card-description {
-    color: #9ca3af !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .dark-mode-kings .king-hover-card-body {
@@ -1924,15 +1924,15 @@ body .dark-mode-maps .page-title {
 }
 
 .dark-mode-kings .king-hover-card-row {
-    color: #e5e7eb !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .dark-mode-kings .king-hover-card-label {
-    color: #9ca3af !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .dark-mode-kings .king-hover-card-value {
-    color: #e5e7eb !important;
+    color: var(--secondary-text-color) !important;
 }
 
 /* Dark mode for hover card badges - legacy */
@@ -1962,7 +1962,7 @@ body .dark-mode-maps .page-title {
 
 .dark-mode-kings .king-hover-card .status-neutral {
     background: #374151 !important;
-    color: #9ca3af !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .dark-mode-kings .king-hover-card .status-righteous {
@@ -2008,7 +2008,7 @@ body .dark-mode-maps .page-title {
 
 .dark-mode-kings .king-hover-card .reign-unknown {
     background: #374151 !important;
-    color: #9ca3af !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .dark-mode-kings .timeline-modal-content {
@@ -2029,12 +2029,12 @@ body .dark-mode-maps .page-title {
 
 .dark-mode-kings.timeline-modal .modal-close {
     background: #353535;
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-kings.timeline-modal .modal-close:hover {
     background: #4a4a4a;
-    color: #e5e7eb;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-kings .timeline-modal-body {
@@ -2042,7 +2042,7 @@ body .dark-mode-maps .page-title {
 }
 
 .dark-mode-kings .timeline-modal-body .subtitle {
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-kings .timeline-modal-body::-webkit-scrollbar {
@@ -2064,7 +2064,7 @@ body .dark-mode-maps .page-title {
 
 .dark-mode-kings.timeline-modal .timeline-card {
     background: #555555;
-    color: white;
+    color: var(--secondary-text-color);
     border-color: #666666;
 }
 
@@ -2292,7 +2292,7 @@ body .dark-mode-maps .page-title {
 .biography-text {
     text-align: left !important;
     line-height: 1.6;
-    color: #374151;
+    color: var(--secondary-text-color);
     font-size: 14px;
     max-height: 200px;
     overflow-y: auto;
@@ -2344,7 +2344,7 @@ body .dark-mode-maps .page-title {
 .biography-content li {
     margin-bottom: 8px;
     line-height: 1.6;
-    color: #374151;
+    color: var(--secondary-text-color);
 }
 
 .biography-content li:last-child {
@@ -2621,7 +2621,7 @@ body .dark-mode-maps .page-title {
 
 .clear-icon {
     font-size: 14px;
-    color: #9ca3af;
+    color: var(--secondary-text-color);
     font-weight: bold;
     transition: color 0.2s;
 }
@@ -2650,7 +2650,7 @@ body .dark-mode-maps .page-title {
 
 .eye-icon {
     font-size: 16px;
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .login-btn {
@@ -2797,7 +2797,7 @@ body .dark-mode-maps .page-title {
 .timeline-container .timeline ul li {
     padding: 18px 22px;
     background-color: #f3f3f3;
-    color: #111;
+    color: var(--heading-color);
     border-radius: 12px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
@@ -3090,11 +3090,11 @@ body .dark-mode-maps .page-title {
 }
 
 .dark-mode-cards .era-title {
-    color: #f3f4f6;
+    color: var(--heading-color);
 }
 
 .dark-mode-cards .era-subtitle {
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 /* Dark mode for dashboard page title */
@@ -3129,11 +3129,11 @@ body .dark-mode-maps .page-title {
 }
 
 .dark-mode-dashboard .era-title {
-    color: #f3f4f6;
+    color: var(--heading-color);
 }
 
 .dark-mode-dashboard .era-subtitle {
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-dashboard .seed-content-container {
@@ -3513,7 +3513,7 @@ body .dark-mode-maps .page-title {
 
 .dark-mode-life-of-christ .search-clear-btn {
     background: #353535;
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-life-of-christ .search-clear-btn:hover {
@@ -3596,7 +3596,7 @@ body .dark-mode-maps .page-title {
 
 .dark-mode-characters .search-clear-btn {
     background: #353535;
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-characters .search-clear-btn:hover {
@@ -3639,7 +3639,7 @@ body .dark-mode-kings .page-title {
     padding: 16px;
     text-align: left;
     font-weight: 600;
-    color: #374151;
+    color: var(--heading-color);
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -3664,7 +3664,7 @@ body .dark-mode-kings .page-title {
 }
 
 #king-page-content.dark-mode-kings .chapter-section-heading {
-    color: #ffffff;
+    color: var(--main-text-color) !important;
     font-size: 1.5rem;  /* Matched with light mode */
     font-weight: 700;   /* Matched with light mode */
     margin-bottom: 1.5rem;
@@ -3675,7 +3675,7 @@ body .dark-mode-kings .page-title {
 
 #king-page-content.dark-mode-kings .chapter-section,
 #king-page-content.dark-mode-kings .chapter-section div {
-    color: #e5e7eb;
+    color: var(--secondary-text-color) !important;
     font-size: 1.05rem;  /* Matched with light mode */
     line-height: 1.8;
     margin-bottom: 2rem;
@@ -3731,12 +3731,12 @@ body .dark-mode-kings .page-title {
 
 #king-page-content.dark-mode-kings .table th {
     background: #1f1f1f;
-    color: #ececec;
+    color: #EBEBFF;
     border-bottom-color: #3a3a3a;
 }
 
 #king-page-content.dark-mode-kings .table td {
-    color: #d1d1d1;
+    color: #EBEBFF;
     border-bottom-color: #3a3a3a;
     background: #2a2a2a;
 }
@@ -3746,7 +3746,7 @@ body .dark-mode-kings .page-title {
 }
 
 #king-page-content.dark-mode-kings .king-name {
-    color: #d1d1d1;
+    color: #EBEBFF;
 }
 
 #king-page-content.dark-mode-kings .king-kingdom {
@@ -3833,7 +3833,7 @@ html #king-page-content.dark-mode-kings .order-number {
 #kings-content.dark-mode-kings .export-btn,
 #kings-content.dark-mode-kings .add-btn {
     background: linear-gradient(135deg, #232a3a 0%, #3a3f4b 100%);
-    color: #f3f4f6;
+    color: var(--heading-color);
     border: 1px solid #353a45;
     box-shadow: 0 2px 8px rgba(20, 20, 30, 0.18);
 }
@@ -3849,7 +3849,7 @@ html #king-page-content.dark-mode-kings .order-number {
 #kings-content.dark-mode-kings .theme-btn {
     background: linear-gradient(135deg, #23272f 0%, #2d3139 100%);
     border: 1px solid #353a45;
-    color: #f3f4f6;
+    color: var(--heading-color);
 }
 
 #kings-content.dark-mode-kings .theme-btn:hover {
@@ -3868,7 +3868,7 @@ html #king-page-content.dark-mode-kings .order-number {
 #prophets-content.dark-mode-prophets .theme-btn {
     background: linear-gradient(135deg, #23272f 0%, #2d3139 100%);
     border: 1px solid #353a45;
-    color: #f3f4f6;
+    color: var(--heading-color);
 }
 
 #prophets-content.dark-mode-prophets .theme-btn:hover {
@@ -3897,7 +3897,7 @@ html #king-page-content.dark-mode-kings .order-number {
 #books-content.dark-mode-books .theme-btn {
     background: linear-gradient(135deg, #23272f 0%, #2d3139 100%);
     border: 1px solid #353a45;
-    color: #f3f4f6;
+    color: var(--heading-color);
 }
 
 #books-content.dark-mode-books .theme-btn:hover {
@@ -3975,7 +3975,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 #kings-content.dark-mode-kings .card {
     background: #232325 !important;
-    color: #f3f4f6;
+    color: var(--heading-color);
     border: 1px solid #35363a;
     box-shadow: 0 4px 24px rgba(20, 20, 30, 0.10);
 }
@@ -3991,12 +3991,12 @@ html #king-page-content.dark-mode-kings .order-number {
 
 #kings-content.dark-mode-kings .table th {
     background: #1f1f1f;
-    color: #ececec;
+    color: #EBEBFF;
     border-bottom-color: #3a3a3a;
 }
 
 #kings-content.dark-mode-kings .table td {
-    color: #d1d1d1 !important;
+    color: #EBEBFF !important;
     border-bottom-color: #3a3a3a !important;
     background: #2a2a2a !important;
 }
@@ -4014,7 +4014,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 #kings-content.dark-mode-kings .king-name {
-    color: #d1d1d1 !important;
+    color: #EBEBFF !important;
 }
 
 #kings-content.dark-mode-kings .king-kingdom {
@@ -4057,7 +4057,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 #kings-content.dark-mode-kings .reign-unknown {
     background: #374151;
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 #kings-content.dark-mode-kings .status-good {
@@ -4067,7 +4067,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 #kings-content.dark-mode-kings .status-neutral {
     background: #374151;
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 #kings-content.dark-mode-kings .status-righteous {
@@ -4101,7 +4101,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .dark-mode-prophets .page-title {
-    color: #ececec !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .dark-mode-prophets .content-header {
@@ -4115,7 +4115,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 .dark-mode-prophets .table th {
     background: #1f1f1f;
-    color: #ececec;
+    color: var(--secondary-text-color);
     border-bottom-color: #3a3a3a;
 }
 
@@ -4131,7 +4131,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .dark-mode-prophets .table td {
-    color: #d1d1d1;
+    color: var(--secondary-text-color);
     border-bottom-color: #3a3a3a;
 }
 
@@ -4141,7 +4141,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 /* Dark mode for Prophet Detail Page Content */
 #prophet-detail-content.dark-mode-prophets .page-title {
-    color: #ececec !important;
+    color: var(--secondary-text-color) !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -4150,7 +4150,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 #prophet-detail-content.dark-mode-prophets .chapter-section-heading {
-    color: #ffffff;
+    color: var(--secondary-text-color);
     font-size: 1.5rem;
     font-weight: 700;
     margin-top: 0;
@@ -4164,19 +4164,19 @@ html #king-page-content.dark-mode-kings .order-number {
 
 #prophet-detail-content.dark-mode-prophets .chapter-section,
 #prophet-detail-content.dark-mode-prophets .chapter-section div {
-    color: #e5e7eb;
+    color: var(--secondary-text-color);
     font-size: 1.05rem;
     line-height: 2.2;
     margin-bottom: 2rem;
 }
 
 #prophet-detail-content.dark-mode-prophets .chapter-section b {
-    color: #60a5fa;
+    color: var(--secondary-text-color);
     font-weight: 600;
 }
 
 .dark-mode-books .page-title {
-    color: #ececec !important;
+    color: var(--secondary-text-color) !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -4185,12 +4185,12 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .dark-mode-books #bookChapterTitle {
-    color: #ececec !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .dark-mode-books .book-chapter-container {
     background-color: #1f1f1f;
-    color: #ececec;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-books .book-chapter-container div,
@@ -4198,15 +4198,15 @@ html #king-page-content.dark-mode-kings .order-number {
 .dark-mode-books .book-chapter-container span,
 .dark-mode-books .book-chapter-container b,
 .dark-mode-books .book-chapter-container strong {
-    color: #e5e7eb !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .dark-mode-books .chapter-section {
-    color: #e5e7eb;
+    color: var(--secondary-text-color);
 }
 
 .dark-mode-books .chapter-section-heading {
-    color: #ececec;
+    color: var(--secondary-text-color);
     background: linear-gradient(to right, #1f2f1f 0%, #2a2a2a 100%);
     border-left-color: #6ba876;
 }
@@ -4454,7 +4454,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .prayer-text {
-    color: #374151;
+    color: var(--secondary-text-color);
     font-size: 16px;
     line-height: 1.8;
     margin: 0 0 16px 0;
@@ -4647,7 +4647,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .seed-text-content {
-    color: #4a5568;
+    color: var(--secondary-text-color);
     font-size: 16px;
     line-height: 1.8;
     padding: 0 28px 28px 28px;
@@ -4662,7 +4662,7 @@ html #king-page-content.dark-mode-kings .order-number {
 .seed-text-content li {
     padding: 6px 0;
     line-height: 1.8;
-    color: #4a5568;
+    color: var(--secondary-text-color);
 }
 
 .seed-image-container {
@@ -4817,7 +4817,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .seed-text {
-    color: #374151;
+    color: var(--secondary-text-color);
     font-size: 16px;
     line-height: 1.8;
     margin: 0 0 16px 0;
@@ -5403,7 +5403,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 .timeline-modal .modal-close:hover {
     background: #e5e7eb;
-    color: #374151;
+    color: var(--heading-color);
 }
 
 .timeline-modal-body {
@@ -5618,14 +5618,14 @@ html #king-page-content.dark-mode-kings .order-number {
     height: 80px;
     margin: 0 auto 20px;
     opacity: 0.3;
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .life-of-christ-no-results h3 {
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0 0 10px 0;
-    color: #4b5563;
+    color: var(--heading-color);
 }
 
 .life-of-christ-no-results p {
@@ -5649,7 +5649,7 @@ html #king-page-content.dark-mode-kings .order-number {
 .life-of-jesus-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    border-color: #e0e0e0;
+    border-color: var(--border-color);
 }
 
 .life-of-jesus-card-header {
@@ -5816,7 +5816,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .life-of-christ-search-input::placeholder {
-    color: #9ca3af;
+    color: var(--secondary-text-color);
     font-weight: 400;
 }
 
@@ -5862,7 +5862,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 .search-clear-btn:hover {
     background: #e5e7eb;
-    color: #374151;
+    color: var(--heading-color);
     transform: scale(1.1) rotate(90deg);
 }
 
@@ -6519,7 +6519,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 .chapters-popup .close-btn:hover {
     background: #e5e7eb;
-    color: #374151;
+    color: var(--heading-color);
 }
 
 .chapters {
@@ -6833,7 +6833,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .dark-mode-books .synopsis-no-data {
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 /* ===== SYNOPSIS SIDE DRAWER STYLES ===== */
@@ -7283,7 +7283,7 @@ html #king-page-content.dark-mode-kings .order-number {
 .note-title {
     font-size: 20px;
     font-weight: 600;
-    color: #2d3748;
+    color: var(--heading-color);
     margin: 0;
     padding-left: 15px;
     border-left: 4px solid #667eea;
@@ -7303,7 +7303,7 @@ html #king-page-content.dark-mode-kings .order-number {
 }
 
 .note-content {
-    color: #4a5568;
+    color: var(--secondary-text-color);
     font-size: 15px;
     line-height: 1.6;
     position: relative;
@@ -7565,7 +7565,7 @@ html #king-page-content.dark-mode-kings .order-number {
 
 .lesson-text {
     font-size: 13px;
-    color: #374151;
+    color: var(--heading-color);
     line-height: 1.5;
     margin: 0;
     font-style: italic;
@@ -7585,7 +7585,7 @@ html #king-page-content.dark-mode-kings .order-number {
     padding: 8px 12px;
     border: 2px solid #e5e7eb;
     background: white;
-    color: #374151;
+    color: var(--heading-color);
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
@@ -7707,7 +7707,7 @@ body:has(.left-sidebar.collapsed) .main-content {
 /* Light theme styles for collapse button */
 body:not(.dark-mode) .sidebar-collapse-btn {
     border: none !important;
-    color: #4b5563;
+    color: var(--heading-color);
 }
 
 body:not(.dark-mode) .sidebar-collapse-btn:hover {
@@ -8627,7 +8627,7 @@ html #king-page-content.dark-mode-kings-variant2 .table tbody tr:hover {
 
 .king-hover-card.dark-mode-kings-variant2 .king-hover-card-label,
 .dark-mode-kings-variant2 .king-hover-card-label {
-    color: #9ca3af !important;
+    color: var(--secondary-text-color) !important;
 }
 
 .king-hover-card.dark-mode-kings-variant2 .king-hover-card-value,
@@ -9019,24 +9019,24 @@ html #king-page-content.dark-mode-kings-variant2 .table tbody tr:hover {
    DARK MODE VARIANT 2 - Bible Verse Display Additional Styles
    ============================================ */
 #bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-chapter-title {
-    color: #e5e7eb;
+    color: var(--heading-color) !important;
 }
 
 #bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-section-title {
-    color: #d1d5db;
+    color: var(--heading-color) !important;
 }
 
 #bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-number {
-    color: #a78bfa;
+    color: var(--secondary-text-color) !important;
 }
 
 #bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-text,
 #bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-tamil {
-    color: #e5e7eb;
+    color: var(--secondary-text-color) !important;
 }
 
 #bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-english {
-    color: #d1d5db;
+    color: var(--main-text-color) !important;
 }
 
 .dark-mode-bible-variant2 .bible-verse-submit-btn {
@@ -9877,7 +9877,7 @@ html #king-page-content.light-mode-kings-variant2 .table tbody tr:hover {
 
 #bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-text,
 #bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-tamil {
-    color: #2c2c2c;
+    color: var(--secondary-text-color) !important;
 }
 
 #bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-english {

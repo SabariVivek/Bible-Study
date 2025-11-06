@@ -1,0 +1,144 @@
+/* ===================================================
+   CENTRALIZED COLOR SCHEME - Single Source of Truth
+   =================================================== */
+
+/* 
+   Changing colors here will automatically update throughout the entire application.
+   All pages reference these CSS variables.
+*/
+
+:root {
+    /* ===== LIGHT MODE - Gentle Reading Palette ===== */
+    
+    /* Background */
+    --light-bg: #F8F9FA;                    /* Very soft gray-white, prevents eye strain */
+    
+    /* Text Colors */
+    --light-main-text: #1A202C;             /* Deep charcoal gray - for sub-headings/main content text */
+    --light-secondary-text: #4A5568;        /* Slightly lighter gray for body text/all other content */
+    --light-heading: #2D3748;               /* Slightly bolder for page titles and navigation */
+    
+    /* Buttons */
+    --light-btn-active-start: #8054D5;      /* Gradient start - soft violet/purple */
+    --light-btn-active-end: #6B46C1;        /* Gradient end - calm tone */
+    --light-btn-hover: #553C9A;             /* Slightly darker purple for feedback */
+    
+    /* Borders & Dividers */
+    --light-border: #E2E8F0;                /* Subtle gray border, keeps layout clean */
+    
+    /* Icons */
+    --light-icon: #718096;                  /* Balanced mid-gray to blend gently */
+    
+    
+    /* ===== DARK MODE - Comfortable Night Reading Palette ===== */
+    
+    /* Background Options */
+    --dark-bg-option1: #121212;             /* Deep neutral tone, no harsh contrast */
+    --dark-bg-option2: #1A1B1E;             /* Alternative deep neutral */
+    --dark-bg: var(--dark-bg-option1);      /* Default background */
+    
+    /* Text Colors */
+    --dark-main-text: #E0E0E0;              /* Soft white for relaxed eyes - for sub-headings/main content text */
+    --dark-secondary-text: #A0A0A0;         /* Softer gray for body text/all other content */
+    --dark-heading: #F3F3F3;                /* Slightly brighter to distinguish page titles and navigation */
+    
+    /* Buttons */
+    --dark-btn-active-start: #7C3AED;       /* Gradient start - vivid violet glow */
+    --dark-btn-active-end: #6D28D9;         /* Gradient end - matches "Tamil" tab */
+    --dark-btn-hover: #9F7AEA;              /* Softer, glowing hover color */
+    
+    /* Borders & Dividers */
+    --dark-border: #2D2D2D;                 /* Subtle dark gray */
+    
+    /* Icons */
+    --dark-icon: #A5B4FC;                   /* Gentle light blue-violet accent */
+}
+
+/* ===================================================
+   LIGHT MODE APPLICATION
+   =================================================== */
+
+body:not(.dark-mode-bible):not(.dark-mode-bible-variant2):not(.dark-mode-kings):not(.dark-mode-prophets):not(.dark-mode-books):not(.dark-mode-maps) {
+    --bg-color: var(--light-bg);
+    --main-text-color: var(--light-main-text);
+    --secondary-text-color: var(--light-secondary-text);
+    --heading-color: var(--light-heading);
+    --btn-active-start: var(--light-btn-active-start);
+    --btn-active-end: var(--light-btn-active-end);
+    --btn-hover: var(--light-btn-hover);
+    --border-color: var(--light-border);
+    --icon-color: var(--light-icon);
+}
+
+/* ===================================================
+   DARK MODE APPLICATION
+   =================================================== */
+
+body.dark-mode-bible,
+body.dark-mode-bible-variant2,
+.dark-mode-bible,
+.dark-mode-bible-variant2,
+.dark-mode-kings,
+.dark-mode-prophets,
+.dark-mode-books,
+.dark-mode-maps {
+    --bg-color: var(--dark-bg);
+    --main-text-color: var(--dark-main-text);
+    --secondary-text-color: var(--dark-secondary-text);
+    --heading-color: var(--dark-heading);
+    --btn-active-start: var(--dark-btn-active-start);
+    --btn-active-end: var(--dark-btn-active-end);
+    --btn-hover: var(--dark-btn-hover);
+    --border-color: var(--dark-border);
+    --icon-color: var(--dark-icon);
+}
+
+/* ===================================================
+   USAGE INSTRUCTIONS
+   =================================================== */
+
+/*
+   HOW TO USE THESE VARIABLES IN YOUR CSS:
+   
+   1. For backgrounds:
+      background-color: var(--bg-color);
+   
+   2. For page titles and navigation:
+      color: var(--heading-color);
+   
+   3. For sub-headings and main content text:
+      color: var(--main-text-color);
+   
+   4. For body text and all other content:
+      color: var(--secondary-text-color);
+   
+   5. For active buttons:
+      background: linear-gradient(135deg, var(--btn-active-start), var(--btn-active-end));
+   
+   6. For button hover:
+      background-color: var(--btn-hover);
+   
+   7. For borders:
+      border-color: var(--border-color);
+   
+   8. For icons:
+      color: var(--icon-color);
+*/
+
+/* ===================================================
+   QUICK REFERENCE - Color Meanings
+   =================================================== */
+
+/*
+   LIGHT MODE:
+   - Background: #F8F9FA (soft gray-white)
+   - Main Text (Sub-headings): #1A202C (deep charcoal)
+   - Secondary Text (Body/Content): #4A5568 (lighter gray)
+   - Heading (Page titles/Nav): #2D3748 (bold charcoal)
+   
+   DARK MODE:
+   - Background: #121212 (deep neutral)
+   - Main Text (Sub-headings): #E0E0E0 (soft white)
+   - Secondary Text (Body/Content): #A0A0A0 (softer gray)
+   - Heading (Page titles/Nav): #F3F3F3 (bright white)
+*/

@@ -554,7 +554,7 @@ function showKingPage(kingName, index) {
         kingPageContainer.innerHTML = `
             <div style="text-align: center; padding: 60px 20px;">
                 <h2 style="color: #667eea; margin-bottom: 16px; font-size: 24px;">Welcome to King ${kingName}'s Timeline</h2>
-                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">Click the table icon above to view the timeline details</p>
+                <p style="font-size: 16px; margin-bottom: 24px;">Click the table icon above to view the timeline details</p>
                 <svg width="120" height="120" viewBox="0 0 24 24" fill="none" style="opacity: 0.3;">
                     <rect x="3" y="3" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
                     <rect x="3" y="13" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
@@ -565,7 +565,7 @@ function showKingPage(kingName, index) {
         `;
     } else {
         // Show message if no data available
-        kingPageContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: #6b7280;">No timeline data available for this king yet.</p>';
+        kingPageContainer.innerHTML = '<p style="text-align: center; padding: 40px;">No timeline data available for this king yet.</p>';
     }
     
     // Check if audio exists for this king and show/hide audio button
@@ -655,7 +655,7 @@ function openKingTableView() {
             kingPageContainer.innerHTML = `
                 <div style="text-align: center; padding: 60px 20px;">
                     <h2 style="color: #667eea; margin-bottom: 16px; font-size: 24px;">Welcome to King ${window.currentKingData.name}'s Timeline</h2>
-                    <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">Click the table icon above to view the timeline details</p>
+                    <p style="font-size: 16px; margin-bottom: 24px;">Click the table icon above to view the timeline details</p>
                     <svg width="120" height="120" viewBox="0 0 24 24" fill="none" style="opacity: 0.3;">
                         <rect x="3" y="3" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
                         <rect x="3" y="13" width="7" height="7" rx="1" stroke="#667eea" stroke-width="2"/>
@@ -1482,7 +1482,7 @@ function loadProphetContent(prophetName, container) {
         container.innerHTML = `
             <div style="text-align: center; padding: 60px 20px;">
                 <h2 style="color: #667eea; margin-bottom: 16px; font-size: 24px;">Prophet ${prophetName}</h2>
-                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">Detailed information about this prophet is coming soon.</p>
+                <p style="font-size: 16px; margin-bottom: 24px;">Detailed information about this prophet is coming soon.</p>
                 <svg width="120" height="120" viewBox="0 0 24 24" fill="none" style="opacity: 0.3;">
                     <path d="M12 2L2 7v10c0 5.55 3.84 10.74 10 12 6.16-1.26 10-6.45 10-12V7l-10-5z" stroke="#667eea" stroke-width="2" fill="none"/>
                     <path d="M12 11v6M12 8h.01" stroke="#667eea" stroke-width="2" stroke-linecap="round"/>
@@ -3746,7 +3746,7 @@ function displayChapterContent(bookName, chapterNum, container) {
     container.innerHTML = `
         <div style="display: flex; align-items: center; justify-content: center; min-height: 300px; flex-direction: column; gap: 20px;">
             <div style="width: 50px; height: 50px; border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-            <p style="color: #666; font-size: 1rem;">Loading chapter...</p>
+            <p style="font-size: 1rem;">Loading chapter...</p>
         </div>
         <style>
             @keyframes spin {
@@ -3815,7 +3815,7 @@ function displayChapterContent(bookName, chapterNum, container) {
                     const formattedText = formatVerseReferences(section.text);
                     sectionText.innerHTML = formattedText;
                     sectionText.style.lineHeight = '2.2';
-                    sectionText.style.color = '#2c3e50';
+                    sectionText.style.color = 'inherit';  // Inherit from CSS variables
                     sectionText.style.fontSize = '1.05rem';
                     sectionText.style.whiteSpace = 'pre-wrap';
                     sectionText.style.marginTop = '1rem';
@@ -3858,7 +3858,6 @@ function displayChapterContent(bookName, chapterNum, container) {
             noDataDiv.className = 'no-chapter-data';
             noDataDiv.style.padding = '4rem 2rem';
             noDataDiv.style.textAlign = 'center';
-            noDataDiv.style.color = '#666';
             noDataDiv.style.fontSize = '1.1rem';
             noDataDiv.style.background = '#f9f9f9';
             noDataDiv.style.borderRadius = '12px';
@@ -3866,9 +3865,9 @@ function displayChapterContent(bookName, chapterNum, container) {
             noDataDiv.style.border = '2px dashed #ddd';
             noDataDiv.innerHTML = `
                 <p style="font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.5;">📖</p>
-                <p style="font-size: 1.3rem; font-weight: 600; color: #333; margin-bottom: 0.5rem;">Chapter Data Not Available</p>
-                <p style="color: #888; font-size: 1rem;">Content for <strong>${bookName} Chapter ${chapterNum}</strong> has not been seeded yet.</p>
-                <p style="color: #888; font-size: 0.9rem; margin-top: 1rem;">Currently available: Matthew and Exodus</p>
+                <p style="font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem;">Chapter Data Not Available</p>
+                <p style="font-size: 1rem;">Content for <strong>${bookName} Chapter ${chapterNum}</strong> has not been seeded yet.</p>
+                <p style="font-size: 0.9rem; margin-top: 1rem;">Currently available: Matthew and Exodus</p>
             `;
             container.appendChild(noDataDiv);
         }

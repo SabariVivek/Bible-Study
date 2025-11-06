@@ -10,7 +10,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4a6b7c 0%, #5a5f6f 100%);
     min-height: 100vh;
     display: flex;
 }
@@ -27,7 +27,7 @@ body.modal-open {
     width: 100%;
     max-width: 1400px;
     margin: 20px auto 0;
-    background: white;
+    background: #EBEBFF;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -129,7 +129,7 @@ body.modal-open {
     cursor: pointer;
     transition: all 0.2s;
     font-size: 14px;
-    color: #374151;
+    color: var(--heading-color);
     margin-bottom: 4px;
     display: flex;
     align-items: center;
@@ -186,7 +186,7 @@ body.modal-open {
     cursor: pointer;
     transition: all 0.2s;
     font-size: 14px;
-    color: #374151;
+    color: var(--heading-color);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -412,7 +412,7 @@ body.modal-open {
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .search-input {
@@ -426,7 +426,7 @@ body.modal-open {
 }
 
 .search-input::placeholder {
-    color: #9ca3af;
+    color: var(--secondary-text-color);
 }
 
 .header-right {

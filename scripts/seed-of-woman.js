@@ -21,7 +21,7 @@ function showSeedOfWoman() {
                     <button id="prevSeedBtn" class="nav-chapter-btn" onclick="navigateToPreviousSeed()" title="Previous">
                         <span class="nav-arrow">←</span>
                     </button>
-                    <span id="seedCounter" style="font-size: 14px; color: #6b7280; font-weight: 600; min-width: 60px; text-align: center;">1 / ${seedOfWomanData.length}</span>
+                    <span id="seedCounter" style="font-size: 14px; font-weight: 600; min-width: 60px; text-align: center;">1 / ${seedOfWomanData.length}</span>
                     <button id="nextSeedBtn" class="nav-chapter-btn" onclick="navigateToNextSeed()" title="Next">
                         <span class="nav-arrow">→</span>
                     </button>
