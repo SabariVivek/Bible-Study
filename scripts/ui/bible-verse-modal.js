@@ -666,12 +666,24 @@ function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData,
         const verseItem = document.createElement('p');
         verseItem.className = 'bible-verse-item';
         
+        // Function to process verse text with link icons (if available from cross-reference-popup.js)
+        const processText = (text) => {
+            if (typeof processVerseTextWithLinks === 'function') {
+                return processVerseTextWithLinks(text);
+            }
+            return text;
+        };
+        
         if (language === 'tamil') {
-            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${tamilVerseText || ''}</span>`;
+            const processedTamilText = processText(tamilVerseText || '');
+            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${processedTamilText}</span>`;
         } else if (language === 'english') {
-            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${englishVerseText || ''}</span>`;
+            const processedEnglishText = processText(englishVerseText || '');
+            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${processedEnglishText}</span>`;
         } else { // both
-            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-tamil">${tamilVerseText || ''}</span><br><span class="bible-verse-english">${englishVerseText || ''}</span>`;
+            const processedTamilText = processText(tamilVerseText || '');
+            const processedEnglishText = processText(englishVerseText || '');
+            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-tamil">${processedTamilText}</span><br><span class="bible-verse-english">${processedEnglishText}</span>`;
         }
         
         section.appendChild(verseItem);
@@ -687,6 +699,11 @@ function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData,
     
     // Initialize navigation
     initializeBibleNavigation();
+    
+    // Initialize cross-reference link handlers
+    if (typeof initializeCrossReferenceLinkHandlers === 'function') {
+        initializeCrossReferenceLinkHandlers();
+    }
 }
 
 /**
