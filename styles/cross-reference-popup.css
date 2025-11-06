@@ -9,7 +9,7 @@
     padding: 0;
     z-index: 10000;
     width: 380px;
-    max-height: 400px;
+    max-height: min(500px, calc(100vh - 40px));
     overflow: hidden;
     display: none;
     animation: popupFadeIn 0.15s ease-out;
@@ -162,6 +162,73 @@
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+/* Verse number in preview (small popup) */
+.cross-reference-verse-text .verse-number {
+    font-size: 11px;
+    font-weight: 600;
+    color: #7ca8c8;
+    margin-right: 4px;
+    vertical-align: baseline;
+}
+
+/* Expanded Content */
+.cross-reference-item.expanded .cross-reference-verse-text {
+    display: none;
+}
+
+.cross-reference-expanded-content {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #e8e8e0;
+    animation: expandIn 0.2s ease-out;
+}
+
+@keyframes expandIn {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 500px;
+    }
+}
+
+.cross-reference-full-text {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #5a5a52;
+    font-family: Georgia, 'Times New Roman', serif;
+    letter-spacing: 0;
+}
+
+.cross-reference-full-text sup {
+    font-size: 10px;
+    font-weight: 600;
+    color: #7ca8c8;
+    margin-right: 4px;
+}
+
+/* Individual verse items (for multi-verse ranges) */
+.cross-reference-full-text .verse-item,
+.verse-language-section .verse-item {
+    margin-bottom: 12px;
+}
+
+.cross-reference-full-text .verse-item:last-child,
+.verse-language-section .verse-item:last-child {
+    margin-bottom: 0;
+}
+
+.cross-reference-full-text .verse-item sup,
+.verse-language-section .verse-item sup {
+    font-size: 11px;
+    font-weight: 600;
+    color: #7ca8c8;
+    margin-right: 5px;
 }
 
 /* Loading State */
@@ -202,6 +269,7 @@
 /* Link Icon Styling */
 .bible-verse-text .link-icon,
 .bible-verse-english .link-icon,
+.bible-verse-esv .link-icon,
 .bible-verse-tamil .link-icon {
     cursor: pointer;
     display: inline-block;
@@ -214,6 +282,7 @@
 
 .bible-verse-text .link-icon:hover,
 .bible-verse-english .link-icon:hover,
+.bible-verse-esv .link-icon:hover,
 .bible-verse-tamil .link-icon:hover {
     opacity: 1;
     transform: scale(1.15);
@@ -235,6 +304,634 @@
     display: block;
 }
 
+/* Dark Mode Support - Default Dark Theme */
+.cross-reference-popup.dark-mode-popup {
+    background: #1e1e1e;
+    border-color: #333333;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-header {
+    background: #1e1e1e;
+    border-bottom-color: #333333;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-title,
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-title sup {
+    color: #e0e0e0;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-view-all {
+    color: #6ba3d0;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-view-all:hover {
+    color: #8bb8dc;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-close {
+    color: #888888;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-close:hover {
+    color: #aaaaaa;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-content {
+    background: #1e1e1e;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-content::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-content::-webkit-scrollbar-thumb {
+    background: #444444;
+    border-color: #2a2a2a;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-popup-content::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-item {
+    background: #1e1e1e;
+    border-bottom-color: #333333;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-item:hover {
+    background: #252525;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-verse-ref {
+    color: #6ba3d0;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-verse-ref:hover {
+    color: #8bb8dc;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-verse-text {
+    color: #b0b0b0;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-full-text {
+    color: #b0b0b0;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-full-text sup {
+    color: #6ba3d0;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-expanded-content {
+    border-top-color: #333333;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-loading,
+.cross-reference-popup.dark-mode-popup .cross-reference-empty {
+    color: #888888;
+}
+
+.cross-reference-popup.dark-mode-popup .cross-reference-error {
+    color: #d88888;
+}
+
+/* Dark Mode Variant 2 */
+.cross-reference-popup.dark-mode-popup-variant2 {
+    background: #1a2332 !important;
+    border-color: rgba(102, 126, 234, 0.3) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-header {
+    background: #1a2332 !important;
+    border-bottom-color: rgba(102, 126, 234, 0.2) !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-title,
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-title sup {
+    color: #f3f3f3 !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-view-all {
+    color: #8896ff !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-view-all:hover {
+    color: #a0acff !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-close {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-close:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-content {
+    background: #1a2332 !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-content::-webkit-scrollbar-track {
+    background: rgba(15, 26, 34, 0.6) !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-content::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.5) !important;
+    border-color: rgba(15, 26, 34, 0.6) !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-popup-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.7) !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-item {
+    background: #1a2332 !important;
+    border-bottom-color: rgba(102, 126, 234, 0.15) !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-item:hover {
+    background: rgba(102, 126, 234, 0.15) !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-verse-ref {
+    color: #8896ff !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-verse-ref:hover {
+    color: #a0acff !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-verse-text {
+    color: #c5d1e8 !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-full-text {
+    color: #c5d1e8 !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-full-text sup {
+    color: #8896ff !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-expanded-content {
+    border-top-color: rgba(102, 126, 234, 0.2) !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-loading,
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-empty {
+    color: #8896a8 !important;
+}
+
+.cross-reference-popup.dark-mode-popup-variant2 .cross-reference-error {
+    color: #ff8a8a !important;
+}
+
+/* Light Mode Variant 2 */
+.cross-reference-popup.light-mode-popup-variant2 {
+    background: #f9f0df !important;
+    border-color: #e8d5b7 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-header {
+    background: #f9f0df !important;
+    border-bottom-color: #e8d5b7 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-title,
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-title sup {
+    color: var(--main-text-color) !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-view-all {
+    color: #8b7355 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-view-all:hover {
+    color: #6b5335 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-close {
+    color: #8b7355 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-close:hover {
+    color: #6b5335 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-content {
+    background: #f9f0df !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-content::-webkit-scrollbar-track {
+    background: #fef6eb !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-content::-webkit-scrollbar-thumb {
+    background: #d4c4a8 !important;
+    border-color: #fef6eb !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-popup-content::-webkit-scrollbar-thumb:hover {
+    background: #c4b498 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-item {
+    background: #f9f0df !important;
+    border-bottom-color: #e8d5b7 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-item:hover {
+    background: #f0e7d0 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-verse-ref {
+    color: #8b7355 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-verse-ref:hover {
+    color: #6b5335 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-verse-text {
+    color: var(--secondary-text-color) !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-full-text {
+    color: var(--secondary-text-color) !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-full-text sup {
+    color: #8b7355 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-expanded-content {
+    border-top-color: #e8d5b7 !important;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-loading,
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-empty {
+    color: var(--secondary-text-color) !important;
+    opacity: 0.7;
+}
+
+.cross-reference-popup.light-mode-popup-variant2 .cross-reference-error {
+    color: #c85a5a !important;
+}
+
+/* View All Modal */
+.cross-reference-view-all-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10001;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+}
+
+.cross-reference-view-all-backdrop.show {
+    opacity: 1;
+}
+
+.cross-reference-view-all-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    background: #f5f5f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    z-index: 10002;
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    border: 1px solid #e0e0d8;
+}
+
+.cross-reference-view-all-modal.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.cross-reference-view-all-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e0e0d8;
+    background: #f5f5f0;
+    flex-shrink: 0;
+}
+
+.cross-reference-view-all-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+/* Segmented Control */
+.cross-reference-segmented-control {
+    display: flex;
+    gap: 0;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e0d8;
+    background: #f5f5f0;
+    flex-shrink: 0;
+}
+
+.cross-reference-segment-btn {
+    flex: 1;
+    padding: 8px 16px;
+    border: 1px solid #d0d0c8;
+    background: #ffffff;
+    color: #666666;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.cross-reference-segment-btn:first-child {
+    border-radius: 6px 0 0 6px;
+    border-right: none;
+}
+
+.cross-reference-segment-btn:last-child {
+    border-radius: 0 6px 6px 0;
+    border-left: none;
+}
+
+.cross-reference-segment-btn:not(:first-child):not(:last-child) {
+    border-left: none;
+    border-right: none;
+}
+
+.cross-reference-segment-btn:hover:not(.active) {
+    background: #f0f0eb;
+}
+
+.cross-reference-segment-btn.active {
+    background: #0066cc;
+    color: #ffffff;
+    border-color: #0066cc;
+}
+
+.cross-reference-view-all-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+}
+
+/* Scrollbar styling for View All content - Light Mode */
+.cross-reference-view-all-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cross-reference-view-all-content::-webkit-scrollbar-track {
+    background: #e8e8e0;
+    border-radius: 4px;
+}
+
+.cross-reference-view-all-content::-webkit-scrollbar-thumb {
+    background: #c0c0b8;
+    border-radius: 4px;
+}
+
+.cross-reference-view-all-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a0;
+}
+
+.cross-reference-view-all-item {
+    padding: 16px;
+    margin-bottom: 16px;
+    background: #ffffff;
+    border-radius: 6px;
+    border: 1px solid #e0e0d8;
+}
+
+.cross-reference-view-all-item:last-child {
+    margin-bottom: 0;
+}
+
+.cross-reference-view-all-item .cross-reference-verse-ref {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0066cc;
+    margin-bottom: 8px;
+}
+
+.cross-reference-view-all-item .cross-reference-full-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1a1a1a;
+}
+
+.verse-language-section {
+    margin-bottom: 12px;
+}
+
+.verse-language-section:last-child {
+    margin-bottom: 0;
+}
+
+.verse-tamil {
+    font-family: 'Noto Sans Tamil', 'Lohit Tamil', 'Tamil MN', sans-serif;
+}
+
+/* Dark Mode for View All Modal */
+.cross-reference-view-all-modal.dark-mode-popup {
+    background: #1e1e1e !important;
+    border-color: #333333 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-view-all-header {
+    background: #1e1e1e !important;
+    border-bottom-color: #333333 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-view-all-title {
+    color: #e0e0e0 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-segmented-control {
+    background: #1e1e1e !important;
+    border-bottom-color: #333333 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-segment-btn {
+    background: #2a2a2a !important;
+    color: #b0b0b0 !important;
+    border-color: #404040 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-segment-btn:hover:not(.active) {
+    background: #353535 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-segment-btn.active {
+    background: #4d9fff !important;
+    color: #ffffff !important;
+    border-color: #4d9fff !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-view-all-content::-webkit-scrollbar-track {
+    background: #2a2a2a !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-view-all-content::-webkit-scrollbar-thumb {
+    background: #4a4a4a !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-view-all-content::-webkit-scrollbar-thumb:hover {
+    background: #5a5a5a !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-view-all-item {
+    background: #2a2a2a !important;
+    border-color: #333333 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-view-all-item .cross-reference-verse-ref {
+    color: #4d9fff !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup .cross-reference-view-all-item .cross-reference-full-text {
+    color: #d0d0d0 !important;
+}
+
+/* Dark Mode Variant 2 for View All Modal */
+.cross-reference-view-all-modal.dark-mode-popup-variant2 {
+    background: #1a2332 !important;
+    border-color: #2a3a4a !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-view-all-header {
+    background: #1a2332 !important;
+    border-bottom-color: #2a3a4a !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-view-all-title {
+    color: #e0e8f0 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-segmented-control {
+    background: #1a2332 !important;
+    border-bottom-color: #2a3a4a !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-segment-btn {
+    background: #22324a !important;
+    color: #a0b0c8 !important;
+    border-color: #2a3a4a !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-segment-btn:hover:not(.active) {
+    background: #2a3a52 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-segment-btn.active {
+    background: #9b7dff !important;
+    color: #ffffff !important;
+    border-color: #9b7dff !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-view-all-content::-webkit-scrollbar-track {
+    background: #22324a !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-view-all-content::-webkit-scrollbar-thumb {
+    background: #3a4a62 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-view-all-content::-webkit-scrollbar-thumb:hover {
+    background: #4a5a72 !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-view-all-item {
+    background: #22324a !important;
+    border-color: #2a3a4a !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-view-all-item .cross-reference-verse-ref {
+    color: #9b7dff !important;
+}
+
+.cross-reference-view-all-modal.dark-mode-popup-variant2 .cross-reference-view-all-item .cross-reference-full-text {
+    color: #d0d8e0 !important;
+}
+
+/* Light Mode Variant 2 for View All Modal */
+.cross-reference-view-all-modal.light-mode-popup-variant2 {
+    background: #f9f0df !important;
+    border-color: #e5d6bf !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-view-all-header {
+    background: #f9f0df !important;
+    border-bottom-color: #e5d6bf !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-view-all-title {
+    color: #2a2419 !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-segmented-control {
+    background: #f9f0df !important;
+    border-bottom-color: #e5d6bf !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-segment-btn {
+    background: #fffbf0 !important;
+    color: #736853 !important;
+    border-color: #d5c6af !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-segment-btn:hover:not(.active) {
+    background: #f5ecdb !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-segment-btn.active {
+    background: #8b6914 !important;
+    color: #ffffff !important;
+    border-color: #8b6914 !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-view-all-content::-webkit-scrollbar-track {
+    background: #efe6d5 !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-view-all-content::-webkit-scrollbar-thumb {
+    background: #c5b6a5 !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-view-all-content::-webkit-scrollbar-thumb:hover {
+    background: #b5a695 !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-view-all-item {
+    background: #fffbf0 !important;
+    border-color: #e5d6bf !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-view-all-item .cross-reference-verse-ref {
+    color: #8b6914 !important;
+}
+
+.cross-reference-view-all-modal.light-mode-popup-variant2 .cross-reference-view-all-item .cross-reference-full-text {
+    color: #2a2419 !important;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .cross-reference-popup {
@@ -246,4 +943,11 @@
     .cross-reference-popup-content {
         max-height: calc(70vh - 48px);
     }
+    
+    .cross-reference-view-all-modal {
+        width: 95%;
+        max-height: 90vh;
+    }
 }
+
+

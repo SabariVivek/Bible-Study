@@ -864,6 +864,21 @@
     margin-top: 10px;
 }
 
+/* ESV Bible verse styling */
+.bible-verse-esv {
+    color: #9CA3AF !important; /* Slightly lighter gray for ESV */
+    font-size: 16px;
+    line-height: 2;
+    display: block;
+    margin-top: 10px;
+    opacity: 0.95;
+}
+
+/* When both Tamil and English are shown, reduce ESV margin */
+.bible-verse-item:has(.bible-verse-tamil) .bible-verse-esv {
+    margin-top: 10px;
+}
+
 /* When both Tamil and English are shown, differentiate English text */
 .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
     color: #D1D5DB !important; /* Softer blue-gray for light mode - easier on eyes */
@@ -890,6 +905,12 @@
 
 .dark-mode-bible .bible-verse-english {
     color: var(--secondary-text-color) !important;
+}
+
+/* Dark mode ESV verse styling */
+.dark-mode-bible .bible-verse-esv {
+    color: #9CA3AF !important; /* Slightly lighter gray for ESV in dark mode */
+    opacity: 0.9;
 }
 
 /* Dark mode: When both Tamil and English are shown, differentiate English text */

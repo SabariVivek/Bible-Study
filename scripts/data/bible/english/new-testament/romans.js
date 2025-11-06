@@ -2,6 +2,8 @@ var romans_data = {
   "chapter_1": {
     "verse_1": "This letter is from me, Paul. I am a servant of Christ Jesus. God chose me to be his apostle. He sent me to tell his good news to people.",
     "verse_2": "God promised this good news long ago, before it became true. His prophets wrote about it in the Bible.",
+    "verse_3": "The good news is about God's Son, Jesus Christ our Lord. As a human, he was born from the family of King David.",
+    "verse_4": "God's Holy Spirit showed with power that Jesus is God's Son. That happened when God caused him to become alive again after he died.",
     "verse_5": "Because of Jesus Christ, God has been very kind to us. He has chosen me to serve him as an apostle. He sent me to tell his message to people from all countries. As a result they would know that Jesus Christ is great. They would trust him and obey him.",
     "verse_6": "You Christians in Rome are also among those people! God has chosen you to belong to Jesus Christ.",
     "verse_7": "So I am writing to all you Christians who are in Rome. God loves you and he has chosen you to be his own people. I pray that God, our Father, and the Lord Jesus Christ will continue to help you. I pray that they will give you peace in your minds.",

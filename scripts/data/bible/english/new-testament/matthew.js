@@ -1,6 +1,6 @@
 var matthew_data = {
   "chapter_1": {
-    "verse_1": "🔗 This is a list of the ancestors of Jesus Christ. 🔗 Jesus was from the family of King David. 🔗 David was from the family of Abraham.",
+    "verse_1": "This is a list of the ancestors of Jesus Christ. Jesus was from the family of King David. David was from the family of Abraham.",
     "verse_2": "Abraham was the father of Isaac. Isaac was the father of Jacob. Jacob was the father of Judah and his brothers.",
     "verse_3": "Judah was the father of Perez and Zerah. Tamar was their mother. Perez was the father of Hezron. Hezron was the father of Ram.",
     "verse_4": "Ram was the father of Amminadab. Amminadab was the father of Nahshon. Nahshon was the father of Salmon.",

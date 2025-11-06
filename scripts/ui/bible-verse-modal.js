@@ -482,6 +482,7 @@ async function loadBibleVerses(book, chapter, verse, language) {
         
         let tamilData = null;
         let englishData = null;
+        let esvData = null;
         
         // Load Tamil data if needed
         if (language === 'tamil' || language === 'both') {
@@ -517,12 +518,29 @@ async function loadBibleVerses(book, chapter, verse, language) {
                 alert('Failed to load English Bible data');
                 return;
             }
+            
+            // Also load ESV data
+            const esvVarName = `esv_${fileName}_data`;
+            const esvScriptPath = `scripts/data/bible/english/${testament}/esv-${fileName}.js`;
+            // Remove existing script to force reload
+            removeScript(esvScriptPath);
+            try {
+                await loadScript(esvScriptPath);
+                // Store ESV data if available
+                if (window[esvVarName]) {
+                    esvData = JSON.parse(JSON.stringify(window[esvVarName]));
+                }
+            } catch (error) {
+                console.log('ESV data not available for this book:', book);
+                esvData = null;
+            }
         }
         
         // Get chapter data
         const chapterKey = `chapter_${chapter}`;
         const tamilChapterData = tamilData ? tamilData[chapterKey] : null;
         const englishChapterData = englishData ? englishData[chapterKey] : null;
+        const esvChapterData = esvData ? esvData[chapterKey] : null;
         
         if (!tamilChapterData && !englishChapterData) {
             alert(`Chapter ${chapter} not found`);
@@ -530,7 +548,7 @@ async function loadBibleVerses(book, chapter, verse, language) {
         }
         
         // Display verses
-        displayBibleVerses(book, chapter, tamilChapterData, englishChapterData, verse, language);
+        displayBibleVerses(book, chapter, tamilChapterData, englishChapterData, esvChapterData, verse, language);
         
         // Update URL route
         if (typeof updateRoute === 'function') {
@@ -597,7 +615,7 @@ function removeScript(src) {
 /**
  * Display Bible verses in the list
  */
-function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData, verseRange, language) {
+function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData, esvChapterData, verseRange, language) {
     const title = document.getElementById('bibleVerseDisplayTitle');
     const content = document.getElementById('bibleChapterContent');
     
@@ -623,7 +641,7 @@ function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData,
     content.innerHTML = '';
     
     // Use whichever data is available to determine verse count
-    const chapterData = tamilChapterData || englishChapterData;
+    const chapterData = tamilChapterData || englishChapterData || esvChapterData;
     
     // Determine which verses to display
     let startVerse = 1;
@@ -660,8 +678,9 @@ function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData,
         const verseKey = `verse_${i}`;
         const tamilVerseText = tamilChapterData ? tamilChapterData[verseKey] : null;
         const englishVerseText = englishChapterData ? englishChapterData[verseKey] : null;
+        const esvVerseText = esvChapterData ? esvChapterData[verseKey] : null;
         
-        if (!tamilVerseText && !englishVerseText) continue;
+        if (!tamilVerseText && !englishVerseText && !esvVerseText) continue;
         
         const verseItem = document.createElement('p');
         verseItem.className = 'bible-verse-item';
@@ -678,12 +697,30 @@ function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData,
             const processedTamilText = processText(tamilVerseText || '');
             verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${processedTamilText}</span>`;
         } else if (language === 'english') {
+            // Show Easy English first, then ESV
             const processedEnglishText = processText(englishVerseText || '');
-            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${processedEnglishText}</span>`;
+            const processedEsvText = esvVerseText ? processText(esvVerseText) : '';
+            
+            let htmlContent = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-text">${processedEnglishText}</span>`;
+            
+            if (esvVerseText) {
+                htmlContent += `<br><span class="bible-verse-esv">${processedEsvText}</span>`;
+            }
+            
+            verseItem.innerHTML = htmlContent;
         } else { // both
+            // Show Tamil, Easy English, then ESV
             const processedTamilText = processText(tamilVerseText || '');
             const processedEnglishText = processText(englishVerseText || '');
-            verseItem.innerHTML = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-tamil">${processedTamilText}</span><br><span class="bible-verse-english">${processedEnglishText}</span>`;
+            const processedEsvText = esvVerseText ? processText(esvVerseText) : '';
+            
+            let htmlContent = `<span class="bible-verse-number">${i}.</span> <span class="bible-verse-tamil">${processedTamilText}</span><br><span class="bible-verse-english">${processedEnglishText}</span>`;
+            
+            if (esvVerseText) {
+                htmlContent += `<span class="bible-verse-esv">${processedEsvText}</span>`;
+            }
+            
+            verseItem.innerHTML = htmlContent;
         }
         
         section.appendChild(verseItem);
