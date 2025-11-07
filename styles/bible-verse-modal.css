@@ -858,7 +858,7 @@
 
 .bible-verse-english {
     color: var(--secondary-text-color) !important;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 2;
     display: block;
     margin-top: 10px;
@@ -866,8 +866,8 @@
 
 /* ESV Bible verse styling */
 .bible-verse-esv {
-    color: #9CA3AF !important; /* Slightly lighter gray for ESV */
-    font-size: 16px;
+    color: #A8B5C4 !important; /* Soft blue-gray for ESV - easier on eyes */
+    font-size: 18px;
     line-height: 2;
     display: block;
     margin-top: 10px;
@@ -907,10 +907,10 @@
     color: var(--secondary-text-color) !important;
 }
 
-/* Dark mode ESV verse styling */
+/* Dark mode ESV verse styling - warmer tone for night reading */
 .dark-mode-bible .bible-verse-esv {
-    color: #9CA3AF !important; /* Slightly lighter gray for ESV in dark mode */
-    opacity: 0.9;
+    color: #B8C5D6 !important; /* Warm blue-gray for comfortable night reading */
+    opacity: 0.92;
 }
 
 /* Dark mode: When both Tamil and English are shown, differentiate English text */

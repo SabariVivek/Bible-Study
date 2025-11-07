@@ -20,6 +20,53 @@ const CROSS_REFERENCE_MAP = {
 let currentPopup = null;
 let currentViewAllModal = null;
 let bibleDataCache = {}; // Cache for both English and Tamil data
+let loadingIndicator = null;
+
+/**
+ * Show loading indicator near the clicked icon
+ */
+function showLoadingIndicator(targetElement) {
+    // Remove any existing indicator
+    hideLoadingIndicator();
+    
+    // Get position BEFORE hiding the icon
+    const rect = targetElement.getBoundingClientRect();
+    
+    // Create loading spinner FIRST
+    loadingIndicator = document.createElement('div');
+    loadingIndicator.className = 'cross-ref-loading';
+    loadingIndicator.innerHTML = '<div class="spinner"></div>';
+    
+    // Position it exactly where the icon is
+    loadingIndicator.style.position = 'fixed';
+    loadingIndicator.style.left = `${rect.left + rect.width / 2}px`;
+    loadingIndicator.style.top = `${rect.top + rect.height / 2}px`;
+    loadingIndicator.style.transform = 'translate(-50%, -50%)';
+    loadingIndicator.style.zIndex = '9999';
+    
+    // Add to DOM and hide icon in the same frame
+    document.body.appendChild(loadingIndicator);
+    targetElement.style.visibility = 'hidden';
+    targetElement.dataset.wasHidden = 'true';
+}
+
+/**
+ * Hide loading indicator
+ */
+function hideLoadingIndicator() {
+    if (loadingIndicator) {
+        loadingIndicator.remove();
+        loadingIndicator = null;
+    }
+    
+    // Restore any hidden icons
+    document.querySelectorAll('[data-was-hidden="true"]').forEach(el => {
+        el.style.visibility = 'visible';
+        el.style.opacity = '1';
+        el.style.transition = '';
+        delete el.dataset.wasHidden;
+    });
+}
 
 /**
  * Initialize cross-reference link handlers
@@ -48,61 +95,132 @@ function initializeCrossReferenceLinkHandlers() {
 function handleCrossReferenceClick(e) {
     const target = e.target;
     
-    // Check if clicked element is a link icon (🔗) or has the link-icon class
-    if ((target.classList && target.classList.contains('link-icon')) || 
-        (target.textContent && target.textContent.trim() === '🔗')) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // Get the reference key from context
-        const verseItem = target.closest('.bible-verse-item');
-        if (!verseItem) {
-            console.warn('Could not find verse item');
-            return;
+    console.log('Click detected on:', target.tagName, target.className, target.textContent.substring(0, 50));
+    
+    // Check if clicked element has cross-ref-link class or contains 🔗
+    if (!target.classList.contains('cross-ref-link') && !target.textContent.includes('🔗')) {
+        return;
+    }
+    
+    console.log('Cross-ref link detected!');
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('=== Cross-reference clicked ===');
+    
+    // Get the verse item
+    const verseItem = target.closest('.bible-verse-item');
+    if (!verseItem) {
+        console.warn('Could not find verse item');
+        return;
+    }
+    
+    // Get verse number
+    const verseNumber = verseItem.querySelector('.bible-verse-number');
+    if (!verseNumber) {
+        console.warn('Could not find verse number');
+        return;
+    }
+    
+    const verseNum = verseNumber.textContent.replace('.', '').trim();
+    console.log('Verse number:', verseNum);
+    
+    // Get the verse text element
+    const verseTextEl = target.closest('.bible-verse-text, .bible-verse-english, .bible-verse-esv');
+    if (!verseTextEl) {
+        console.warn('Could not find verse text');
+        return;
+    }
+    
+    // Count which link was clicked by counting 🔗 before this one
+    const allLinks = verseTextEl.querySelectorAll('.cross-ref-link');
+    let linkIndex = 0;
+    for (let i = 0; i < allLinks.length; i++) {
+        if (allLinks[i] === target) {
+            linkIndex = i;
+            break;
         }
-        
-        // Get verse number
-        const verseNumber = verseItem.querySelector('.bible-verse-number');
-        if (!verseNumber) {
-            console.warn('Could not find verse number');
-            return;
+    }
+    
+    console.log('Link index:', linkIndex);
+    console.log('Current book:', window.currentEsvBook);
+    console.log('Current chapter:', window.currentEsvChapter);
+    
+    // Get cross-reference from ESV data
+    if (!window.currentEsvRawData) {
+        console.warn('No ESV data available');
+        return;
+    }
+    
+    const rawData = window.currentEsvRawData;
+    const chapterNum = window.currentEsvChapter;
+    
+    // Find chapter key in raw data
+    let chapterKey = null;
+    for (let key in rawData) {
+        if (key.endsWith(`_${chapterNum}`)) {
+            chapterKey = key;
+            break;
         }
-        
-        const verseNum = verseNumber.textContent.replace('.', '').trim();
-        
-        // Build reference key - use underscores to match CROSS_REFERENCE_MAP format
-        const book = currentBibleBook.toLowerCase().replace(/\s+/g, '_');
-        const chapter = currentBibleChapter;
-        
-        console.log(`Clicked reference in ${book} ${chapter}:${verseNum}`);
-        
-        // Find the position of the clicked icon in the text
-        const verseText = target.closest('.bible-verse-text, .bible-verse-english, .bible-verse-esv');
-        if (!verseText) {
-            console.warn('Could not find verse text container');
-            return;
+    }
+    
+    if (!chapterKey) {
+        console.warn('Chapter not found in raw data');
+        return;
+    }
+    
+    console.log('Chapter key:', chapterKey);
+    
+    // Get verse data
+    const verseKey = `Verse_${verseNum}`;
+    const verseData = rawData[chapterKey][verseKey];
+    
+    if (!verseData) {
+        console.warn('Verse data not found');
+        return;
+    }
+    
+    console.log('Verse data:', verseData);
+    
+    // Get the reference (Reference_1, Reference_2, etc.)
+    const refKey = `Reference_${linkIndex + 1}`;
+    const reference = verseData[refKey];
+    
+    console.log('Looking for:', refKey);
+    console.log('Reference found:', reference);
+    
+    if (!reference) {
+        console.warn('Reference not found');
+        return;
+    }
+    
+    // Parse the reference and show popup
+    const referenceStrings = reference.split(';').map(ref => ref.trim());
+    const parsedReferences = [];
+    
+    for (const refString of referenceStrings) {
+        const parsed = parseReferenceString(refString);
+        if (parsed) {
+            parsedReferences.push(parsed);
         }
+    }
+    
+    console.log('Parsed references:', parsedReferences);
+    
+    if (parsedReferences.length > 0) {
+        // Hide icon IMMEDIATELY before any async operations
+        target.style.opacity = '0';
+        target.style.transition = 'none';
         
-        // Get which link was clicked (by counting preceding links)
-        const allLinks = verseText.querySelectorAll('.link-icon');
-        let linkIndex = 0;
-        for (let i = 0; i < allLinks.length; i++) {
-            if (allLinks[i] === target || allLinks[i].contains(target)) {
-                linkIndex = i;
-                break;
-            }
-        }
+        // Show loading indicator
+        showLoadingIndicator(target);
         
-        console.log(`Link index: ${linkIndex}`);
-        
-        // Build reference key: book_chapter_verse_index
-        let referenceKey = `${book}_${chapter}_${verseNum}_${linkIndex}`;
-        
-        console.log(`Looking for reference key: ${referenceKey}`);
-        console.log(`Available keys:`, Object.keys(CROSS_REFERENCE_MAP));
-        
-        // Show the popup
-        showCrossReferencePopup(referenceKey, target);
+        // Wait 500ms then show the popup
+        setTimeout(() => {
+            hideLoadingIndicator();
+            showCrossReferencePopup({ references: parsedReferences }, target);
+        }, 500);
     }
 }
 
@@ -119,19 +237,157 @@ function getVerseNumberFromKey(referenceKey) {
 }
 
 /**
+ * Get cross-reference from ESV data
+ */
+function getEsvCrossReference(referenceKey) {
+    console.log('getEsvCrossReference called with:', referenceKey);
+    console.log('currentEsvRawData exists:', !!window.currentEsvRawData);
+    console.log('currentEsvBook:', window.currentEsvBook);
+    
+    if (!window.currentEsvRawData) return null;
+    
+    // Parse reference key: genesis_1_1_0 -> book: genesis, chapter: 1, verse: 1, index: 0
+    const parts = referenceKey.split('_');
+    if (parts.length < 4) return null;
+    
+    const verseIndex = parts.pop(); // Get the last part (link index)
+    const verseNum = parts.pop(); // Get verse number
+    const chapterNum = parts.pop(); // Get chapter number
+    const bookName = parts.join('_'); // Remaining parts form the book name
+    
+    console.log('Parsed:', { bookName, chapterNum, verseNum, verseIndex });
+    
+    // Find the chapter in ESV data
+    // Chapter keys could be like "Genesis_1" or "1_John_1"
+    const rawData = window.currentEsvRawData;
+    let chapterKey = null;
+    
+    // Try to find matching chapter key
+    for (let key in rawData) {
+        if (key.endsWith(`_${chapterNum}`)) {
+            chapterKey = key;
+            break;
+        }
+    }
+    
+    console.log('Found chapter key:', chapterKey);
+    
+    if (!chapterKey) return null;
+    
+    // Get the verse data
+    const verseKey = `Verse_${verseNum}`;
+    const verseData = rawData[chapterKey][verseKey];
+    
+    console.log('Verse data:', verseData);
+    
+    if (!verseData) return null;
+    
+    // Get the specific reference by index
+    const refKey = `Reference_${parseInt(verseIndex) + 1}`;
+    const reference = verseData[refKey];
+    
+    console.log(`Looking for ${refKey}:`, reference);
+    
+    if (!reference) return null;
+    
+    // Parse the reference string into the format expected by the popup
+    // Reference format: "Genesis 3:15; Romans 16:20; Galatians 4:4; Revelation 12:17"
+    const referenceStrings = reference.split(';').map(ref => ref.trim());
+    
+    // Parse each reference string into an object
+    const parsedReferences = [];
+    for (const refString of referenceStrings) {
+        const parsed = parseReferenceString(refString);
+        if (parsed) {
+            parsedReferences.push(parsed);
+        }
+    }
+    
+    console.log('Parsed references:', parsedReferences);
+    
+    return {
+        references: parsedReferences
+    };
+}
+
+/**
+ * Parse a reference string like "Genesis 3:15" or "Romans 16:20-25"
+ */
+function parseReferenceString(refString) {
+    // Match patterns like "Genesis 3:15" or "1 John 2:3-5" or "2 Corinthians 5:17"
+    // Handle both regular hyphen (-) and en-dash (–)
+    const match = refString.match(/^(.+?)\s+(\d+):(\d+)(?:[-–](\d+))?$/);
+    
+    if (!match) {
+        console.warn('Could not parse reference:', refString);
+        return null;
+    }
+    
+    let book = match[1].trim();
+    const chapter = match[2];
+    const startVerse = parseInt(match[3]);
+    const endVerse = match[4] ? parseInt(match[4]) : startVerse;
+    
+    // Normalize book names to match BOOK_FILE_MAP
+    book = normalizeBookName(book);
+    
+    // Build verses array
+    const verses = [];
+    for (let i = startVerse; i <= endVerse; i++) {
+        verses.push(i);
+    }
+    
+    return {
+        book: book,
+        chapter: chapter,
+        verses: verses,
+        verse: refString // Keep original string for display
+    };
+}
+
+/**
+ * Normalize book names to match BOOK_FILE_MAP keys
+ */
+function normalizeBookName(book) {
+    // Handle common variations
+    const bookMap = {
+        'Psalm': 'Psalms',
+        'Song of Solomon': 'Song of Songs',
+        '1 Corinthians': '1 Corinthians',
+        '2 Corinthians': '2 Corinthians',
+        '1 Thessalonians': '1 Thessalonians',
+        '2 Thessalonians': '2 Thessalonians',
+        '1 Timothy': '1 Timothy',
+        '2 Timothy': '2 Timothy',
+        '1 Peter': '1 Peter',
+        '2 Peter': '2 Peter',
+        '1 John': '1 John',
+        '2 John': '2 John',
+        '3 John': '3 John',
+        '1 Samuel': '1 Samuel',
+        '2 Samuel': '2 Samuel',
+        '1 Kings': '1 Kings',
+        '2 Kings': '2 Kings',
+        '1 Chronicles': '1 Chronicles',
+        '2 Chronicles': '2 Chronicles'
+    };
+    
+    return bookMap[book] || book;
+}
+
+/**
  * Show cross-reference popup
  */
-function showCrossReferencePopup(referenceKey, triggerElement) {
+function showCrossReferencePopup(referenceData, triggerElement) {
     // Close any existing popup
     closeCrossReferencePopup();
     
-    // Get reference data
-    const referenceData = CROSS_REFERENCE_MAP[referenceKey];
-    
-    if (!referenceData) {
-        console.warn('No cross-reference data found for:', referenceKey);
+    if (!referenceData || !referenceData.references || referenceData.references.length === 0) {
+        console.warn('No reference data provided');
         return;
     }
+    
+    console.log('Showing popup with data:', referenceData);
     
     // Create backdrop
     const backdrop = document.createElement('div');
@@ -168,6 +424,13 @@ function showCrossReferencePopup(referenceKey, triggerElement) {
     const header = document.createElement('div');
     header.className = 'cross-reference-popup-header';
     
+    const title = document.createElement('h3');
+    title.className = 'cross-reference-popup-title';
+    
+    // Use the first reference for the title
+    const firstRef = referenceData.references[0];
+    title.textContent = firstRef.verse || 'Cross References';
+    
     // Add "View All" link
     const viewAll = document.createElement('a');
     viewAll.className = 'cross-reference-popup-view-all';
@@ -175,15 +438,8 @@ function showCrossReferencePopup(referenceKey, triggerElement) {
     viewAll.href = '#';
     viewAll.onclick = (e) => {
         e.preventDefault();
-        showViewAllModal(referenceData, verseRef);
+        showViewAllModal(referenceData, title.textContent);
     };
-    
-    const title = document.createElement('h3');
-    title.className = 'cross-reference-popup-title';
-    
-    // Get the verse reference for title
-    const verseRef = `${currentBibleBook} ${currentBibleChapter}:${getVerseNumberFromKey(referenceKey)}`;
-    title.textContent = verseRef;
     
     const closeBtn = document.createElement('button');
     closeBtn.className = 'cross-reference-popup-close';
@@ -987,13 +1243,6 @@ function closeCrossReferencePopup() {
 /**
  * Process verse text to wrap link icons
  */
-function processVerseTextWithLinks(verseText) {
-    if (!verseText) return '';
-    
-    // Replace link icons with wrapped spans for better click handling
-    return verseText.replace(/🔗/g, '<span class="link-icon">🔗</span>');
-}
-
 // Close popup on Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {

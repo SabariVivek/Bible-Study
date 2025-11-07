@@ -520,18 +520,69 @@ async function loadBibleVerses(book, chapter, verse, language) {
             }
             
             // Also load ESV data
-            const esvVarName = `esv_${fileName}_data`;
-            const esvScriptPath = `scripts/data/bible/english/${testament}/esv-${fileName}.js`;
+            // Convert filename to valid JS variable name (e.g., "1-john" -> "john1" or keep as "matthew")
+            let esvVarName = fileName;
+            // Handle files that start with numbers like "1-john", "2-peter", etc.
+            if (/^\d/.test(fileName)) {
+                // Extract book name and number: "1-john" -> "john1", "2-thessalonians" -> "thessalonians2"
+                const match = fileName.match(/^(\d+)-(.+)$/);
+                if (match) {
+                    esvVarName = `${match[2]}${match[1]}`; // e.g., "john1", "thessalonians2"
+                }
+            }
+            
+            const esvScriptPath = `scripts/data/bible/esv-english/${testament}/${fileName}.js`;
             // Remove existing script to force reload
             removeScript(esvScriptPath);
             try {
                 await loadScript(esvScriptPath);
+                console.log('ESV script loaded:', esvScriptPath);
+                console.log('Looking for window variable:', esvVarName);
+                console.log('Available:', window[esvVarName] ? 'Yes' : 'No');
+                
                 // Store ESV data if available
                 if (window[esvVarName]) {
-                    esvData = JSON.parse(JSON.stringify(window[esvVarName]));
+                    // Convert ESV format to standard format
+                    const rawEsvData = window[esvVarName];
+                    console.log('Raw ESV data keys:', Object.keys(rawEsvData).slice(0, 5));
+                    esvData = {};
+                    
+                    // Store raw ESV data globally for cross-reference access
+                    window.currentEsvRawData = rawEsvData;
+                    window.currentEsvBook = book;
+                    window.currentEsvChapter = chapter;
+                    
+                    // Convert from "Matthew_1" or "1_John_1" format to "chapter_1" format
+                    for (let key in rawEsvData) {
+                        const chapterMatch = key.match(/_(\d+)$/);
+                        if (chapterMatch) {
+                            const chapterNum = chapterMatch[1];
+                            const chapterKey = `chapter_${chapterNum}`;
+                            esvData[chapterKey] = {};
+                            
+                            // Convert verses from "Verse_1": {verse: "...", Reference_1: "..."} to "verse_1": "..."
+                            for (let verseKey in rawEsvData[key]) {
+                                const verseMatch = verseKey.match(/Verse_(\d+)/);
+                                if (verseMatch) {
+                                    const verseNum = verseMatch[1];
+                                    const verseData = rawEsvData[key][verseKey];
+                                    
+                                    // Replace 📎 with clickable 🔗
+                                    let verseText = verseData.verse || '';
+                                    verseText = verseText.replace(/📎/g, ' <span class="cross-ref-link">🔗</span> ');
+                                    
+                                    esvData[chapterKey][`verse_${verseNum}`] = verseText;
+                                }
+                            }
+                        }
+                    }
+                    console.log('Converted ESV data chapters:', Object.keys(esvData).slice(0, 5));
+                    console.log('Chapter 1 verses count:', esvData.chapter_1 ? Object.keys(esvData.chapter_1).length : 0);
+                } else {
+                    console.log('ESV variable not found in window');
                 }
             } catch (error) {
-                console.log('ESV data not available for this book:', book);
+                console.log('ESV data error:', error.message);
                 esvData = null;
             }
         }
@@ -1465,6 +1516,7 @@ async function handleBibleBookSelection(bookName) {
 
 // Export the URL loading function
 window.loadBibleVersesFromURL = loadBibleVersesFromURL;
+
 
 
 

@@ -1,5 +1,57 @@
 /* ===== CROSS REFERENCE POPUP STYLES ===== */
 
+/* Loading Indicator */
+.cross-ref-loading {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cross-ref-loading .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(128, 84, 213, 0.2);
+    border-top-color: #8054D5;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Dark mode spinner */
+[data-theme="dark"] .cross-ref-loading .spinner {
+    border-color: rgba(124, 58, 237, 0.2);
+    border-top-color: #7C3AED;
+}
+
+/* Cross-Reference Link Icon Styling */
+.cross-ref-link {
+    color: #8054D5 !important;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin: 0 2px;
+    transition: all 0.2s ease;
+    display: inline-block;
+    text-decoration: none;
+    user-select: none;
+}
+
+.cross-ref-link:hover {
+    color: #553C9A !important;
+    transform: scale(1.15);
+}
+
+/* Dark mode support */
+[data-theme="dark"] .cross-ref-link {
+    color: #7C3AED !important;
+}
+
+[data-theme="dark"] .cross-ref-link:hover {
+    color: #9F7AEA !important;
+}
+
 /* Popup Container */
 .cross-reference-popup {
     position: fixed;
