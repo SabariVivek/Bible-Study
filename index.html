@@ -2452,16 +2452,25 @@
                     <div class="testament-nav-wrapper" id="bibleTestamentNavWrapper">
                         <h1 class="bible-chapter-title" id="bibleVerseDisplayTitle">Genesis - 36</h1>
                     </div>
-                    <div class="bible-language-toggle">
-                        <button class="language-btn" data-lang="tamil" onclick="switchBibleLanguage('tamil')" title="Tamil">
-                            Tamil
+                    <!-- Reading Settings Menu -->
+                    <div class="bible-settings-menu-wrapper">
+                        <button class="bible-settings-trigger" id="bibleSettingsTrigger">
+                            <span class="dots">⋯</span>
                         </button>
-                        <button class="language-btn" data-lang="english" onclick="switchBibleLanguage('english')" title="English">
-                            English
-                        </button>
-                        <button class="language-btn" data-lang="both" onclick="switchBibleLanguage('both')" title="Both Languages">
-                            Both
-                        </button>
+                        <div class="bible-settings-dropdown" id="bibleSettingsDropdown">
+                            <div class="bible-settings-item">
+                                <span class="settings-icon">Aa</span>
+                                <span class="settings-label">Text Settings</span>
+                            </div>
+                            <div class="bible-settings-item">
+                                <span class="settings-icon">⊞</span>
+                                <span class="settings-label">Layout Options</span>
+                            </div>
+                            <div class="bible-settings-item">
+                                <span class="settings-icon">Ω</span>
+                                <span class="settings-label">Language Tools</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="bible-chapter-content" id="bibleChapterContent">
@@ -3132,6 +3141,7 @@
     <script src="scripts/main.js"></script>
     <script src="scripts/characters.js"></script>
     <script src="scripts/ui/testament-nav.js"></script>
+    <script src="scripts/ui/bible-settings-menu.js"></script>
     <script src="scripts/ui/modal.js"></script>
     <script src="scripts/ui/events.js"></script>
     <script src="scripts/ui/life-of-christ.js"></script>

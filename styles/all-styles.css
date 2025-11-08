@@ -48,6 +48,10 @@
     --color-mint: #48CFAD;
     --color-teal: #A0CECB;
     --color-aqua: #4FC1E9;
+
+    /* Red Letter - For Jesus's words */
+    --red-letter-color: #C62828;
+    --red-letter-color-light: #E53935;
     --color-blue-jeans: #5D9CEC;
 
     /* Row 3 - Purples to Grays */
@@ -5994,6 +5998,20 @@ html #king-page-content.dark-mode-kings .order-number {
     background: #fde68a;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   RED LETTER FORMATTING - Jesus's Words
+   ============================================ */
+
+.red-letter {
+    color: var(--red-letter-color);
+    font-weight: 500;
+}
+
+/* Dark mode variant for red letter text */
+.dark-mode-books .red-letter {
+    color: var(--red-letter-color-light);
 }
 
 .verse-badge-container {

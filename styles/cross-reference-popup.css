@@ -252,7 +252,7 @@
 .cross-reference-full-text {
     font-size: 13px;
     line-height: 1.7;
-    color: #5a5a52;
+    color: #A8B5C4;
     font-family: Georgia, 'Times New Roman', serif;
     letter-spacing: 0;
 }
@@ -427,7 +427,7 @@
 }
 
 .cross-reference-popup.dark-mode-popup .cross-reference-full-text {
-    color: #b0b0b0;
+    color: #B8C5D6;
 }
 
 .cross-reference-popup.dark-mode-popup .cross-reference-full-text sup {

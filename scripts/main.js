@@ -4334,6 +4334,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const darkThemeLabel = document.querySelector('label[for="dark-theme"]');
         const lightThemeLabel = document.querySelector('label[for="light-theme"]');
         
+        // Restore saved theme on page load
+        try {
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme === 'dark') {
+                darkTheme.checked = true;
+                lightTheme.checked = false;
+            } else if (savedTheme === 'light') {
+                darkTheme.checked = false;
+                lightTheme.checked = true;
+            }
+        } catch (e) {
+            // ignore storage errors
+        }
+        
         // Function to apply dark theme (supports two variants via darkVariant)
         function applyDarkTheme() {
             // Remove light mode hover styles if they exist
@@ -4869,12 +4883,20 @@ document.addEventListener('DOMContentLoaded', function() {
             applyDarkTheme();
         }
         
+        // Apply light theme on page load if it's checked
+        if (lightTheme.checked) {
+            applyLightTheme();
+        }
+        
         // Dark theme change handler with animation
         darkTheme.addEventListener('change', function() {
             if (this.checked) {
                 // Reset to variant 1 when dark mode is first enabled
                 darkVariant = 1;
-                try { localStorage.setItem('darkVariant', darkVariant); } catch (err) {}
+                try { 
+                    localStorage.setItem('darkVariant', darkVariant);
+                    localStorage.setItem('selectedTheme', 'dark');
+                } catch (err) {}
                 
                 if (window.ThemeAnimation) {
                     window.ThemeAnimation.applyThemeWithAnimation(darkThemeLabel, applyDarkTheme);
@@ -4907,7 +4929,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (this.checked) {
                 // Reset to variant 1 when light mode is first enabled
                 lightVariant = 1;
-                try { localStorage.setItem('lightVariant', lightVariant); } catch (err) {}
+                try { 
+                    localStorage.setItem('lightVariant', lightVariant);
+                    localStorage.setItem('selectedTheme', 'light');
+                } catch (err) {}
                 
                 if (window.ThemeAnimation) {
                     window.ThemeAnimation.applyThemeWithAnimation(lightThemeLabel, applyLightTheme);

@@ -32,13 +32,15 @@
     border-radius: 8px;
 }
 
-.testament-nav-wrapper:hover .testament-mega-menu {
+.testament-nav-trigger:hover + .testament-mega-menu,
+.testament-mega-menu:hover {
     opacity: 1;
     visibility: visible;
 }
 
 /* Disable hover when menu is closing after a selection */
-.testament-nav-wrapper.menu-closing:hover .testament-mega-menu {
+.testament-nav-wrapper.menu-closing .testament-nav-trigger:hover + .testament-mega-menu,
+.testament-nav-wrapper.menu-closing .testament-mega-menu:hover {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;

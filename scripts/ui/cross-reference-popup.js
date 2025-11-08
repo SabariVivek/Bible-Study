@@ -97,8 +97,8 @@ function handleCrossReferenceClick(e) {
     
     console.log('Click detected on:', target.tagName, target.className, target.textContent.substring(0, 50));
     
-    // Check if clicked element has cross-ref-link class or contains 🔗
-    if (!target.classList.contains('cross-ref-link') && !target.textContent.includes('🔗')) {
+    // ONLY allow clicks on elements with cross-ref-link class
+    if (!target.classList.contains('cross-ref-link')) {
         return;
     }
     

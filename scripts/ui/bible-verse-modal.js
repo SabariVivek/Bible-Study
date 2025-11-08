@@ -788,6 +788,11 @@ function displayBibleVerses(book, chapter, tamilChapterData, englishChapterData,
     // Initialize navigation
     initializeBibleNavigation();
     
+    // Apply saved text settings
+    if (typeof applyBibleTextSettings === 'function') {
+        setTimeout(() => applyBibleTextSettings(), 100);
+    }
+    
     // Initialize cross-reference link handlers
     if (typeof initializeCrossReferenceLinkHandlers === 'function') {
         initializeCrossReferenceLinkHandlers();
