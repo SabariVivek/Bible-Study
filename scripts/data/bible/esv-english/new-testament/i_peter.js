@@ -1,4 +1,4 @@
-var peter1 = {
+var i_peter = {
   "1_Peter_1": {
     "Verse_1": {
       "verse": "Peter, an apostle of Jesus Christ,"

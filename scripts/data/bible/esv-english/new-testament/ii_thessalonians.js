@@ -1,4 +1,4 @@
-var thessalonians2 = {
+var ii_thessalonians = {
   "2_Thessalonians_1": {
     "Verse_1": {
       "verse": "📎Paul, Silvanus, and Timothy,",

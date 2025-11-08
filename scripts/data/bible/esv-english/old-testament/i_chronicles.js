@@ -1,4 +1,4 @@
-var chronicles1 = {
+var i_chronicles = {
   "1_Chronicles_1": {
     "Verse_1": {
       "verse": "📎Adam, Seth, Enosh;",

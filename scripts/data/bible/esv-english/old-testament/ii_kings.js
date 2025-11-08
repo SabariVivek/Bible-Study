@@ -1,4 +1,4 @@
-var kings_2 = {
+var ii_kings = {
   "2_Kings_1": {
     "Verse_1": {
       "verse": "📎After the death of Ahab, Moab 📎rebelled against Israel.",

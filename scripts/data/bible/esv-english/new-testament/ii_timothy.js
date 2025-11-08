@@ -1,4 +1,4 @@
-var timothy2 = {
+var ii_timothy = {
   "2_Timothy_1": {
     "Verse_1": {
       "verse": "Paul, 📎an apostle of Christ Jesus 📎by the will of God according to 📎the promise of the life that is in Christ Jesus,",

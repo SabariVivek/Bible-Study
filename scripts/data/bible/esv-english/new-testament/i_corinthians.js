@@ -1,4 +1,4 @@
-var corinthians1 = {
+var i_corinthians = {
   "1_Corinthians_1": {
     "Verse_1": {
       "verse": "Paul, 📎called 📎by the will of God to be an apostle of Christ Jesus, and our brother Sosthenes,",

@@ -1,4 +1,4 @@
-var samuel_2 = {
+var ii_samuel = {
   "2_Samuel_1": {
     "Verse_1": {
       "verse": "After the death of Saul, when David had returned 📎from striking down the Amalekites, David remained two days in Ziklag.",

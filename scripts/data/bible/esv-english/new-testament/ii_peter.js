@@ -1,4 +1,4 @@
-var peter2 = {
+var ii_peter = {
   "2_Peter_1": {
     "Verse_1": {
       "verse": "Simeon Peter, a servant and apostle of Jesus Christ,"

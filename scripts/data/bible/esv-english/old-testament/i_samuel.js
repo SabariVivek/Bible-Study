@@ -1,4 +1,4 @@
-var samuel_1 = {
+var i_samuel = {
   "1_Samuel_1": {
     "Verse_1": {
       "verse": "There was a certain man of 📎Ramathaim-zophim of 📎the hill country of Ephraim whose name was Elkanah the son of Jeroham, son of Elihu, son of Tohu, son of Zuph, 📎an Ephrathite.",

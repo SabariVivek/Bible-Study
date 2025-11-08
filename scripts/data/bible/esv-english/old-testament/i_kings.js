@@ -1,4 +1,4 @@
-var kings_1 = {
+var i_kings = {
   "1_Kings_1": {
     "Verse_1": {
       "verse": "Now King David was old and advanced in years. And although they covered him with clothes, he could not get warm."
