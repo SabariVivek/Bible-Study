@@ -60,7 +60,7 @@ function openTextSettingsPanel() {
     // Get current settings
     const currentSize = localStorage.getItem('bible-font-size') || 'medium';
     const currentFont = localStorage.getItem('bible-font-family') || 'Sentinel';
-    const currentLineSpacing = localStorage.getItem('bible-line-spacing') || 'normal';
+    const currentLineSpacing = localStorage.getItem('bible-line-spacing') || 'super-relaxed';
     // Get current language from global state or localStorage, defaulting to 'tamil'
     const currentLanguage = (typeof currentBibleLanguage !== 'undefined' ? currentBibleLanguage : null) 
                           || localStorage.getItem('bible-language') 
@@ -163,11 +163,11 @@ function handleTextSettingsClickOutside(e) {
 
 function formatSpacingLabel(spacing) {
     const labels = {
-        'extra-compact': 'Extra Compact',
-        'compact': 'Compact',
         'normal': 'Normal',
         'relaxed': 'Relaxed',
-        'extra-relaxed': 'Extra Relaxed'
+        'extra-relaxed': 'Extra Relaxed',
+        'super-relaxed': 'Super Relaxed',
+        'ultra-relaxed': 'Ultra Relaxed'
     };
     return labels[spacing] || 'Normal';
 }
@@ -187,13 +187,7 @@ function updateLineSpacingIcon(spacing) {
     if (btn) {
         const icon = btn.querySelector('.spacing-icon');
         if (icon) {
-            if (spacing === 'extra-compact') {
-                icon.style.letterSpacing = '-3px';
-                icon.style.lineHeight = '0.8';
-            } else if (spacing === 'compact') {
-                icon.style.letterSpacing = '-1.5px';
-                icon.style.lineHeight = '0.9';
-            } else if (spacing === 'normal') {
+            if (spacing === 'normal') {
                 icon.style.letterSpacing = '0px';
                 icon.style.lineHeight = '1';
             } else if (spacing === 'relaxed') {
@@ -202,6 +196,12 @@ function updateLineSpacingIcon(spacing) {
             } else if (spacing === 'extra-relaxed') {
                 icon.style.letterSpacing = '3px';
                 icon.style.lineHeight = '1.4';
+            } else if (spacing === 'super-relaxed') {
+                icon.style.letterSpacing = '4px';
+                icon.style.lineHeight = '1.6';
+            } else if (spacing === 'ultra-relaxed') {
+                icon.style.letterSpacing = '5px';
+                icon.style.lineHeight = '1.8';
             }
         }
     }
@@ -248,20 +248,20 @@ function initTextSettingsDropdownListeners() {
     const lineSpacingBtn = document.querySelector('.line-spacing-btn-full');
     if (lineSpacingBtn) {
         lineSpacingBtn.addEventListener('click', function() {
-            const currentSpacing = localStorage.getItem('bible-line-spacing') || 'normal';
+            const currentSpacing = localStorage.getItem('bible-line-spacing') || 'super-relaxed';
             let newSpacing;
             
-            // Cycle through 5 spacing options: extra-compact -> compact -> normal -> relaxed -> extra-relaxed -> extra-compact
-            if (currentSpacing === 'extra-compact') {
-                newSpacing = 'compact';
-            } else if (currentSpacing === 'compact') {
-                newSpacing = 'normal';
-            } else if (currentSpacing === 'normal') {
+            // Cycle through 5 spacing options: normal -> relaxed -> extra-relaxed -> super-relaxed -> ultra-relaxed -> normal
+            if (currentSpacing === 'normal') {
                 newSpacing = 'relaxed';
             } else if (currentSpacing === 'relaxed') {
                 newSpacing = 'extra-relaxed';
+            } else if (currentSpacing === 'extra-relaxed') {
+                newSpacing = 'super-relaxed';
+            } else if (currentSpacing === 'super-relaxed') {
+                newSpacing = 'ultra-relaxed';
             } else {
-                newSpacing = 'extra-compact';
+                newSpacing = 'normal';
             }
             
             // Update data attribute and active state
@@ -271,13 +271,7 @@ function initTextSettingsDropdownListeners() {
             const icon = this.querySelector('.spacing-icon');
             if (icon) {
                 // Visual feedback for different spacing levels
-                if (newSpacing === 'extra-compact') {
-                    icon.style.letterSpacing = '-3px';
-                    icon.style.lineHeight = '0.8';
-                } else if (newSpacing === 'compact') {
-                    icon.style.letterSpacing = '-1.5px';
-                    icon.style.lineHeight = '0.9';
-                } else if (newSpacing === 'normal') {
+                if (newSpacing === 'normal') {
                     icon.style.letterSpacing = '0px';
                     icon.style.lineHeight = '1';
                 } else if (newSpacing === 'relaxed') {
@@ -286,6 +280,12 @@ function initTextSettingsDropdownListeners() {
                 } else if (newSpacing === 'extra-relaxed') {
                     icon.style.letterSpacing = '3px';
                     icon.style.lineHeight = '1.4';
+                } else if (newSpacing === 'super-relaxed') {
+                    icon.style.letterSpacing = '4px';
+                    icon.style.lineHeight = '1.6';
+                } else if (newSpacing === 'ultra-relaxed') {
+                    icon.style.letterSpacing = '5px';
+                    icon.style.lineHeight = '1.8';
                 }
             }
             
@@ -325,14 +325,14 @@ function initTextSettingsDropdownListeners() {
 function applyBibleTextSettings() {
     const size = localStorage.getItem('bible-font-size') || 'medium';
     const font = localStorage.getItem('bible-font-family') || 'Sentinel';
-    const lineSpacing = localStorage.getItem('bible-line-spacing') || 'normal';
+    const lineSpacing = localStorage.getItem('bible-line-spacing') || 'super-relaxed';
     
     const bibleSection = document.getElementById('bibleVerseDisplaySection');
     if (!bibleSection) return;
     
     // Remove existing classes
     bibleSection.classList.remove('bible-font-small', 'bible-font-medium', 'bible-font-large');
-    bibleSection.classList.remove('bible-spacing-extra-compact', 'bible-spacing-compact', 'bible-spacing-normal', 'bible-spacing-relaxed', 'bible-spacing-extra-relaxed');
+    bibleSection.classList.remove('bible-spacing-normal', 'bible-spacing-relaxed', 'bible-spacing-extra-relaxed', 'bible-spacing-super-relaxed', 'bible-spacing-ultra-relaxed');
     
     // Apply font size
     bibleSection.classList.add(`bible-font-${size}`);

@@ -711,16 +711,16 @@
 .bible-settings-trigger {
     background: rgba(102, 126, 234, 0.1);
     border: 1px solid rgba(102, 126, 234, 0.2);
-    border-radius: 12px;
-    width: 44px;
-    height: 44px;
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
     color: #667eea;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     padding: 0;
 }
@@ -1050,30 +1050,6 @@
 }
 
 /* Line Spacing Variations - 5 Options */
-/* Extra Compact Spacing */
-#bibleVerseDisplaySection.bible-spacing-extra-compact .bible-verse-item {
-    margin-bottom: 4px !important;
-}
-
-#bibleVerseDisplaySection.bible-spacing-extra-compact .bible-verse-text,
-#bibleVerseDisplaySection.bible-spacing-extra-compact .bible-verse-english,
-#bibleVerseDisplaySection.bible-spacing-extra-compact .bible-verse-esv,
-#bibleVerseDisplaySection.bible-spacing-extra-compact .bible-verse-tamil {
-    line-height: 1.4 !important;
-}
-
-/* Compact Spacing */
-#bibleVerseDisplaySection.bible-spacing-compact .bible-verse-item {
-    margin-bottom: 8px !important;
-}
-
-#bibleVerseDisplaySection.bible-spacing-compact .bible-verse-text,
-#bibleVerseDisplaySection.bible-spacing-compact .bible-verse-english,
-#bibleVerseDisplaySection.bible-spacing-compact .bible-verse-esv,
-#bibleVerseDisplaySection.bible-spacing-compact .bible-verse-tamil {
-    line-height: 1.5 !important;
-}
-
 /* Normal Spacing */
 #bibleVerseDisplaySection.bible-spacing-normal .bible-verse-item {
     margin-bottom: 12px !important;
@@ -1122,6 +1098,30 @@
 #bibleVerseDisplaySection.bible-spacing-extra-relaxed .bible-verse-esv,
 #bibleVerseDisplaySection.bible-spacing-extra-relaxed .bible-verse-tamil {
     line-height: 2.5 !important;
+}
+
+/* Super Relaxed Spacing */
+#bibleVerseDisplaySection.bible-spacing-super-relaxed .bible-verse-item {
+    margin-bottom: 30px !important;
+}
+
+#bibleVerseDisplaySection.bible-spacing-super-relaxed .bible-verse-text,
+#bibleVerseDisplaySection.bible-spacing-super-relaxed .bible-verse-english,
+#bibleVerseDisplaySection.bible-spacing-super-relaxed .bible-verse-esv,
+#bibleVerseDisplaySection.bible-spacing-super-relaxed .bible-verse-tamil {
+    line-height: 2.8 !important;
+}
+
+/* Ultra Relaxed Spacing */
+#bibleVerseDisplaySection.bible-spacing-ultra-relaxed .bible-verse-item {
+    margin-bottom: 36px !important;
+}
+
+#bibleVerseDisplaySection.bible-spacing-ultra-relaxed .bible-verse-text,
+#bibleVerseDisplaySection.bible-spacing-ultra-relaxed .bible-verse-english,
+#bibleVerseDisplaySection.bible-spacing-ultra-relaxed .bible-verse-esv,
+#bibleVerseDisplaySection.bible-spacing-ultra-relaxed .bible-verse-tamil {
+    line-height: 3.2 !important;
 }
 
 /* Responsive adjustments for language toggle */
@@ -1226,14 +1226,13 @@
     margin-top: 10px;
 }
 
-/* ESV Bible verse styling */
+/* ESV Bible verse styling - Deep Red */
 .bible-verse-esv {
-    color: #A8B5C4 !important; /* Soft blue-gray for ESV - easier on eyes */
+    color: #C62828 !important; /* Deep red for ESV - better contrast */
     font-size: 18px;
     line-height: 2;
     display: block;
     margin-top: 10px;
-    opacity: 0.95;
 }
 
 /* When both Tamil and English are shown, reduce ESV margin */
@@ -1241,9 +1240,14 @@
     margin-top: 10px;
 }
 
+/* Easy English styling - Deep Blue */
+.bible-verse-english {
+    color: #1976D2 !important; /* Deep blue for Easy English - better contrast */
+}
+
 /* When both Tamil and English are shown, differentiate English text */
 .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
-    color: #D1D5DB !important; /* Softer blue-gray for light mode - easier on eyes */
+    color: #1976D2 !important; /* Deep blue for Easy English - better contrast */
 }
 
 /* Dark Mode for Chapter Display */
@@ -1269,15 +1273,19 @@
     color: var(--secondary-text-color) !important;
 }
 
-/* Dark mode ESV verse styling - warmer tone for night reading */
+/* Dark mode ESV verse styling - Bright Red (comfortable for dark backgrounds) */
 .dark-mode-bible .bible-verse-esv {
-    color: #B8C5D6 !important; /* Warm blue-gray for comfortable night reading */
-    opacity: 0.92;
+    color: #EF5350 !important; /* Bright red for dark mode - good contrast */
+}
+
+/* Dark mode Easy English - Bright Blue (comfortable for dark backgrounds) */
+.dark-mode-bible .bible-verse-english {
+    color: #42A5F5 !important; /* Bright blue for dark mode - good contrast */
 }
 
 /* Dark mode: When both Tamil and English are shown, differentiate English text */
 .dark-mode-bible .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
-    color: #b8c5d6 !important; /* Softer, warmer light blue for dark mode - comfortable for night reading */
+    color: #42A5F5 !important; /* Bright blue for dark mode */
 }
 
 /* Dark mode for verse display section */
@@ -1298,13 +1306,23 @@
     color: var(--secondary-text-color) !important;
 }
 
+/* Dark mode Easy English - Bright Blue */
 #bibleVerseDisplaySection.dark-mode-bible .bible-verse-english {
-    color: var(--secondary-text-color) !important;
+    color: #42A5F5 !important; /* Bright blue for dark mode */
+}
+
+/* Dark mode ESV - Bright Red */
+#bibleVerseDisplaySection.dark-mode-bible .bible-verse-esv {
+    color: #EF5350 !important; /* Bright red for dark mode */
 }
 
 /* Display section dark mode: When both languages shown */
 #bibleVerseDisplaySection.dark-mode-bible .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
-    color: #b8c5d6 !important;
+    color: #42A5F5 !important; /* Bright blue for dark mode */
+}
+
+#bibleVerseDisplaySection.dark-mode-bible .bible-verse-item:has(.bible-verse-tamil) .bible-verse-esv {
+    color: #EF5350 !important; /* Bright red for dark mode */
 }
 
 /* Light Mode for Chapter Display */
@@ -1327,13 +1345,23 @@
     color: var(--secondary-text-color) !important;
 }
 
+/* Light mode Easy English - Deep Blue (better contrast) */
 #bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-english {
-    color: var(--secondary-text-color) !important;
+    color: #1976D2 !important; /* Deep blue for Easy English in light mode - better contrast */
+}
+
+/* Light mode ESV - Deep Red (better contrast) */
+#bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-esv {
+    color: #C62828 !important; /* Deep red for ESV in light mode - better contrast */
 }
 
 /* Light mode: When both languages shown */
 #bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
-    color: #7a8ca0 !important;
+    color: #1976D2 !important; /* Deep blue for Easy English in light mode - better contrast */
+}
+
+#bibleVerseDisplaySection:not(.dark-mode-bible) .bible-verse-item:has(.bible-verse-tamil) .bible-verse-esv {
+    color: #C62828 !important; /* Deep red for ESV in light mode - better contrast */
 }
 
 /* Dark mode styles for language toggle - Segmented Control */

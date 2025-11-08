@@ -8019,6 +8019,78 @@ body.dark-mode .left-sidebar.collapsed:hover .sidebar-collapse-btn {
 
 /* ===== END NEW MODERN LEFT SIDEBAR STYLES ===== */
 
+/* ===== DARK MODE VARIANT 2 - LEFT SIDEBAR PURPLE THEME ===== */
+
+body.dark-mode-bible-variant2 .left-sidebar {
+    background: linear-gradient(180deg, #1a0d2e 0%, #2d1b4e 50%, #1a0d2e 100%);
+    border-right: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+body.dark-mode-bible-variant2 .sidebar-header {
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+body.dark-mode-bible-variant2 .sidebar-collapse-btn {
+    color: #c4b5fd;
+}
+
+body.dark-mode-bible-variant2 .sidebar-collapse-btn:hover {
+    background: rgba(139, 92, 246, 0.15);
+}
+
+body.dark-mode-bible-variant2 .sidebar-title {
+    color: #e9d5ff;
+}
+
+body.dark-mode-bible-variant2 .history-item {
+    color: #c4b5fd;
+}
+
+body.dark-mode-bible-variant2 .history-item:hover {
+    background: rgba(139, 92, 246, 0.15);
+}
+
+body.dark-mode-bible-variant2 .history-item.active {
+    background: rgba(139, 92, 246, 0.25);
+    border-left: 3px solid #a78bfa;
+    color: #e9d5ff;
+}
+
+body.dark-mode-bible-variant2 .nav-icon {
+    color: #a78bfa;
+}
+
+body.dark-mode-bible-variant2 .sidebar-footer {
+    border-top: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+body.dark-mode-bible-variant2 .sidebar-footer-item {
+    color: #c4b5fd;
+}
+
+body.dark-mode-bible-variant2 .sidebar-footer-item:hover {
+    background: rgba(139, 92, 246, 0.15);
+}
+
+body.dark-mode-bible-variant2 .theme-toggle {
+    background: rgba(139, 92, 246, 0.1);
+}
+
+body.dark-mode-bible-variant2 .theme-option {
+    color: #c4b5fd;
+}
+
+body.dark-mode-bible-variant2 .theme-option:hover {
+    background: rgba(139, 92, 246, 0.2);
+}
+
+body.dark-mode-bible-variant2 .theme-toggle input[type="radio"]:checked+.theme-option {
+    background: rgba(139, 92, 246, 0.3);
+    color: #e9d5ff;
+}
+
+/* ===== END DARK MODE VARIANT 2 LEFT SIDEBAR ===== */
+
 /* ===== RESET ALL SCROLLBARS TO DEFAULT ===== */
 /* Remove all custom scrollbar styles and use browser default */
 .sidebar::-webkit-scrollbar,
@@ -9054,12 +9126,16 @@ html #king-page-content.dark-mode-kings-variant2 .table tbody tr:hover {
 }
 
 #bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-english {
-    color: var(--secondary-text-color) !important;
+    color: #42A5F5 !important; /* Bright blue for Easy English in dark mode variant 2 */
+}
+
+#bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-esv {
+    color: #EF5350 !important; /* Bright red for ESV in dark mode variant 2 */
 }
 
 /* Dark mode variant2: When both languages shown */
 #bibleVerseDisplaySection.dark-mode-bible-variant2 .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
-    color: #b8c5d6 !important;
+    color: #42A5F5 !important; /* Bright blue for Easy English in dark mode variant 2 */
 }
 
 .dark-mode-bible-variant2 .bible-verse-submit-btn {
@@ -9904,12 +9980,16 @@ html #king-page-content.light-mode-kings-variant2 .table tbody tr:hover {
 }
 
 #bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-english {
-    color: var(--secondary-text-color) !important;
+    color: #1976D2 !important; /* Deep blue for Easy English in light mode variant 2 - better contrast */
+}
+
+#bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-esv {
+    color: #C62828 !important; /* Deep red for ESV in light mode variant 2 - better contrast */
 }
 
 /* Light mode variant2: When both languages shown */
 #bibleVerseDisplaySection.light-mode-bible-variant2 .bible-verse-item:has(.bible-verse-tamil) .bible-verse-english {
-    color: #7a8ca0 !important;
+    color: #1976D2 !important; /* Deep blue for Easy English in light mode variant 2 - better contrast */
 }
 
 .light-mode-bible-variant2 .bible-verse-submit-btn {
