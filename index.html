@@ -3286,8 +3286,12 @@
             const error = document.getElementById('passcodeError');
 
             if (enteredCode === correctPasscode) {
-                // Success - redirect to secret page
+                // Success - set flag and redirect to secret page
                 otpInputs.forEach(input => input.classList.add('success'));
+                
+                // Set session storage flag to indicate valid access from dashboard
+                sessionStorage.setItem('secretAccess', 'true');
+                
                 setTimeout(() => {
                     window.location.href = 'secret.html';
                 }, 300);

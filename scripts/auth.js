@@ -158,6 +158,7 @@ function logout() {
         sessionStorage.removeItem('isLoggedIn');
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('loginTime');
+        sessionStorage.removeItem('secretAccess'); // Clear secret access flag
         // Hide loader and overlay, then redirect
         if (loader) loader.style.display = 'none';
         if (overlay) overlay.style.display = 'none';
